@@ -1,0 +1,167 @@
+﻿@model GreenPro.Data.Garage
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="row">
+
+    <div class="col-md-8">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h3>Add Garage</h3>
+
+                <hr />
+                @Html.Raw(ViewBag.CaptchaError)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Garage_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Garage_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Garage_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Garage_Address, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.TextAreaFor(model => model.Garage_Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Garage_Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.State, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-5">
+                        @Html.DropDownList("StateId", null, htmlAttributes: new { @class = "form-control" })
+                        @*@Html.DropDownListFor(model => model.StateId, Model.StateList, new { @class = "form-control" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.City, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-5">
+                        @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
+                        @*@Html.DropDownListFor(model => model.CityId, Model.CityList, new { @class = "form-control" })*@
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contact_Person, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Contact_Person, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Contact_Person, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone_Number, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Phone_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Phone_Number, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OpenTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.OpenTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OpenTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CloseTime, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.CloseTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CloseTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ServiceDays, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.ServiceDays, new { htmlAttributes = new { @class = "form-control", @placeholder = "Multiple service days with comma" } })
+                        @Html.ValidationMessageFor(model => model.ServiceDays, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-5">
+
+                        @*<div class="g-recaptcha" data-sitekey="6Lc1BQcTAAAAALgxX794Bqe5c7fym3eLFSWBCopa"></div><br />*@
+                        <div class="g-recaptcha" data-sitekey="6LeLSwcTAAAAAHrSe22UKOKPIfyRxwmCJW0n48XU"></div>
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        <h3>Important Points</h3>
+        <hr />
+
+        <p>Ensure you enter all relevant information</p><br />
+        <br />    <p>Make sure you enter complete address in Address field. This will help our system to find your exact location on google maps. Hence your garage will be located perfectly. </p>
+        <br /><p>Please note garage will be approved once it is reviewed. You will receive notification for same via e-mail.</p>
+        <br /> <p>For any queries you can contact us on support@greenpro.com</p>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#CityId").prop("readonly", true);
+        $("#StateId").change(function () {
+            $("#CityId").empty();
+            var sid = $("#StateId").val();
+            if (sid == "-1")
+                $("#CityId").prop("readonly", true);
+            else
+                $("#CityId").prop("readonly", false);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Citylist")',
+                dataType: 'json',
+                data: { id: sid },
+                success: function (selectListItemList) {
+                    $.each(selectListItemList, function (i, state) {
+                        $("#CityId").append('<option value="'
+                         + state.Value + '">'
+                         + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>

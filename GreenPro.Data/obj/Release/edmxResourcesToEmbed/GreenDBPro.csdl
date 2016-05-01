@@ -1,0 +1,1368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreenProDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="GreenProDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AdhocUserPackages" EntityType="GreenProDbModel.AdhocUserPackage" />
+    <EntitySet Name="AdhocUserPackagesAddons" EntityType="GreenProDbModel.AdhocUserPackagesAddon" />
+    <EntitySet Name="AspNetRoles" EntityType="GreenProDbModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="GreenProDbModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="GreenProDbModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="GreenProDbModel.AspNetUser" />
+    <EntitySet Name="AutomaticPayments" EntityType="GreenProDbModel.AutomaticPayment" />
+    <EntitySet Name="CarServiceEntries" EntityType="GreenProDbModel.CarServiceEntry" />
+    <EntitySet Name="CarTypes" EntityType="GreenProDbModel.CarType" />
+    <EntitySet Name="CarUsers" EntityType="GreenProDbModel.CarUser" />
+    <EntitySet Name="Cities" EntityType="GreenProDbModel.City" />
+    <EntitySet Name="CrewAdminMembers" EntityType="GreenProDbModel.CrewAdminMember" />
+    <EntitySet Name="GarageMaxCars" EntityType="GreenProDbModel.GarageMaxCar" />
+    <EntitySet Name="Garages" EntityType="GreenProDbModel.Garage" />
+    <EntitySet Name="GarrageWeekdays" EntityType="GreenProDbModel.GarrageWeekday" />
+    <EntitySet Name="LeaderCarJobs" EntityType="GreenProDbModel.LeaderCarJob" />
+    <EntitySet Name="LeaderGarageDays" EntityType="GreenProDbModel.LeaderGarageDay" />
+    <EntitySet Name="LeaderMembers" EntityType="GreenProDbModel.LeaderMember" />
+    <EntitySet Name="LeaderWorks" EntityType="GreenProDbModel.LeaderWork" />
+    <EntitySet Name="LogDetailCarSides" EntityType="GreenProDbModel.LogDetailCarSide" />
+    <EntitySet Name="Logs" EntityType="GreenProDbModel.Log" />
+    <EntitySet Name="Package_Services" EntityType="GreenProDbModel.Package_Services" />
+    <EntitySet Name="Packages" EntityType="GreenProDbModel.Package" />
+    <EntitySet Name="PayPalLogs" EntityType="GreenProDbModel.PayPalLog" />
+    <EntitySet Name="Services" EntityType="GreenProDbModel.Service" />
+    <EntitySet Name="States" EntityType="GreenProDbModel.State" />
+    <EntitySet Name="Taxes" EntityType="GreenProDbModel.Tax" />
+    <EntitySet Name="UnAssignedCars" EntityType="GreenProDbModel.UnAssignedCar" />
+    <EntitySet Name="UserPackages" EntityType="GreenProDbModel.UserPackage" />
+    <EntitySet Name="UserPackagesAddons" EntityType="GreenProDbModel.UserPackagesAddon" />
+    <EntitySet Name="UserTransactions" EntityType="GreenProDbModel.UserTransaction" />
+    <EntitySet Name="Weekdays" EntityType="GreenProDbModel.Weekday" />
+    <EntitySet Name="WorkDones" EntityType="GreenProDbModel.WorkDone" />
+    <EntitySet Name="WorkerGarages" EntityType="GreenProDbModel.WorkerGarage" />
+    <EntitySet Name="WorkLogDetails" EntityType="GreenProDbModel.WorkLogDetail" />
+    <AssociationSet Name="FK_AdhocUserPackages_CarUsers" Association="GreenProDbModel.FK_AdhocUserPackages_CarUsers">
+      <End Role="CarUser" EntitySet="CarUsers" />
+      <End Role="AdhocUserPackage" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_Packages" Association="GreenProDbModel.FK_AdhocUserPackages_Packages">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="AdhocUserPackage" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_UserPackages" Association="GreenProDbModel.FK_AdhocUserPackages_UserPackages">
+      <End Role="UserPackage" EntitySet="UserPackages" />
+      <End Role="AdhocUserPackage" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_Users" Association="GreenProDbModel.FK_AdhocUserPackages_Users">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AdhocUserPackage" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackagesAddons_AdhocUserPackages" Association="GreenProDbModel.FK_AdhocUserPackagesAddons_AdhocUserPackages">
+      <End Role="AdhocUserPackage" EntitySet="AdhocUserPackages" />
+      <End Role="AdhocUserPackagesAddon" EntitySet="AdhocUserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackagesAddons_ToServices" Association="GreenProDbModel.FK_AdhocUserPackagesAddons_ToServices">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="AdhocUserPackagesAddon" EntitySet="AdhocUserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="GreenProDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="GreenProDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Cities" Association="GreenProDbModel.FK_AspNetUsers_Cities">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_States" Association="GreenProDbModel.FK_AspNetUsers_States">
+      <End Role="State" EntitySet="States" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarOwnerId_AspNetUsers" Association="GreenProDbModel.FK_CarOwnerId_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CarServiceEntry" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarUsers_Users" Association="GreenProDbModel.FK_CarUsers_Users">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CarUser" EntitySet="CarUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewAdmin_AspNetUsers" Association="GreenProDbModel.FK_CrewAdmin_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CrewAdminMember" EntitySet="CrewAdminMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewLeader_AspNetUSer" Association="GreenProDbModel.FK_CrewLeader_AspNetUSer">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="LeaderMember" EntitySet="LeaderMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewMember_AspNetUSer" Association="GreenProDbModel.FK_CrewMember_AspNetUSer">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="LeaderMember" EntitySet="LeaderMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewMember_AspNetUsers" Association="GreenProDbModel.FK_CrewMember_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CrewAdminMember" EntitySet="CrewAdminMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_AspNetUser" Association="GreenProDbModel.FK_LeaderCarJob_AspNetUser">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_Users" Association="GreenProDbModel.FK_UserPackages_Users">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserPackage" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTransactions_ASpnetUsers" Association="GreenProDbModel.FK_UserTransactions_ASpnetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserTransaction" EntitySet="UserTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_AspNetUsers1" Association="GreenProDbModel.FK_WorkDone_AspNetUsers1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_AspNetUsers2" Association="GreenProDbModel.FK_WorkDone_AspNetUsers2">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkererId_AspNetUsers" Association="GreenProDbModel.FK_WorkererId_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CarServiceEntry" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkerGarages_AspNetUser" Association="GreenProDbModel.FK_WorkerGarages_AspNetUser">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="WorkerGarage" EntitySet="WorkerGarages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarServiceEntries_CarUsers" Association="GreenProDbModel.FK_CarServiceEntries_CarUsers">
+      <End Role="CarUser" EntitySet="CarUsers" />
+      <End Role="CarServiceEntry" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarServiceEntries_Packages" Association="GreenProDbModel.FK_CarServiceEntries_Packages">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="CarServiceEntry" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarUsers_CarTypes" Association="GreenProDbModel.FK_CarUsers_CarTypes">
+      <End Role="CarType" EntitySet="CarTypes" />
+      <End Role="CarUser" EntitySet="CarUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Packages_CarTypes" Association="GreenProDbModel.FK_Packages_CarTypes">
+      <End Role="CarType" EntitySet="CarTypes" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarUsers_Garage" Association="GreenProDbModel.FK_CarUsers_Garage">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="CarUser" EntitySet="CarUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_CarUser" Association="GreenProDbModel.FK_LeaderCarJob_CarUser">
+      <End Role="CarUser" EntitySet="CarUsers" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_CarUsers" Association="GreenProDbModel.FK_UserPackages_CarUsers">
+      <End Role="CarUser" EntitySet="CarUsers" />
+      <End Role="UserPackage" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cities_State" Association="GreenProDbModel.FK_Cities_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Garages_Cities" Association="GreenProDbModel.FK_Garages_Cities">
+      <End Role="City" EntitySet="Cities" />
+      <End Role="Garage" EntitySet="Garages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarageMaxCars_Garages" Association="GreenProDbModel.FK_GarageMaxCars_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="GarageMaxCar" EntitySet="GarageMaxCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Garages_States" Association="GreenProDbModel.FK_Garages_States">
+      <End Role="State" EntitySet="States" />
+      <End Role="Garage" EntitySet="Garages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarrageWeekday_Garages" Association="GreenProDbModel.FK_GarrageWeekday_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="GarrageWeekday" EntitySet="GarrageWeekdays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_Garages" Association="GreenProDbModel.FK_LeaderCarJob_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnAssignedCars_Garages" Association="GreenProDbModel.FK_UnAssignedCars_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="UnAssignedCar" EntitySet="UnAssignedCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkerGarages_Garages" Association="GreenProDbModel.FK_WorkerGarages_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="WorkerGarage" EntitySet="WorkerGarages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarrageWeekday_Weekdays" Association="GreenProDbModel.FK_GarrageWeekday_Weekdays">
+      <End Role="Weekday" EntitySet="Weekdays" />
+      <End Role="GarrageWeekday" EntitySet="GarrageWeekdays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderGarageDay_WorkerGarages" Association="GreenProDbModel.FK_LeaderGarageDay_WorkerGarages">
+      <End Role="WorkerGarage" EntitySet="WorkerGarages" />
+      <End Role="LeaderGarageDay" EntitySet="LeaderGarageDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkLogDetails_LogDetailCarSide" Association="GreenProDbModel.FK_WorkLogDetails_LogDetailCarSide">
+      <End Role="LogDetailCarSide" EntitySet="LogDetailCarSides" />
+      <End Role="WorkLogDetail" EntitySet="WorkLogDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Services_Packages" Association="GreenProDbModel.FK_Package_Services_Packages">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="Package_Services" EntitySet="Package_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Services_Services" Association="GreenProDbModel.FK_Package_Services_Services">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="Package_Services" EntitySet="Package_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_Packages" Association="GreenProDbModel.FK_UserPackages_Packages">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="UserPackage" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_Packages" Association="GreenProDbModel.FK_WorkDone_Packages">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayPalLogs_UserPackage" Association="GreenProDbModel.FK_PayPalLogs_UserPackage">
+      <End Role="UserPackage" EntitySet="UserPackages" />
+      <End Role="PayPalLog" EntitySet="PayPalLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackagesAddons_ToServices" Association="GreenProDbModel.FK_UserPackagesAddons_ToServices">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="UserPackagesAddon" EntitySet="UserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnAssignedCars_Packages" Association="GreenProDbModel.FK_UnAssignedCars_Packages">
+      <End Role="UserPackage" EntitySet="UserPackages" />
+      <End Role="UnAssignedCar" EntitySet="UnAssignedCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackagesAddons_UserPackages" Association="GreenProDbModel.FK_UserPackagesAddons_UserPackages">
+      <End Role="UserPackage" EntitySet="UserPackages" />
+      <End Role="UserPackagesAddon" EntitySet="UserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTransactions_UserPackages" Association="GreenProDbModel.FK_UserTransactions_UserPackages">
+      <End Role="UserPackage" EntitySet="UserPackages" />
+      <End Role="UserTransaction" EntitySet="UserTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkLogDetails_WorkDone" Association="GreenProDbModel.FK_WorkLogDetails_WorkDone">
+      <End Role="WorkDone" EntitySet="WorkDones" />
+      <End Role="WorkLogDetail" EntitySet="WorkLogDetails" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="GreenProDbModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AdhocUserPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="SubscribedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActualPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PriceWithAddOns" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Ipaddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExistingPackageId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentRecieved" Type="Boolean" Nullable="false" />
+    <Property Name="Processed" Type="Boolean" Nullable="false" />
+    <Property Name="TaxAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TipAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="CarUser" Relationship="GreenProDbModel.FK_AdhocUserPackages_CarUsers" FromRole="AdhocUserPackage" ToRole="CarUser" />
+    <NavigationProperty Name="Package" Relationship="GreenProDbModel.FK_AdhocUserPackages_Packages" FromRole="AdhocUserPackage" ToRole="Package" />
+    <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_AdhocUserPackages_UserPackages" FromRole="AdhocUserPackage" ToRole="UserPackage" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_AdhocUserPackages_Users" FromRole="AdhocUserPackage" ToRole="AspNetUser" />
+    <NavigationProperty Name="AdhocUserPackagesAddons" Relationship="GreenProDbModel.FK_AdhocUserPackagesAddons_AdhocUserPackages" FromRole="AdhocUserPackage" ToRole="AdhocUserPackagesAddon" />
+  </EntityType>
+  <EntityType Name="AdhocUserPackagesAddon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ActualPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CreatedDt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AdhocUserPackage" Relationship="GreenProDbModel.FK_AdhocUserPackagesAddons_AdhocUserPackages" FromRole="AdhocUserPackagesAddon" ToRole="AdhocUserPackage" />
+    <NavigationProperty Name="Service" Relationship="GreenProDbModel.FK_AdhocUserPackagesAddons_ToServices" FromRole="AdhocUserPackagesAddon" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="GreenProDbModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="Int32" Nullable="false" />
+    <Property Name="Pincode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Balance" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="GreenProDbModel.FK_AdhocUserPackages_Users" FromRole="AspNetUser" ToRole="AdhocUserPackage" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="GreenProDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="GreenProDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="City1" Relationship="GreenProDbModel.FK_AspNetUsers_Cities" FromRole="AspNetUser" ToRole="City" />
+    <NavigationProperty Name="State1" Relationship="GreenProDbModel.FK_AspNetUsers_States" FromRole="AspNetUser" ToRole="State" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="GreenProDbModel.FK_CarOwnerId_AspNetUsers" FromRole="AspNetUser" ToRole="CarServiceEntry" />
+    <NavigationProperty Name="CarUsers" Relationship="GreenProDbModel.FK_CarUsers_Users" FromRole="AspNetUser" ToRole="CarUser" />
+    <NavigationProperty Name="CrewAdminMembers" Relationship="GreenProDbModel.FK_CrewAdmin_AspNetUsers" FromRole="AspNetUser" ToRole="CrewAdminMember" />
+    <NavigationProperty Name="LeaderMembers" Relationship="GreenProDbModel.FK_CrewLeader_AspNetUSer" FromRole="AspNetUser" ToRole="LeaderMember" />
+    <NavigationProperty Name="LeaderMembers1" Relationship="GreenProDbModel.FK_CrewMember_AspNetUSer" FromRole="AspNetUser" ToRole="LeaderMember" />
+    <NavigationProperty Name="CrewAdminMembers1" Relationship="GreenProDbModel.FK_CrewMember_AspNetUsers" FromRole="AspNetUser" ToRole="CrewAdminMember" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="GreenProDbModel.FK_LeaderCarJob_AspNetUser" FromRole="AspNetUser" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_Users" FromRole="AspNetUser" ToRole="UserPackage" />
+    <NavigationProperty Name="UserTransactions" Relationship="GreenProDbModel.FK_UserTransactions_ASpnetUsers" FromRole="AspNetUser" ToRole="UserTransaction" />
+    <NavigationProperty Name="WorkDones" Relationship="GreenProDbModel.FK_WorkDone_AspNetUsers1" FromRole="AspNetUser" ToRole="WorkDone" />
+    <NavigationProperty Name="WorkDones1" Relationship="GreenProDbModel.FK_WorkDone_AspNetUsers2" FromRole="AspNetUser" ToRole="WorkDone" />
+    <NavigationProperty Name="CarServiceEntries1" Relationship="GreenProDbModel.FK_WorkererId_AspNetUsers" FromRole="AspNetUser" ToRole="CarServiceEntry" />
+    <NavigationProperty Name="WorkerGarages" Relationship="GreenProDbModel.FK_WorkerGarages_AspNetUser" FromRole="AspNetUser" ToRole="WorkerGarage" />
+    <NavigationProperty Name="AspNetRoles" Relationship="GreenProDbModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="AutomaticPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="155" FixedLength="false" Unicode="true" />
+    <Property Name="UserPackageID" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="PaypalBillingID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayPalECToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdhocUserPackageID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CarServiceEntry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CarOwnerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="WorkerId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_CarOwnerId_AspNetUsers" FromRole="CarServiceEntry" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="GreenProDbModel.FK_WorkererId_AspNetUsers" FromRole="CarServiceEntry" ToRole="AspNetUser" />
+    <NavigationProperty Name="CarUser" Relationship="GreenProDbModel.FK_CarServiceEntries_CarUsers" FromRole="CarServiceEntry" ToRole="CarUser" />
+    <NavigationProperty Name="Package" Relationship="GreenProDbModel.FK_CarServiceEntries_Packages" FromRole="CarServiceEntry" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarUsers" Relationship="GreenProDbModel.FK_CarUsers_CarTypes" FromRole="CarType" ToRole="CarUser" />
+    <NavigationProperty Name="Packages" Relationship="GreenProDbModel.FK_Packages_CarTypes" FromRole="CarType" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="CarUser">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Make" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LicenseNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="PurchaseYear" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AutoRenewal" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="GreenProDbModel.FK_AdhocUserPackages_CarUsers" FromRole="CarUser" ToRole="AdhocUserPackage" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_CarUsers_Users" FromRole="CarUser" ToRole="AspNetUser" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="GreenProDbModel.FK_CarServiceEntries_CarUsers" FromRole="CarUser" ToRole="CarServiceEntry" />
+    <NavigationProperty Name="CarType" Relationship="GreenProDbModel.FK_CarUsers_CarTypes" FromRole="CarUser" ToRole="CarType" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_CarUsers_Garage" FromRole="CarUser" ToRole="Garage" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="GreenProDbModel.FK_LeaderCarJob_CarUser" FromRole="CarUser" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_CarUsers" FromRole="CarUser" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StateID" Type="Int32" />
+    <NavigationProperty Name="AspNetUsers" Relationship="GreenProDbModel.FK_AspNetUsers_Cities" FromRole="City" ToRole="AspNetUser" />
+    <NavigationProperty Name="State" Relationship="GreenProDbModel.FK_Cities_State" FromRole="City" ToRole="State" />
+    <NavigationProperty Name="Garages" Relationship="GreenProDbModel.FK_Garages_Cities" FromRole="City" ToRole="Garage" />
+  </EntityType>
+  <EntityType Name="CrewAdminMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewMemberId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CrewAdminId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_CrewAdmin_AspNetUsers" FromRole="CrewAdminMember" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="GreenProDbModel.FK_CrewMember_AspNetUsers" FromRole="CrewAdminMember" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="GarageMaxCar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="CarPerCrewAdmin" Type="Int32" Nullable="false" />
+    <Property Name="DayRef" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_GarageMaxCars_Garages" FromRole="GarageMaxCar" ToRole="Garage" />
+  </EntityType>
+  <EntityType Name="Garage">
+    <Key>
+      <PropertyRef Name="GarageId" />
+    </Key>
+    <Property Name="GarageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Garage_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Garage_Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="Int32" Nullable="false" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pincode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Latitute" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Contact_Person" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="OpenTime" Type="Time" Precision="7" />
+    <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ServiceDays" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarUsers" Relationship="GreenProDbModel.FK_CarUsers_Garage" FromRole="Garage" ToRole="CarUser" />
+    <NavigationProperty Name="City1" Relationship="GreenProDbModel.FK_Garages_Cities" FromRole="Garage" ToRole="City" />
+    <NavigationProperty Name="GarageMaxCars" Relationship="GreenProDbModel.FK_GarageMaxCars_Garages" FromRole="Garage" ToRole="GarageMaxCar" />
+    <NavigationProperty Name="State1" Relationship="GreenProDbModel.FK_Garages_States" FromRole="Garage" ToRole="State" />
+    <NavigationProperty Name="GarrageWeekdays" Relationship="GreenProDbModel.FK_GarrageWeekday_Garages" FromRole="Garage" ToRole="GarrageWeekday" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="GreenProDbModel.FK_LeaderCarJob_Garages" FromRole="Garage" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="UnAssignedCars" Relationship="GreenProDbModel.FK_UnAssignedCars_Garages" FromRole="Garage" ToRole="UnAssignedCar" />
+    <NavigationProperty Name="WorkerGarages" Relationship="GreenProDbModel.FK_WorkerGarages_Garages" FromRole="Garage" ToRole="WorkerGarage" />
+  </EntityType>
+  <EntityType Name="GarrageWeekday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarrageId" Type="Int32" Nullable="false" />
+    <Property Name="WeekdayId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_GarrageWeekday_Garages" FromRole="GarrageWeekday" ToRole="Garage" />
+    <NavigationProperty Name="Weekday" Relationship="GreenProDbModel.FK_GarrageWeekday_Weekdays" FromRole="GarrageWeekday" ToRole="Weekday" />
+  </EntityType>
+  <EntityType Name="LeaderCarJob">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <Property Name="LeaderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_LeaderCarJob_AspNetUser" FromRole="LeaderCarJob" ToRole="AspNetUser" />
+    <NavigationProperty Name="CarUser" Relationship="GreenProDbModel.FK_LeaderCarJob_CarUser" FromRole="LeaderCarJob" ToRole="CarUser" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_LeaderCarJob_Garages" FromRole="LeaderCarJob" ToRole="Garage" />
+  </EntityType>
+  <EntityType Name="LeaderGarageDay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkerGarageID" Type="Int32" Nullable="false" />
+    <Property Name="Day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WorkerGarage" Relationship="GreenProDbModel.FK_LeaderGarageDay_WorkerGarages" FromRole="LeaderGarageDay" ToRole="WorkerGarage" />
+  </EntityType>
+  <EntityType Name="LeaderMember">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CrewMemberID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_CrewLeader_AspNetUSer" FromRole="LeaderMember" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="GreenProDbModel.FK_CrewMember_AspNetUSer" FromRole="LeaderMember" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="LeaderWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaderID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogDetailCarSide">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WorkLogDetails" Relationship="GreenProDbModel.FK_WorkLogDetails_LogDetailCarSide" FromRole="LogDetailCarSide" ToRole="WorkLogDetail" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="source" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackStrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Package_Services">
+    <Key>
+      <PropertyRef Name="PackageServiceId" />
+    </Key>
+    <Property Name="PackageServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Package" Relationship="GreenProDbModel.FK_Package_Services_Packages" FromRole="Package_Services" ToRole="Package" />
+    <NavigationProperty Name="Service" Relationship="GreenProDbModel.FK_Package_Services_Services" FromRole="Package_Services" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageId" />
+    </Key>
+    <Property Name="PackageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Package_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Package_Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CarTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Package_Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CreateDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="GreenProDbModel.FK_AdhocUserPackages_Packages" FromRole="Package" ToRole="AdhocUserPackage" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="GreenProDbModel.FK_CarServiceEntries_Packages" FromRole="Package" ToRole="CarServiceEntry" />
+    <NavigationProperty Name="CarType" Relationship="GreenProDbModel.FK_Packages_CarTypes" FromRole="Package" ToRole="CarType" />
+    <NavigationProperty Name="Package_Services" Relationship="GreenProDbModel.FK_Package_Services_Packages" FromRole="Package" ToRole="Package_Services" />
+    <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_Packages" FromRole="Package" ToRole="UserPackage" />
+    <NavigationProperty Name="WorkDones" Relationship="GreenProDbModel.FK_WorkDone_Packages" FromRole="Package" ToRole="WorkDone" />
+  </EntityType>
+  <EntityType Name="PayPalLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApiSatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseError" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseRedirectURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ECToken" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAggrementID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TimeStamp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorrelationID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ACK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServerDate" Type="DateTime" Precision="3" />
+    <Property Name="SubscriptionID" Type="Int32" />
+    <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_PayPalLogs_UserPackage" FromRole="PayPalLog" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Service_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Service_Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Service_Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CreateDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdhocUserPackagesAddons" Relationship="GreenProDbModel.FK_AdhocUserPackagesAddons_ToServices" FromRole="Service" ToRole="AdhocUserPackagesAddon" />
+    <NavigationProperty Name="Package_Services" Relationship="GreenProDbModel.FK_Package_Services_Services" FromRole="Service" ToRole="Package_Services" />
+    <NavigationProperty Name="UserPackagesAddons" Relationship="GreenProDbModel.FK_UserPackagesAddons_ToServices" FromRole="Service" ToRole="UserPackagesAddon" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="GreenProDbModel.FK_AspNetUsers_States" FromRole="State" ToRole="AspNetUser" />
+    <NavigationProperty Name="Cities" Relationship="GreenProDbModel.FK_Cities_State" FromRole="State" ToRole="City" />
+    <NavigationProperty Name="Garages" Relationship="GreenProDbModel.FK_Garages_States" FromRole="State" ToRole="Garage" />
+  </EntityType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TaxPercentage" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+  </EntityType>
+  <EntityType Name="UnAssignedCar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_UnAssignedCars_Garages" FromRole="UnAssignedCar" ToRole="Garage" />
+    <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UnAssignedCars_Packages" FromRole="UnAssignedCar" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="UserPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="SubscribedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActualPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PriceWithAddOns" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Ipaddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymentRecieved" Type="Boolean" Nullable="false" />
+    <Property Name="Processed" Type="Boolean" Nullable="false" />
+    <Property Name="TaxAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="TipAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="SubscriptionEndDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="GreenProDbModel.FK_AdhocUserPackages_UserPackages" FromRole="UserPackage" ToRole="AdhocUserPackage" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_UserPackages_Users" FromRole="UserPackage" ToRole="AspNetUser" />
+    <NavigationProperty Name="CarUser" Relationship="GreenProDbModel.FK_UserPackages_CarUsers" FromRole="UserPackage" ToRole="CarUser" />
+    <NavigationProperty Name="Package" Relationship="GreenProDbModel.FK_UserPackages_Packages" FromRole="UserPackage" ToRole="Package" />
+    <NavigationProperty Name="PayPalLogs" Relationship="GreenProDbModel.FK_PayPalLogs_UserPackage" FromRole="UserPackage" ToRole="PayPalLog" />
+    <NavigationProperty Name="UnAssignedCars" Relationship="GreenProDbModel.FK_UnAssignedCars_Packages" FromRole="UserPackage" ToRole="UnAssignedCar" />
+    <NavigationProperty Name="UserPackagesAddons" Relationship="GreenProDbModel.FK_UserPackagesAddons_UserPackages" FromRole="UserPackage" ToRole="UserPackagesAddon" />
+    <NavigationProperty Name="UserTransactions" Relationship="GreenProDbModel.FK_UserTransactions_UserPackages" FromRole="UserPackage" ToRole="UserTransaction" />
+  </EntityType>
+  <EntityType Name="UserPackagesAddon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ActualPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="CreatedDt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Service" Relationship="GreenProDbModel.FK_UserPackagesAddons_ToServices" FromRole="UserPackagesAddon" ToRole="Service" />
+    <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UserPackagesAddons_UserPackages" FromRole="UserPackagesAddon" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="UserTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="PackageId" Type="Int32" />
+    <Property Name="PaypalId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_UserTransactions_ASpnetUsers" FromRole="UserTransaction" ToRole="AspNetUser" />
+    <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UserTransactions_UserPackages" FromRole="UserTransaction" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="Weekday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GarrageWeekdays" Relationship="GreenProDbModel.FK_GarrageWeekday_Weekdays" FromRole="Weekday" ToRole="GarrageWeekday" />
+  </EntityType>
+  <EntityType Name="WorkDone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CrewMemberId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="StartTimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="EndTimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedTimeStamp" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_WorkDone_AspNetUsers1" FromRole="WorkDone" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="GreenProDbModel.FK_WorkDone_AspNetUsers2" FromRole="WorkDone" ToRole="AspNetUser" />
+    <NavigationProperty Name="Package" Relationship="GreenProDbModel.FK_WorkDone_Packages" FromRole="WorkDone" ToRole="Package" />
+    <NavigationProperty Name="WorkLogDetails" Relationship="GreenProDbModel.FK_WorkLogDetails_WorkDone" FromRole="WorkDone" ToRole="WorkLogDetail" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="WorkerGarage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="IsLeader" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_WorkerGarages_AspNetUser" FromRole="WorkerGarage" ToRole="AspNetUser" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_WorkerGarages_Garages" FromRole="WorkerGarage" ToRole="Garage" />
+    <NavigationProperty Name="LeaderGarageDays" Relationship="GreenProDbModel.FK_LeaderGarageDay_WorkerGarages" FromRole="WorkerGarage" ToRole="LeaderGarageDay" />
+  </EntityType>
+  <EntityType Name="WorkLogDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SideId" Type="Int32" Nullable="false" />
+    <Property Name="PrePost" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ImageRef" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WorkDoneId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LogDetailCarSide" Relationship="GreenProDbModel.FK_WorkLogDetails_LogDetailCarSide" FromRole="WorkLogDetail" ToRole="LogDetailCarSide" />
+    <NavigationProperty Name="WorkDone" Relationship="GreenProDbModel.FK_WorkLogDetails_WorkDone" FromRole="WorkLogDetail" ToRole="WorkDone" />
+  </EntityType>
+  <Association Name="FK_AdhocUserPackages_CarUsers">
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackage" Role="AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUser">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="AdhocUserPackage">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_Packages">
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackage" Role="AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="AdhocUserPackage">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_UserPackages">
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackage" Role="AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackage">
+        <PropertyRef Name="ExistingPackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_Users">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackage" Role="AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackage">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackagesAddons_AdhocUserPackages">
+    <End Type="GreenProDbModel.AdhocUserPackage" Role="AdhocUserPackage" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackagesAddon" Role="AdhocUserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdhocUserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackagesAddon">
+        <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackagesAddons_ToServices">
+    <End Type="GreenProDbModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="GreenProDbModel.AdhocUserPackagesAddon" Role="AdhocUserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="AdhocUserPackagesAddon">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GreenProDbModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="GreenProDbModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Cities">
+    <End Type="GreenProDbModel.City" Role="City" Multiplicity="1" />
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_States">
+    <End Type="GreenProDbModel.State" Role="State" Multiplicity="1" />
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarOwnerId_AspNetUsers">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.CarServiceEntry" Role="CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarServiceEntry">
+        <PropertyRef Name="CarOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarUsers_Users">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewAdmin_AspNetUsers">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.CrewAdminMember" Role="CrewAdminMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CrewAdminMember">
+        <PropertyRef Name="CrewMemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewLeader_AspNetUSer">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderMember" Role="LeaderMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderMember">
+        <PropertyRef Name="CrewLeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewMember_AspNetUSer">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderMember" Role="LeaderMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderMember">
+        <PropertyRef Name="CrewMemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewMember_AspNetUsers">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.CrewAdminMember" Role="CrewAdminMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CrewAdminMember">
+        <PropertyRef Name="CrewAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_AspNetUser">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderCarJob" Role="LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="LeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_Users">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackage">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTransactions_ASpnetUsers">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserTransaction" Role="UserTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTransaction">
+        <PropertyRef Name="Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_AspNetUsers1">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkDone" Role="WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="CrewLeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_AspNetUsers2">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkDone" Role="WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="CrewMemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkererId_AspNetUsers">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.CarServiceEntry" Role="CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarServiceEntry">
+        <PropertyRef Name="WorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkerGarages_AspNetUser">
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkerGarage" Role="WorkerGarage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkerGarage">
+        <PropertyRef Name="CrewLeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarServiceEntries_CarUsers">
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.CarServiceEntry" Role="CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUser">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="CarServiceEntry">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarServiceEntries_Packages">
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="GreenProDbModel.CarServiceEntry" Role="CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="CarServiceEntry">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarUsers_CarTypes">
+    <End Type="GreenProDbModel.CarType" Role="CarType" Multiplicity="1" />
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarUser">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Packages_CarTypes">
+    <End Type="GreenProDbModel.CarType" Role="CarType" Multiplicity="1" />
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="CarTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarUsers_Garage">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="CarUser">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_CarUser">
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderCarJob" Role="LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUser">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_CarUsers">
+    <End Type="GreenProDbModel.CarUser" Role="CarUser" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUser">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="UserPackage">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cities_State">
+    <End Type="GreenProDbModel.State" Role="State" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Garages_Cities">
+    <End Type="GreenProDbModel.City" Role="City" Multiplicity="1" />
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Garage">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarageMaxCars_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.GarageMaxCar" Role="GarageMaxCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GarageMaxCar">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Garages_States">
+    <End Type="GreenProDbModel.State" Role="State" Multiplicity="1" />
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Garage">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarrageWeekday_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.GarrageWeekday" Role="GarrageWeekday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GarrageWeekday">
+        <PropertyRef Name="GarrageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderCarJob" Role="LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnAssignedCars_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.UnAssignedCar" Role="UnAssignedCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="UnAssignedCar">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkerGarages_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkerGarage" Role="WorkerGarage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="WorkerGarage">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarrageWeekday_Weekdays">
+    <End Type="GreenProDbModel.Weekday" Role="Weekday" Multiplicity="1" />
+    <End Type="GreenProDbModel.GarrageWeekday" Role="GarrageWeekday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Weekday">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GarrageWeekday">
+        <PropertyRef Name="WeekdayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderGarageDay_WorkerGarages">
+    <End Type="GreenProDbModel.WorkerGarage" Role="WorkerGarage" Multiplicity="1" />
+    <End Type="GreenProDbModel.LeaderGarageDay" Role="LeaderGarageDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkerGarage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderGarageDay">
+        <PropertyRef Name="WorkerGarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkLogDetails_LogDetailCarSide">
+    <End Type="GreenProDbModel.LogDetailCarSide" Role="LogDetailCarSide" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkLogDetail" Role="WorkLogDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogDetailCarSide">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkLogDetail">
+        <PropertyRef Name="SideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Services_Packages">
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="GreenProDbModel.Package_Services" Role="Package_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Package_Services">
+        <PropertyRef Name="PackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Services_Services">
+    <End Type="GreenProDbModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="GreenProDbModel.Package_Services" Role="Package_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="Package_Services">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_Packages">
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="UserPackage">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_Packages">
+    <End Type="GreenProDbModel.Package" Role="Package" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkDone" Role="WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayPalLogs_UserPackage">
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.PayPalLog" Role="PayPalLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PayPalLog">
+        <PropertyRef Name="SubscriptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackagesAddons_ToServices">
+    <End Type="GreenProDbModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserPackagesAddon" Role="UserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="UserPackagesAddon">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnAssignedCars_Packages">
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="1" />
+    <End Type="GreenProDbModel.UnAssignedCar" Role="UnAssignedCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnAssignedCar">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackagesAddons_UserPackages">
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="1" />
+    <End Type="GreenProDbModel.UserPackagesAddon" Role="UserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackagesAddon">
+        <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTransactions_UserPackages">
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.UserTransaction" Role="UserTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTransaction">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkLogDetails_WorkDone">
+    <End Type="GreenProDbModel.WorkDone" Role="WorkDone" Multiplicity="1" />
+    <End Type="GreenProDbModel.WorkLogDetail" Role="WorkLogDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkDone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkLogDetail">
+        <PropertyRef Name="WorkDoneId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="GreenProDbModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+</Schema>

@@ -1,0 +1,3 @@
+Paypal Call: 03/16/2016 08:36:57
+
+responseFrom Paypal: {"ReferenceID":null,"PaymentAction":null,"IPAddress":null,"OrderTotal":"61.00","ItemTotal":"61.00","InvoiceID":null,"ApiStatus":"SUCCESS","ResponseError":null,"BillingAgreementID":"B-9MJ87472989329538","Timestamp":null,"TransactionID":"74G3946392261705E","PaymentStatus":"NONE","PendingReason":"NONE","PaymentError":null,"PaymentDate":"2016-03-16T03:06:51Z","GrossAmount":"61.00"}

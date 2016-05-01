@@ -1,0 +1,102 @@
+﻿@model GreenPro.Data.Package
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Package</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Package</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+        <div class="col-md-6"> 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Price, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Services</h4>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+
+                    @ViewBag.Message
+                    <table class="table table-condensed">
+
+
+                        @{
+
+    List<GreenPro.Data.Service> services = ViewBag.Services;
+    if (services.Count == 0)
+    {
+                        <p>Please add Services</p>
+    }
+    else
+    {
+        foreach (var service in services)
+        {
+
+                        <tr>
+                            <td>
+
+
+                                <input type="checkbox"
+                                       name="selectedServices"
+                                       value="@service.ServiceID " />
+                                @*// @(Html.Raw(service.Selected ? "checked=\"checked\"" : "")) />*@
+                                @service.Service_Name
+                            </td>
+                        </tr>
+
+
+
+
+
+        }
+    }
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Landing";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>User / Crew & Role Management</h2>
+        <p>This page lets you manage users for overall site. These users may be Customers, Admins, Crew Admin and Crew Leaders</p>
+        @Html.ActionLink("View Users","Index")
+        <br />
+        @Html.ActionLink("View Roles","Index","Roles")<br />
+        @Html.ActionLink("Add User","Create")
+    </div>
+</div>

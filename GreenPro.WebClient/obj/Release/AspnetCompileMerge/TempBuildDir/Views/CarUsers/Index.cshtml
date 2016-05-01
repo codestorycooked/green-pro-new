@@ -1,0 +1,263 @@
+﻿@model GreenPro.WebClient.ViewModel.CarGarageUserViewModel
+@using GridMvc.Html
+@using Microsoft.AspNet.Identity
+<script src="~/Scripts/smoothScroll.js"></script>
+
+<style>
+    .fa:before {
+        line-height: 10px;
+    }
+
+    .garage-title {
+        color: green;
+        font-weight: 600;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        @*<div class="col-md-12">*@
+        <h3>Your Cars | <span style="font-size:18px"><a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a></span></h3>
+        <hr />
+
+        <br />
+
+        @Html.Grid(Model.CarUser).Columns(columns =>
+                        {
+                            columns.Add(a => a.DisplayName).Titled("Car Display Name");
+                            columns.Add(a => a.Make).Titled("Make");
+                            columns.Add(a => a.GarageName).Titled("Garage");
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Details/" + d.CarId + "' id='" + d.CarId + "' title='Detail'> <span class='glyphicon glyphicon-search'> </span> </a>"));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Edit/" + d.CarId + "' id='" + d.CarId + "' title='Edit'> <span class='glyphicon glyphicon-edit'> </span> </a>"));
+                            //columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Delete/" + d.CarId + "' id='" + d.CarId + "' title='Detail'> <span class='glyphicon glyphicon-trash'> </span> </a>"));
+                            columns.Add().Titled("Renewal").Encoded(false).Sanitized(false).RenderValueAs(d => CarSubscriptionRenewal(d));
+                            columns.Add().Titled("Garage").Encoded(false).Sanitized(false).RenderValueAs(d => GarageSelection(d));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => Subscription(d));
+                        }).WithPaging(20)
+
+        <br /><br /><br />
+        @if (Model.AdhocCarUser.Count() > 0)
+        {
+            <h3>One Time Car Wash</h3>
+            <hr />
+            @Html.Grid(Model.AdhocCarUser).Columns(columns =>
+                        {
+                            columns.Add(a => a.DisplayName).Titled("Car Display Name");
+                            columns.Add(a => a.Make).Titled("Make");
+                            columns.Add(a => a.LinkedCarDisplayName).Titled("Linked To Subscription");
+                            // columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => AdhocToSubscription(d));
+                        }).WithPaging(20)
+
+            <br /><br /><hr />
+        }
+
+
+        @*</div>*@
+
+
+
+    </div>
+
+    <div class="col-md-12 form-horizontal hidden" id="garagesearchlist">
+        @using (Ajax.BeginForm("GetGarages", "CarUsers",
+            new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loading",
+                LoadingElementDuration = 10,
+                UpdateTargetId = "garageList",
+                OnSuccess = "OnSuccess",
+                OnFailure = "OnFailure"
+            }))
+        {
+
+            <div class="col-md-12">
+                <div class="form-group pull-right">
+                    <label style="font-size:16px" class="control-label col-md-4">Garage Locator</label>
+                    <div class="col-md-6">
+                        <input type="hidden" id="search_carid" name="search_carid" />
+                        <input type="text" id="searchText" name="searchText" required placeholder="Name, City, State or Zip" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" id="submit" type="submit"><i class="fa fa-search"></i> </button>
+                    </div>
+                    <br /><br />
+                </div>
+            </div>
+        }
+
+
+    </div>
+    <div class="co-md-12">
+
+        @*Load Garages from ajax*@
+        <p id="loading" style="display:none;text-align:center">
+            <img src="~/Content/images/loading.gif" />
+        </p>
+        <div id="garageList">
+            <br />
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+    function OnSearchGarage(id) {
+        $("#garagesearchlist").removeClass("hidden");
+        $("#search_carid").val(id);
+        scrollTo();
+
+    };
+    function scrollTo() {
+        $.smoothScroll({
+            offset: 1000,
+            speed: 800,
+            scrollTarget: '#garagesearchlist'
+        });
+        location.hash = "#garagesearchlist";
+    };
+
+    function OnSuccess() {
+
+
+        $.ajaxSetup({ cache: false });
+        $("a[data-modal]").on("click", function (e) {
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+
+                bindForm(this);
+
+            });
+            return false;
+        });
+
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $('#progress').show();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#myModal').modal('hide');
+                            $('#progress').hide();
+                            location.reload();
+                        } else {
+                            $('#progress').hide();
+                            $('#myModalContent').html(result);
+
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+@helper CarSubscriptionRenewal(GreenPro.WebClient.Models.CarUserModel user)
+{
+    if (String.IsNullOrEmpty(user.SubscriptionName))
+    {
+        <text>NA</text>
+    }
+    else if (user.AutoRenewal)
+    {
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + true + "' id='" + user.CarId + "' title='Detail'> Cancel </a>")</text>
+    }
+    else
+    {
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + false + "' id='" + user.CarId + "' title='Detail'> Auto</a>")</text>
+    }
+}
+
+@helper GarageSelection(GreenPro.WebClient.Models.CarUserModel user)
+{
+    if (String.IsNullOrEmpty(user.SubscriptionName))
+    {
+        <text>NA</text>
+    }
+    else if (user.GarageId > 0)
+    {
+        <text><a href="#" onclick="OnSearchGarage(@user.CarId)">Change </a> </text>
+    }
+    else
+    {
+        <text><a href="#" onclick="OnSearchGarage(@user.CarId)">Select </a> </text>
+    }
+}
+
+@helper Subscription(GreenPro.WebClient.Models.CarUserModel user)
+{
+
+    GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+    var userid = User.Identity.GetUserId();
+    var userCars = db.CarUsers.Where(a => a.UserId == userid);
+    var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
+    if (user.SubscriptionBought)
+    {
+        <text> @user.SubscriptionName </text>
+    }
+    else if (userCars.Count() == 1)
+    {
+        //If there is one car do not show popup
+        <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
+
+    }
+    else if (userpackages.Count() == 0)
+    {
+        <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
+    }
+    else
+    {
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
+
+    }
+}
+@helper AdhocToSubscription(GreenPro.WebClient.ViewModel.AdhocCarViewModel user)
+{
+    <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
+}
+<script>
+    $(document).ready(function () {
+        $("#CityId").prop("readonly", true);
+        $("#StateId").change(function () {
+            $("#CityId").empty();
+            var sid = $("#StateId").val();
+            if (sid == "-1")
+                $("#CityId").prop("readonly", true);
+            else
+                $("#CityId").prop("readonly", false);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Citylist")',
+                dataType: 'json',
+                data: { id: sid },
+                success: function (selectListItemList) {
+                    $.each(selectListItemList, function (i, state) {
+                        $("#CityId").append('<option value="'
+                         + state.Value + '">'
+                         + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>

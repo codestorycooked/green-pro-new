@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="a1ft">
+
+    <title>Green Pro Solutions :: Home</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/modal-ui.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    @Styles.Render("~/Content/css")
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption:700' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        .carousel {
+        }
+
+            .carousel .item {
+                -webkit-transition: opacity 1s;
+                -moz-transition: opacity 1s;
+                -ms-transition: opacity 1s;
+                -o-transition: opacity 1s;
+                transition: opacity 1s;
+            }
+
+            .carousel .active.left, .carousel .active.right {
+                left: 0;
+                opacity: 0;
+                z-index: 2;
+            }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="full-width-container header-section">
+        <div class="container">
+
+            <div class="navbar navbar-inverse left-navbar">
+                <div class="navbar-header">
+                    <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li id="homeMenu">@Html.ActionLink("Home", "Index", "Home")</li>                        
+                        <li id="garagesMenu">@Html.ActionLink("Garages", "Index", "Garages")</li>
+                        <li id="aboutMenu">@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li id="contactMenu">@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="top-right-section">
+                @if (!Request.IsAuthenticated)
+                {
+                    <a href='/Account/Login/'><button class="btn btn-success" value="Login">Login</button></a>
+                    <a href='/Account/Register/'><button class="btn btn-success" value="Login">Register</button></a>
+                    @*@Html.Partial("_LoginUser")*@
+                }
+                else
+                {
+                    @Html.Partial("_LoginPartial")
+                }
+            </div>
+
+        </div>
+    </div>
+    <div class="logo-section">
+        <img src="~/Content/images/logo.png" alt="" width="100%">
+    </div>
+    <div class="container">
+
+
+
+
+        @RenderBody()
+        <br /><br />
+        <div id='myModal' class='modal fade in' style="top:50px">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+        <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+        <!-- Fotter STRAT -->
+
+
+    </div>
+    <div class="full-width-container fotter-section container-fluid">
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1"><br />
+                   <p class="connectd-text">Get Connected</p>
+                    <ul class="social-icon">
+                        <li><a href="#" title="Facebook">
+                                <img src="~/Content/social/48/facebook_48.png" /></a></li>
+                        <li><a title="Twitter" href="#">
+                                <img src="~/Content/social/48/twitter_48.png" /></a></li>
+                        
+                        
+                        <li><a href="#" title="Linkedin">
+                                <img src="~/Content/social/48/linkedin_48.png" /></a></li>
+                        <li><a href="#" title="Google Plus">
+                                <img src="~/Content/social/48/google-plus_48.png" /></a></li>
+                    </ul><br /><br />
+                    <p class="copy-right">&copy; @DateTime.Now.Year Green Pro Solutions. All rights reserved.</p>
+                    
+                </div>
+
+            </div>
+        </div>
+
+     <!-- container end -->
+    <!-- modal placeholder-->
+
+    <script type="text/javascript">
+    $(function () {
+        // Initialize numeric spinner input boxes
+        //$(".numeric-spinner").spinedit();
+
+        // Initalize modal dialog
+        // attach modal-container bootstrap attributes to links with .modal-link class.
+        // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+        $('body').on('click', '.modal-link', function (e) {
+            e.preventDefault();
+            $(this).attr('data-target', '#modal-container');
+            $(this).attr('data-toggle', 'modal');
+        });
+
+        // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+        $('body').on('click', '.modal-close-btn', function () {
+            $('#modal-container').modal('hide');
+        });
+
+        //clear modal cache, so that new content can be loaded
+        $('#modal-container').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+
+        $('#CancelModal').on('click', function () {
+            return false;
+        });
+    });
+    </script>
+
+
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('.carousel').carousel({
+                interval: 5000,
+                pause: "false"
+            });
+
+
+            //$(".demo1").bootstrapNews({
+            //    newsPerPage: 2,
+            //    autoplay: true,
+            //    pauseOnHover: true,
+            //    direction: 'up',
+            //    newsTickerInterval: 4000,
+            //    onToDo: function () {
+            //        //console.log(this);
+            //    }
+            //});
+
+        });
+    </script>
+
+
+    @*<script type="text/javascript" src="drop-down/bootstrap-hover-dropdown.js"></script>*@
+    <script type="text/javascript">
+        // very simple to use!
+        //$(document).ready(function () {
+        //    $('.js-activated').dropdownHover().dropdown();
+        //});
+
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#oceanCarousel, #musiciansCarousel').carousel({
+                interval: 6000,
+                autoplay: true,
+                pauseOnHover: false
+            });
+
+        });
+
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

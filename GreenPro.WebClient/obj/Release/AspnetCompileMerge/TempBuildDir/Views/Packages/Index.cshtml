@@ -1,0 +1,67 @@
+﻿@model GreenPro.WebClient.ViewModel.PackagesServiceViewModel
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/smoothScroll.js"></script>
+
+<div class="row">
+    <div class="col-md-12 package_bg">
+        <div class="form-horizontal" style="text-align:center">
+
+
+
+            <h4>Select Your Car Type</h4>
+            @using (Html.BeginForm("IndexPost", "Packages", FormMethod.Post))
+            {
+
+                foreach (var item in Model.CarTypes)
+                {
+                    if (item.Id == 1)
+                    {
+                        <div class="col-md-2 col-md-offset-1">
+                            <a id="cartype" onclick="submit(@item.Id)"><img src=@String.Format("/Content/cartypes/{0}.png", @item.Id) /><br />@item.Description</a>
+                        </div>
+
+                    }
+                    else
+                    {
+
+                        <div class="col-md-2">
+                            <a id="cartype" onclick="submit(@item.Id)"><img src=@String.Format("/Content/cartypes/{0}.png", @item.Id) /><br />@item.Description</a>
+                        </div>
+                    }
+                }
+            }
+
+        </div>
+
+    </div>
+    <div class="row">
+        <br />
+        <div class="co-md-12" style="padding-top:20px;" id="packagesList">
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function submit(typid) {
+        var types;
+        $.ajax({ url: "/Packages/IndexPost", data: { id: typid }, dataType: "html", method: "post" }).done(function (data) {
+            $('#packagesList').html(data);
+            scrollTo();
+        });
+    };
+    function scrollTo() {
+        $.smoothScroll({
+            offset: 10,
+            speed:800,
+            scrollTarget: '#packagesList'
+        });
+        location.hash = "#packagesList";
+    };
+</script>

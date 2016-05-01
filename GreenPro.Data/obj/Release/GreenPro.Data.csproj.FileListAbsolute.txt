@@ -1,0 +1,12 @@
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\GreenPro.Data.dll.config
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\GreenPro.Data.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\GreenPro.Data.pdb
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\EntityFramework.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\EntityFramework.SqlServer.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\Newtonsoft.Json.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\EntityFramework.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\EntityFramework.SqlServer.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\Newtonsoft.Json.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.csprojResolveAssemblyReference.cache
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.pdb

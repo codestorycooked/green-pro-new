@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "ServiceManagement";
+}
+<style>
+    .btn {
+        margin: 5px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <h2>User Management</h2>
+        <p>This page lets you manage Packages, Taxes & Payments</p>
+        <ul>
+            @Html.ActionLink("Manage Users", "Index", "UsersAdmin", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Roles", "Index", "RolesAdmin", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Crew Management", "Index", "Services", null, new { @class = "btn btn-primary" })
+           
+
+        </ul>
+    </div>
+</div>

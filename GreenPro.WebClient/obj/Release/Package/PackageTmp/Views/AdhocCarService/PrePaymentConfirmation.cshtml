@@ -1,0 +1,105 @@
+﻿@model GreenPro.WebClient.ViewModel.AdhocUserPackageAddOn
+
+<div class="row">
+    <div class="col-md-12"><h3>Order Summary</h3></div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Package Details</h4>
+            <hr />
+            <table class="table table-bordered">
+                <tr>
+                    <td>Your Car</td>
+                    <td>@Model.UserPackge.CarUser.DisplayName</td>
+                </tr>
+                <tr>
+                    <td>Package Name</td>
+                    <td>@Model.UserPackge.Package.Package_Name</td>
+                </tr>
+                <tr>
+                    <td>Base Package Price</td>
+                    <td>$@Model.UserPackge.Package.Package_Price.ToString("00.00")</td>
+                </tr>
+                <tr>
+                    <td>Package Price with Addons</td>
+                    <td>$@Model.UserPackge.TotalPrice.ToString("00.00")</td>
+                </tr>
+            </table>
+            <p>You can access details of this transaction in <b>My Transactions</b></p>
+        </div>
+        <div class="col-md-4">
+            <h5>Service & Add-Ons</h5>
+            <hr />
+            <h6>Included Services</h6>
+            <table class="table table-bordered">
+                @foreach (var item in Model.UserPackge.Package.Package_Services)
+                {
+
+                    <tr>
+                        <td>@item.Service.Service_Name</td>
+                    </tr>
+
+                }
+            </table>
+            @if (Model.Addons.Count() != 0)
+            {
+                <h5>Add Ons</h5>
+                <table class="table table-bordered">
+
+                    @foreach (var item in Model.Addons)
+                    {
+                        <tr>
+                            <td>@item.Service.Service_Name </td>
+                            <td>$@item.Service.Service_Price.ToString("00.00")</td>
+
+                        </tr>
+                    }
+
+
+
+                </table>
+            }
+            else
+            {
+                <h5 class="alert alert-info">No Addons</h5>
+            }
+        </div>
+        <div class="col-md-4">
+            <h4>Total</h4><hr />
+            <h1 style="font-weight:800">$@Model.FinalPrice.ToString("00")
+                <span style="font-size:16px;"> (Tax added $@Model.TaxAmount.ToString("00.00") at @Model.TaxPercentage%)</span>
+            </h1>
+
+
+            @Html.RadioButtonFor(m => m.AcceptAgreement, "true") <a href="#">I Accept Terms & Conditions</a>
+            @Html.HiddenFor(m => m.UserPackageID)<br />
+
+
+            @Html.ValidationMessageFor(m => m.AcceptAgreement)<br />
+            @{
+                GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+              
+              var text = "";
+              var url = "";
+              if (Model.UserPackge.TipAmount <= 0)
+              {
+                  url = "/AdhocCarService/TipAmount?id=" + Model.UserPackge.Id;
+                  text = "Add Tip Amount";
+
+              }
+              else
+              {
+                  url = "/AdhocCarService/DeleteTip?id=" + Model.UserPackge.Id;
+                  text = "Edit Tip Amount";
+              }
+              }
+
+            <a href="@url" data-modal=""><button type="button" class="btn btn-info">@text</button></a> &nbsp;  <button type="submit" class="btn btn-primary">Pay using Paypal</button><br /><br />
+            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /><br /><br />
+            <p class="alert alert-danger">Note: Paypal is our payment system. We do not store card numbers or other sensitive information on our website.</p>
+        </div>
+    </div>
+}

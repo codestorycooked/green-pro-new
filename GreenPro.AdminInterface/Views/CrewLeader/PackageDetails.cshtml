@@ -1,0 +1,34 @@
+﻿@model GreenPro.Data.UserPackage
+@{
+    ViewBag.Title = "PackageDetails";
+    Layout = "~/Views/Shared/_CrewLayout.cshtml";
+}
+
+<h2>Package Details</h2>
+
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>Package Name</th>
+        <th>Package Services</th>
+        <th>Package AddOns</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">@Model.Package.Package_Name</td>
+        <td>
+            @foreach (var item in Model.Package.Package_Services)
+            {
+                <p>@item.Service.Service_Name</p>
+            }
+
+        </td>
+        <td>
+            @foreach (var item in Model.UserPackagesAddons.Where(a => a.UserPackageID == Model.Id))
+            {
+                <p>@item.Service.Service_Name</p>
+            }
+        </td>
+    </tr>
+</table>
+

@@ -1,0 +1,42 @@
+﻿@model List<GreenPro.Data.Garage>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "ChooseGarage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ChooseGarage</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@Html.Grid(Model).Columns(columns =>
+                        {
+                            columns.Add(a => a.Garage_Name).Titled("Garrage Display Name").Filterable(true);
+                            columns.Add(a => a.Garage_Address).Titled("Garage Address");
+                            columns.Add(a => a.State).Titled("State").Filterable(true);
+                            columns.Add(a => a.City).Titled("City");
+                            columns.Add(a => a.Country).Titled("Country");
+                            columns.Add(a => a.Pincode).Titled("Pincode");
+                            columns.Add(a => a.Contact_Person).Titled("Contact Person");
+                            columns.Add(a => a.Phone_Number).Titled("Phone Number");
+                            columns.Add(a => a.Email).Titled("Email");
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Edit", "Edit", new { id = d.GarageId }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Details", "Details", new { id = d.GarageId }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Delete", "Delete", new { id = d.GarageId }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => SetDefaultCard(d));
+
+                        }).WithPaging(20).Filterable()
+
+@helper SetDefaultCard(GreenPro.Data.Garage garage)
+{
+    if (garage.GarageId == @ViewBag.DefaultGarageId)
+    {
+        //http://www.w3schools.com/charsets/ref_utf_dingbats.asp
+        <text>&#10004;</text>
+    }
+    else
+    {
+        <text> @Html.ActionLink("Select Garage", "SelectGarage", new { garageId = garage.GarageId }))</text>
+    }
+}

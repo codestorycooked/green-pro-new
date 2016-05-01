@@ -1,0 +1,38 @@
+﻿@model GreenPro.AdminInterface.ViewModels.CarPackageServiceViewModel
+
+
+<div class="modal-header panel-default">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Select Crew Member</h3>
+</div>
+@using (Html.BeginForm("AssignWorkerPost", "CrewAdmin", FormMethod.Post))
+{
+    <div class="modal-body">
+        <div class="form-group">
+
+
+            <div class="form-group">
+                
+                
+                    @Html.Label("Select User:", new { @class = "control-label" })
+                    @*@Html.DropDownList("AssignWorkerId", "", htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.AssignWorkerId, Model.UserSelectList, htmlAttributes: new { @class = "form-control" })
+                    @*@Html.ValidationMessageFor(m => )*@
+                    @*@Html.DropDownListFor(model => model.CityId, Model.CityList, new { @class = "form-control" })*@
+                    @Html.HiddenFor(a => a.CarDetails)
+                    @Html.HiddenFor(a => a.CarId)
+                
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        @*<button class="btn btn-primary" data-dismiss="modal">Cancel</button>*@
+        @*<input class="btn btn-danger" type="submit" value="Yes" disabled="@ViewBag.Disabled" />*@
+        <input type="submit" name="name" value="Assign Worker" class="btn btn-primary" />
+    </div>
+}

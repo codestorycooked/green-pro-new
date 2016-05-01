@@ -1,0 +1,184 @@
+﻿@model GreenPro.AdminInterface.ViewModels.CarViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Car Detail</h2>
+<p><a href="@Url.Action("Index")">Back Car List</a> </p>
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+
+    <div class="col-md-12">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Car Info</a></li>
+            <li><a data-toggle="tab" href="#package">Package</a></li>
+                
+        </ul>
+
+
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">               
+
+                <div style="padding:10px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Car # </label>
+                        <div class="col-md-10">
+                            @Model.CarId
+                            @Html.HiddenFor(m=>m.CarId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Display Name</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m=>m.DisplayName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Make</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Make)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> License Number </label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.LicenseNumber)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Color </label>
+                        <div class="col-md-10">
+                           @Html.TextBoxFor(m => m.Color)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Car Type </label>
+                        <div class="col-md-10">
+                           @Html.DisplayFor(m => m.CarType)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Purchase Year </label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.PurchaseYear)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> User # </label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(m => m.DisplayName)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Garage </label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(m => m.Garage)
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+
+                
+            </div>
+            <div class="clearfix"> </div>
+            <div id="package" class="tab-pane fade">
+                <div style="padding:10px;">
+                    @if (Model.UserPackages.Count > 0)
+                    {
+                       foreach (var userPackage in Model.UserPackages)
+                        {
+                           <div class="package-info">
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Package Name </label>
+                                   <div class="col-md-10">
+                                       @userPackage.Package.Package_Name
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Service Day </label>
+                                   <div class="col-md-10">
+                                       @userPackage.ServiceDay
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Actual Price </label>
+                                   <div class="col-md-10">
+                                       @userPackage.ActualPrice
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Total Price </label>
+                                   <div class="col-md-10">
+                                       @userPackage.TotalPrice
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Tip Amount </label>
+                                   <div class="col-md-10">
+                                       @userPackage.TipAmount
+                                   </div>
+                               </div>
+                               
+                               <div class="form-group">
+                                   @if (userPackage.Services.Count > 0)
+                                   {
+                                       <div style="height:15px;"></div>
+                                    <p>Services</p>
+                                       <table>
+                                           <tr>
+                                               <td>
+                                                   <b>Service Name</b>
+                                               </td>
+                                               <td>
+                                                   <b>Is AddOn</b>
+                                               </td>
+                                           </tr>
+                                           @foreach (var service in userPackage.Services)
+                                           {
+                                            <tr>
+                                                <td>
+                                                    @service.Service_Name
+                                                </td>
+                                                <td>
+                                                    @service.IsAddOn
+                                                </td>
+                                            </tr>
+                                           }
+                                       </table>
+                                   }
+
+                               </div>
+
+
+                               </div>
+                        }
+                    }
+                </div>
+            </div>
+            @*<div id="menu2" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Some content in menu 2.</p>
+    </div>*@
+        </div>
+        <div class="clearfix"> </div>
+
+        </div>
+
+    </div>
+
+}

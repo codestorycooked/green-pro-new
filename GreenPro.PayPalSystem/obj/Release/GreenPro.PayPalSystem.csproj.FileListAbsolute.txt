@@ -1,0 +1,10 @@
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\GreenPro.PayPalSystem.dll.config
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\GreenPro.PayPalSystem.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\GreenPro.PayPalSystem.pdb
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\Newtonsoft.Json.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\PayPalCoreSDK.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\PayPalMerchantSDK.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\bin\Release\Newtonsoft.Json.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\obj\Release\GreenPro.PayPalSystem.csprojResolveAssemblyReference.cache
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\obj\Release\GreenPro.PayPalSystem.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.PayPalSystem\obj\Release\GreenPro.PayPalSystem.pdb

@@ -1,0 +1,9 @@
+﻿@model GreenPro.WebClient.Models.LoginViewModel
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.TextBoxFor(m => m.UserName, new { @class = "login-inp", @placeholder = "Username" })
+    @Html.TextBoxFor(m => m.Password, new { @class = "login-inp", @placeholder = "Password", @type = "password" })
+    <input type="submit" name="name" value="Login" />
+    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+}

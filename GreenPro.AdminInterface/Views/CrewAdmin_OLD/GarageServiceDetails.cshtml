@@ -1,0 +1,114 @@
+﻿@model GreenPro.AdminInterface.ViewModels.CarPackageServiceViewModel
+@{
+    ViewBag.Title = "GarageServiceDetails";
+}
+
+<div class="row">   
+    <div class="col-md-6">
+        <h3>Car Details</h3>
+        @Html.HiddenFor(m => m.WorkDoneId)
+        @Html.HiddenFor(m => m.CarId)
+        <table class="table">
+            <tr>
+                <td>Display Name</td>
+                <td>@Model.CarDetails.DisplayName</td>
+            </tr>
+            <tr>
+                <td>Make</td>
+                <td>@Model.CarDetails.Make</td>
+            </tr>
+            <tr>
+                <td>License</td>
+                <td>@Model.CarDetails.LicenseNumber</td>
+            </tr>
+            <tr>
+                <td>Color</td>
+                <td>@Model.CarDetails.Color</td>
+            </tr>
+            <tr>
+                <td>Purchase Year</td>
+                <td>@Model.CarDetails.PurchaseYear</td>
+            </tr>
+        </table>
+
+
+
+
+        @if (ViewBag.ShowAssignedButton == "true")
+        {
+            using (Html.BeginForm("StartWork", "CrewAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.WorkDoneId)
+                @Html.HiddenFor(m => m.CarId)
+                <input type="button" value="Assign Work" class="btn btn-primary" />
+            }
+
+
+        }
+        @if (ViewBag.ShowStartWorkButton == "true")
+        {
+            using (Html.BeginForm("StartWork", "CrewAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.WorkDoneId)
+                @Html.HiddenFor(m => m.CarId)
+                <input type="submit" value="Start Service" class="btn btn-primary" />
+            }
+
+        }
+        @if (ViewBag.ShowCompleteButton == "true")
+        {
+            using (Html.BeginForm("Create", "CrewAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(m => m.WorkDoneId)
+                @Html.HiddenFor(m => m.CarId)
+                <input type="button" value="Complete Work " class="btn btn-primary" />
+            }
+
+        }
+
+        <hr />
+        <h3>Log Work</h3>
+
+
+    </div>
+    <div class="col-md-6">
+        <h3>Service Details</h3>
+        <table class="table">
+            @*<tr>
+                <td>Package Name </td>
+
+                <td> @Model.Details.PackageDetails.Package_Name</td>
+            </tr>
+            <tr>
+                <td>Package Description </td>
+
+                <td> @Model.Details.PackageDetails.Package_Description</td>
+            </tr>
+            <tr>
+                <td>Services Name </td>
+
+                <td>
+                    @foreach (var service in @Model.Details.PackageDetails.Package_Services)
+                    {
+                        <p> @service.Service.Service_Name</p>
+
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td>Add Ons</td>
+                <td>@foreach (var addon in @Model.Details.PackageDetails.UserPackages)
+                    {
+                      //  addon.UserPackagesAddons
+                    }</td>
+            </tr>*@
+            @foreach (var service in @Model.Details.ServiceDetails)
+            {
+                <tr>
+                    <td> @service.Service_Name</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿@model GreenPro.WebClient.Models.LoginViewModel
+
+@using (@Html.BeginForm("UserLogin", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
+    @Html.LabelFor(m => m.Password)
+    @Html.LabelFor(m => m.UserName)
+}

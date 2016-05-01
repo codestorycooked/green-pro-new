@@ -1,0 +1,7 @@
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\bin\Debug\GreenPro.Database.dacpac
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\Model.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\refactor.xml
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\postdeploy.sql
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\predeploy.sql
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\GreenPro.Database.dll
+F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Database\obj\Debug\GreenPro.Database.pdb

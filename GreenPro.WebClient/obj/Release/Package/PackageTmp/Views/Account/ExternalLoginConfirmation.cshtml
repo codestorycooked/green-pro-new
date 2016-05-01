@@ -1,0 +1,133 @@
+﻿@model GreenPro.WebClient.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@*<h3>Associate your @ViewBag.LoginProvider account.</h3>*@
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h2>@ViewBag.Title.</h2>
+            @*<h4>Association Form</h4>*@
+            <hr />
+            @Html.ValidationSummary()
+            <p class="text-info">
+                You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+                @*Please enter a user name for this site below and click the Register button to finish
+                    logging in.*@
+            </p><br /><br />
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = true })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateofBirth, new { @class = "col-md-3 control-label" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.DateofBirth, new { @class = "form-control", id = "datetimepicker1" })
+                    @Html.ValidationMessageFor(m => m.DateofBirth)
+
+                </div><div class="col-md-4 control-label" style="text-align:left!important">Format: MM/DD/YYYY</div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Address, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.StateId, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.DropDownList("StateId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.StateId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CityId, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CityId)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Pincode, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Pincode)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-3 control-label" })
+                <div class="col-md-5">
+                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PhoneNumber)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Register" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'MM/DD/YYYY',
+            defaultDate: "01/1/1960"
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#CityId").prop("readonly", true);
+        $("#StateId").change(function () {
+            $("#CityId").empty();
+            var sid = $("#StateId").val();
+            if (sid == "-1")
+                $("#CityId").prop("readonly", true);
+            else
+                $("#CityId").prop("readonly", false);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Citylist")',
+                dataType: 'json',
+                data: { id: sid },
+                success: function (selectListItemList) {
+                    $.each(selectListItemList, function (i, state) {
+                        $("#CityId").append('<option value="'
+                         + state.Value + '">'
+                         + state.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>

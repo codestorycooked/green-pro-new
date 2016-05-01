@@ -1,0 +1,75 @@
+﻿@model IEnumerable<GreenPro.AdminInterface.ViewModels.CarPackageServiceViewModel>
+@{
+    ViewBag.Title = "GarageService";
+    Layout = "~/Views/Shared/_CrewLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Garage Service Jobs</h3>
+        <hr />
+
+        <div class="form">
+            <div class="form-group">
+                @Html.Label("Select Garage:", new { @class = "col-md-2 control-label" })
+                <div class="col-md-5">
+                    @Html.DropDownList("GarageList", null, htmlAttributes: new { @class = "form-control", @onchange = "CallChangefunc(this.value)" })
+                    @*@Html.ValidationMessageFor(m => )*@
+                    @*@Html.DropDownListFor(model => model.CityId, Model.CityList, new { @class = "form-control" })*@
+                </div>
+            </div>
+        </div>
+        <br /><br /><br />
+
+        @if (Model != null)
+        {
+            <div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Car License Number</th>
+                        <th>Car Make</th>
+                        <th>Assigned Worker</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td>@item.CarDetails.Make</td>
+                            <td>@Html.DisplayFor(m => item.CarDetails.LicenseNumber)</td>
+                            <td>
+                                @if (item.AssignedWorker == null)
+                                {
+                                    @Html.ActionLink("Assign Worker", "AssignWorker", new { carId = item.CarDetails.CarId }, new { @class = "modal-link" })
+
+                                    @*@Html.Raw("<a data-modal='' href='/CrewAdmin/AssignWorker?carId=" + item.CarDetails.CarId + "' title='Assign Member'>Assign</a>")*@
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(a => item.AssignedWorker.Email)
+                                }
+                            </td>
+                            <td> @ViewBag.StatusMessage</td>
+                            <td>
+
+                            <td>@Html.ActionLink("Details", "GarageServiceDetails", new { id = item.CarDetails.CarId, workDoneId = item.WorkDoneId })</td>
+                            @*<td>@Html.ActionLink("Details", "GarageServiceDetails", new { id = item.Id })</td>*@
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+<script>
+    function CallChangefunc(val) {
+        window.location.href = "/CrewAdmin/GarageService?garageId=" + val;
+    }
+</script>

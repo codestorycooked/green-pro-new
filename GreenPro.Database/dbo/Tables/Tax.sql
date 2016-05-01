@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Tax]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Type] NVARCHAR(50) NOT NULL, 
+    [TaxPercentage] NUMERIC(4, 2) NOT NULL
+)

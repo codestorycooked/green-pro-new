@@ -1,0 +1,160 @@
+﻿@model GreenPro.WebClient.ViewModel.UserPackageAddOn
+
+<div class="row">
+    <div class="col-md-12"><h3>Order Summary</h3></div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Package Details</h4>
+            <hr />
+            <table class="table table-bordered">
+                <tr>
+                    <td>Your Car</td>
+                    <td>@Model.UserPackge.CarUser.DisplayName</td>
+                </tr>
+                <tr>
+                    <td>Package Name</td>
+                    <td>@Model.UserPackge.Package.Package_Name</td>
+                </tr>
+                @*<tr>
+                    <td>Base Package Price</td>
+                    <td>$@Model.UserPackge.Package.Package_Price.ToString("00.00")</td>
+                </tr>*@
+                <tr>
+                    <td>Package Price with Addons</td>
+                    <td>$@Model.UserPackge.TotalPrice.ToString("00.00")</td>
+                </tr>
+            </table>
+            <p>You can access details of this transaction in <b>My Transactions</b></p>
+        </div>
+        <div class="col-md-4">
+            <h4>Service's & Add-Ons</h4>
+            <hr />
+            <h6>Included Services</h6>
+            <table class="table table-bordered">
+                @foreach (var item in Model.UserPackge.Package.Package_Services)
+                {
+
+                    <tr>
+                        <td>@item.Service.Service_Name</td>
+                    </tr>
+
+                }
+            </table>
+            @if (Model.Addons.Count() != 0)
+            {
+                <h4>Add Ons</h4>
+                <table class="table table-bordered">
+
+                    @foreach (var item in Model.Addons)
+                    {
+                        <tr>
+                            <td>@item.Service.Service_Name </td>
+                            <td>$@item.Service.Service_Price.ToString("00.00")</td>
+
+                        </tr>
+                    }
+
+
+
+                </table>
+            }
+            else
+            {
+                <h5 class="alert alert-info">No Addons</h5>
+            }
+        </div>
+        <div class="col-md-4">
+            <h4>Total</h4><hr />
+            <h1 style="font-weight:800">$@Model.FinalPrice.ToString("00.00")&nbsp;<span style="font-size:16px;" > (Tax added $@Model.TaxAmount.ToString("00.00") at @Model.TaxPercentage%)</span></h1>
+
+
+            @Html.RadioButtonFor(m => m.AcceptAgreement, "true") <a data-modal='' href='/Website/TermsCondition'>I Accept Terms & Conditions</a>
+            @Html.HiddenFor(m => m.UserPackageID)<br />
+
+
+            @Html.ValidationMessageFor(m => m.AcceptAgreement)<br />
+            @{
+            GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+            
+            var text = "";
+            var url="";
+            if (Model.UserPackge.TipAmount <= 0)
+            {
+                url = "/Website/TipAmount?id=" + Model.UserPackge.Id;
+                text = "Add Tip Amount";
+
+            }
+            else {
+                url = "/Website/DeleteTip?id=" + Model.UserPackge.Id;
+                text = "Edit Tip Amount";
+            }
+
+            }
+
+            <a href="@url" data-modal=""><button type="button" class="btn btn-info">@text</button></a> &nbsp;  <button type="submit" class="btn btn-primary">Pay using Paypal</button>&nbsp;<br /><br />
+            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /><br /><br />
+            <p class="alert alert-danger">Note: Paypal is our payment system. We do not store card numbers or other sensitive information on our website.</p>
+        </div>
+    </div>
+}
+
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' style="top:50px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+<script>
+    $("form").removeData("validator");
+    $("form").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $(document).ready(function () { OnSuccess() });
+    function OnSuccess() {
+
+
+        $.ajaxSetup({ cache: false });
+        $("a[data-modal]").on("click", function (e) {
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+
+                bindForm(this);
+
+            });
+            return false;
+        });
+
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $('#progress').show();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#myModal').modal('hide');
+                            $('#progress').hide();
+                            location.reload();
+                        } else {
+                            $('#progress').hide();
+                            $('#myModalContent').html(result);
+
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }
+</script>

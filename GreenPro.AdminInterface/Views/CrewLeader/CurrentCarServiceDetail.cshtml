@@ -1,0 +1,188 @@
+﻿@model GreenPro.AdminInterface.ViewModels.CurrentCarServiceDetailModel
+@{
+    ViewBag.Title = "CurrentCarServiceDetail";
+    Layout = "~/Views/Shared/_CrewLayout.cshtml";
+}
+<script src="~/Scripts/jquery.datetimepicker.full.js"></script>
+<link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
+<h2>Current Job Detail</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.CurrentCarServiceId)
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentCarServiceId, "Job #", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CurrentCarServiceId
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ServiceStatusId, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.serviceStatus.ToString()
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.CarId, "Car #", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.CarId
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.CarDisplayName, "Display Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.CarDisplayName
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.LicenseNumber, "License Number", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.LicenseNumber
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.Make, "Make", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.Make
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.PurchaseYear, "Purchase Year", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.PurchaseYear
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CarService.Color, "Color", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.CarService.Color
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-2">
+                Services
+            </div>
+            <div class="col-md-10">
+                @if (Model.CarService.SelectServices.Count > 0)
+                {
+
+                    <ul>
+                        @foreach (var service in Model.CarService.SelectServices)
+                        {
+                            <li> @service.ServiceName</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDateTime, "Start Date Time", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.StartDateTime,
+                   new
+                   {
+                       htmlAttributes = new
+                       {
+
+                           @Value = Model.StartDateTime.HasValue? Model.StartDateTime.Value.ToString("MM/dd/yyyy"):"",
+
+                           @class = "form-control"
+                       },
+                   })*@
+
+                @if (Model.StartDateTime.HasValue)
+                {
+                    @Model.StartDateTime.Value
+                }
+                else
+                {
+                    <input type="submit" value="Job Start" name="btnStartJob" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDateTime, "End Date Time", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.EndDateTime,
+                   new
+                   {
+                       htmlAttributes = new
+                       {
+
+                           @Value = Model.EndDateTime.HasValue ? Model.EndDateTime.Value.ToString("MM/dd/yyyy") : "",
+
+                           @class = "form-control"
+                       },
+                   })*@
+
+                @if (Model.EndDateTime.HasValue)
+                {
+                    @Model.EndDateTime.Value
+                }
+                else if (Model.StartDateTime.HasValue)
+                {
+                    <input type="submit" value="Job End" name="btnEndJob" class="btn btn-primary" />
+                }
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Comment, "Comment", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Comment, new { style = "width:300px; height:200px;" })
+                @Html.ValidationMessageFor(m => m.Comment)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-10">
+               <input type="submit" class="btn btn-primary" value="Save" name="Save" />
+            </div>
+        </div>
+
+        
+
+        </div>
+    
+    <script>
+        $('#StartDateTime').datetimepicker({
+            format: 'm/d/Y h:i',
+            formatTime: 'h:i',
+            formatDate: 'm/d/Y'
+            //defaultDate:'8.12.1986', // it's my birthday
+            //defaultDate: '+03.01.1970', // it's my birthday
+            //defaultTime: '10:00',
+            //timepickerScrollbar: false
+        });
+        $('#EndDateTime').datetimepicker({
+            format: 'm/d/Y h:i',
+            formatTime: 'h:i',
+            formatDate: 'm/d/Y'
+            //defaultDate:'8.12.1986', // it's my birthday
+            //defaultDate: '+03.01.1970', // it's my birthday
+            //defaultTime: '10:00',
+            //timepickerScrollbar: false
+        });
+    </script>
+}

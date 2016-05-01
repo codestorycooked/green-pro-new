@@ -1,0 +1,106 @@
+﻿@model GreenPro.Data.UserPackage
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserPackage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscribedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscribedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActualPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActualPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceWithAddOns)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceWithAddOns)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ipaddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ipaddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentRecieved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentRecieved)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CarUser.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CarUser.DisplayName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Package.Package_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Package.Package_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

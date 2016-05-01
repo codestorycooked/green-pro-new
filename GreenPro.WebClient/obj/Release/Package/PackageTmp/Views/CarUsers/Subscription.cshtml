@@ -1,0 +1,19 @@
+﻿@model IEnumerable<GreenPro.WebClient.ViewModel.SubscriptionViewModel>
+@using GridMvc.Html
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="modal-title">Subscription</h3>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @Html.Grid(Model).Columns(columns =>
+                        {
+                            columns.Add(a => a.CarName).Titled("Connect it to Subscription for:");
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Select", "SubscriptionConfirmed", new { id = d.Id }));
+                        }).WithPaging(20)
+
+        <br /><br /><hr />
+    </div>
+</div>

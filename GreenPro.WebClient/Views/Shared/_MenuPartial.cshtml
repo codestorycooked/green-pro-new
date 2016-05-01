@@ -1,0 +1,24 @@
+﻿<ul class="nav navbar-nav" data-0="margin-top:10px;" data-300="margin-top:10px;">
+    
+    @*<li id="garagesMenu">@Html.ActionLink("Garages", "Index", "Garages")</li>*@    
+    @*<li id="contactMenu">@Html.ActionLink("Contact Us", "Contact", "Home")</li>*@
+
+    <li class="active"><a href="~/">Home</a></li>
+    <li><a href="#section-about">Our Story</a></li>
+	 <li><a href="#section-works">Results</a></li>
+    <li><a href="#line-pricing">Locations & Pricing</a></li>
+     
+</ul>
+
+<div class="top-right-section">
+    @if (!Request.IsAuthenticated)
+    {
+        <a href='/Account/Login/'><button class="btn btn-success" value="Login">Login</button></a>
+        <a href='/Account/Register/'><button class="btn btn-success" value="Login">Register</button></a>
+        
+    }
+    else
+    {
+        @Html.Partial("_LoginPartial")
+    }
+</div>

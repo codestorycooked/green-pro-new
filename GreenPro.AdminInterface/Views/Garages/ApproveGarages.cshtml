@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GreenPro.Data.Garage>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Garages";
+}
+
+<h2>Garages</h2>
+<p>
+    @Html.ActionLink("Garages List", "Index")
+</p>
+
+@using (Html.BeginForm())
+{
+    @Html.Grid(Model).Columns(columns =>
+                        {
+                            columns.Add(a => a.Garage_Name).Titled("Garage Name").Filterable(true);
+                            columns.Add(a => a.Garage_Address).Titled("Garage Address");
+                            columns.Add(a => a.Pincode).Titled("Postal code").Filterable(true);
+                            columns.Add(a => a.Contact_Person).Titled("Contact");
+                            columns.Add(a => a.Phone_Number).Titled("Phone");
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => "<button type='submit' id=" + d.GarageId + ">Approve </button><input type='hidden' name='GarageID' value=" + d.GarageId + "/>");
+
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Edit", "Edit", new { id = d.GarageId }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Details", "Details", new { id = d.GarageId }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Delete", "Delete", new { id = d.GarageId }));
+
+                        }).WithPaging(20).Filterable().WithPaging(10)
+}

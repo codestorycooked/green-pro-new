@@ -1,0 +1,72 @@
+﻿@model GreenPro.WebClient.ViewModel.PackagesServiceViewModel
+@{
+    Layout = null;
+
+}
+<div class="col-md-12 css">
+
+    @if (Model.Packages.Count() != 0)
+    {
+
+        <div class="line-pricing-table">
+
+            @foreach (var item in Model.Packages)
+            {
+                int showCount = 0;
+                int maxCount = 10;
+                
+               
+                GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+                var package_service = db.Package_Services.Where(b => b.PackageID == item.PackageId);
+                
+                
+                
+
+                <div class="pricing-table-wrap" data-scrollreveal="enter top over 0.5s after 0.3s">
+                    <ul>
+                        <li class="line-head-row">
+                            @item.Package_Name
+                        </li>
+                        <li class="line-price-row">
+                            <p>
+                                @*<span class="symbol">$</span>*@
+                                <span style="font-size: 40px;">$@(String.Format("{0:0.00}", item.Package_Price))</span>
+                            </p>
+                            @*<small>Ideal for beginners</small>*@
+                        </li>
+
+                        @foreach (var pService in package_service)
+                        {
+                        showCount = showCount + 1;
+                        <li style="font-size:12px;">
+                            @pService.Service.Service_Name
+                        </li>
+                        
+                        }                        
+
+                        @for (int i = 1; i <= (maxCount - showCount); i++)
+                        {
+                            <li>
+                                &nbsp;
+                            </li>
+                        }
+
+
+
+                        <li class="line-btn-row">
+                            <a class="line-btn light" href="@string.Format("/Website/SubscribePackage?packageid={0}", item.PackageId)"> Buy </a>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+
+        </div>
+        
+    }
+
+    else
+    {
+        <span class="alert alert-danger center-block " style="text-align:center">No Packages Available</span>
+    }
+</div>

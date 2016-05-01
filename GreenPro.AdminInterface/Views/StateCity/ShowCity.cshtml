@@ -1,0 +1,21 @@
+﻿@model IEnumerable<GreenPro.Data.City>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>City by State</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@Html.Grid(Model).Columns(columns =>
+                        {
+                            columns.Add(a => a.CityName).Titled("City Name").Filterable(true);
+                            columns.Add(a => a.State.StateName).Titled("State Name");
+
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Edit", "Edit", new { id = d.Id }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Details", "Details", new { id = d.Id }));
+                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Delete", "Delete", new { id = d.Id }));
+
+                        }).WithPaging(20).Filterable().WithPaging(10).Sortable(true)

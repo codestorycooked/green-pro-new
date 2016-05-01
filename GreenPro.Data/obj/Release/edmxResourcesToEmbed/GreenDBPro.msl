@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GreenProDbModelStoreContainer" CdmEntityContainer="GreenProDbEntities">
+    <EntitySetMapping Name="AdhocUserPackages">
+      <EntityTypeMapping TypeName="GreenProDbModel.AdhocUserPackage">
+        <MappingFragment StoreEntitySet="AdhocUserPackages">
+          <ScalarProperty Name="TipAmount" ColumnName="TipAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="Processed" ColumnName="Processed" />
+          <ScalarProperty Name="PaymentRecieved" ColumnName="PaymentRecieved" />
+          <ScalarProperty Name="ExistingPackageId" ColumnName="ExistingPackageId" />
+          <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
+          <ScalarProperty Name="Ipaddress" ColumnName="Ipaddress" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="PriceWithAddOns" ColumnName="PriceWithAddOns" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />
+          <ScalarProperty Name="SubscribedDate" ColumnName="SubscribedDate" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdhocUserPackagesAddons">
+      <EntityTypeMapping TypeName="GreenProDbModel.AdhocUserPackagesAddon">
+        <MappingFragment StoreEntitySet="AdhocUserPackagesAddons">
+          <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="GreenProDbModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="GreenProDbModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="GreenProDbModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="GreenProDbModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutomaticPayments">
+      <EntityTypeMapping TypeName="GreenProDbModel.AutomaticPayment">
+        <MappingFragment StoreEntitySet="AutomaticPayments">
+          <ScalarProperty Name="AdhocUserPackageID" ColumnName="AdhocUserPackageID" />
+          <ScalarProperty Name="PayPalECToken" ColumnName="PayPalECToken" />
+          <ScalarProperty Name="PaypalBillingID" ColumnName="PaypalBillingID" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarServiceEntries">
+      <EntityTypeMapping TypeName="GreenProDbModel.CarServiceEntry">
+        <MappingFragment StoreEntitySet="CarServiceEntries">
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="CarOwnerId" ColumnName="CarOwnerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarTypes">
+      <EntityTypeMapping TypeName="GreenProDbModel.CarType">
+        <MappingFragment StoreEntitySet="CarTypes">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarUsers">
+      <EntityTypeMapping TypeName="GreenProDbModel.CarUser">
+        <MappingFragment StoreEntitySet="CarUsers">
+          <ScalarProperty Name="GarageId" ColumnName="GarageId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="AutoRenewal" ColumnName="AutoRenewal" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PurchaseYear" ColumnName="PurchaseYear" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="GreenProDbModel.City">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CrewAdminMembers">
+      <EntityTypeMapping TypeName="GreenProDbModel.CrewAdminMember">
+        <MappingFragment StoreEntitySet="CrewAdminMember">
+          <ScalarProperty Name="CrewAdminId" ColumnName="CrewAdminId" />
+          <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GarageMaxCars">
+      <EntityTypeMapping TypeName="GreenProDbModel.GarageMaxCar">
+        <MappingFragment StoreEntitySet="GarageMaxCars">
+          <ScalarProperty Name="DayRef" ColumnName="DayRef" />
+          <ScalarProperty Name="CarPerCrewAdmin" ColumnName="CarPerCrewAdmin" />
+          <ScalarProperty Name="GarageID" ColumnName="GarageID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Garages">
+      <EntityTypeMapping TypeName="GreenProDbModel.Garage">
+        <MappingFragment StoreEntitySet="Garages">
+          <ScalarProperty Name="ServiceDays" ColumnName="ServiceDays" />
+          <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+          <ScalarProperty Name="OpenTime" ColumnName="OpenTime" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitute" ColumnName="Latitute" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Garage_Address" ColumnName="Garage_Address" />
+          <ScalarProperty Name="Garage_Name" ColumnName="Garage_Name" />
+          <ScalarProperty Name="GarageId" ColumnName="GarageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GarrageWeekdays">
+      <EntityTypeMapping TypeName="GreenProDbModel.GarrageWeekday">
+        <MappingFragment StoreEntitySet="GarrageWeekday">
+          <ScalarProperty Name="WeekdayId" ColumnName="WeekdayId" />
+          <ScalarProperty Name="GarrageId" ColumnName="GarrageId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaderCarJobs">
+      <EntityTypeMapping TypeName="GreenProDbModel.LeaderCarJob">
+        <MappingFragment StoreEntitySet="LeaderCarJob">
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="LeaderId" ColumnName="LeaderId" />
+          <ScalarProperty Name="GarageId" ColumnName="GarageId" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaderGarageDays">
+      <EntityTypeMapping TypeName="GreenProDbModel.LeaderGarageDay">
+        <MappingFragment StoreEntitySet="LeaderGarageDay">
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="WorkerGarageID" ColumnName="WorkerGarageID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaderMembers">
+      <EntityTypeMapping TypeName="GreenProDbModel.LeaderMember">
+        <MappingFragment StoreEntitySet="LeaderMember">
+          <ScalarProperty Name="CrewMemberID" ColumnName="CrewMemberID" />
+          <ScalarProperty Name="CrewLeaderID" ColumnName="CrewLeaderID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LeaderWorks">
+      <EntityTypeMapping TypeName="GreenProDbModel.LeaderWork">
+        <MappingFragment StoreEntitySet="LeaderWork">
+          <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
+          <ScalarProperty Name="LeaderID" ColumnName="LeaderID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LogDetailCarSides">
+      <EntityTypeMapping TypeName="GreenProDbModel.LogDetailCarSide">
+        <MappingFragment StoreEntitySet="LogDetailCarSide">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="GreenProDbModel.Log">
+        <MappingFragment StoreEntitySet="Logs">
+          <ScalarProperty Name="LogDate" ColumnName="LogDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="StackStrace" ColumnName="StackStrace" />
+          <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+          <ScalarProperty Name="source" ColumnName="source" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Package_Services">
+      <EntityTypeMapping TypeName="GreenProDbModel.Package_Services">
+        <MappingFragment StoreEntitySet="Package_Services">
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+          <ScalarProperty Name="PackageServiceId" ColumnName="PackageServiceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="GreenProDbModel.Package">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateDt" ColumnName="CreateDt" />
+          <ScalarProperty Name="Package_Price" ColumnName="Package_Price" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Package_Description" ColumnName="Package_Description" />
+          <ScalarProperty Name="Package_Name" ColumnName="Package_Name" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayPalLogs">
+      <EntityTypeMapping TypeName="GreenProDbModel.PayPalLog">
+        <MappingFragment StoreEntitySet="PayPalLogs">
+          <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+          <ScalarProperty Name="ServerDate" ColumnName="ServerDate" />
+          <ScalarProperty Name="ACK" ColumnName="ACK" />
+          <ScalarProperty Name="CorrelationID" ColumnName="CorrelationID" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
+          <ScalarProperty Name="ECToken" ColumnName="ECToken" />
+          <ScalarProperty Name="ResponseRedirectURL" ColumnName="ResponseRedirectURL" />
+          <ScalarProperty Name="ResponseError" ColumnName="ResponseError" />
+          <ScalarProperty Name="ApiSatus" ColumnName="ApiSatus" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="GreenProDbModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateDt" ColumnName="CreateDt" />
+          <ScalarProperty Name="Service_Price" ColumnName="Service_Price" />
+          <ScalarProperty Name="Service_Description" ColumnName="Service_Description" />
+          <ScalarProperty Name="Service_Name" ColumnName="Service_Name" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="GreenProDbModel.State">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Taxes">
+      <EntityTypeMapping TypeName="GreenProDbModel.Tax">
+        <MappingFragment StoreEntitySet="Tax">
+          <ScalarProperty Name="TaxPercentage" ColumnName="TaxPercentage" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnAssignedCars">
+      <EntityTypeMapping TypeName="GreenProDbModel.UnAssignedCar">
+        <MappingFragment StoreEntitySet="UnAssignedCars">
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="GarageID" ColumnName="GarageID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPackages">
+      <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
+        <MappingFragment StoreEntitySet="UserPackages">
+          <ScalarProperty Name="SubscriptionEndDate" ColumnName="SubscriptionEndDate" />
+          <ScalarProperty Name="TipAmount" ColumnName="TipAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="Processed" ColumnName="Processed" />
+          <ScalarProperty Name="PaymentRecieved" ColumnName="PaymentRecieved" />
+          <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
+          <ScalarProperty Name="Ipaddress" ColumnName="Ipaddress" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="PriceWithAddOns" ColumnName="PriceWithAddOns" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />
+          <ScalarProperty Name="SubscribedDate" ColumnName="SubscribedDate" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPackagesAddons">
+      <EntityTypeMapping TypeName="GreenProDbModel.UserPackagesAddon">
+        <MappingFragment StoreEntitySet="UserPackagesAddons">
+          <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
+          <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
+          <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTransactions">
+      <EntityTypeMapping TypeName="GreenProDbModel.UserTransaction">
+        <MappingFragment StoreEntitySet="UserTransactions">
+          <ScalarProperty Name="Userid" ColumnName="Userid" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="PaypalId" ColumnName="PaypalId" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Weekdays">
+      <EntityTypeMapping TypeName="GreenProDbModel.Weekday">
+        <MappingFragment StoreEntitySet="Weekdays">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkDones">
+      <EntityTypeMapping TypeName="GreenProDbModel.WorkDone">
+        <MappingFragment StoreEntitySet="WorkDone">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CreatedTimeStamp" ColumnName="CreatedTimeStamp" />
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="EndTimeStamp" ColumnName="EndTimeStamp" />
+          <ScalarProperty Name="StartTimeStamp" ColumnName="StartTimeStamp" />
+          <ScalarProperty Name="PackageId" ColumnName="PackageId" />
+          <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
+          <ScalarProperty Name="CrewLeaderID" ColumnName="CrewLeaderID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkerGarages">
+      <EntityTypeMapping TypeName="GreenProDbModel.WorkerGarage">
+        <MappingFragment StoreEntitySet="WorkerGarages">
+          <ScalarProperty Name="IsLeader" ColumnName="IsLeader" />
+          <ScalarProperty Name="GarageID" ColumnName="GarageID" />
+          <ScalarProperty Name="CrewLeaderId" ColumnName="CrewLeaderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkLogDetails">
+      <EntityTypeMapping TypeName="GreenProDbModel.WorkLogDetail">
+        <MappingFragment StoreEntitySet="WorkLogDetails">
+          <ScalarProperty Name="WorkDoneId" ColumnName="WorkDoneId" />
+          <ScalarProperty Name="ImageRef" ColumnName="ImageRef" />
+          <ScalarProperty Name="PrePost" ColumnName="PrePost" />
+          <ScalarProperty Name="SideId" ColumnName="SideId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="GreenProDbModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

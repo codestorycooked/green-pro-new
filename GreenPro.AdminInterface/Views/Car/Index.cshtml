@@ -1,0 +1,62 @@
+﻿@model GreenPro.AdminInterface.ViewModels.CarListViewModel
+@{
+    ViewBag.Title = "Cars";
+}
+
+<h2>Cars</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Car #
+        </th>
+        <th>
+            Display Name
+        </th>
+        <th>
+            Make
+        </th>
+        <th>
+            License Number
+        </th>
+        <th>
+            Color
+        </th>        
+        <th>
+            Purchase Year
+        </th>
+        <th>
+            Customer
+        </th>
+       
+        <th>
+            Garage
+        </th>
+        <th></th>
+
+
+
+    </tr>
+    @foreach (var item in Model.Cars)
+    {
+        <tr>
+            <td>
+                @item.CarId
+            </td>
+            <td> @item.DisplayName </td>
+            <td> @item.Make</td>
+            <td> @item.LicenseNumber</td>
+            <td> @item.Color</td>            
+            <td>@item.PurchaseYear</td>
+            <td> @Html.Raw(item.CustomerName)</td>            
+            <td>@item.Garage</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CarId })                 
+                
+            </td>
+
+        </tr>
+
+    }
+
+</table>

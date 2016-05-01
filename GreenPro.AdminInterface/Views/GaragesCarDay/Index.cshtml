@@ -1,0 +1,286 @@
+﻿@model GreenPro.AdminInterface.ViewModels.DefaultSettingViewModel
+
+@{
+    ViewBag.Title = "Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .rowstyle td, .altrowstyle td {
+        border-right: 1px solid gray;
+        padding: 4px 10px;
+    }
+
+    .altrowstyle {
+        background-color: #f4faff;
+    }
+
+
+    .headerstyle th {
+        background: #2e2e2e center;
+        border: 1px solid #676767;
+        color: #fff;
+        font-weight: 700;
+        padding: 5px 10px;
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+
+<h2>Garage Settings - @Model.GarageName  (@Convert.ToString(ViewData["WorkingDay"]))</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.GarageId)
+    @Html.HiddenFor(m => m.ServiceDay)
+
+    <div class="form-horizontal">
+
+        
+       
+        <div class="col-md-12">
+
+
+            
+
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Working Day Setting</a></li>
+                <li><a data-toggle="tab" href="#menu1">Car Services </a></li>
+                   @* <li><a data-toggle="tab" href="#menu2">Team Cars</a></li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    @*<div class="form-group">
+                            <label for="ServiceDay" class="control-label col-md-3">Leaders</label>
+                            <div class="col-md-8">
+                                <ul>
+                                    @foreach (var item in Model.AvailableLeaders)
+                                    {
+                                        <li> <input type="checkbox" name="SelectedLeaderIds" value="@item.Value" checked="@(Model.SelectedLeaderIds != null && Model.SelectedLeaderIds.Contains(item.Value))" />@item.Text </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>*@
+
+                    <div class="form-group" style="padding:10px;">
+
+                        @*<script type="text/javascript">
+                                            $(document).ready(function () {
+                                                @foreach (var team in Model.AvailableTeams)
+                            {
+                            <text>
+                                                $('#selectall-@(team.Value)').click(function () {
+                                                    $('.restrict_@(team.Value)').attr('checked', $(this).is(':checked')).change();
+                                                });
+
+                                                </text>
+                            }
+                                            });
+                                        </script>*@
+                        <div class="col-md-12">
+
+                            <table class="tablestyle" cellspacing="0" rules="all" border="1" style="width: 100%;
+                        border-collapse: collapse;">
+                                <tbody>
+                                    <tr class="headerstyle">
+                                        <th scope="col">
+                                            <strong>Leaders</strong>
+                                        </th>
+                                        @foreach (var team in Model.AvailableTeams)
+                                        {
+                                            <th scope="col">
+                                                <strong>@team.Text</strong>
+                                                @*<input type="checkbox" id="selectall-@(team.Value)" />*@
+                                            </th>
+                                        }
+                                    </tr>
+                                    @{
+                                    bool altRow = true;
+                                    }
+                                    @foreach (var leader in Model.AvailableLeaders)
+                                    {
+                                        altRow = !altRow;
+                                        <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
+                                            <td>
+                                                <span>@Html.Raw(leader.Text)</span>
+                                            </td>
+                                            @foreach (var team in Model.AvailableTeams)
+                                            {
+                                                var restricted = Model.SelectedLeaders.ContainsKey(leader.Value) && Model.SelectedLeaders[leader.Value][Convert.ToInt32(team.Value)];
+                                                <td>
+                                                    <input id="restrict_@(team.Value)" class="restrict_@(team.Value)" type="radio" value="@(leader.Value)" name="restrict_@(team.Value)" @(restricted ? " checked=checked" : null) />
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="clearfix"> </div>
+                        <p style="height:20px;"></p>
+                        <div class="col-md-12">
+
+                            <table class="tablestyle" cellspacing="0" rules="all" border="1" style="width: 100%;
+                        border-collapse: collapse;">
+                                <tbody>
+                                    <tr class="headerstyle">
+                                        <th scope="col">
+                                            <strong>Members</strong>
+                                        </th>
+                                        @foreach (var team in Model.AvailableTeams)
+                                        {
+                                            <th scope="col">
+                                                <strong>@team.Text</strong>
+                                                @*<input type="checkbox" id="selectall-@(team.Value)" />*@
+                                            </th>
+                                        }
+                                    </tr>
+                                    @{
+    altRow = true;
+                                    }
+                                    @foreach (var member in Model.AvailableMembers)
+                                    {
+                                        altRow = !altRow;
+                                        <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
+                                            <td>
+                                                <span>@Html.Raw(member.Text)</span>
+                                            </td>
+                                            @foreach (var team in Model.AvailableTeams)
+                                            {
+                                                var selectedMember = Model.SelectedMembers.ContainsKey(member.Value) && Model.SelectedMembers[member.Value][Convert.ToInt32(team.Value)];
+                                                <td>
+                                                    <input id="member_@(team.Value)" class="member_@(team.Value)" type="checkbox" value="@(member.Value)" name="member_@(team.Value)" @(selectedMember ? " checked=checked" : null) />
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="clearfix"> </div>
+                        <p style="height:20px;"></p>
+                        <div class="col-md-12">
+
+                            <table class="tablestyle" cellspacing="0" rules="all" border="1" style="width: 100%;
+                        border-collapse: collapse;">
+                                <tbody>
+                                    <tr class="headerstyle">
+                                        <th scope="col">
+                                            <strong>Cars</strong>
+                                        </th>
+                                        @foreach (var team in Model.AvailableTeams)
+                                        {
+                                            <th scope="col">
+                                                <strong>@team.Text</strong>                                                
+                                            </th>
+                                        }
+                                    </tr>
+                                    @{
+    altRow = true;
+                                    }
+                                    @foreach (var car in Model.AvailableCars)
+                                    {
+                                        altRow = !altRow;
+                                        <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
+                                            <td>
+                                                <span>@Html.Raw(car.Text)</span>
+                                            </td>
+                                            @foreach (var team in Model.AvailableTeams)
+                                            {
+                                                var selectedCar = Model.SelectedCars.ContainsKey(Convert.ToInt32(car.Value)) && Model.SelectedCars[Convert.ToInt32(car.Value)][Convert.ToInt32(team.Value)];
+                                                <td>
+                                                    <input id="car_@(team.Value)" class="car_@(team.Value)" type="checkbox" value="@(car.Value)" name="car_@(team.Value)" @(selectedCar ? " checked=checked" : null) />
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"> </div>
+                        <p style="height:20px;"></p>
+
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-3"></label>
+                        <div class="col-md-8">
+
+                            @if (Model.PrepareModelData)
+                            { <text>
+                            <input type="submit" value="Save" name="btnSaveLeaders" class="btn btn-primary" /> &nbsp;
+                            <input type="submit" value="Save and Locked" name="save-locked" class="btn btn-primary" /> &nbsp;
+                            <input type="submit" value="Take Payment" name="btnAutoPayment" class="btn btn-primary" /> &nbsp;
+                            <input type="submit" value="Send to leaders" name="btnSendNotification" class="btn btn-primary" />
+                            </text>
+                                
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+                <div id="menu1" class="tab-pane fade">
+                    @foreach (var team in Model.AvailableTeams)
+                    {
+                        <div style="padding:10px;">
+                            <p>
+                                <b>@team.Text</b>
+                            </p>
+
+                            @{var CarByTeam = Model.CarServicesList.Where(t => t.TeamId == Convert.ToInt32(team.Value)).ToList();
+                    }
+                            @if (CarByTeam.Count > 0)
+                            {
+                            <table>
+                                <tr>
+                                    <td>
+                                        <b>Car</b>
+                                    </td>
+                                    <td>
+                                        <b>Services</b>
+                                    </td>
+                                </tr>
+                                @foreach (var car in CarByTeam)
+                                {
+                                <tr>
+                                    <td>
+                                        @car.CarDisplayName
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            @foreach(var service in car.SelectServices)
+                                                {
+                                                <li>@service.ServiceName</li>
+                                                }
+                                        </ul>
+
+                                    </td>
+                                </tr>
+                                }
+                            </table>
+                            }
+
+                        </div>
+                    }
+                        
+                    </div>
+                    
+            </div>
+            <div class="clearfix"> </div>
+
+
+        </div>
+
+        <div class="clearfix"> </div>
+
+    </div>
+    <div class="clearfix"> </div>
+
+}
+

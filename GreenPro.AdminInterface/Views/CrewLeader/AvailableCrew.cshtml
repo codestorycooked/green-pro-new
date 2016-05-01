@@ -1,0 +1,27 @@
+﻿@model  GreenPro.AdminInterface.ViewModels.CrewMemberAssignment
+
+@{
+    ViewBag.Title = "MyCrew";
+    Layout = "~/Views/Shared/_CrewLayout.cshtml";
+}
+
+<h2>Available Crew</h2>
+@if (Model.AvailableMembers != null)
+{<table class="table">
+
+
+        @foreach (var member in Model.AvailableMembers)
+        {
+            <tr>
+                <td>@member.AspNetUser.FirstName</td>
+                <td>@member.AspNetUser.LastName</td>
+                <td>@member.AspNetUser.Email</td>
+                <td>@Html.ActionLink("Pick this member", "AddMember", new { id = member.CrewLeaderId })</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>There are no crew members available</p>
+}

@@ -1,0 +1,35 @@
+﻿@model PagedList.IPagedList<GreenPro.Data.Garage>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+
+<style>
+    p {
+        font-size: 14px;
+    }
+</style>
+@if (Model != null)
+{
+
+    foreach (var item in Model)
+    {
+        <h4 class="garage-title">@item.Garage_Name</h4>
+        <p>@item.Garage_Address</p>
+        <p><b>Open Time: </b>@item.OpenTime to @item.CloseTime</p>
+        <p><b>Service Days: </b>@item.ServiceDays</p>
+        <p style="text-align:right">  <a href=@string.Format("/Packages/Index/{0}", item.GarageId)><button class='btn btn-xs btn-primary'>View Packages</button></a></p>
+        <hr />
+    }
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchText = ViewBag.SearchText, }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "garageList" }))
+    <br />
+
+
+
+}
+else
+{
+
+}
+

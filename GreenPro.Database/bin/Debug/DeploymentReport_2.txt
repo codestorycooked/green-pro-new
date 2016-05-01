@@ -1,0 +1,19 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[GarageMaxCars]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Table rebuild
+       [dbo].[GarageMaxCars] (Table)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_GarageMaxCars_Garages] (Foreign Key)
+     Create
+       [dbo].[FK_GarageMaxCars_Garages] (Foreign Key)

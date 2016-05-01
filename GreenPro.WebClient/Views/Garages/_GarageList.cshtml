@@ -1,0 +1,13 @@
+﻿@model GreenPro.WebClient.ViewModel.GarageSearchViewModel
+@using GridMvc.Html
+@Html.Grid(Model.Garages).Columns(columns =>
+                        {
+                            columns.Add(a => a.Garage_Name).Titled("Garage Name").Filterable(true);
+                            columns.Add(a => a.Garage_Address).Titled("Garage Address");
+
+                            columns.Add(a => a.Contact_Person).Titled("Contact");
+                            columns.Add(a => a.Phone_Number).Titled("Phone");
+
+                        }).WithPaging(20)
+
+

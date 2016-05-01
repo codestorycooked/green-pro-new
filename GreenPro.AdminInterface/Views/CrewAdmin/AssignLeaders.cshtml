@@ -1,0 +1,58 @@
+﻿@model IList<GreenPro.AdminInterface.ViewModels.CrewAdminAssignLeaderModel>
+@{
+    ViewBag.Title = "Index";
+
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Assign Leaders</h1>
+        <p>Select Leaders which will serve for this day: <b>@DateTime.Now.Date.DayOfWeek</b></p>
+        @using (Html.BeginForm("AssignLeaders", "CrewAdmin", FormMethod.Post))
+        {
+            <table class="table table-responsive table-striped">
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    @*<td>
+                        Email
+                    </td>*@
+                    <th></th>
+                </tr>
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    @Html.HiddenFor(m => m[i].Id)
+                    @Html.HiddenFor(m => m[i].FirstName)
+                    @Html.HiddenFor(m => m[i].LastName)
+                    @Html.HiddenFor(m => m[i].GarageId)
+                    @Html.HiddenFor(m => m[i].WorkerId)
+
+
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m[i].FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m[i].LastName)
+                           
+                        </td>
+
+                        @*<td>
+                            @Html.DisplayFor(m => m[i].Email)
+                        </td>*@
+                        <td>
+                            @Html.CheckBoxFor(m => m[i].IsLeader)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <input type="submit" name="name" class="btn btn-primary" value="Save" />
+        }
+    </div>
+</div>

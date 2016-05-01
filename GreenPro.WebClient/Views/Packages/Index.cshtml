@@ -1,0 +1,12 @@
+﻿@model GreenPro.WebClient.ViewModel.PackagesServiceViewModel
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="co-md-12" id="packagesList">
+        @Html.Partial("_Packages", Model)
+    </div>
+</div>
+

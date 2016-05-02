@@ -12,6 +12,7 @@ using PagedList;
 using Newtonsoft.Json;
 using Geocoding;
 using Geocoding.Google;
+using GreenPro.WebClient.Models;
 
 
 namespace GreenPro.WebClient.Controllers
@@ -83,11 +84,14 @@ namespace GreenPro.WebClient.Controllers
             ViewBag.SearchTextData = searchText;
             ViewBag.stateData = state;
 
-            var cityList = (from c in db.Cities
-                            join
-                                s in db.States
-                                on c.StateID equals s.Id
-                            select new { CityName = c.CityName + " - " + s.StateName, Id = c.Id,StateId=s.Id }).OrderBy(a=>a.StateId).ToList();
+            //var cityList = (from c in db.Cities
+            //                join
+            //                    s in db.States
+            //                    on c.StateID equals s.Id
+            //                select new { CityName = c.CityName + " - " + s.StateName, Id = c.Id,StateId=s.Id }).OrderBy(a=>a.StateId).ToList();
+
+            var cityList = db.Database.SqlQuery<CityModel>("exec dbo.GetAllAvailableGaragesCitiesList").ToList();
+
             ViewBag.AvailableCitys = new SelectList(cityList, "Id", "CityName");
             ViewBag.AvailableGarages = new SelectList(garages, "GarageId", "Garage_Name");
 

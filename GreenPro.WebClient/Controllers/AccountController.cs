@@ -123,6 +123,9 @@ namespace GreenPro.WebClient.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (Request.IsAuthenticated)
+                return RedirectToAction("", "CarUsers");
+
             SetCookie("returnURL", returnUrl);
 
             ViewBag.ReturnUrl = returnUrl;
@@ -169,6 +172,8 @@ namespace GreenPro.WebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, string provider, string source = null)
         {
+            
+
             if (!ModelState.IsValid)
             {
                 return View("Login", model);
@@ -182,12 +187,13 @@ namespace GreenPro.WebClient.Controllers
             {
                 case SignInStatus.Success:
                     var returnURL = GetCookie("returnURL");
-                    if (returnURL != null)
+                    if (returnURL!=null)
                     {
-                        return RedirectToLocal(returnURL.Value);
+                        if (!string.IsNullOrEmpty(returnURL.Value))
+                            return RedirectToLocal(returnURL.Value);
                     }
 
-                    return RedirectToAction("Index", "Carusers");
+                    return RedirectToAction("", "CarUsers");
 
 
                 case SignInStatus.LockedOut:
@@ -251,9 +257,12 @@ namespace GreenPro.WebClient.Controllers
         public ActionResult Register()
         {
             LoadStatesAndCity();
+            
+            // added by 05 May 2016
+            RegisterViewModel model = new RegisterViewModel();
+            return View(model);
 
-
-            return View();
+            //return View(); // comment by 05 May 2016
         }
 
         private void LoadStatesAndCity()
@@ -276,7 +285,27 @@ namespace GreenPro.WebClient.Controllers
             model.Email = model.Email;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { Email = model.UserName, UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, DateofBirth = model.DateofBirth, Address = model.Address, State = model.StateId, City = model.CityId, Pincode = model.Pincode, EmailConfirmed = true };
+                DateTime dateOfBirth = new DateTime(1970,1,1);
+                try
+                {
+                    dateOfBirth = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value);
+                }
+                catch {
+                    dateOfBirth = new DateTime(1971, 1, 1);
+                }
+
+                //var user = new ApplicationUser() { Email = model.UserName, UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, DateofBirth = model.DateofBirth, Address = model.Address, State = model.StateId, City = model.CityId, Pincode = model.Pincode, EmailConfirmed = true };
+
+                var user = new ApplicationUser() { Email = model.UserName, 
+                    UserName = model.UserName, 
+                    FirstName = model.FirstName, 
+                    LastName = model.LastName,
+                                                   DateofBirth = dateOfBirth, 
+                    Address = model.Address, State = model.StateId, 
+                    City = model.CityId, 
+                    Pincode = model.Pincode, 
+                    EmailConfirmed = true };
+
                 user.PhoneNumber = model.PhoneNumber;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

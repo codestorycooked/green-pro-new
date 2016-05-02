@@ -131,6 +131,13 @@ namespace GreenPro.WebClient.Models
         public IList<System.Web.Mvc.SelectListItem> CityList { get; set; }
 
 
+        public int? DateOfBirthDay { get; set; }
+        
+        public int? DateOfBirthMonth { get; set; }
+        
+        public int? DateOfBirthYear { get; set; }
+
+
 
     }
 

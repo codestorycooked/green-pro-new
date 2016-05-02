@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GreenPro.Data.UserPackage>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Your Subscriptions</h3><hr />
+        @Html.Grid(Model).Columns(columns =>
+                        {
+                            columns.Add(a => a.CarUser.DisplayName).Titled("Car Display Name");
+                            columns.Add(a => a.Package.Package_Name).Titled("Package Name");
+                            columns.Add(a => a.ServiceDay).Titled("Service Day"); // Added By Sachin
+                            columns.Add(a => a.ActualPrice).Titled("Base Price").Format("{0:$00.00}");
+                            columns.Add(a => a.PriceWithAddOns).Titled("Add-Ons").Format("{0:$00.00}");
+                            columns.Add(a => a.SubscribedDate).Titled("Subscribed Date");
+                            columns.Add(a => a.PaymentRecieved).Titled("Status").RenderValueAs(d => @Html.Raw(IsSuccess(d.PaymentRecieved, d.Id)));
+
+
+
+                        }).WithPaging(20)
+        <br /><br />
+
+        @*<span class="alert alert-danger"><b>Payment not initiated</b> : Payment dint pass through paypal transaction with success code</span>
+        <span class=" alert alert-info"><b>Success</b>: Payment was successfully recieved by GreenPro</span>*@
+
+    </div>
+</div>
+
+@helper IsSuccess(bool value, int id)
+{
+    GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+
+    var transcation = db.PayPalLogs.Where(a => a.SubscriptionID == id);
+
+    if (value)
+    {
+        if (transcation.Count() != null)
+        {
+            <text>Success </text>
+        }
+
+    }
+    else
+    {
+
+        if (transcation.Count() == 0)
+        {
+            <text>Payment Not Initiated</text>
+
+        }
+
+    }
+}
+
+

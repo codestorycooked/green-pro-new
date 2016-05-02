@@ -1,7 +1,7 @@
 ﻿@using Microsoft.Owin.Security
 
-<h4>Social Network's</h4>
-<hr />
+<h4 class="panel-heading">Social Network's</h4>
+
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
 
@@ -10,11 +10,11 @@
     using (Html.BeginForm("ExternalLogin", "Account"))
     {
         @Html.AntiForgeryToken()
-        <div id="socialLoginList">
+        <div id="socialLoginList" class="panel-body">
             <p>
                 @foreach (AuthenticationDescription p in loginProviders)
                 {
-                    <button type="submit" class="btn btn-primary" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                    <button type="submit" class="line-btn light" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
                 }
 
                 <br />

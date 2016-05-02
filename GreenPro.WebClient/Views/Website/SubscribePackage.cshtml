@@ -13,9 +13,9 @@
         <div class="col-md-9">
             <div class="col-md-12">
 
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-heading">
-                    <h4>Your Car Details</h4>
+                <div class="panel panel-default">
+                    <div class="">
+                    <h4 class="panel-heading">Your Car Details</h4>
                     </div>
                     <div class="panel-body" id="fromGarage">
                         <div class="col-md-6">
@@ -85,8 +85,8 @@
             <div class="clearfix"></div>
             <div class="col-md-12">
 
-                <div class="panel panel-default panel-primary">
-                    <div class="panel-heading"><h4>You have selected @Model.Packages.Package_Name</h4></div>
+                <div class="panel panel-default">
+                    <div class=""><h4 class="panel-heading">You have selected @Model.Packages.Package_Name</h4></div>
                     <div class="panel-body">
                         <div>You have selected <b>@Model.Packages.Package_Name</b></div>
                         <div>Price for Package <b>$ @Model.Packages.Package_Price.ToString("0")</b><br /></div><br />
@@ -105,8 +105,8 @@
                 </div>
                 <div class="col-md-12">
 
-                    <div class="panel panel-default panel-primary">
-                        <div class="panel-heading"><h3>Add Ons</h3></div>
+                    <div class="panel panel-default">
+                        <div class=""><h4 class="panel-heading">Add Ons</h4></div>
                         <div class="panel-body">
                             <table class="table  table-responsive table-hover">
                                 <thead>
@@ -147,8 +147,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div class="panel panel-default panel-primary">
-                        <div class="panel-heading"><h3>Payment Information</h3></div>
+                    <div class="panel panel-default">
+                        <div class=""><h4 class="panel-heading">Payment Information</h4></div>
                         <div class="panel-body">
                             @*You have selected <b>@Model.Packages.Package_Name</b>
                                 Price for Package <b>$ @Model.Packages.Package_Price</b>*@
@@ -171,7 +171,7 @@
                                 }*@
                                 @Html.Hidden("AutoRenewalSubscription", true)
                                 @*<input type="checkbox" name="@Model.AutoRenewalSubscription" /> <br />*@
-                                <button class="btn center-block btn-primary" type="submit" value="Save" id="pay">Proceed and Pay</button>
+                                <button class="line-btn light" type="submit" value="Save" id="pay">Proceed and Pay</button>
 
                             </div>
                         </div>
@@ -183,7 +183,7 @@
 
 
             <div class="col-md-3 visible-lg visible-md ">
-                <div class="col-md-12" id="totalprice" data-spy="affix" data-offset-top="20"
+                <div class="" id="totalprice" data-spy="affix" data-offset-top="20"
                      data-offset-bottom="200">
 
                     @Html.HiddenFor(model => model.Packages.Package_Price, new { @id = "tp" })

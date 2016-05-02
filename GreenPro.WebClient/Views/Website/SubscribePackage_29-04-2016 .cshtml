@@ -1,0 +1,325 @@
+﻿@model GreenPro.WebClient.ViewModel.UserPackageAddOnViewModel
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "SubscribePackage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.PackageID)
+        <div class="clearfix"></div>
+        <div class="col-md-9">
+            <div class="col-md-12">
+
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading">
+                    <h4>Your Car Details</h4>
+                    </div>
+                    <div class="panel-body" id="fromGarage">
+                        <div class="col-md-6">
+                            <a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a>
+                            @foreach (var item in Model.UserCars)
+                            {
+                                if (item.CarId == ViewBag.LatestCar)
+                                {
+                                    <div>@Html.RadioButtonFor(m => m.SelectedCar, item.CarId, new { @checked = true }) @item.DisplayName</div>
+                                }
+                                else
+                                {
+                                    <div>@Html.RadioButtonFor(m => m.SelectedCar, item.CarId) @item.DisplayName</div>
+                                }
+                                
+                            }
+
+                            @Html.ValidationMessageFor(m => m.SelectedCar)
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li>If this is your first time you need to add a car</li>                                
+                                <li>To view all your cars please visit My Cars Page</li>
+                            </ul>
+
+
+
+                        </div>
+
+                    </div>
+                    
+                    <div class="col-md-12">                        
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    Service Day
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.ServiceDay,Model.AvailableServiceDays, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ServiceDay, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            </div>                            
+                        </div>
+                   
+                    <div class="col-md-12" id="fromMyCars">
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    Your Car
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="panel-body">
+
+                                        <input type="radio" checked name="radioselectedcar1" value="@Model.SelectedCar" />@ViewBag.SelectedCarName
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>   
+                    </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+
+                <div class="panel panel-default panel-primary">
+                    <div class="panel-heading"><h4>You have selected @Model.Packages.Package_Name</h4></div>
+                    <div class="panel-body">
+                        <div>You have selected <b>@Model.Packages.Package_Name</b></div>
+                        <div>Price for Package <b>$ @Model.Packages.Package_Price.ToString("0")</b><br /></div><br />
+                        <div>
+                            Service Included:<br />
+
+                            @foreach (var item in Model.Packages.Package_Services)
+                            {
+                                <p class="visible-md  visible-md-inline  label label-info visible-lg visible-lg-inline" style="margin:5px; font-size:16px">@item.Service.Service_Name</p>
+                                <p class="visible-sm visible-xs">@item.Service.Service_Name</p>
+                            }
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading"><h3>Add Ons</h3></div>
+                        <div class="panel-body">
+                            <table class="table  table-responsive table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Services</th>
+                                        <th>Price</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                @*No Service Check added in case of no addons KD*@
+                                @if (Model.Services != null)
+                                {
+                                    foreach (var item in Model.Services)
+                                    {
+                                        <tr>
+                                            <td>@item.Service_Name</td>
+                                            <td>$ @item.Service_Price.ToString("0")</td>
+                                            <td>
+                                                @*<input type="checkbox" name="@item.ServiceID" class="chkPrice" />*@
+                                                <input type="checkbox" id="@item.ServiceID" name="services" value="@item.ServiceID" onchange="OnPriceChange(@item.ServiceID,@item.Service_Price)" />
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>No Addons</td>
+                                    </tr>
+                                }
+
+
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-primary">
+                        <div class="panel-heading"><h3>Payment Information</h3></div>
+                        <div class="panel-body">
+                            @*You have selected <b>@Model.Packages.Package_Name</b>
+                                Price for Package <b>$ @Model.Packages.Package_Price</b>*@
+                            <div class="col-md-12">
+                                @*//IF No Package autoreneal false*@
+                                @{
+                                GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+                                var userid = User.Identity.GetUserId();
+
+                                var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
+                                }
+                                @*@if (userpackages.Count() > 0)
+                                {
+                                    @Html.CheckBoxFor(m => m.AutoRenewalSubscription)<span>Auto renew Suscription every month</span><br />
+
+                                }
+                                else
+                                {
+                                    @Html.Hidden("AutoRenewalSubscription", true);
+                                }*@
+                                @Html.Hidden("AutoRenewalSubscription", true)
+                                @*<input type="checkbox" name="@Model.AutoRenewalSubscription" /> <br />*@
+                                <button class="btn center-block btn-primary" type="submit" value="Save" id="pay">Proceed and Pay</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3 visible-lg visible-md ">
+                <div class="col-md-12" id="totalprice" data-spy="affix" data-offset-top="20"
+                     data-offset-bottom="200">
+
+                    @Html.HiddenFor(model => model.Packages.Package_Price, new { @id = "tp" })
+                    <button class="btn btn-danger" type="button">
+                        Your Cart Total <span class="badge" style="font-size:22px;" id="baseprice"> $@Model.Packages.Package_Price.ToString("0")</span>
+                    </button><br /><br />
+                    <div><b>Talk to specialist</b></div>
+                    <span>1 800-GP-Wash</span>
+                </div>
+
+
+            </div>
+
+            <div class="col-sm-12 col-xs-12 visible-sm visible-xs">
+
+
+
+                <button class="btn btn-danger pull-right" type="button">
+                    Your Cart Total <span class="badge" style="font-size:22px;">$ @Model.Packages.Package_Price.ToString("0")</span>
+                </button>
+
+                <br /><br /><br /><br />
+
+            </div>
+        </div>
+
+}
+@Html.HiddenFor(a => a.SelectedCar, new { @id = "selvalcar" })
+@section scripts{
+    <script>
+        $('#totalprice').affix({
+            offset: {
+                top: 50,
+                bottom: function () {
+                    return (this.bottom = $('.footer').outerHeight(true))
+                }
+            }
+        })
+</script>
+<script>
+    var price = new Number('@Model.Packages.Package_Price'); // assign initial value
+    var element = $('#baseprice'); // cache it
+    function OnPriceChange(elementID, val) {
+        var item = val; // get the item value
+
+        if ($('input[id=' + elementID + ']:checked').length > 0) {
+
+            price += item;
+        } else {
+            price -= item;
+        }
+        // alert(price);
+        element.text('$' + price.toFixed(2));
+        $('#tp').val(price);
+        $('#baseprice').html('$' + price.toPrecision(2));
+    };
+</script>
+
+<script>
+    function OnSuccess() {
+
+
+        $.ajaxSetup({ cache: false });
+        $("a[data-modal]").on("click", function (e) {
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+
+                bindForm(this);
+
+            });
+            return false;
+        });
+
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $('#progress').show();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#myModal').modal('hide');
+                            $('#progress').hide();
+                            location.reload();
+                        } else {
+                            $('#progress').hide();
+                            $('#myModalContent').html(result);
+
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        
+        //For MyCars Flow
+        if ($("input:radio[name=radioselectedcar1]:checked").val() > 0) {
+            $('#pay').removeAttr('disabled');
+        }
+        else {
+            $('#pay').attr('disabled', 'disabled');
+        }
+
+
+        if ($("input:radio[name=SelectedCar]:checked").val() > 0) {
+            $('#pay').removeAttr('disabled');
+        }
+        else {
+            $('#pay').attr('disabled', 'disabled');
+        }
+
+        var vald = $('#selvalcar').val();
+
+        if (vald == '') {
+
+            $('#fromMyCars').addClass("hidden");
+            $('#fromGarage').removeClass("hidden");
+        }
+        else {
+
+            $('#fromGarage').addClass("hidden");
+            $('#fromMyCars').removeClass("hidden");
+        }
+    });
+</script>
+
+}
+
+

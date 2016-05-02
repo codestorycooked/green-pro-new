@@ -535,7 +535,13 @@ padding-top: 0px;
 #testimonials .container {
     height: 100%;
 }
-#garageList .panel{ margin-right:0px;}
+.garages .panel.panel-default {
+    margin-right: 0;
+}
+.garages .form-group.panel.panel-default {
+    padding-bottom: 10px;
+}
+
 .rect_div{
 	background-image: url(../img/parallax/square.png); position:relative; float:right;
 height:482px; width:482px; background-repeat: no-repeat;  background-size: cover; right:145px; top:17px;
@@ -547,6 +553,14 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
     position: absolute;
     top: 158px;
     width: 400px;
+}
+.col-md-12.sum{ padding:10px;}
+.payment .panel.panel-default {
+    margin: 0 10px;
+}
+.payment {
+    display: inline-block;
+    padding-bottom: 14px;
 }
 .color_11 {
     color: #ffffff;
@@ -563,6 +577,7 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
 	---Pricing---
 ===========================*/
 #socialLoginList p{ padding:0px; margin:0px; text-align:center;}
+
 .line-pricing-table {
   margin: 50px 0 100px 0;
 }
@@ -582,8 +597,10 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
   table-layout: fixed;
 }
 .line-pricing-table .pricing-table-wrap {
-  display: table-cell;
+  display: inline-block;
   text-align: center;
+   width: 32.2%;
+   margin-bottom: 10px;
 }
 
 

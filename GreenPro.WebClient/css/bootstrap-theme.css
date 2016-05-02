@@ -175,6 +175,7 @@
   background-repeat: repeat-x;
   border-color: #b92c28;
 }
+.affix-top .btn-danger, .affix .btn-danger{ font-size:15px;}
 .btn-danger:hover,
 .btn-danger:focus {
   background-color: #c12e2a;
@@ -291,7 +292,7 @@
   background-image:         linear-gradient(to bottom, #d9edf7 0%, #b9def0 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffb9def0', GradientType=0);
   background-repeat: repeat-x;
-  border-color: #9acfea;
+  border-color: #9acfea; margin:6px 5px;
 }
 .alert-warning {
   background-image: -webkit-linear-gradient(top, #fcf8e3 0%, #f8efc0 100%);
@@ -300,7 +301,7 @@
   background-image:         linear-gradient(to bottom, #fcf8e3 0%, #f8efc0 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffcf8e3', endColorstr='#fff8efc0', GradientType=0);
   background-repeat: repeat-x;
-  border-color: #f5e79e;
+  border-color: #f5e79e;  margin: 6px 5px;
 }
 .alert-danger {
   background-image: -webkit-linear-gradient(top, #f2dede 0%, #e7c3c3 100%);

@@ -16,13 +16,10 @@
 
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 panel panel-default">
         
-        <h3>Your Cars | <span style="font-size:18px"><a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a></span></h3>
-        <hr />
-
-        <br />
-
+		<h3 class="panel-heading">Your Cars | <span style="font-size:18px"><a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a></span></h3>
+        
         @Html.Grid(Model.CarUser).Columns(columns =>
                         {
                             columns.Add(a => a.DisplayName).Titled("Car Display Name");
@@ -80,7 +77,7 @@
                         <input type="text" id="searchText" name="searchText" required placeholder="Name, City, State or Zip" class="form-control" />
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary" id="submit" type="submit"><i class="fa fa-search"></i> </button>
+                        <button class="line-btn light" id="submit" type="submit"><i class="fa fa-search"></i> </button>
                     </div>
                     <br /><br />
                 </div>

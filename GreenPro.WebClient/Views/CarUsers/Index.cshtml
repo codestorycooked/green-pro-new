@@ -1,7 +1,10 @@
 ﻿@model GreenPro.WebClient.ViewModel.CarGarageUserViewModel
 @using GridMvc.Html
 @using Microsoft.AspNet.Identity
-
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+}
 
 <style>
     .fa:before {
@@ -12,18 +15,77 @@
         color: green;
         font-weight: 600;
     }
+
+ 
 </style>
 
+@section left
+{
+    @Html.Action("CustomerNavigation", "Account", new { selectedTabId = GreenPro.WebClient.Models.CustomerNavigationEnum.Cars })
+}
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 panel panel-default">
         
-        <h3>Your Cars | <span style="font-size:18px"><a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a></span></h3>
-        <hr />
+		<h3 class="panel-heading">Your Cars | <span style="font-size:18px"><a data-modal="" href="/CarUsers/Create/"><i class="fa fa-plus"></i> Add car</a></span></h3>
+        
+        <div class="page-body account-page">
+            @if (Model.CarUser.Count() > 0)
+            {
 
-        <br />
+                <div class="address-list">
+                    @foreach (var carUser in Model.CarUser)
+                    {
 
-        @Html.Grid(Model.CarUser).Columns(columns =>
+                        <div class="section address-item">
+
+                            <ul class="info" style="list-style:outside none none">
+                                <li class="">
+                                    <label for="">Car Display Name:</label>
+                                    @carUser.DisplayName
+
+                                </li>
+
+
+                                <li class="">
+                                    <label for="">Make:</label>
+                                    @carUser.Make
+                                </li>
+
+                                <li class="">
+                                    <label for="">GarageName:</label>
+                                    @carUser.GarageName
+                                </li>
+
+                                <li class="">
+                                    <label for="">GarageName:</label>
+                                    @Subscription(carUser) 
+                                </li>
+
+                            </ul>
+                            <div class="buttons">
+                                <a data-modal=''  class="line-btn light" href="/CarUsers/Details/@(carUser.CarId)" id="@(carUser.CarId)" title='Detail'> <span class=''> Detail </span> </a>
+                                <a data-modal='' class="line-btn light"  href="/CarUsers/Edit/@(carUser.CarId)" id="@(carUser.CarId) " title='Edit'> <span class=''> Edit </span> </a>
+
+                                @CarSubscriptionRenewal(carUser)
+                                @*<input type="button" class="line-btn light" onclick="location.href=''" value='Edit' />
+                                <input type="button" class="line-btn light" onclick="if (confirm('Are you sure?')) {location.href='';}" value="Delete" />*@
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-data">
+                    No cars
+                </div>
+            }
+        </div>
+
+
+
+        @*@Html.Grid(Model.CarUser).Columns(columns =>
                         {
                             columns.Add(a => a.DisplayName).Titled("Car Display Name");
                             columns.Add(a => a.Make).Titled("Make");
@@ -50,7 +112,7 @@
                         }).WithPaging(20)
 
             <br /><br /><hr />
-        }
+        }*@
 
 
 
@@ -80,7 +142,7 @@
                         <input type="text" id="searchText" name="searchText" required placeholder="Name, City, State or Zip" class="form-control" />
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary" id="submit" type="submit"><i class="fa fa-search"></i> </button>
+                        <button class="line-btn light" id="submit" type="submit"><i class="fa fa-search"></i> </button>
                     </div>
                     <br /><br />
                 </div>
@@ -216,11 +278,11 @@
     }
     else if (user.AutoRenewal)
     {
-        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + true + "' id='" + user.CarId + "' title='Detail'> Cancel </a>")</text>
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + true + "' id='" + user.CarId + "' class='line-btn light' title='Detail'> Cancel </a>")</text>
     }
     else
     {
-        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + false + "' id='" + user.CarId + "' title='Detail'> Auto</a>")</text>
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Renewal?id=" + user.CarId + "&cancel=" + false + "' id='" + user.CarId + "' class='line-btn light' title='Detail'> Auto</a>")</text>
     }
 }
 
@@ -249,7 +311,7 @@
     var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
     if (user.SubscriptionBought)
     {
-        <text> @user.SubscriptionName <br /> @user.ServiceDay
+        <text> @user.SubscriptionName / @user.ServiceDay
         </text>
     }
     else if (userCars.Count() == 1)

@@ -1,14 +1,101 @@
 ﻿@model IEnumerable<GreenPro.Data.UserPackage>
+@using GreenPro.WebClient.Models;
+
 @using GridMvc.Html
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Account", new { selectedTabId = CustomerNavigationEnum.YourSubscriptions })
 }
 
-
 <div class="row">
-    <div class="col-md-12">
-        <h3>Your Subscriptions</h3><hr />
-        @Html.Grid(Model).Columns(columns =>
+    <div class="col-md-12 panel panel-default">
+        <h3 class="panel-heading">Your Subscriptions</h3>
+
+
+        <div class="page-body account-page">
+            @if (Model.Count() > 0)
+            {
+
+                <div class="address-list">
+                    @foreach (var userSubscriptions in Model)
+                    {
+
+                        <div class="section address-item">
+
+                            <ul class="info" style="list-style:outside none none">
+                                <li class="">
+                                    <label for="">Car Display Name:</label>
+                                    @userSubscriptions.CarUser.DisplayName
+
+                                </li>
+
+
+                                <li class="">
+                                    <label for="">Package Name:</label>
+                                    @userSubscriptions.Package.Package_Name
+                                </li>
+
+                                <li class="">
+                                    <label for="">Service Day:</label>
+                                    @userSubscriptions.ServiceDay
+                                </li>
+
+                                <li class="">
+                                    <label for="">Base Amount:</label>
+                                    @String.Format("{0:$00.00}", userSubscriptions.TotalPrice)
+                                </li>
+
+                                <li class="">
+                                    <label for="">Tax Amount:</label>
+                                    @String.Format("{0:$00.00}", userSubscriptions.TaxAmount)
+                                </li>
+
+                                <li class="">
+                                    <label for="">Tip Amount:</label>
+                                    @String.Format("{0:$00.00}", userSubscriptions.TipAmount)
+                                </li>
+
+                                <li class="">
+                                    <label for="">Total Amount:</label>
+                                    @String.Format("{0:$00.00}", userSubscriptions.TotalPrice + userSubscriptions.TaxAmount + userSubscriptions.TipAmount)
+                                </li>
+
+                                <li class="">
+                                    <label for="">Subscribed Date:</label>
+                                    @userSubscriptions.SubscribedDate
+                                </li>
+                                @*<li class="">
+                                    <label for="">Status:</label>
+                                    @Html.Raw(IsSuccess(userSubscriptions.PaymentRecieved, userSubscriptions.Id))
+                                </li>*@
+
+                            </ul>
+                            <div class="buttons">
+                                <a class="line-btn light" href="/UserPackages/Details/@(userSubscriptions.Id)" 
+                                   id="@(userSubscriptions.Id)" title='Detail'> <span class=''> View Detail </span> </a>
+                               
+
+                               
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-data">
+
+                </div>
+            }
+        </div>
+
+
+
+        @*@Html.Grid(Model).Columns(columns =>
                         {
                             columns.Add(a => a.CarUser.DisplayName).Titled("Car Display Name");
                             columns.Add(a => a.Package.Package_Name).Titled("Package Name");
@@ -24,7 +111,7 @@
 
 
                         }).WithPaging(20)
-        <br /><br />
+        <br /><br />*@
 
         @*<span class="alert alert-danger"><b>Payment not initiated</b> : Payment dint pass through paypal transaction with success code</span>
         <span class=" alert alert-info"><b>Success</b>: Payment was successfully recieved by GreenPro</span>*@

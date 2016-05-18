@@ -21,6 +21,9 @@ namespace GreenPro.Data
         public string PaypalId { get; set; }
         public string Details { get; set; }
         public string Userid { get; set; }
+        public string BillingAggrementID { get; set; }
+        public string TrasactionID { get; set; }
+        public string ReferenceID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual UserPackage UserPackage { get; set; }

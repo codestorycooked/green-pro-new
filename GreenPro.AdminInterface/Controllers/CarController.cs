@@ -122,7 +122,31 @@ namespace GreenPro.AdminInterface.Controllers
                             }
                         }
 
+                       
+
+                        /// Prepare Payments Historys
+                        var paypalAutoPaymentList = db.PaypalAutoPayments.Where(p => p.UserPackageID == userPackage.Id).ToList();
+                        if (paypalAutoPaymentList.Count > 0)
+                        {
+                            foreach (var payment in paypalAutoPaymentList)
+                            {
+                                PaypalAutoPaymentsViewModel paymentViewModel = new PaypalAutoPaymentsViewModel();
+                                paymentViewModel.Id = payment.Id;
+                                paymentViewModel.ReferenceID = payment.ReferenceID;
+                                paymentViewModel.TrasactionID = payment.TrasactionID;
+                                paymentViewModel.TransactionDate = payment.TransactionDate;
+                                paymentViewModel.IsPaid = payment.IsPaid;
+                                paymentViewModel.PaymentStatus = payment.PaymentStatus;
+                                paymentViewModel.GrossAmount = payment.GrossAmount;
+                                paymentViewModel.CreatedOn = payment.CreatedOn;
+                                paymentViewModel.ServiceDate = payment.ServiceDate;
+                                userPackageModel.PaymentHistorys.Add(paymentViewModel);
+
+                            }
+                        }
+
                         carModel.UserPackages.Add(userPackageModel);
+
 
                     }
                 }

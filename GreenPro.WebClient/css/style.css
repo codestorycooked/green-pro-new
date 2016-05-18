@@ -535,7 +535,13 @@ padding-top: 0px;
 #testimonials .container {
     height: 100%;
 }
-#garageList .panel{ margin-right:0px;}
+.garages .panel.panel-default {
+    margin-right: 0;
+}
+.garages .form-group.panel.panel-default {
+    padding-bottom: 10px;
+}
+
 .rect_div{
 	background-image: url(../img/parallax/square.png); position:relative; float:right;
 height:482px; width:482px; background-repeat: no-repeat;  background-size: cover; right:145px; top:17px;
@@ -547,6 +553,14 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
     position: absolute;
     top: 158px;
     width: 400px;
+}
+.col-md-12.sum{ padding:10px;}
+.payment .panel.panel-default {
+    margin: 0 10px;
+}
+.payment {
+    display: inline-block;
+    padding-bottom: 14px;
 }
 .color_11 {
     color: #ffffff;
@@ -563,6 +577,7 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
 	---Pricing---
 ===========================*/
 #socialLoginList p{ padding:0px; margin:0px; text-align:center;}
+
 .line-pricing-table {
   margin: 50px 0 100px 0;
 }
@@ -582,8 +597,10 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
   table-layout: fixed;
 }
 .line-pricing-table .pricing-table-wrap {
-  display: table-cell;
+  float:left;
   text-align: center;
+   width: 32.2%;
+   margin-bottom: 10px;
 }
 
 
@@ -598,7 +615,7 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
   padding: 40px 20px;
   background: #ffffff;
   list-style: none;
-  min-height:410px;
+  min-height:640px;
 }
 .line-pricing-table .pricing-table-wrap ul li.line-head-row {
   font-size: 24px;
@@ -880,7 +897,7 @@ height: auto;
 .nav li {
 	height: 100%;
 	line-height: 100%;
-	margin: 0px 22px;
+	margin: 0px 15px;
 	padding-bottom:0;
 	min-width:105px;
 	width:auto;
@@ -896,6 +913,10 @@ height: auto;
     text-transform: none;
     vertical-align: middle;
 	
+}
+
+.customTab > li > a {
+    color: black !important;
 }
 
 .nav>li>a:hover {
@@ -988,13 +1009,30 @@ padding-top: 10px;
  vertical-align: middle; 
   padding-bottom: 20px;
 }
+.block.block-account-navigation {
+    padding-top: 20px;
+}
 .title{
 padding-top: 0px;
-text-align: center; margin-bottom:40px;
+text-align: center; margin-bottom:10px;
 }
 .list-style{
 list-style: none;
 left:0%;
+}
+.account-page .buttons {
+    text-align: right; margin-bottom:5px;
+}
+.section.address-item {
+    background: #f5f5f5 none repeat scroll 0 0;
+    margin: 10px;
+    padding: 3px 5px;
+}
+.page-body .info{ padding:5px 10px;}
+
+.info label {
+    display: inline-block;
+    width: 25%;
 }
 
 .learn-more{
@@ -2158,7 +2196,7 @@ Media queries
 	.navbar-nav > li > a {
     padding: 6px 5px;
 	}
-	.nav li{ margin:0px 20px;}
+	.nav li{ margin:0px 17px;}
 	.nav > li > a{ font-size:15px;}
 	.top-right-section .btn{ font-size:15px;}
 	.line-wrap{ width:100%;}
@@ -2204,7 +2242,8 @@ Media queries
 		border-bottom: 1px solid #666;
 	}
 	
-	
+	.account-page .buttons .line-btn.light{ margin-bottom:6px;}
+	.info label{ width:auto;}
 	
 	.team-member,.col-lg-4 {
 		margin-bottom: 30px;
@@ -2215,7 +2254,7 @@ Media queries
 	}
 	.line-pricing-table .pricing-table-wrap {
   		display: block;
-  		text-align: center; margin-bottom:10px;
+  		text-align: center; margin-bottom:10px; width: 100%;
 	}
 	.line-wrap { width: 100%; }
 	.title {  padding-top: 0px;}

@@ -41,7 +41,7 @@
             <td> @Html.ActionLink("View Car", "Edit", "Car", new { id = item.CarId }, new { target="_blank"}) </td>
             <td> @item.SubscribedDate</td>
             <td> @item.CreatedDt</td>
-            <td> @Html.ActionLink("Detail", "Package", new { id = item.Id })</td>
+            <td> @Html.ActionLink("View Detail", "Details", "Packages", new { id = item.Id }, null)</td>
         </tr>
     }
     </table>

@@ -24,6 +24,16 @@ namespace GreenPro.WebClient.Controllers
             _workflowMessageService = new WorkflowMessageService();
         }
 
+        [ChildActionOnly]
+        public ActionResult CustomerNavigation(int selectedTabId = 0)
+        {
+            var model = new CustomerNavigationModel();
+
+            model.SelectedTab = (CustomerNavigationEnum)selectedTabId;
+
+            return PartialView(model);
+        }
+
         [Authorize]
         public ActionResult Profile()
         {
@@ -32,7 +42,7 @@ namespace GreenPro.WebClient.Controllers
 
             var userid = User.Identity.GetUserId();
             AspNetUser user = db.AspNetUsers.Where(b => b.Id == userid).First();
-            ViewBag.StateId = new SelectList(db.States, "Id", "StateName", user.State);
+            ViewBag.StateId = new SelectList(db.States.OrderBy(m=>m.StateName), "Id", "StateName", user.State);
             ViewBag.CityId = new SelectList(db.Cities.Where(b => b.StateID == user.State), "Id", "CityName", user.City);
             if (user == null)
             {
@@ -49,7 +59,7 @@ namespace GreenPro.WebClient.Controllers
             {
                 GreenProDbEntities db = new GreenProDbEntities();
 
-                ViewBag.StateId = new SelectList(db.States, "Id", "StateName", user.State);
+                ViewBag.StateId = new SelectList(db.States.OrderBy(m => m.StateName), "Id", "StateName", user.State);
                 ViewBag.CityId = new SelectList(db.Cities.Where(b => b.StateID == user.State), "Id", "CityName", user.City);
 
                 ModelState.Remove("State");
@@ -268,7 +278,7 @@ namespace GreenPro.WebClient.Controllers
         private void LoadStatesAndCity()
         {
             GreenProDbEntities db = new GreenProDbEntities();
-            ViewBag.StateId = new SelectList(db.States, "Id", "StateName");
+            ViewBag.StateId = new SelectList(db.States.OrderBy(o=>o.StateName), "Id", "StateName");
             ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
         }
 
@@ -621,7 +631,7 @@ namespace GreenPro.WebClient.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        //[HttpPost]
         //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {

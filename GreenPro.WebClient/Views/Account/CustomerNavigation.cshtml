@@ -1,0 +1,41 @@
+﻿@model CustomerNavigationModel           
+@using GreenPro.WebClient.Models;
+<div class="block block-account-navigation">
+    <div class="title">
+        <strong>Account Info</strong>
+    </div>
+    <div class="listbox">
+        <ul class="list-group">
+           
+            <li>
+                <a href="@Url.Action("Profile", "Account")" class="@if (Model.SelectedTab == CustomerNavigationEnum.Info)
+                                                                   {<text>active list-group-item</text>}
+                                                                   else
+                                                                   {<text>inactive list-group-item</text>}">Your Profile</a>
+                                                            </li>
+            <li>
+                <a href="@Url.Action("Index", "CarUsers")" class="@if (Model.SelectedTab == CustomerNavigationEnum.Cars)
+                                                                        {<text>active list-group-item</text>}
+                                                                        else
+                                                                        {<text>inactive list-group-item</text>}">Your Cars</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "UserTransactions")" class="@if (Model.SelectedTab == CustomerNavigationEnum.YourTransactions)
+                                                                     {<text>active list-group-item</text>}
+                                                                     else
+                                                                     {<text>inactive list-group-item</text>}">Your Transactions</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "UserPackages")" class="@if (Model.SelectedTab == CustomerNavigationEnum.YourSubscriptions)
+                                                                             {<text>active list-group-item</text>}
+                                                                             else
+                                                                             {<text>inactive list-group-item</text>}">Your Subscriptions</a>
+            </li>
+            
+            <li>
+                <a href="@Url.Action("LogOff", "Account")" class="inactive list-group-item">Logout</a>
+            </li>
+           
+        </ul>
+    </div>
+</div>

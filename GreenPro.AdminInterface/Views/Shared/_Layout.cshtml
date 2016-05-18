@@ -51,15 +51,15 @@
                                 </ul>*@
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        @*<li>
                             @Html.ActionLink("Unassigned Cars", "Index", "UnAssignedCars")
-                        </li>
+                        </li>*@
                         <li>
                             <a href="#">Garages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 @*<li>@Html.ActionLink("Manage Car Types", "Index", "Cartypes")</li>*@
                                 <li>@Html.ActionLink("Manage Garages", "Index", "Garages")</li>
-                                <li>@Html.ActionLink("Cars", "Index", "Car")</li>
+                                <li>@Html.ActionLink("Default Days Setting", "Index", "Setting")</li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -69,7 +69,7 @@
                                 <li>@Html.ActionLink("Manage Package Services", "Index", "Services")</li>
                                 <li>@Html.ActionLink("Manage Packages", "Index", "Packages")</li>
 
-                                <li>@Html.ActionLink("User Packages", "UserPackageList", "Packages")</li>
+                                
 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -77,8 +77,8 @@
                         <li>
                             <a href="#">Payments<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li>@Html.ActionLink("Manage Tax", "Index", "Taxes")</li>
-                                <li>@Html.ActionLink("Manage Paypal Payments", "Index", "Taxes")</li>
+                                
+                                <li>@Html.ActionLink("Paypal Payments log", "Index", "PaypalPaymentLog")</li>
                                 <li>@Html.ActionLink("Upcoming Renewals", "Index", "Taxes")</li>
                                 <li>@Html.ActionLink("Manage Renewals", "Index", "Taxes")</li>
 
@@ -91,6 +91,8 @@
                             <ul class="nav nav-second-level">
                                 <li>@Html.ActionLink("Manage Users", "Index", "UsersAdmin")</li>
                                 <li>@Html.ActionLink("Manage Roles", "Index", "RolesAdmin")</li>
+                                <li>@Html.ActionLink("Cars", "Index", "Car")</li>
+                                <li>@Html.ActionLink("User Packages", "UserPackageList", "Packages")</li>
 
                             </ul>
                             <!-- /.nav-second-level -->
@@ -99,10 +101,12 @@
                             <a href="#">Settings<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>@Html.ActionLink("Manage Teams", "TeamList", "Setting")</li>
-                                <li>@Html.ActionLink("Default Days Setting", "Index", "Setting")</li>
-                                <li>@Html.ActionLink("Manage States", "Index", "States")</li>
-                                <li>@Html.ActionLink("Manage Cities", "Index", "StateCity")</li>
-                                <li>@Html.ActionLink("Car Sides", "Index", "LogDetailCarSides")</li>
+                                <li>@Html.ActionLink("Manage Garages Employee", "GaragesEmployee", "UsersAdmin")</li>
+                                <li>@Html.ActionLink("Manage Tax", "Index", "Taxes")</li>
+                                
+                                @*<li>@Html.ActionLink("Manage States", "Index", "States")</li>
+                                <li>@Html.ActionLink("Manage Cities", "Index", "StateCity")</li>*@
+                                @*<li>@Html.ActionLink("Car Sides", "Index", "LogDetailCarSides")</li>*@
 
 
                             </ul>

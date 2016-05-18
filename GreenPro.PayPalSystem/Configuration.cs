@@ -14,10 +14,7 @@ namespace GreenPro.PayPalSystem
 
             configMap = GetConfig();
 
-            // Signature Credential
-            //configMap.Add("account1.apiUsername", "merchant_api1.greenpro.com");
-            //configMap.Add("account1.apiPassword", "WKG67HQ4QMG2JGTZ");
-            //configMap.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AEGQFBL0w8jHPpDpd49BbFi6IXkh");
+           
 
             configMap.Add("account1.apiUsername", "info-facilitator_api1.circustechnologies.in");
             configMap.Add("account1.apiPassword", "5WGM7VSSHURD4B3Q");

@@ -18,7 +18,7 @@ namespace GreenPro.WebClient.Views
         public ActionResult Index()
         {
             var userid = User.Identity.GetUserId();
-            var userTransactions = db.UserTransactions.Include(u => u.UserPackage).Where(a => a.Userid == userid);
+            var userTransactions = db.UserTransactions.Include(u => u.UserPackage).Where(a => a.Userid == userid).OrderByDescending(o=>o.Id);
             return View(userTransactions.ToList());
         }
 

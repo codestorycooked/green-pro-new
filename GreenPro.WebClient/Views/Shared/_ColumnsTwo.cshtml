@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (IsSectionDefined("scripts"))
+{
+    @section scripts{
+            @RenderSection("scripts")
+        }
+}
+
+<div class="col-md-3">
+    @if (IsSectionDefined("left"))
+    {
+        @RenderSection("left")
+    }
+    else
+    {
+        <text></text>
+    }
+</div>
+<div class="col-md-9">
+
+    @RenderBody()
+
+</div>

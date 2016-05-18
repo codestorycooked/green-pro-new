@@ -325,6 +325,7 @@
     <Property Name="IsPaid" Type="bit" Nullable="false" />
     <Property Name="ServiceDate" Type="date" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="BillingAggrementID" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="PayPalLogs">
     <Key>
@@ -424,6 +425,9 @@
     <Property Name="PaypalId" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="BillingAggrementID" Type="nvarchar" MaxLength="500" />
+    <Property Name="TrasactionID" Type="nvarchar" MaxLength="150" />
+    <Property Name="ReferenceID" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="Weekdays">
     <Key>

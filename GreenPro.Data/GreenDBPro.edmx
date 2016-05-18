@@ -330,6 +330,7 @@
           <Property Name="IsPaid" Type="bit" Nullable="false" />
           <Property Name="ServiceDate" Type="date" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="BillingAggrementID" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="PayPalLogs">
           <Key>
@@ -429,6 +430,9 @@
           <Property Name="PaypalId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="BillingAggrementID" Type="nvarchar" MaxLength="500" />
+          <Property Name="TrasactionID" Type="nvarchar" MaxLength="150" />
+          <Property Name="ReferenceID" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Weekdays">
           <Key>
@@ -2063,6 +2067,9 @@
           <Property Name="Userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_UserTransactions_ASpnetUsers" FromRole="UserTransaction" ToRole="AspNetUser" />
           <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UserTransactions_UserPackages" FromRole="UserTransaction" ToRole="UserPackage" />
+          <Property Name="BillingAggrementID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TrasactionID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Weekday">
           <Key>
@@ -2779,6 +2786,7 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="GreenProDbModel.FK_PaypalAutoPayments_AspNEtUSERs" FromRole="PaypalAutoPayment" ToRole="AspNetUser" />
           <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_PaypalAutoPayments_UserPackageID" FromRole="PaypalAutoPayment" ToRole="UserPackage" />
+          <Property Name="BillingAggrementID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_PaypalAutoPayments_AspNEtUSERs">
           <End Type="GreenProDbModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
@@ -3178,6 +3186,9 @@
           <EntitySetMapping Name="UserTransactions">
             <EntityTypeMapping TypeName="GreenProDbModel.UserTransaction">
               <MappingFragment StoreEntitySet="UserTransactions">
+                <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+                <ScalarProperty Name="TrasactionID" ColumnName="TrasactionID" />
+                <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="PaypalId" ColumnName="PaypalId" />
@@ -3297,6 +3308,7 @@
           <EntitySetMapping Name="PaypalAutoPayments">
             <EntityTypeMapping TypeName="GreenProDbModel.PaypalAutoPayment">
               <MappingFragment StoreEntitySet="PaypalAutoPayments">
+                <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
                 <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />

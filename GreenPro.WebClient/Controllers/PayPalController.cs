@@ -13,11 +13,12 @@ namespace GreenPro.WebClient.Controllers
 {
     public class PayPalController : Controller
     {
-        private GreenProDbEntities db = new GreenProDbEntities();
+        private GreenProDbEntities db;
 
         WorkflowMessageService _workflowMessageService;
         public PayPalController()
         {
+            db = new GreenProDbEntities();
             _workflowMessageService = new WorkflowMessageService();
         }
 
@@ -51,7 +52,7 @@ namespace GreenPro.WebClient.Controllers
                     string fileName = DateTime.Now.ToString("Response_"+userpackageID+"_"+"yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
                     System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), text);
 
-                    GreenProDbEntities _db = new GreenProDbEntities();
+                   
                     PayPalLog log = new PayPalLog()
                     {
                         UserId = User.Identity.GetUserId(),
@@ -66,8 +67,8 @@ namespace GreenPro.WebClient.Controllers
                         TimeStamp = response.Timestamp,
                         SubscriptionID = payment.Id
                     };
-                    _db.PayPalLogs.Add(log);
-                    _db.SaveChanges();
+                    db.PayPalLogs.Add(log);
+                    db.SaveChanges();
 
                     if (response.ResponseRedirectURL != null)
                     {
@@ -132,7 +133,8 @@ namespace GreenPro.WebClient.Controllers
                 TransactionDate = DateTime.Now,
                 Amount = finalPrice,
                 PackageId = user.SubscriptionID,
-                Details = "No Details"
+                Details = "No Details",
+                BillingAggrementID = log.BillingAggrementID
 
             };
             db.UserTransactions.Add(_transaction);
@@ -154,9 +156,10 @@ namespace GreenPro.WebClient.Controllers
 
                 PaypalAutoPayment paypalAutoPayment = new PaypalAutoPayment();
                 paypalAutoPayment.UserPackageID = userPackages.Id;
+                paypalAutoPayment.BillingAggrementID = log.BillingAggrementID;
                 paypalAutoPayment.UserID = userPackages.UserId;
                 paypalAutoPayment.IsPaid = true;
-                paypalAutoPayment.GrossAmount = Convert.ToString( finalPrice);
+                paypalAutoPayment.GrossAmount = Convert.ToString(finalPrice);
                 
 
 

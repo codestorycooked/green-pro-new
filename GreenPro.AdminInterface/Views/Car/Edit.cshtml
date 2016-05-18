@@ -1,4 +1,5 @@
 ﻿@model GreenPro.AdminInterface.ViewModels.CarViewModel
+          
 @{
     ViewBag.Title = "Edit";
 }
@@ -14,6 +15,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#home">Car Info</a></li>
             <li><a data-toggle="tab" href="#package">Package</a></li>
+            @*<li><a data-toggle="tab" href="#payments">Payments</a></li>*@
                 
         </ul>
 
@@ -137,8 +139,9 @@
                                <div class="form-group">
                                    @if (userPackage.Services.Count > 0)
                                    {
+                                      
                                        <div style="height:15px;"></div>
-                                    <p>Services</p>
+                                       <p>Services</p>
                                        <table>
                                            <tr>
                                                <td>
@@ -170,6 +173,70 @@
                     }
                 </div>
             </div>
+
+            @*<div id="payments" class="tab-pane fade">
+                <div style="padding:10px;">
+                    <div class="package-info">
+                        @if (Model.UserPackages.PaymentHistorys.Count > 0)
+                        {
+                            <table>
+                                <tr>
+                                    <td>
+                                        Payment #
+                                    </td>
+                                    <td>
+                                        ReferenceID #
+                                    </td>
+                                    <td>
+                                        TrasactionID #
+                                    </td>
+
+                                    <td>
+                                        Amount
+                                    </td>
+                                    <td>
+                                        Service Day
+                                    </td>
+                                    <td>
+                                        Created Date
+                                    </td>
+
+                                </tr>
+                                @foreach (var item in Model.UserPackages.PaymentHistorys)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Id
+                                        </td>
+                                        <td>
+                                            @item.ReferenceID
+                                        </td>
+                                        <td>
+                                            @item.TrasactionID
+                                        </td>
+
+                                        <td>
+                                            @String.Format("{0:$00.00}", Convert.ToDecimal(item.GrossAmount))
+                                        </td>
+                                        <td>
+                                            @item.ServiceDate
+                                        </td>
+                                        <td>
+                                            @item.CreatedOn
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+
+                </div>
+            </div>*@
+
+
+
             @*<div id="menu2" class="tab-pane fade">
         <h3>Menu 2</h3>
         <p>Some content in menu 2.</p>

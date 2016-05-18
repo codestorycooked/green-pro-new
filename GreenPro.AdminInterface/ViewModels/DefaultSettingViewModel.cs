@@ -19,6 +19,7 @@ namespace GreenPro.AdminInterface.ViewModels
             AvailableCars = new List<SelectListItem>();
 
             CarServicesList = new List<CarServices>();
+            CarPayments = new List<CarServicesPayment>();
 
             SelectedLeaders = new Dictionary<string, IDictionary<int, bool>>();
             SelectedMembers = new Dictionary<string, IDictionary<int, bool>>();
@@ -53,6 +54,8 @@ namespace GreenPro.AdminInterface.ViewModels
 
         public IList<CarServices> CarServicesList { get; set; }
 
+        public IList<CarServicesPayment> CarPayments { get; set; }
+
     }
 
     public partial class CarServices
@@ -85,6 +88,8 @@ namespace GreenPro.AdminInterface.ViewModels
 
         public IList<SelectService> SelectServices { get; set; }
 
+       
+
 
         public string Comment { get; set; }
 
@@ -92,5 +97,17 @@ namespace GreenPro.AdminInterface.ViewModels
         {
             public string ServiceName { get; set; }
         }
+    }
+
+
+    public partial class CarServicesPayment
+    {
+        public int ServiceDayId { get; set; }       
+        public int CarId { get; set; }
+        public string DisplayName { get; set; }
+        public string Make { get; set; }
+        public string LicenseNumber { get; set; }
+        public string Color { get; set; }
+        public bool IsPaid { get; set; }
     }
 }

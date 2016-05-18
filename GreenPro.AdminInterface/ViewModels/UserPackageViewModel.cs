@@ -10,6 +10,7 @@ namespace GreenPro.AdminInterface.ViewModels
         public UserPackageViewModel()
         {
             Services=new List<CarServiceViewModel>();
+            PaymentHistorys = new List<PaypalAutoPaymentsViewModel>();
         }
     
         public int Id { get; set; }
@@ -29,14 +30,14 @@ namespace GreenPro.AdminInterface.ViewModels
         public decimal TaxAmount { get; set; }
         public decimal TipAmount { get; set; }
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
-        public string ServiceDay { get; set; }
-    
-        //public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
-
+        public string ServiceDay { get; set; }   
+       
         
        public virtual PackageViewModel Package { get; set; }
         
         public virtual IList<CarServiceViewModel> Services { get; set; }
+
+        public IList<PaypalAutoPaymentsViewModel> PaymentHistorys { get; set; }
         
     }
 }

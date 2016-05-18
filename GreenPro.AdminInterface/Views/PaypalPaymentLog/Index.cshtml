@@ -1,0 +1,113 @@
+﻿@model GreenPro.AdminInterface.Models.PaypalAutoPaymentSearchList
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Payments</h2>
+@using (Html.BeginForm("index", "PaypalPaymentLog", FormMethod.Get, new { role = "form" }))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            
+            <label class="col-md-2 control-label"> Garage</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m=>m.garageId,Model.AvailableGarages)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"> Email</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.customerEmail, new { @class = "form-control" })
+            </div>
+        </div>        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+    <p>
+        <hr />
+    </p>
+<div class="table-responsive">
+    <table style="width:100%">
+        <tr>
+            <td>
+                Id
+            </td>
+
+            <td>
+                PaymentStatus
+            </td>
+
+            <td>
+                TrasactionID 
+            </td>
+            <td>
+               BillingAggrementID
+            </td>
+            @*<td>
+                ReferenceID
+            </td>*@
+            
+            <td>
+                PendingReason
+            </td>
+            @*<td>
+                PaymentDate
+            </td>*@
+            <td>
+                GrossAmount
+            </td>
+            <td>UserPackageName</td>
+            <td>CustomerName</td>
+            
+            <td>ServiceDate</td>
+            <td>CreatedOn</td>
+        </tr>
+        @foreach (var item in Model.PaypalAutoPaymentsList)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+
+                <td>
+                    @item.PaymentStatus
+                </td>
+
+                <td>
+                    @item.TrasactionID 
+                   
+                </td>
+                <td>                    
+                    @item.BillingAggrementID
+                </td>
+                @*<td>
+                    @item.ReferenceID
+                </td>*@
+                
+                <td>
+                    @item.PendingReason
+                </td>
+                @*<td>
+                    @item.PaymentDate
+                </td>*@
+                <td>
+                    @item.GrossAmount
+                </td>
+                <td>
+                @Html.ActionLink(item.UserPackageName, "Details", "Packages", new { id = item.UserPackageID }, null)
+                </td>
+                <td>@Html.ActionLink(item.CustomerName, "Edit", "UsersAdmin", new { id = item.UserID }, null) </td>
+                
+                <td>@Convert.ToDateTime(item.ServiceDate).ToShortDateString() </td>
+                <td>@item.CreatedOn</td>
+            </tr>
+        }
+    </table>
+</div>
+
+}

@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "Setting";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    bool ShowBulkPaymentButton = true;
+    if (Model.CarPayments.Count > 0)
+    {
+        ShowBulkPaymentButton = Model.CarPayments.Where(p => p.IsPaid == false).ToList().Count > 0 ? true : false;
+    }
 }
 
 <style>
@@ -48,7 +53,7 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Working Day Setting</a></li>
                 <li><a data-toggle="tab" href="#menu1">Car Services </a></li>
-                   @* <li><a data-toggle="tab" href="#menu2">Team Cars</a></li>*@
+                <li><a data-toggle="tab" href="#tab2">Payments</a></li>
             </ul>
 
             <div class="tab-content">
@@ -212,13 +217,18 @@
                         <div class="col-md-8">
 
                             @if (Model.PrepareModelData)
-                            { <text>
+                            { 
+
+                            if(ShowBulkPaymentButton)
+                            { 
+                                <text>
                             <input type="submit" value="Save" name="btnSaveLeaders" class="btn btn-primary" /> &nbsp;
                             <input type="submit" value="Save and Locked" name="save-locked" class="btn btn-primary" /> &nbsp;
-                            <input type="submit" value="Take Payment" name="btnAutoPayment" class="btn btn-primary" /> &nbsp;
-                            <input type="submit" value="Send to leaders" name="btnSendNotification" class="btn btn-primary" />
-                            </text>
-                                
+</text>
+                            }
+
+
+
                             }
                             
                         </div>
@@ -264,12 +274,123 @@
                                 </tr>
                                 }
                             </table>
+                                
                             }
 
                         </div>
                     }
                         
                     </div>
+
+                <div class="clearfix"> </div>
+                <div id="tab2" class="tab-pane fade">
+                    
+                        <div style="padding:10px;">
+                            
+
+                            
+                            @if (Model.CarPayments.Count > 0)
+                            {
+                                
+                                <p>
+                                    <b>Car Service Day Payment Detail</b>
+                                </p>
+                                
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <b>Job Id #</b>
+                                        </td>
+                                        <td>
+                                            <b>Car Display Name</b>
+                                        </td>
+
+                                        <td>
+                                            <b>Make</b>
+                                        </td>
+                                        <td>
+                                            <b>LicenseNumber</b>
+                                        </td>
+                                        <td>
+                                            <b>Color</b>
+                                        </td>
+
+                                        <td>
+                                            <b>Payment Status</b>
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    @foreach (var car in Model.CarPayments)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @car.ServiceDayId
+                                            </td>
+                                            <td>
+                                                @car.DisplayName
+                                            </td>
+                                            <td>
+                                               @car.Make
+
+                                            </td>
+
+                                            <td>
+                                                @car.LicenseNumber
+
+                                            </td>
+
+                                            <td>
+                                                @car.Color
+
+                                            </td>
+
+                                            <td>
+                                                @Html.Raw(car.IsPaid?"Paid":"UnPaid")
+
+                                            </td>
+                                            <td>
+                                                @if (!car.IsPaid)
+                                                {
+                                                    <input type="submit" value="Take Payment" name="btnMakePayment-@(car.CarId)" class="btn btn-primary" />
+                                                    <input type="hidden" value="@car.ServiceDayId" name="hidJobId-@(car.CarId)" />
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3"></label>
+                                    <div class="col-md-8">
+
+                                        @if (Model.PrepareModelData)
+                                        { <text>
+                                            @if(ShowBulkPaymentButton)
+                                            { 
+                                            <input type="submit" value="Bulk Payment" name="btnAutoPayment" class="btn btn-primary" />
+                                            }
+                                            &nbsp;
+                                            <input type="submit" value="Send to leaders" name="btnSendNotification" class="btn btn-primary" />
+                                        </text>
+
+                                        }
+
+                                    </div>
+                                </div>
+
+
+                            }
+
+                        </div>
+                    
+
+                </div>
+
+
                     
             </div>
             <div class="clearfix"> </div>

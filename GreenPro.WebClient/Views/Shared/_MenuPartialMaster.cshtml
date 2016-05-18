@@ -7,17 +7,18 @@
     <li><a href="http://www.greenprocarwash.com/">Our Story</a></li>
 	<li><a href="http://www.greenprocarwash.com/">Results</a></li>
 	<li><a href="@Url.Action("Index", "Garages")">Locations & Pricing</a></li>
+    <li><a href="@Url.Action("Login", "Account")">Login / My Account</a></li>
     
 </ul>
 
-<div class="top-right-section">
+@*<div class="top-right-section">
     @if (!Request.IsAuthenticated)
     {
         <a href='~/Account/Login/'><button class="btn btn-success" value="Login">Login</button></a>
-        <a href='~/Account/Register/'><button class="btn btn-success" value="Login">Register</button></a>
+        
     }
     else
     {
         @Html.Partial("_LoginPartial")
     }
-</div>
+</div>*@

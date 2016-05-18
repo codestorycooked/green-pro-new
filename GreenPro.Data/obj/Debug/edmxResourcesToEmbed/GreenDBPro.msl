@@ -369,6 +369,9 @@
     <EntitySetMapping Name="UserTransactions">
       <EntityTypeMapping TypeName="GreenProDbModel.UserTransaction">
         <MappingFragment StoreEntitySet="UserTransactions">
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="TrasactionID" ColumnName="TrasactionID" />
+          <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
           <ScalarProperty Name="Userid" ColumnName="Userid" />
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="PaypalId" ColumnName="PaypalId" />
@@ -488,6 +491,7 @@
     <EntitySetMapping Name="PaypalAutoPayments">
       <EntityTypeMapping TypeName="GreenProDbModel.PaypalAutoPayment">
         <MappingFragment StoreEntitySet="PaypalAutoPayments">
+          <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ServiceDate" ColumnName="ServiceDate" />
           <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />

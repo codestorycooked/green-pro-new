@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<GreenPro.WebClient.ViewModel.GarageModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@if (Model != null)
+{
+    <div class="panel-group">
+        @foreach (var item in Model)
+        {
+
+            <div class="">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a href="#collapse@(item.GarageId)">
+                             @item.Garage_Name
+
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse@(item.GarageId)" class="">
+                    <div class="panel-body">
+                        <div>@item.Garage_Address, @item.City, @item.State @item.Pincode</div>
+                        <div><b>Open Time: </b>@item.OpenTime to @item.CloseTime</div>
+                        <div><b>Service Days: </b>@item.ServiceDays</div>
+                        <div style="text-align:right">  <a href="@string.Format("/Packages/Index/{0}", item.GarageId)" class='line-btn light'>Subscribe</a></div>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+            
+        @*<h4 class="garage-title">@item.Garage_Name</h4>
+        <div>@item.Garage_Address</div>
+        <div><b>Open Time: </b>@item.OpenTime to @item.CloseTime</div>
+        <div><b>Service Days: </b>@item.ServiceDays</div>
+        <div style="text-align:right">  <a href="@string.Format("/Packages/Index/{0}", item.GarageId)" class='btn btn-xs btn-primary'>View Packages</a></div>
+        <hr />*@
+        }
+    </div>
+        @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchText = ViewBag.SearchText, }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "garageList" }))*@
+        <br />
+
+        @*<div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Collapsible Group 1
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                            Collapsible Group 2
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                            Collapsible Group 3
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        }
+        else
+        {
+    <div>
+        No Results were found
+    </div>
+        }
+

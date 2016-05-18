@@ -27,6 +27,7 @@ namespace GreenPro.Data
         public bool IsPaid { get; set; }
         public Nullable<System.DateTime> ServiceDate { get; set; }
         public System.DateTime CreatedOn { get; set; }
+        public string BillingAggrementID { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual UserPackage UserPackage { get; set; }

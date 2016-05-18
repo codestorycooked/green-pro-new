@@ -67,11 +67,17 @@ namespace GreenPro.AdminInterface.Controllers
         // GET: /Users/
         public ActionResult Index()
         {
-            var userList = _db.AspNetUsers.Where(u => u.IsDelete == false).ToList();
+            //var userList = _db.AspNetUsers.Where(u => u.IsDelete == false).ToList();           
 
-            //return View(await UserManager.Users.ToListAsync());
+            var userList = _db.AspNetUsers.Where(u => u.IsDelete == false && u.AspNetRoles.Any(r=>r.Name=="Users")).ToList();     
 
             return View(userList);
+        }
+
+        public ActionResult GaragesEmployee()
+        {
+            var userList = _db.AspNetUsers.Where(u => u.IsDelete == false && u.AspNetRoles.Any(r => r.Name == "Crew Leader" || r.Name == "Crew Member" || r.Name == "Admin")).ToList();
+            return View(userList);            
         }
 
         //
@@ -104,84 +110,7 @@ namespace GreenPro.AdminInterface.Controllers
             return View();
         }
 
-        //
-        // POST: /Users/Create
-
-        //public async Task<ActionResult> Create(RegisterViewModel userViewModel, string[] garages)
-        //{
-        //    GreenProDbEntities db = new GreenProDbEntities();
-        //    var id = userViewModel.RoleId.ToString();
-        //    string[] selectedRoles = db.AspNetRoles.Where(a => a.Id == id).Select(a => a.Name).ToArray();
-
-        //    ModelState.Remove("Email");
-        //    userViewModel.Email = userViewModel.Email;
-
-
-        //    if (ModelState.IsValid && garages.Count() != 0 selectedRoles)
-        //    {
-        //        var user = new ApplicationUser() { Email = userViewModel.UserName, UserName = userViewModel.UserName, FirstName = userViewModel.FirstName, LastName = userViewModel.LastName, DateofBirth = userViewModel.DateofBirth, Address = userViewModel.Address, State = userViewModel.StateId, City = userViewModel.CityId, Pincode = userViewModel.Pincode, EmailConfirmed = true };
-        //        var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
-
-        //        //Add User to the selected Roles 
-        //        if (adminresult.Succeeded)
-        //        {
-        //            //if (selectedRoles != null)
-        //            //{
-
-        //            var result = await UserManager.AddToRolesAsync(user.Id, selectedRoles);
-        //            if (!result.Succeeded)
-        //            {
-        //                ModelState.AddModelError("", result.Errors.First());
-        //                var crewAdminRole = db.AspNetRoles.Where(a => a.Name.Equals("Crew Admin")).Select(a => a).FirstOrDefault();
-        //                var crewAdmins = new List<AspNetUser>();
-        //                foreach (var user1 in db.AspNetUsers)
-        //                {
-        //                    foreach (var role in user1.AspNetRoles)
-        //                    {
-        //                        if (role.Id == crewAdminRole.Id)
-        //                        {
-        //                            crewAdmins.Add(user1);
-        //                            break;
-        //                        }
-        //                    }
-        //                }
-        //                ViewBag.CrewMemberId = db.AspNetRoles.Where(a => a.Name.Equals("Crew Member")).Select(a => a.Id).FirstOrDefault();
-        //                ViewBag.CrewAdminId = new SelectList(crewAdmins, "Id", "Email");
-        //                ViewBag.StateId = new SelectList(db.States, "Id", "StateName");
-        //                ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
-        //                ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name");
-        //                return View();
-        //            }
-        //            var crewMemberRole = db.AspNetRoles.Where(a => a.Name.Equals("Crew Member")).Select(a => a).FirstOrDefault();
-        //            if (id == crewMemberRole.Id)
-        //            {
-        //                var a = new CrewAdminMember { CrewAdminId = userViewModel.CrewAdminId, CrewMemberId = user.Id };
-        //                db.CrewAdminMembers.Add(a);
-        //                db.SaveChanges();
-        //            }
-        //            //}
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", adminresult.Errors.First());
-        //            GreenProDbEntities db = new GreenProDbEntities();
-
-        //            ViewBag.StateId = new SelectList(db.States, "Id", "StateName");
-        //            ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
-        //            ViewBag.RoleId = new SelectList(db.AspNetRoles, "Id", "Name");
-        //            if (garages.Count()==0)
-        //            {
-        //                ViewBag.NoGarages = "Please select atleast one garage for user";
-        //            }
-        //            return View();
-
-        //        }
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.RoleId = new SelectList(RoleManager.Roles, "Name", "Name");
-        //    return View();
-        //}
-
+     
 
         [HttpPost]
         public async Task<ActionResult> Create(RegisterViewModel userViewModel, string[] garages)
@@ -268,6 +197,8 @@ namespace GreenPro.AdminInterface.Controllers
             return View();
 
         }
+
+
         //
         // GET: /Users/Edit/1
         public async Task<ActionResult> Edit(string id)
@@ -409,7 +340,7 @@ namespace GreenPro.AdminInterface.Controllers
         // POST: /Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(string id)
         {
             if (ModelState.IsValid)
             {

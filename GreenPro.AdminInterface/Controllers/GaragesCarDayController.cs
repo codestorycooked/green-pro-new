@@ -27,8 +27,8 @@ namespace GreenPro.AdminInterface.Controllers
         protected void PrepareDefaultSettingModel(DefaultSettingViewModel model, Garage garage, IQueryable<Garage_LeaderSetting> garageDefaultSettingEitity,
             IList<Garage_CarDaySetting> garageCarDaySettingEntity, bool loadDefaultValue = true)
         {
-            
-            
+
+
             model.GarageId = garage.GarageId;
             model.GarageName = garage.Garage_Name;
             model.PrepareModelData = true;
@@ -47,7 +47,7 @@ namespace GreenPro.AdminInterface.Controllers
                     Text = team.Title,
                     Value = team.Id.ToString()
                 });
-            }            
+            }
 
             //// Crew Leader
             var LeadersList = (from u in db.AspNetUsers
@@ -72,7 +72,7 @@ namespace GreenPro.AdminInterface.Controllers
                 });
 
 
-            }            
+            }
 
             // Crew Member
 
@@ -103,7 +103,7 @@ namespace GreenPro.AdminInterface.Controllers
 
             // Garage Cars
 
-            
+
             var garageList = db.Garages.Where(a => a.ServiceDays == model.ServiceDay).ToList();
             var carList = (
                 from c in db.CarUsers
@@ -113,7 +113,7 @@ namespace GreenPro.AdminInterface.Controllers
                 join p in db.Packages
                 on up.PackageId equals p.PackageId
                 where c.GarageId == model.GarageId && up.PaymentRecieved == true && up.IsActive == true && up.ServiceDay == model.ServiceDay
-                select new { CarId = c.CarId, DisplayName = c.DisplayName, LicenseNumber=c.LicenseNumber, c.Make,c.Color}).ToList();
+                select new { CarId = c.CarId, DisplayName = c.DisplayName, LicenseNumber = c.LicenseNumber, c.Make, c.Color }).ToList();
 
             if (carList.Count <= 0)
             {
@@ -146,7 +146,7 @@ namespace GreenPro.AdminInterface.Controllers
             }
 
 
-            if (garageCarDaySettingEntity.Count>0)
+            if (garageCarDaySettingEntity.Count > 0)
             {
                 var garageDefaultSettingByDay = garageCarDaySettingEntity.Where(q => q.ServiceDay == model.ServiceDay).ToList();
 
@@ -186,7 +186,7 @@ namespace GreenPro.AdminInterface.Controllers
                             {
                                 var garageDefaultSettingByDayCarPaid = garageDefaultSettingByDay.Where(f => f.EntityTypeKey == (int)EntityTypeKey.Car && f.EntityTypeValue == car.CarId.ToString() && f.GarageTeamId == team.Id).SingleOrDefault();
 
-                                var userpackageDetail = db.UserPackages.Where(u => u.CarId == car.CarId).SingleOrDefault();
+                                var userpackageDetail = db.UserPackages.Where(u => u.CarId == car.CarId && u.IsActive == true).SingleOrDefault();
                                 if (userpackageDetail != null)
                                 {
                                     string PaymentStatus = string.Empty;
@@ -203,6 +203,37 @@ namespace GreenPro.AdminInterface.Controllers
 
                             }
                         }
+
+                    /// Load Car Payment Detail
+                    /// 
+                    model.CarPayments = new List<CarServicesPayment>();
+                    foreach (var car in carList)
+                    {
+                        CarServicesPayment carPayment = new CarServicesPayment();
+                        carPayment.CarId = car.CarId;
+                        carPayment.DisplayName = car.DisplayName;
+                        carPayment.LicenseNumber = car.LicenseNumber;
+                        carPayment.Make = car.Make;
+                        carPayment.Color = car.Color;
+
+                        var garageDefaultSettingByDayCarPaid = garageDefaultSettingByDay.Where(f => f.EntityTypeKey == (int)EntityTypeKey.Car && f.EntityTypeValue == car.CarId.ToString()).SingleOrDefault();
+                        carPayment.ServiceDayId = garageDefaultSettingByDayCarPaid.Id;
+
+                        var userpackageDetail = db.UserPackages.Where(u => u.CarId == car.CarId && u.IsActive == true).SingleOrDefault();
+                        if (userpackageDetail != null)
+                        {
+                            string PaymentStatus = string.Empty;
+                            var paypalAutoPaymentDetail = db.PaypalAutoPayments.Where(p => p.UserPackageID == userpackageDetail.Id && p.ServiceDate == model.ServiceDate).FirstOrDefault();
+
+                            if (paypalAutoPaymentDetail == null)
+                                carPayment.IsPaid = false;
+                            else
+                                carPayment.IsPaid = paypalAutoPaymentDetail.IsPaid ? true : false;
+                        }
+
+
+                        model.CarPayments.Add(carPayment);
+                    }
 
                     /// Load Car With Services
                     /// 
@@ -286,7 +317,7 @@ namespace GreenPro.AdminInterface.Controllers
                         }
 
 
-                    
+
                 }
 
             }
@@ -316,7 +347,7 @@ namespace GreenPro.AdminInterface.Controllers
             model.ServiceDate = serviceDate;
             model.PrepareModelData = true;
             PrepareDefaultSettingModel(model, garage, defaultSetting, garageCarDaySetting);
-            
+
 
 
 
@@ -328,7 +359,7 @@ namespace GreenPro.AdminInterface.Controllers
         public ActionResult Index(DefaultSettingViewModel model, bool IsLocked)
         {
             var garage = db.Garages.Where(i => i.GarageId == model.GarageId).SingleOrDefault();
-            
+
             DateTime serviceDate = DateTime.Now.Date.AddDays(1);
             var currentDay = DateTime.Now.Date.AddDays(1).DayOfWeek.ToString();
 
@@ -480,7 +511,7 @@ namespace GreenPro.AdminInterface.Controllers
                        pIsLocked,
                        pIsPaid);
 
-                    
+
                 }
             }
 
@@ -559,9 +590,9 @@ namespace GreenPro.AdminInterface.Controllers
 
             #endregion
 
-            AddNotification(Models.NotifyType.Success,"Records Successfully Saved",true);
+            AddNotification(Models.NotifyType.Success, "Records Successfully Saved", true);
 
-            return RedirectToAction("Index", new { Id=model.GarageId });
+            return RedirectToAction("Index", new { Id = model.GarageId });
         }
 
         [HttpPost, ActionName("Index")]
@@ -587,16 +618,16 @@ namespace GreenPro.AdminInterface.Controllers
                     // Other wise take payment from paypal.
                     try
                     {
-                        obj.TakePaymentFromPaypal(item.UserPackageID, item.BillingAggrementID,item.CarServiceDate,item.JobId);
-                        string responsePayment = obj.TestAutoPayment();
+
+                        string responsePayment = obj.TakePaymentFromPaypal(item.UserPackageID, item.BillingAggrementID, item.CarServiceDate, item.JobId);
                         string text = "Paypal Call: " + DateTime.Now.ToString();
                         text += Environment.NewLine + Environment.NewLine + "responseFrom Paypal: " + responsePayment;
-                        string fileName = item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID+"__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                        string fileName = item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
                         System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), text);
                     }
                     catch (Exception ex)
                     {
-                        string fileName = "ErrorLog_"+item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                        string fileName = "ErrorLog_" + item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
                         System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), ex.ToString());
                     }
 
@@ -604,6 +635,70 @@ namespace GreenPro.AdminInterface.Controllers
             }
             return RedirectToAction("Index", new { Id = model.GarageId });
         }
+
+
+
+        [HttpPost, ActionName("Index")]
+        [FormValueRequired(FormValueRequirement.StartsWith, "btnMakePayment-")]
+        public ActionResult TakePaymentByCar(DefaultSettingViewModel model)
+        {
+            int carId = 0;
+            
+            
+            BillGenerator obj = new BillGenerator();
+
+            DateTime serviceDate = DateTime.Now.Date.AddDays(1);
+            var currentDay = DateTime.Now.Date.AddDays(1).DayOfWeek.ToString();
+
+            var userSuppliedAuthor = new SqlParameter("@ServiceDate", serviceDate);
+
+            var result = db.Database.SqlQuery<Garage_CarDaySettingPaymentDetailModel>("exec dbo.GetGarage_CarDaySettingPaymentDetail @ServiceDate", userSuppliedAuthor).ToList();
+
+
+            if (result.Count > 0)
+            {
+              
+                foreach (var item in result)
+                {
+                    carId = 0;
+
+                    // Skip if payment is already paid (True).
+                    if (item.IsPaid)
+                        continue;
+
+                    foreach(string key in Request.Form.Keys)
+                    {
+                        if(key=="btnMakePayment-"+item.CarId)
+                            carId=item.CarId;
+                    }
+
+
+                    if(carId>0)
+                    {
+                        // Other wise take payment from paypal.
+                        try
+                        {
+
+                            string responsePayment = obj.TakePaymentFromPaypal(item.UserPackageID, item.BillingAggrementID, item.CarServiceDate, item.JobId);
+                            string text = "Paypal Call: " + DateTime.Now.ToString();
+                            text += Environment.NewLine + Environment.NewLine + "responseFrom Paypal: " + responsePayment;
+                            string fileName = item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), text);
+                        }
+                        catch (Exception ex)
+                        {
+                            string fileName = "ErrorLog_" + item.JobId + "-" + item.UserPackageID + "-" + item.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                            System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), ex.ToString());
+                        }
+
+                        break;
+                    }
+
+                }
+            }
+            return RedirectToAction("Index", new { Id = model.GarageId });
+        }
+
 
         [HttpPost, ActionName("Index")]
         [FormValueRequired("btnSendNotification")]
@@ -619,12 +714,12 @@ namespace GreenPro.AdminInterface.Controllers
 
             if (garage == null)
                 return RedirectToAction("Index");
-            
+
             var TeamList = db.GarageTeams.Where(t => t.GarageId == model.GarageId).ToList();
-           
+
             var result = db.Garage_CarDaySetting.Where(q => q.CarServiceDate == serviceDate
-                && q.ServiceDay == currentDay 
-                && q.GarageId==model.GarageId).ToList();
+                && q.ServiceDay == currentDay
+                && q.GarageId == model.GarageId).ToList();
 
             if (result.Count > 0)
             {
@@ -668,30 +763,30 @@ namespace GreenPro.AdminInterface.Controllers
                     if (carList.Count > 0)
                     {
                         carHtml += "<table>";
-                            carHtml += "<tr>";
-                            carHtml += "<td>Display Name</td>";
-                            carHtml += "<td>License Number </td>";
-                            carHtml += "<td>Color</td>";
-                            carHtml += "<td>Make</td>";
-                            carHtml += "<td>PurchaseYear</td>";
-                            carHtml += "</tr>";
-                                foreach (var car in carList)
-                                {
-                                    int carid=Convert.ToInt32(car.EntityTypeValue);
-                                    var carInfo = db.CarUsers.Where(q => q.CarId == carid).FirstOrDefault();
-                                    if (carInfo != null)
-                                    {
-                                        carHtml += "<tr>";
+                        carHtml += "<tr>";
+                        carHtml += "<td>Display Name</td>";
+                        carHtml += "<td>License Number </td>";
+                        carHtml += "<td>Color</td>";
+                        carHtml += "<td>Make</td>";
+                        carHtml += "<td>PurchaseYear</td>";
+                        carHtml += "</tr>";
+                        foreach (var car in carList)
+                        {
+                            int carid = Convert.ToInt32(car.EntityTypeValue);
+                            var carInfo = db.CarUsers.Where(q => q.CarId == carid).FirstOrDefault();
+                            if (carInfo != null)
+                            {
+                                carHtml += "<tr>";
 
-                                        carHtml += "<td>" + carInfo.DisplayName+"</td>";                                
-                                        carHtml += "<td>" + carInfo.LicenseNumber + "</td>";
-                                        carHtml += "<td>" + carInfo.Color + "</td>";
-                                        carHtml += "<td>" + carInfo.Make + "</td>";
-                                        carHtml += "<td>" + carInfo.PurchaseYear + "</td>";
+                                carHtml += "<td>" + carInfo.DisplayName + "</td>";
+                                carHtml += "<td>" + carInfo.LicenseNumber + "</td>";
+                                carHtml += "<td>" + carInfo.Color + "</td>";
+                                carHtml += "<td>" + carInfo.Make + "</td>";
+                                carHtml += "<td>" + carInfo.PurchaseYear + "</td>";
 
-                                        carHtml += "</tr>";
-                                    }
-                                }
+                                carHtml += "</tr>";
+                            }
+                        }
 
                         carHtml += "</table>";
                     }

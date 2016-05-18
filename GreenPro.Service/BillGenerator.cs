@@ -12,31 +12,7 @@ namespace GreenPro.Service
 {
     public class BillGenerator
     {
-        //public List<CustomerBillDetails> Generate()
-        //{
-        //    var today = DateTime.Now;
-        //    var weekBackTime = today.AddDays(-7);
-        //    var db = new GreenProDbEntities();
-        //    var workDoneList = db.WorkDones.Where(a => a.EndTimeStamp >= weekBackTime).ToList();
-        //    var list = new List<CustomerBillDetails>();
-        //    foreach (var workDone in workDoneList)
-        //    {
-        //        var user = db.AspNetUsers.Where(a => a.Id == workDone.UserId).FirstOrDefault();
-        //        var p = db.Packages.Where(a => a.PackageId == workDone.PackageId).FirstOrDefault();
-        //        var package = db.UserPackages.Where(a => a.PackageId == workDone.PackageId).FirstOrDefault();
-        //        var car = db.CarUsers.Where(a => a.UserId == workDone.UserId && a.CarId == package.CarId).FirstOrDefault();
-        //        var services = (from a in db.Package_Services
-        //                        from b in db.UserPackagesAddons
-        //                        from c in db.Services
-        //                        where a.PackageID == package.PackageId && a.ServiceID == c.ServiceID && b.UserPackageID == package.Id && b.ServiceID == c.ServiceID
-        //                        select c).ToList();
-        //        var amt = services.Sum(a => a.Service_Price);
-        //        var custBillDetails = new CustomerBillDetails { Customer = user, PackageName = p, CarDetails = car, ServiceList = services, Amount = amt };
-        //        list.Add(custBillDetails);
-        //    }
-        //    return list;
-        //}
-
+       
         public void AutoPay()
         {
             var db = new GreenProDbEntities();
@@ -61,22 +37,7 @@ namespace GreenPro.Service
                 {
                     string message = string.Empty;
                     var response = paypal.DoTransaction(item.BillingAggrementID, package.Package_Description, package.Package_Name, (double)userPackage.TotalPrice, "Weekly Renewal", out message);
-
-                    //PayPalLog log = new PayPalLog()
-                    //{
-                    //    UserId = item.UserId,
-                    //    ACK = "Express",
-                    //    ApiSatus = response.ApiStatus,
-                    //    BillingAggrementID = (response.BillingAgreementID == null) ? string.Empty : response.BillingAgreementID,
-                    //    CorrelationID = response.CorrelationID,
-                    //    ECToken = response.ECToken,
-                    //    ResponseError = (response.ResponseError == null) ? string.Empty : response.ResponseError.ToString(),
-                    //    ResponseRedirectURL = (response.ResponseRedirectURL == null) ? string.Empty : response.ResponseRedirectURL,
-                    //    ServerDate = DateTime.Now,
-                    //    TimeStamp = response.Timestamp,
-                    //    SubscriptionID = payment.Id
-                    //};
-                    //db.PayPalLogs.Add(log);
+                                       
 
                 }
             }
@@ -94,15 +55,14 @@ namespace GreenPro.Service
                     var car = db.CarUsers.FirstOrDefault(a => a.CarId == userPackage.CarId);
                     var package = db.Packages.FirstOrDefault(a => a.PackageId == userPackage.PackageId);
                     var JobDetail = db.Garage_CarDaySetting.Where(i => i.Id == JobId).SingleOrDefault();
-
+                    decimal finalPrice = userPackage.TotalPrice + userPackage.TaxAmount + userPackage.TipAmount;
                     if (userPackage != null && (car != null && (car.AutoRenewal)))
                     {
                         string message = string.Empty;
-                        //var response = paypal.DoTransaction(item.BillingAggrementID, package.Package_Description, package.Package_Name, (double)userPackage.TotalPrice, "Weekly Renewal", out message);
-
+                       
                         string OriResponsePaypal = string.Empty;
                         DoReferenceTrasaction paypal = new DoReferenceTrasaction();
-                        var response = paypal.DoTransaction(BillingAggrementID, package.Package_Description, package.Package_Name, (double)userPackage.TotalPrice, "Weekly Renewal", out OriResponsePaypal);
+                        var response = paypal.DoTransaction(BillingAggrementID, package.Package_Description, package.Package_Name, (double)finalPrice, "Weekly Renewal", out OriResponsePaypal);
                         
                         responseString = JsonConvert.SerializeObject(response);
 
@@ -113,10 +73,11 @@ namespace GreenPro.Service
                         paypalAutoPayment.UserPackageID = userPackage.Id;
                         paypalAutoPayment.UserID = userPackage.UserId;
                         paypalAutoPayment.IsPaid =response.PaymentStatus=="COMPLETED"? true:false;
-                        paypalAutoPayment.GrossAmount = Convert.ToString(userPackage.TotalPrice);
+                        paypalAutoPayment.GrossAmount = Convert.ToString(finalPrice);
                         paypalAutoPayment.PaymentStatus = response.PaymentStatus;
                         paypalAutoPayment.PaymentDate = response.PaymentDate;
                         paypalAutoPayment.TrasactionID = response.TransactionID;
+                        paypalAutoPayment.BillingAggrementID = BillingAggrementID;
                         paypalAutoPayment.TransactionDate = DateTime.Now;
 
                         paypalAutoPayment.ServiceDate = CarServiceDate;
@@ -129,23 +90,26 @@ namespace GreenPro.Service
                         {
                             JobDetail.IsPaid = true;
                             db.SaveChanges();
+
+                            UserTransaction _transaction = new UserTransaction()
+                            {
+                                Userid = userPackage.UserId,
+                                PaypalId = "",
+                                TransactionDate = DateTime.Now,
+                                Amount = finalPrice,
+                                PackageId = userPackage.Id,
+                                Details = "No Details",
+                                BillingAggrementID = BillingAggrementID,
+                                TrasactionID = paypalAutoPayment.TrasactionID,
+
+                            };
+                            db.UserTransactions.Add(_transaction);
+                            db.SaveChanges();
                         }
 
-                        //PayPalLog log = new PayPalLog()
-                        //{
-                        //    UserId = item.UserId,
-                        //    ACK = "Express",
-                        //    ApiSatus = response.ApiStatus,
-                        //    BillingAggrementID = (response.BillingAgreementID == null) ? string.Empty : response.BillingAgreementID,
-                        //    CorrelationID = response.CorrelationID,
-                        //    ECToken = response.ECToken,
-                        //    ResponseError = (response.ResponseError == null) ? string.Empty : response.ResponseError.ToString(),
-                        //    ResponseRedirectURL = (response.ResponseRedirectURL == null) ? string.Empty : response.ResponseRedirectURL,
-                        //    ServerDate = DateTime.Now,
-                        //    TimeStamp = response.Timestamp,
-                        //    SubscriptionID = payment.Id
-                        //};
-                        //db.PayPalLogs.Add(log);
+
+                       
+                        
 
                     }
 

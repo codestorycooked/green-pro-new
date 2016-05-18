@@ -21,42 +21,9 @@ namespace GreenPro.WebClient.Controllers
         }
         public ActionResult Index()
         {
-            //GreenPro.Utilities.Mail ms = new Utilities.Mail();
-            //ms.SendMail("kunal@innoator.com", "kunal@innoator.com","<b>Test<b>", "Test");
-            //Paypal
-            //GreenPro.PayPalSystem.SetExpressCheckOut express = new PayPalSystem.SetExpressCheckOut();
-            //GreenPro.PayPalSystem.Models.PaypalResponse response = new PayPalSystem.Models.PaypalResponse();
-            //response = express.SetExpressCheckout("kunal@innoatro.com", "Cleaning Services", "Accept to pay weekly", null, "GreenPro", 1.0, "Basic Plan", 10, "Basic Weeklyplan");
-            //GreenPro.Data.GreenProDbEntities _db = new Data.GreenProDbEntities();
-            //GreenPro.Data.PayPalLog log = new Data.PayPalLog()
-            // {
-            //     ACK = "Express",
-            //     ApiSatus = response.ApiStatus,
-            //     BillingAggrementID = (response.BillingAgreementID == null) ? string.Empty : response.BillingAgreementID,
-            //     CorrelationID = response.CorrelationID,
-            //     ECToken = response.ECToken,
-            //     ResponseError = (response.ResponseError == null) ? string.Empty : response.ResponseError.ToString(),
-            //     ResponseRedirectURL = (response.ResponseRedirectURL == null) ? string.Empty : response.ResponseRedirectURL,
-            //     ServerDate = DateTime.Now,
-            //     TimeStamp = response.Timestamp
-            //     //UserId
-            // };
-            //_db.PayPalLogs.Add(log);
-            //_db.SaveChanges();
-
-            //if (response.ResponseRedirectURL != null)
-            //{
-            //    Response.Redirect(response.ResponseRedirectURL);
-            //}
-
-            //// 
-
-            //ViewBag.Token = response.ECToken;
-
-            //GreenPro.PayPalSystem.DoReferenceTrasaction df = new PayPalSystem.DoReferenceTrasaction();
-            //GreenPro.PayPalSystem.Models.PayPalTrasactions response = df.DoTransaction("B-5XE96108MA831044F", "Renewal Weekly", "Basic Plan", 1 - .02, "Basic Plan");
-            //var res = response;
-            return View();
+            return RedirectToAction("", "Garages");
+            
+            //return View();
         }
 
         public ActionResult FeaturedPackage()
@@ -138,10 +105,6 @@ namespace GreenPro.WebClient.Controllers
         public ActionResult SendTestMail()
         {
             _workflowMessageService.SendTestMail();
-            //GreenPro.Utilities.Mail mail = new Utilities.Mail();
-            //GreenPro.Utilities.SiteSetting setting = new Utilities.SiteSetting();
-
-            //GreenPro.Utilities.Mail.SendMail(setting.SenderEmail, setting.SenderName, "circussite1@gmail.com", "", "", DateTime.Now.ToString() + "Test Mail Body", DateTime.Now.ToString() + " subject");
             return Content("");
         }
     }

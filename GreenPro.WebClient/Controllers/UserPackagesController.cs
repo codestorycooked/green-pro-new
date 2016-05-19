@@ -45,6 +45,7 @@ namespace GreenPro.WebClient.Controllers
             userPackageModel.TipAmount = userPackage.TipAmount;
             userPackageModel.ServiceDay = userPackage.ServiceDay;
             userPackageModel.SubscribedDate = userPackage.SubscribedDate;
+            userPackageModel.IsActive = userPackage.IsActive;
 
             userPackageModel.Package = new PackageDetailViewModel();
             userPackageModel.Package.Package_Name = userPackage.Package.Package_Name;
@@ -124,7 +125,22 @@ namespace GreenPro.WebClient.Controllers
 
             
         }
-        
+
+        [HttpPost, ActionName("Details")]
+        [FormValueRequired("btnSubscriptionCancel")]
+        public ActionResult Details(UserPackageDetailViewModel model)
+        {
+            UserPackage userPackage = db.UserPackages.Find(model.Id);
+            if (userPackage == null)
+            {
+                return HttpNotFound();
+            }
+
+            userPackage.IsActive = false;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { Id = model.Id });
+        }
         // GET: UserPackages/Delete/5
         public ActionResult Delete(int? id)
         {

@@ -15,6 +15,7 @@
     <hr />
     @using (Html.BeginForm())
     {
+        @Html.HiddenFor(i=>i.Id)
         <div class="form-horizontal">
 
             <div class="col-md-12">
@@ -137,6 +138,16 @@
                                         @String.Format("{0:$00.00}", Model.TotalPrice + Model.TaxAmount + Model.TipAmount)
                                     </div>
                                 </div>
+
+                                @if(Model.IsActive)
+                                { 
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2"> Cancel Subscription </label>
+                                        <div class="col-md-10">
+                                            <input type="submit" value="Cancel" name="btnSubscriptionCancel" class="btn btn-danger" />
+                                        </div>
+                                    </div>
+                                }
 
                                 <div class="form-group">
                                     @if (Model.Services.Count > 0)

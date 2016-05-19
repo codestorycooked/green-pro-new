@@ -615,7 +615,7 @@ height:482px; width:482px; background-repeat: no-repeat;  background-size: cover
   padding: 40px 20px;
   background: #ffffff;
   list-style: none;
-  min-height:640px;
+  min-height:40px;
 }
 .line-pricing-table .pricing-table-wrap ul li.line-head-row {
   font-size: 24px;

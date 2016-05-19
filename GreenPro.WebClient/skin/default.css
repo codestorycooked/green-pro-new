@@ -11,14 +11,14 @@ a:hover {
 
 /* menu */
 .nav>li>a:hover {
-	color: #54ee23;
+	color: #C0C0C0;
 }
 
 .navbar .navbar-nav > .active > a {
-	color: #54ee23;
+	color: #C0C0C0;
 }
 .navbar .navbar-brand:hover {
-	color: #54ee23;
+	color: #C0C0C0;
 }
 
 /* flexslider */
@@ -73,9 +73,6 @@ a:hover {
 
 /* footer */
 .social-circle li a {
-	background:#417630;
+	background:none;
 }
 
-a.scrollup{
-	background:#417630;
-}

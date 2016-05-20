@@ -253,7 +253,19 @@ namespace GreenPro.WebClient.Controllers
                 return HttpNotFound();
             }
             else
-            {                
+            {
+                //if (carUser.Default)
+                //{
+                //    ViewBag.Disabled = "true";
+                //    ViewBag.Message = "Cannot Delete Default. Please set default car first and try again";
+                //}
+                //else
+                //{
+                //    ViewBag.Disabled = "false";
+                //    ViewBag.Message = "Do You want to delete this car ?";
+                //}
+
+                //ViewBag.Disabled = "false";
                 ViewBag.Message = "Do You want to delete this car ?";
             }
             return PartialView("Delete", carUser);
@@ -291,7 +303,12 @@ namespace GreenPro.WebClient.Controllers
                 ViewBag.Message = "Renewal would mean next week onwards the amount would be automatically deducted. Do you agree to the terms and conditions?";
             }
             return PartialView("Renewal", carUser);
-            
+            //var newDefaultCar = db.CarUsers.Find(carId);
+            //newDefaultCar.Default = cancel;
+
+            //db.SaveChanges();
+
+            //return RedirectToAction("Index");
         }
         [HttpPost, ActionName("Renewal")]
         public ActionResult RenewalConfirmed(int id, bool cancel)
@@ -313,7 +330,15 @@ namespace GreenPro.WebClient.Controllers
         }
 
 
-       
+        //public ActionResult GarageSearch(string searchText)
+        //{
+
+        //    //CarGarageUserViewModel model = new CarGarageUserViewModel();
+        //    //model.Garages = db.Garages.Where(m => m.Garage_Address.ToLower().Contains(searchText.ToLower()) || m.Pincode.Contains(searchText) || m.Garage_Name.ToLower().Contains(searchText.ToLower())).ToList();
+        //    ////ViewBag.StateId = new SelectList(db.States, "Id", "StateName");
+        //    ////ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
+        //    return PartialView("_GarageSearch", model);
+        //}
 
         public ActionResult SelectGarage(int id)
         {

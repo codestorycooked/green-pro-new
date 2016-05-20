@@ -198,7 +198,16 @@ namespace GreenPro.AdminInterface.Controllers
 
             }
 
-            
+            //foreach (var leader in LeadersList)
+            //{
+            //    model.AvailableLeaders.Add(new SelectListItem()
+            //    {
+            //        Text = leader.FirstName + " " + leader.LastName,
+            //        Value = leader.Id
+            //    });
+
+
+            //}
             
 
             // Crew Member

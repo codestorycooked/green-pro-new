@@ -32,8 +32,7 @@ namespace GreenPro.WebClient.ViewModel
         public decimal TaxAmount { get; set; }
         public decimal TipAmount { get; set; }
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
-        public string ServiceDay { get; set; }
-        public bool IsActive { get; set; }
+        public string ServiceDay { get; set; }    
        
        public  PackageDetailViewModel Package { get; set; }
         

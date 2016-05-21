@@ -118,6 +118,9 @@
     <Compile Include="Garage_LeaderSetting.cs">
       <DependentUpon>GreenDBPro.tt</DependentUpon>
     </Compile>
+    <Compile Include="GargesTimeingSlot.cs">
+      <DependentUpon>GreenDBPro.tt</DependentUpon>
+    </Compile>
     <Compile Include="GarrageWeekday.cs">
       <DependentUpon>GreenDBPro.tt</DependentUpon>
     </Compile>

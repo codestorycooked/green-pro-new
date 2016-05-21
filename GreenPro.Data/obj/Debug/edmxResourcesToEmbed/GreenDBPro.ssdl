@@ -229,6 +229,15 @@
     <Property Name="Active" Type="bit" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="GargesTimeingSlots">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SlotTimeing" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="GarageId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="GarrageWeekday">
     <Key>
       <PropertyRef Name="Id" />
@@ -402,6 +411,7 @@
     <Property Name="SubscriptionEndDate" Type="datetime" />
     <Property Name="ServiceDay" Type="nvarchar" MaxLength="50" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="GaragesTimeingSlotId" Type="int" />
   </EntityType>
   <EntityType Name="UserPackagesAddons">
     <Key>
@@ -778,6 +788,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_GargesTimeingSlots_Garages">
+    <End Role="Garages" Type="Self.Garages" Multiplicity="1" />
+    <End Role="GargesTimeingSlots" Type="Self.GargesTimeingSlots" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GargesTimeingSlots">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_GarrageWeekday_Garages">
     <End Role="Garages" Type="Self.Garages" Multiplicity="1" />
     <End Role="GarrageWeekday" Type="Self.GarrageWeekday" Multiplicity="*" />
@@ -943,6 +965,18 @@
       </Principal>
       <Dependent Role="UserPackages">
         <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_GargesTimeingSlots">
+    <End Role="GargesTimeingSlots" Type="Self.GargesTimeingSlots" Multiplicity="0..1" />
+    <End Role="UserPackages" Type="Self.UserPackages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GargesTimeingSlots">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackages">
+        <PropertyRef Name="GaragesTimeingSlotId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1133,6 +1167,7 @@
     <EntitySet Name="GarageMaxCars" EntityType="Self.GarageMaxCars" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Garages" EntityType="Self.Garages" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GarageTeam" EntityType="Self.GarageTeam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GargesTimeingSlots" EntityType="Self.GargesTimeingSlots" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GarrageWeekday" EntityType="Self.GarrageWeekday" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeaderCarJob" EntityType="Self.LeaderCarJob" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LeaderGarageDay" EntityType="Self.LeaderGarageDay" Schema="dbo" store:Type="Tables" />
@@ -1255,6 +1290,10 @@
       <End Role="States" EntitySet="States" />
       <End Role="Garages" EntitySet="Garages" />
     </AssociationSet>
+    <AssociationSet Name="FK_GargesTimeingSlots_Garages" Association="Self.FK_GargesTimeingSlots_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="GargesTimeingSlots" EntitySet="GargesTimeingSlots" />
+    </AssociationSet>
     <AssociationSet Name="FK_GarrageWeekday_Garages" Association="Self.FK_GarrageWeekday_Garages">
       <End Role="Garages" EntitySet="Garages" />
       <End Role="GarrageWeekday" EntitySet="GarrageWeekday" />
@@ -1309,6 +1348,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_UserPackages_CarUsers" Association="Self.FK_UserPackages_CarUsers">
       <End Role="CarUsers" EntitySet="CarUsers" />
+      <End Role="UserPackages" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_GargesTimeingSlots" Association="Self.FK_UserPackages_GargesTimeingSlots">
+      <End Role="GargesTimeingSlots" EntitySet="GargesTimeingSlots" />
       <End Role="UserPackages" EntitySet="UserPackages" />
     </AssociationSet>
     <AssociationSet Name="FK_UserPackages_Packages" Association="Self.FK_UserPackages_Packages">

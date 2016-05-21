@@ -42,6 +42,7 @@ namespace GreenPro.Data
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
         public string ServiceDay { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> GaragesTimeingSlotId { get; set; }
     
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
@@ -52,5 +53,6 @@ namespace GreenPro.Data
         public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
         public virtual ICollection<UserTransaction> UserTransactions { get; set; }
         public virtual ICollection<PaypalAutoPayment> PaypalAutoPayments { get; set; }
+        public virtual GargesTimeingSlot GargesTimeingSlot { get; set; }
     }
 }

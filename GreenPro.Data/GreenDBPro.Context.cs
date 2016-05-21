@@ -64,5 +64,6 @@ namespace GreenPro.Data
         public virtual DbSet<Garage_CarDaySetting> Garage_CarDaySetting { get; set; }
         public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<PaypalAutoPayment> PaypalAutoPayments { get; set; }
+        public virtual DbSet<GargesTimeingSlot> GargesTimeingSlots { get; set; }
     }
 }

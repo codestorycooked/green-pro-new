@@ -248,6 +248,15 @@
       <End Role="UserPackage" EntitySet="UserPackages" />
       <End Role="PaypalAutoPayment" EntitySet="PaypalAutoPayments" />
     </AssociationSet>
+    <EntitySet Name="GargesTimeingSlots" EntityType="GreenProDbModel.GargesTimeingSlot" />
+    <AssociationSet Name="FK_UserPackages_GargesTimeingSlots" Association="GreenProDbModel.FK_UserPackages_GargesTimeingSlots">
+      <End Role="GargesTimeingSlot" EntitySet="GargesTimeingSlots" />
+      <End Role="UserPackage" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GargesTimeingSlots_Garages" Association="GreenProDbModel.FK_GargesTimeingSlots_Garages">
+      <End Role="Garage" EntitySet="Garages" />
+      <End Role="GargesTimeingSlot" EntitySet="GargesTimeingSlots" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AdhocUserPackage">
     <Key>
@@ -474,6 +483,7 @@
     <NavigationProperty Name="LeaderCarJobs" Relationship="GreenProDbModel.FK_LeaderCarJob_Garages" FromRole="Garage" ToRole="LeaderCarJob" />
     <NavigationProperty Name="UnAssignedCars" Relationship="GreenProDbModel.FK_UnAssignedCars_Garages" FromRole="Garage" ToRole="UnAssignedCar" />
     <NavigationProperty Name="WorkerGarages" Relationship="GreenProDbModel.FK_WorkerGarages_Garages" FromRole="Garage" ToRole="WorkerGarage" />
+    <NavigationProperty Name="GargesTimeingSlots" Relationship="GreenProDbModel.FK_GargesTimeingSlots_Garages" FromRole="Garage" ToRole="GargesTimeingSlot" />
   </EntityType>
   <EntityType Name="GarrageWeekday">
     <Key>
@@ -663,6 +673,8 @@
     <Property Name="ServiceDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="PaypalAutoPayments" Relationship="GreenProDbModel.FK_PaypalAutoPayments_UserPackageID" FromRole="UserPackage" ToRole="PaypalAutoPayment" />
+    <Property Name="GaragesTimeingSlotId" Type="Int32" />
+    <NavigationProperty Name="GargesTimeingSlot" Relationship="GreenProDbModel.FK_UserPackages_GargesTimeingSlots" FromRole="UserPackage" ToRole="GargesTimeingSlot" />
   </EntityType>
   <EntityType Name="UserPackagesAddon">
     <Key>
@@ -1432,6 +1444,41 @@
       </Principal>
       <Dependent Role="PaypalAutoPayment">
         <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GargesTimeingSlot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SlotTimeing" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_GargesTimeingSlots" FromRole="GargesTimeingSlot" ToRole="UserPackage" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Garage" Relationship="GreenProDbModel.FK_GargesTimeingSlots_Garages" FromRole="GargesTimeingSlot" ToRole="Garage" />
+  </EntityType>
+  <Association Name="FK_UserPackages_GargesTimeingSlots">
+    <End Type="GreenProDbModel.GargesTimeingSlot" Role="GargesTimeingSlot" Multiplicity="0..1" />
+    <End Type="GreenProDbModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GargesTimeingSlot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackage">
+        <PropertyRef Name="GaragesTimeingSlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GargesTimeingSlots_Garages">
+    <End Type="GreenProDbModel.Garage" Role="Garage" Multiplicity="1" />
+    <End Type="GreenProDbModel.GargesTimeingSlot" Role="GargesTimeingSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garage">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GargesTimeingSlot">
+        <PropertyRef Name="GarageId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

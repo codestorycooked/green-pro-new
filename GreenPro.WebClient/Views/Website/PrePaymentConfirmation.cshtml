@@ -19,6 +19,14 @@
                     <td>Package Name</td>
                     <td>@Model.UserPackge.Package.Package_Name</td>
                 </tr>
+                <tr>
+                    <td>Service Day</td>
+                    <td>@Model.UserPackge.ServiceDay</td>
+                </tr>
+                <tr>
+                    <td>Slot Time</td>
+                    <td>@Model.UserPackge.GargesTimeingSlot.SlotTimeing</td>
+                </tr>
                 @*<tr>
                     <td>Base Package Price</td>
                     <td>$@Model.UserPackge.Package.Package_Price.ToString("00.00")</td>
@@ -28,7 +36,7 @@
                     <td>$@Model.UserPackge.TotalPrice.ToString("00.00")</td>
                 </tr>
             </table>
-            <p>You can access details of this transaction in <b>My Transactions</b></p>
+            <div style="padding:10px;">You can access details of this transaction in <b>My Transactions</b></div>
         </div>
         <div class="col-md-3 panel panel-default">
             <h4 class="panel-heading">Service's & Add-Ons</h4>

@@ -22,6 +22,7 @@ namespace GreenPro.Data
             this.LeaderCarJobs = new HashSet<LeaderCarJob>();
             this.UnAssignedCars = new HashSet<UnAssignedCar>();
             this.WorkerGarages = new HashSet<WorkerGarage>();
+            this.GargesTimeingSlots = new HashSet<GargesTimeingSlot>();
         }
     
         public int GarageId { get; set; }
@@ -51,5 +52,6 @@ namespace GreenPro.Data
         public virtual ICollection<LeaderCarJob> LeaderCarJobs { get; set; }
         public virtual ICollection<UnAssignedCar> UnAssignedCars { get; set; }
         public virtual ICollection<WorkerGarage> WorkerGarages { get; set; }
+        public virtual ICollection<GargesTimeingSlot> GargesTimeingSlots { get; set; }
     }
 }

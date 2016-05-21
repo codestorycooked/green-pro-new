@@ -184,27 +184,8 @@ namespace GreenPro.WebClient.Controllers
                 {
                     return HttpNotFound();
                 }
-
                 packageDetails.Packages = package;
-                packageDetails.Services = db.Services.Where(s => s.IsAddOn == true).ToList();
-                //foreach (var item in db.Services.ToList())
-                //{
-                //    bool flag = true;
-                //    foreach (var subItem in package.Package_Services)
-                //    {
-                //        if (item.ServiceID == subItem.ServiceID)
-                //        {
-                //            flag = false;
-                //            break;
-                //        }
-                //    }
-                //    if (flag)
-                //    {
-                //        if (packageDetails.Services == null)
-                //            packageDetails.Services = new List<Service>();
-                //        (packageDetails.Services as List<Service>).Add(item);
-                //    }
-                //}                
+                packageDetails.Services = db.Services.Where(s => s.IsAddOn == true).ToList();                                
 
             }
 
@@ -214,6 +195,7 @@ namespace GreenPro.WebClient.Controllers
                 int.TryParse(Convert.ToString(Session["NewServiceGarageId"]), out garageId);
                 if (garageId > 0)
                 {
+                    packageDetails.GarageId = garageId;
                     var garage = db.Garages.Where(i => i.GarageId == garageId).SingleOrDefault();
                     if (garage != null)
                     {
@@ -228,6 +210,28 @@ namespace GreenPro.WebClient.Controllers
                             });
                         }
                     }
+
+                    // prepare Time Slots List
+                    var defaultFirstDay = packageDetails.AvailableServiceDays.FirstOrDefault();
+                    var userPackagesList = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true && a.IsActive==true).ToList();
+                    if (defaultFirstDay != null)
+                    {
+                        var garageTimeSlotList = db.GargesTimeingSlots.Where(g => g.GarageId == garageId).ToList();
+                        foreach (var timeSlot in garageTimeSlotList)
+                        {
+                            var userPackageByTimeSlot = userPackagesList.Where(u => u.GaragesTimeingSlotId == timeSlot.Id && u.ServiceDay == defaultFirstDay.Text).FirstOrDefault();
+                            if (userPackageByTimeSlot != null)
+                                continue;
+                            
+                            packageDetails.AvailableGaragesTimeingSlots.Add(new SelectListItem()
+                            {
+                                Text = timeSlot.SlotTimeing,
+                                Value = timeSlot.Id.ToString()
+                            });
+                        }
+                    }
+
+
                 }
             }
 
@@ -265,7 +269,8 @@ namespace GreenPro.WebClient.Controllers
                 DiscountPrice = 0,
                 CreatedDt = DateTime.Now,
                 PaymentRecieved = false,
-                 ServiceDay=model.ServiceDay
+                ServiceDay=model.ServiceDay,
+                GaragesTimeingSlotId=model.GaragesTimeingSlotId,
             };
             db.UserPackages.Add(savingEntity);
 
@@ -315,6 +320,26 @@ namespace GreenPro.WebClient.Controllers
             return RedirectToAction("PrepaymentConfirmation", new { id = savingEntity.Id });
         }
 
+
+
+        [AllowAnonymous]
+        public JsonResult GarageTimeSlotlist(string serviceDay, int garageId)
+        {
+            var userid = User.Identity.GetUserId();
+
+            GreenProDbEntities db = new GreenProDbEntities();                     
+            List<SelectListItem> selectListItemList = new List<SelectListItem>();
+            var garageTimeSlotList = db.GargesTimeingSlots.Where(g => g.GarageId == garageId).ToList();
+            var userPackagesList = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true && a.IsActive == true).ToList();
+            foreach (var timeSlot in garageTimeSlotList)
+            {
+                var userPackageByTimeSlot = userPackagesList.Where(u => u.GaragesTimeingSlotId == timeSlot.Id && u.ServiceDay == serviceDay).FirstOrDefault();
+                if (userPackageByTimeSlot != null)
+                    continue;
+                selectListItemList.Add(new SelectListItem { Text = timeSlot.SlotTimeing, Value = timeSlot.Id.ToString() });
+            }
+            return Json(selectListItemList);
+        }
 
 
         public ActionResult PrePaymentConfirmation(int id)

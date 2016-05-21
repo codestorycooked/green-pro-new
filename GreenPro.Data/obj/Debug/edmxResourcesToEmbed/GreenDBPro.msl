@@ -333,6 +333,7 @@
     <EntitySetMapping Name="UserPackages">
       <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
         <MappingFragment StoreEntitySet="UserPackages">
+          <ScalarProperty Name="GaragesTimeingSlotId" ColumnName="GaragesTimeingSlotId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ServiceDay" ColumnName="ServiceDay" />
           <ScalarProperty Name="SubscriptionEndDate" ColumnName="SubscriptionEndDate" />
@@ -504,6 +505,16 @@
           <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
           <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
           <ScalarProperty Name="TrasactionID" ColumnName="TrasactionID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GargesTimeingSlots">
+      <EntityTypeMapping TypeName="GreenProDbModel.GargesTimeingSlot">
+        <MappingFragment StoreEntitySet="GargesTimeingSlots">
+          <ScalarProperty Name="GarageId" ColumnName="GarageId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="SlotTimeing" ColumnName="SlotTimeing" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

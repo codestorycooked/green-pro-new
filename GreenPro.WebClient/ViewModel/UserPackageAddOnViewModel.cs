@@ -6,6 +6,7 @@ using GreenPro.Data;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
+
 namespace GreenPro.WebClient.ViewModel
 {
     public class UserPackageAddOnViewModel
@@ -13,6 +14,7 @@ namespace GreenPro.WebClient.ViewModel
         public UserPackageAddOnViewModel()
         {
             AvailableServiceDays = new List<SelectListItem>();
+            AvailableGaragesTimeingSlots = new List<SelectListItem>();
         }
         public Package Packages { get; set; }
         public IEnumerable<Service> Services { get; set; }
@@ -23,8 +25,11 @@ namespace GreenPro.WebClient.ViewModel
         [Required(ErrorMessage = "You have to select a car.")]
         public string SelectedCar { get; set; }
         public int PackageID { get; set; }
+        public int GarageId { get; set; }
+        public int GaragesTimeingSlotId { get; set; }
         public string ServiceDay { get; set; }
         public bool AutoRenewalSubscription { get; set; }
         public IList<SelectListItem> AvailableServiceDays { get; set; }
+        public IList<SelectListItem> AvailableGaragesTimeingSlots { get; set; }
     }
 }

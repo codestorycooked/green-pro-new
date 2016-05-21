@@ -96,6 +96,9 @@
         <EntityTypeShape EntityType="GreenProDbModel.PaypalAutoPayment" Width="1.5" PointX="26" PointY="31.75" />
         <AssociationConnector Association="GreenProDbModel.FK_PaypalAutoPayments_AspNEtUSERs" />
         <AssociationConnector Association="GreenProDbModel.FK_PaypalAutoPayments_UserPackageID" />
+        <EntityTypeShape EntityType="GreenProDbModel.GargesTimeingSlot" Width="1.5" PointX="7.375" PointY="5.875" />
+        <AssociationConnector Association="GreenProDbModel.FK_UserPackages_GargesTimeingSlots" />
+        <AssociationConnector Association="GreenProDbModel.FK_GargesTimeingSlots_Garages" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

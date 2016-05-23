@@ -94,6 +94,7 @@ namespace GreenPro.AdminInterface.Controllers
                         userPackageModel.TotalPrice = userPackage.TotalPrice;
                         userPackageModel.TipAmount = userPackage.TipAmount;
                         userPackageModel.ServiceDay = userPackage.ServiceDay;
+                        userPackageModel.TimeSlot = userPackage.GaragesTimeingSlotId.HasValue ? userPackage.GargesTimeingSlot.SlotTimeing : "";
                         userPackageModel.SubscribedDate = userPackage.SubscribedDate;
 
                         userPackageModel.Package = new PackageViewModel();

@@ -31,23 +31,7 @@ namespace GreenPro.WebClient.Controllers
             if (!string.IsNullOrEmpty(searchText) || !string.IsNullOrWhiteSpace(state) || gId > 0)
             {
                 IList<GreenPro.Data.Garage> model = new List<GreenPro.Data.Garage>();
-
-
-                //if (!string.IsNullOrWhiteSpace(searchText))
-                //{
-                //    garages = garages.Where(b =>
-                //    b.Garage_Address.ToLower().Contains(searchText.ToLower()) ||
-                //    b.Garage_Name.ToLower().Contains(searchText.ToLower()) ||
-                //    b.Pincode.ToLower().Contains(searchText.ToLower()));
-                //}
-
-                //if (!string.IsNullOrWhiteSpace(state))
-                //{
-                //    int stateId = 0;
-                //    int.TryParse(state, out stateId);
-                //    garages = garages.Where(b => b.City == stateId);
-                //}
-
+                               
                 if (gId > 0)
                 {
 
@@ -71,35 +55,36 @@ namespace GreenPro.WebClient.Controllers
             var garages = db.Garages.AsQueryable();
             garages = garages.Where(b => b.IsActive == true);
 
+
+            IList<GarageSearchModel> GaragesList = new List<GarageSearchModel>();
+
             if (!string.IsNullOrWhiteSpace(state))
             {
                 int stateId = 0;
                 int.TryParse(state, out stateId);
                 garages = garages.Where(b => b.City == stateId);
+
+                foreach (var garageItem in garages)
+                {
+                    GaragesList.Add(new GarageSearchModel() { Garage_Name = garageItem.Garage_Name, GarageId = garageItem.GarageId });
+                }
             }
 
             int pageSize = 5;
             var statesList = db.States.ToList();
             ViewBag.AvailableStates = new SelectList(statesList, "Id", "StateName");
             ViewBag.SearchTextData = searchText;
-            ViewBag.stateData = state;
-
-            //var cityList = (from c in db.Cities
-            //                join
-            //                    s in db.States
-            //                    on c.StateID equals s.Id
-            //                select new { CityName = c.CityName + " - " + s.StateName, Id = c.Id,StateId=s.Id }).OrderBy(a=>a.StateId).ToList();
+            ViewBag.stateData = state;            
 
             var cityList = db.Database.SqlQuery<CityModel>("exec dbo.GetAllAvailableGaragesCitiesList").ToList();
 
             ViewBag.AvailableCitys = new SelectList(cityList, "Id", "CityName");
-            ViewBag.AvailableGarages = new SelectList(garages, "GarageId", "Garage_Name");
+            //ViewBag.AvailableGarages = new SelectList(garages, "GarageId", "Garage_Name");
+            ViewBag.AvailableGarages = new SelectList(GaragesList, "GarageId", "Garage_Name");
 
             if ((!string.IsNullOrWhiteSpace(searchText) || !string.IsNullOrWhiteSpace(state)) || gId>0 || Request.IsAjaxRequest())
             {
                 IList<GarageModel> model = new List<GarageModel>();
-                
-
                 
                 if (!string.IsNullOrWhiteSpace(state))
                 {

@@ -45,6 +45,11 @@
                                 </li>
 
                                 <li class="">
+                                    <label for="">Time:</label>
+                                    @(userSubscriptions.GaragesTimeingSlotId.HasValue?userSubscriptions.GargesTimeingSlot.SlotTimeing:"")
+                                </li>
+
+                                <li class="">
                                     <label for="">Base Amount:</label>
                                     @String.Format("{0:$00.00}", userSubscriptions.TotalPrice)
                                 </li>

@@ -897,9 +897,9 @@ height: auto;
 .nav li {
 	height: 100%;
 	line-height: 100%;
-	margin: 0px 15px;
+	margin: 0px 10px;
 	padding-bottom:0;
-	min-width:105px;
+	min-width:85px;
 	width:auto;
 }
 

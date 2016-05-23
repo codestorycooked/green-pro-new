@@ -33,6 +33,7 @@ namespace GreenPro.AdminInterface.ViewModels
         public decimal TipAmount { get; set; }
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
         public string ServiceDay { get; set; }
+        public string TimeSlot { get; set; }
 
         public PackageDetailViewModel Package { get; set; }
 

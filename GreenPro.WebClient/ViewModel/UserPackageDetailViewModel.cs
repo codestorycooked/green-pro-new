@@ -14,6 +14,7 @@ namespace GreenPro.WebClient.ViewModel
             Package = new PackageDetailViewModel();
             PaymentHistorys = new List<PaypalAutoPaymentsViewModel>();
         }
+
     
         public int Id { get; set; }
         public string UserId { get; set; }
@@ -33,6 +34,7 @@ namespace GreenPro.WebClient.ViewModel
         public decimal TipAmount { get; set; }
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
         public string ServiceDay { get; set; }
+        public string TimeSlot { get; set; }
         public bool IsActive { get; set; }
        
        public  PackageDetailViewModel Package { get; set; }

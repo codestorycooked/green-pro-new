@@ -30,8 +30,8 @@ namespace GreenPro.AdminInterface.ViewModels
         public decimal TaxAmount { get; set; }
         public decimal TipAmount { get; set; }
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
-        public string ServiceDay { get; set; }   
-       
+        public string ServiceDay { get; set; }
+        public string TimeSlot { get; set; }
         
        public virtual PackageViewModel Package { get; set; }
         

@@ -337,7 +337,17 @@ namespace GreenPro.WebClient.Controllers
                     // New Customer Notification To Admin
                     _workflowMessageService.SendNewUserRegisterMailtoAdmin(user.FirstName + " " + user.LastName, user.UserName, user.Email, user.PhoneNumber);
 
-                   
+                    var returnURL = GetCookie("returnURL");
+                    string redirectReturnUr = string.Empty;
+                    if (returnURL != null)
+                    {
+                        if (!string.IsNullOrEmpty(returnURL.Value))
+                            redirectReturnUr = returnURL.Value;
+                    }
+
+                    if (!string.IsNullOrEmpty(redirectReturnUr))
+                        return RedirectToLocal(redirectReturnUr);
+                    else
                     return RedirectToAction("Index", "CarUsers", null);
                 }
                 AddErrors(result);

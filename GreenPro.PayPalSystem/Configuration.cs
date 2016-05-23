@@ -43,6 +43,7 @@ namespace GreenPro.PayPalSystem
             Dictionary<string, string> configMap = new Dictionary<string, string>();
 
             // Endpoints are varied depending on whether sandbox OR live is chosen for mode
+            //configMap.Add("mode", "sandbox");
             configMap.Add("mode", "live");
 
             // These values are defaulted in SDK. If you want to override default values, uncomment it and add your value.

@@ -157,7 +157,7 @@ namespace GreenPro.PayPalSystem
             //Optional get from merchant account ecDetails.ReqConfirmShipping=value;
             //Optional get from paypal  ecDetails.AddressOverride
             //optional ecDetails.NoShipping
-            //Optional  ecDetails.SolutionType = (SolutionTypeType)         Enum.Parse(typeof(SolutionTypeType), solutionType.SelectedValue);
+            ecDetails.SolutionType = (SolutionTypeType)Enum.Parse(typeof(SolutionTypeType), "SOLE");
 
             //Adding payment details
             PaymentDetailsType paymentDetails = new PaymentDetailsType();

@@ -73,7 +73,7 @@ namespace GreenPro.Service
                         paypalAutoPayment.UserPackageID = userPackage.Id;
                         paypalAutoPayment.UserID = userPackage.UserId;
                         paypalAutoPayment.IsPaid =response.PaymentStatus=="COMPLETED"? true:false;
-                        paypalAutoPayment.GrossAmount = Convert.ToString(finalPrice);
+                        paypalAutoPayment.GrossAmount = String.Format("{0:0.00}", finalPrice); //Convert.ToString(finalPrice);
                         paypalAutoPayment.PaymentStatus = response.PaymentStatus;
                         paypalAutoPayment.PaymentDate = response.PaymentDate;
                         paypalAutoPayment.TrasactionID = response.TransactionID;

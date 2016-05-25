@@ -31,13 +31,16 @@ namespace GreenPro.PayPalSystem
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
 
+            string requestString = "  Paypal DoTransaction Request billingAgreementID: " + billingAgreementID + ":  " ;
+            requestString = requestString + JsonConvert.SerializeObject(wrapper);
+
             // # API call 
             // Invoke the DoReferenceTransaction method in service wrapper object  
             DoReferenceTransactionResponseType doReferenceTxnResponse = service.DoReferenceTransaction(wrapper);
             PayPalTrasactions responsePaypal = new PayPalTrasactions();
             responsePaypal = ProcessTrasactionResponse(doReferenceTxnResponse);
             response = JsonConvert.SerializeObject(doReferenceTxnResponse);
-            PaypalResponse = response;
+            PaypalResponse = requestString +"  Paypal DoTransaction Response billingAgreementID: " + billingAgreementID + " : "+ response;
             return responsePaypal;
         }
 
@@ -85,8 +88,11 @@ namespace GreenPro.PayPalSystem
                 PaymentDetailsItemType itemDetails = new PaymentDetailsItemType();
                 // Item name. This field is required when you pass a value for ItemCategory.
                 itemDetails.Name = itemName;
-                // Cost of item. This field is required when you pass a value for ItemCategory.
-                itemDetails.Amount = new BasicAmountType(currency, itemAmount.ToString());
+                // Cost of item. This field is required when you pass a value for ItemCategory. 
+                
+                //itemDetails.Amount = new BasicAmountType(currency, itemAmount.ToString());
+                itemDetails.Amount = new BasicAmountType(currency, String.Format("{0:0.00}", itemAmount));
+
                 // Item quantity. This field is required when you pass a value forItemCategory.
                 itemDetails.Quantity = Convert.ToInt32(itemQuantity);
                 // Indicates whether the item is digital or physical. For digital goods, this field is required and you must set it to Digital to get the best rates. It is one of the following values:

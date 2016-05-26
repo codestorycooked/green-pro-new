@@ -59,9 +59,16 @@
 
                                 <li class="">
                                     <label for="">Service Day:</label>
-                                    @Subscription(carUser) 
+                                    @ServiceDay(carUser) 
                                 </li>
-
+                                <li class="">
+                                    <label for="">Package:</label>
+                                    @Subscription(carUser)
+                                </li>
+                                <li class="">
+                                    <label for="">Subscription:</label>
+                                    @Subscription(carUser)
+                                </li>
                             </ul>
                             <div class="buttons">
                                 <a data-modal=''  class="line-btn light" href="/CarUsers/Details/@(carUser.CarId)" id="@(carUser.CarId)" title='Detail'> <span class=''> Detail </span> </a>
@@ -329,6 +336,34 @@
         <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
 
     }
+}
+@helper ServiceDay(GreenPro.WebClient.Models.CarUserModel user)
+{
+
+GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+var userid = User.Identity.GetUserId();
+var userCars = db.CarUsers.Where(a => a.UserId == userid);
+var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
+if (user.SubscriptionBought)
+{
+        <text> @user.ServiceDay
+        </text>
+}
+else if (userCars.Count() == 1)
+{
+    //If there is one car do not show popup
+    <text>@Html.ActionLink("N/A", "Index", "Garages")</text>
+
+}
+else if (userpackages.Count() == 0)
+{
+        <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
+}
+else
+{
+        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
+
+}
 }
 @helper AdhocToSubscription(GreenPro.WebClient.ViewModel.AdhocCarViewModel user)
 {

@@ -147,22 +147,31 @@ namespace GreenPro.WebClient.Controllers
             var userPackages = db.UserPackages.Find(user.SubscriptionID);
             if (userPackages != null)
             {
-                userPackages.PaymentRecieved = true;
-                userPackages.IsActive = true;
-                db.Entry(userPackages).State = EntityState.Modified;
-                db.SaveChanges();
+               
+                string message = string.Empty;
+                string responseString = string.Empty;
+                var package = db.Packages.FirstOrDefault(a => a.PackageId == userPackages.PackageId);
+                string OriResponsePaypal = string.Empty;
+                DoReferenceTrasaction paypal = new DoReferenceTrasaction();
+                var doResponse = paypal.DoTransaction(log.BillingAggrementID, package.Package_Description, package.Package_Name, (double)finalPrice, "Weekly Renewal", out OriResponsePaypal);
 
-                // 
+                ///Write paypal response in txt file.
+                responseString = JsonConvert.SerializeObject(response);
+                responseString = responseString + " : Paypal Response: " + OriResponsePaypal;
+                string fileName = userPackages.Id + "-" + log.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), responseString);
+
 
                 PaypalAutoPayment paypalAutoPayment = new PaypalAutoPayment();
                 paypalAutoPayment.UserPackageID = userPackages.Id;
-                paypalAutoPayment.BillingAggrementID = log.BillingAggrementID;
                 paypalAutoPayment.UserID = userPackages.UserId;
-                paypalAutoPayment.IsPaid = true;
-                paypalAutoPayment.GrossAmount = Convert.ToString(finalPrice);
-                
-
-
+                paypalAutoPayment.IsPaid = doResponse.PaymentStatus == "COMPLETED" ? true : false;
+                paypalAutoPayment.GrossAmount = String.Format("{0:0.00}", finalPrice); //Convert.ToString(finalPrice);
+                paypalAutoPayment.PaymentStatus = doResponse.PaymentStatus;
+                paypalAutoPayment.PaymentDate = doResponse.PaymentDate;
+                paypalAutoPayment.TrasactionID = doResponse.TransactionID;
+                paypalAutoPayment.BillingAggrementID = log.BillingAggrementID;
+                paypalAutoPayment.TransactionDate = DateTime.Now;            
                 
                 DateTime currentDate = DateTime.Now;
                 DateTime serviceDate = currentDate;
@@ -181,7 +190,6 @@ namespace GreenPro.WebClient.Controllers
                                 serviceDate = nextServiceDate.AddDays(7);
                                 break;
                             }
-
                         }
                         else
                         {
@@ -197,9 +205,17 @@ namespace GreenPro.WebClient.Controllers
 
                 paypalAutoPayment.ServiceDate = serviceDate;
                 paypalAutoPayment.CreatedOn = DateTime.Now;
-
                 db.PaypalAutoPayments.Add(paypalAutoPayment);
                 db.SaveChanges();
+
+                if (paypalAutoPayment.IsPaid)
+                {
+                    userPackages.PaymentRecieved = true;
+                    userPackages.IsActive = true;
+                    db.Entry(userPackages).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
 
             }
 

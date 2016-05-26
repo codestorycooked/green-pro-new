@@ -21,3 +21,4 @@ F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Data\bin\Debug\E
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Data\bin\Debug\Newtonsoft.Json.xml
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Data\obj\Debug\GreenPro.Data.dll
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Data\obj\Debug\GreenPro.Data.pdb
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Data\obj\Debug\GreenPro.Data.csprojResolveAssemblyReference.cache

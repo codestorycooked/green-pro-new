@@ -15,14 +15,19 @@ namespace GreenPro.PayPalSystem
             configMap = GetConfig();
 
 
-            
-          //  configMap.Add("account1.apiUsername", "info-facilitator_api1.circustechnologies.in");
-           // configMap.Add("account1.apiPassword", "5WGM7VSSHURD4B3Q");
-           // configMap.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AqJ7QThoYow7gi5.EWtm3QK05dUB");
+            // sand box keys
+            configMap.Add("account1.apiUsername", "info-facilitator_api1.circustechnologies.in");
+            configMap.Add("account1.apiPassword", "5WGM7VSSHURD4B3Q");
+            configMap.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AqJ7QThoYow7gi5.EWtm3QK05dUB");
 
-            configMap.Add("account1.apiUsername", "iaya_api1.gprowash.com");
-            configMap.Add("account1.apiPassword", "PCAPTWDW7VJFT847");
-            configMap.Add("account1.apiSignature", "AwpNBt8VI5CEx3Oo5VDAsqCqNr20AxIpZFyJRR4U.D2ZBNO5Mi2m-RYR");
+            // live keys
+            //configMap.Add("account1.apiUsername", "iaya_api1.gprowash.com");
+            //configMap.Add("account1.apiPassword", "PCAPTWDW7VJFT847");
+            //configMap.Add("account1.apiSignature", "AwpNBt8VI5CEx3Oo5VDAsqCqNr20AxIpZFyJRR4U.D2ZBNO5Mi2m-RYR");
+
+
+
+
 
             // Optional
             //configMap.Add("account1.subject", "testSubject");
@@ -32,8 +37,10 @@ namespace GreenPro.PayPalSystem
             // configMap.Add("account2.apiPassword", "D6JNKKULHN3G5B8A");
             // configMap.Add("account2.apiCertificate", "resource/sdk-cert.p12");
             // configMap.Add("account2.privateKeyPassword", "password");
+
             // Optional
             // configMap.Add("account2.subject", "");
+
             return configMap;
         }
 
@@ -43,8 +50,9 @@ namespace GreenPro.PayPalSystem
             Dictionary<string, string> configMap = new Dictionary<string, string>();
 
             // Endpoints are varied depending on whether sandbox OR live is chosen for mode
-            //configMap.Add("mode", "sandbox");
-            configMap.Add("mode", "live");
+            configMap.Add("mode", "sandbox");
+            
+            //configMap.Add("mode", "live");
 
             // These values are defaulted in SDK. If you want to override default values, uncomment it and add your value.
             // configMap.Add("connectionTimeout", "5000");

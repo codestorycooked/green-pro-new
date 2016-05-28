@@ -20,7 +20,7 @@ namespace GreenPro.WebClient.Controllers
         public ActionResult Index()
         {
             var userid = User.Identity.GetUserId();
-            var userPackages = db.UserPackages.Include(u => u.AspNetUser).Include(u => u.CarUser).Include(u => u.Package).Where(a=>a.UserId==userid && a.PaymentRecieved==true);
+            var userPackages = db.UserPackages.Include(u => u.AspNetUser).Include(u => u.CarUser).Include(u => u.Package).Where(a=>a.UserId==userid && a.PaymentRecieved==true && a.IsActive);
             return View(userPackages.ToList());
         }
 

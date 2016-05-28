@@ -54,7 +54,15 @@
 
                                 <li class="">
                                     <label for="">GarageName:</label>
-                                    @carUser.GarageName
+                                    @if (!string.IsNullOrEmpty(carUser.GarageName))
+                                    {
+                                        @carUser.GarageName
+                                    }
+                                    else
+                                    {
+                                        <text>N/A</text>
+                                    }
+
                                 </li>
 
                                 <li class="">
@@ -280,7 +288,12 @@
     if (user.SubscriptionBought)
     {
         <text> @user.SubscriptionName  </text>
-    }    
+    }
+    else
+    {
+
+        <text>N/A</text>
+    }
 }
 
 @helper SubscriptionLink(GreenPro.WebClient.Models.CarUserModel user)
@@ -289,44 +302,29 @@
     GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
     var userid = User.Identity.GetUserId();    
     var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true && a.IsActive == true);
-    if (userpackages.Count() == 0)
-    {
+    if (user.UserPackageId<=0)
+    { 
         <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
     }
     else
     {
-        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
+        <text>@Html.ActionLink("View Subscription", "Details", "UserPackages", new { Id = user.UserPackageId },null)</text>
     }
 }
 
 
 @helper ServiceDay(GreenPro.WebClient.Models.CarUserModel user)
 {
-
-GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
-var userid = User.Identity.GetUserId();
-var userCars = db.CarUsers.Where(a => a.UserId == userid);
-var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
-if (user.SubscriptionBought)
-{
-        <text> @user.ServiceDay
-        </text>
-}
-else if (userCars.Count() == 1)
-{
-    //If there is one car do not show popup
-    <text>@Html.ActionLink("N/A", "Index", "Garages")</text>
-
-}
-else if (userpackages.Count() == 0)
-{
-        <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
-}
-else
-{
-        <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
-
-}
+    if (user.SubscriptionBought)
+    {
+            <text> @user.ServiceDay
+            </text>
+    }
+    else
+    {
+       
+        <text>N/A</text>
+    }
 }
 @helper AdhocToSubscription(GreenPro.WebClient.ViewModel.AdhocCarViewModel user)
 {

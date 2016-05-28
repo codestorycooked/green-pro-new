@@ -64,24 +64,24 @@ namespace GreenPro.WebClient.Controllers
                     CarId = car.CarId,
                     DisplayName = car.DisplayName,
                     Make = car.Make,
-                    AutoRenewal = car.AutoRenewal
-
-                    //GarageName = car.Garage.Garage_Name
+                    AutoRenewal = car.AutoRenewal                    
                 };
-                if (car.GarageId.HasValue)
-                {
-                    carUserModel.GarageId = car.GarageId.Value;
-
-                }
-                if (car.Garage != null)
-                {
-                    carUserModel.GarageName = car.Garage.Garage_Name;
-                }
+                
                 bool isNotAdhocCar = false;
                 foreach (var subscription in subscriptions)
                 {
                     if (subscription.CarId == car.CarId && subscription.PaymentRecieved)
                     {
+                        if (car.GarageId.HasValue)
+                        {
+                            carUserModel.GarageId = car.GarageId.Value;
+
+                        }
+                        if (car.Garage != null)
+                        {
+                            carUserModel.GarageName = car.Garage.Garage_Name;
+                        }
+
                         carUserModel.SubscriptionBought = true;
                         carUserModel.SubscriptionName = subscription.Package.Package_Name;
 

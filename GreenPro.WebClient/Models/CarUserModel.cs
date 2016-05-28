@@ -17,5 +17,6 @@ namespace GreenPro.WebClient.Models
         public bool SubscriptionBought { get; set; }
         public string SubscriptionName { get; set; }
         public string ServiceDay { get; set; }
+        public int UserPackageId { get; set; }
     }
 }

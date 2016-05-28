@@ -51,9 +51,9 @@ namespace GreenPro.WebClient.Controllers
             ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
 
             var model = new CarGarageUserViewModel();
-            //model.CarUser = db.CarUsers.Include(c => c.AspNetUser).Where(a => a.UserId == userid).ToList();
+           
             var carUserList = db.CarUsers.Include(c => c.AspNetUser).Where(a => a.UserId == userid).ToList();
-            var subscriptions = db.UserPackages.Where(a => a.UserId == userid).ToList();
+            var subscriptions = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved==true && a.IsActive==true).ToList();
             var adhocSubscriptions = db.AdhocUserPackages.Where(a => a.UserId == userid).ToList();
             List<CarUserModel> carList = new List<CarUserModel>();
             List<AdhocCarViewModel> adhocCarList = new List<AdhocCarViewModel>();
@@ -87,6 +87,7 @@ namespace GreenPro.WebClient.Controllers
 
                         // Added By Sachin
                         carUserModel.ServiceDay = subscription.ServiceDay;
+                        carUserModel.UserPackageId = subscription.Id;
                         isNotAdhocCar = true;
                         break;
                     }

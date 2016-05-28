@@ -67,7 +67,7 @@
                                 </li>
                                 <li class="">
                                     <label for="">Subscription:</label>
-                                    @Subscription(carUser)
+                                    @SubscriptionLink(carUser)
                                 </li>
                             </ul>
                             <div class="buttons">
@@ -90,41 +90,7 @@
             }
         </div>
 
-
-
-        @*@Html.Grid(Model.CarUser).Columns(columns =>
-                        {
-                            columns.Add(a => a.DisplayName).Titled("Car Display Name");
-                            columns.Add(a => a.Make).Titled("Make");
-                            columns.Add(a => a.GarageName).Titled("Garage");
-                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Details/" + d.CarId + "' id='" + d.CarId + "' title='Detail'> <span class='glyphicon'> Detail </span> </a>"));
-                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Edit/" + d.CarId + "' id='" + d.CarId + "' title='Edit'> <span class='glyphicon'> Edit </span> </a>"));
-                            //columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.Raw("<a data-modal='' href='/CarUsers/Delete/" + d.CarId + "' id='" + d.CarId + "' title='Detail'> <span class='glyphicon glyphicon-trash'> </span> </a>"));
-                            columns.Add().Titled("Renewal").Encoded(false).Sanitized(false).RenderValueAs(d => CarSubscriptionRenewal(d));
-                            //columns.Add().Titled("Garage").Encoded(false).Sanitized(false).RenderValueAs(d => GarageSelection(d));
-                            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => Subscription(d));
-                        }).WithPaging(20)
-
-        <br /><br /><br />
-        @if (Model.AdhocCarUser.Count() > 0)
-        {
-            <h3>One Time Car Wash</h3>
-            <hr />
-            @Html.Grid(Model.AdhocCarUser).Columns(columns =>
-                        {
-                            columns.Add(a => a.DisplayName).Titled("Car Display Name");
-                            columns.Add(a => a.Make).Titled("Make");
-                            columns.Add(a => a.LinkedCarDisplayName).Titled("Linked To Subscription");
-                            // columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => AdhocToSubscription(d));
-                        }).WithPaging(20)
-
-            <br /><br /><hr />
-        }*@
-
-
-
-
-
+        
     </div>
 
     <div class="col-md-12 form-horizontal hidden" id="garagesearchlist">
@@ -310,33 +276,30 @@
 }
 
 @helper Subscription(GreenPro.WebClient.Models.CarUserModel user)
+{    
+    if (user.SubscriptionBought)
+    {
+        <text> @user.SubscriptionName  </text>
+    }    
+}
+
+@helper SubscriptionLink(GreenPro.WebClient.Models.CarUserModel user)
 {
 
     GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
-    var userid = User.Identity.GetUserId();
-    var userCars = db.CarUsers.Where(a => a.UserId == userid);
-    var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true);
-    if (user.SubscriptionBought)
-    {
-        <text> @user.SubscriptionName / @user.ServiceDay
-        </text>
-    }
-    else if (userCars.Count() == 1)
-    {
-        //If there is one car do not show popup
-        <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
-
-    }
-    else if (userpackages.Count() == 0)
+    var userid = User.Identity.GetUserId();    
+    var userpackages = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true && a.IsActive == true);
+    if (userpackages.Count() == 0)
     {
         <text>@Html.ActionLink("Buy New Subscription", "Index", "Garages")</text>
     }
     else
     {
         <text>@Html.Raw("<a data-modal='' href='/CarUsers/Subscription?id=" + user.CarId + "' id='" + user.CarId + "' title='Detail'> Buy New Subscription </a>")</text>
-
     }
 }
+
+
 @helper ServiceDay(GreenPro.WebClient.Models.CarUserModel user)
 {
 

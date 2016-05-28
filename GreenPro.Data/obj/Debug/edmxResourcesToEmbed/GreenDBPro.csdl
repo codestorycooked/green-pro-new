@@ -432,6 +432,7 @@
     <NavigationProperty Name="AspNetUsers" Relationship="GreenProDbModel.FK_AspNetUsers_Cities" FromRole="City" ToRole="AspNetUser" />
     <NavigationProperty Name="State" Relationship="GreenProDbModel.FK_Cities_State" FromRole="City" ToRole="State" />
     <NavigationProperty Name="Garages" Relationship="GreenProDbModel.FK_Garages_Cities" FromRole="City" ToRole="Garage" />
+    <Property Name="IsActive" Type="Boolean" />
   </EntityType>
   <EntityType Name="CrewAdminMember">
     <Key>
@@ -675,6 +676,9 @@
     <NavigationProperty Name="PaypalAutoPayments" Relationship="GreenProDbModel.FK_PaypalAutoPayments_UserPackageID" FromRole="UserPackage" ToRole="PaypalAutoPayment" />
     <Property Name="GaragesTimeingSlotId" Type="Int32" />
     <NavigationProperty Name="GargesTimeingSlot" Relationship="GreenProDbModel.FK_UserPackages_GargesTimeingSlots" FromRole="UserPackage" ToRole="GargesTimeingSlot" />
+    <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="SubscriptionTypeId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="UserPackagesAddon">
     <Key>

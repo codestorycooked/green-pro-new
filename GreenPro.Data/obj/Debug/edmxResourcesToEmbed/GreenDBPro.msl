@@ -135,6 +135,7 @@
     <EntitySetMapping Name="Cities">
       <EntityTypeMapping TypeName="GreenProDbModel.City">
         <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="StateID" ColumnName="StateID" />
           <ScalarProperty Name="CityName" ColumnName="CityName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -333,6 +334,9 @@
     <EntitySetMapping Name="UserPackages">
       <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
         <MappingFragment StoreEntitySet="UserPackages">
+          <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
+          <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
+          <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
           <ScalarProperty Name="GaragesTimeingSlotId" ColumnName="GaragesTimeingSlotId" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ServiceDay" ColumnName="ServiceDay" />

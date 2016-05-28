@@ -26,6 +26,8 @@ namespace GreenPro.WebClient.ViewModel
         public string SelectedCar { get; set; }
         public int PackageID { get; set; }
         public int GarageId { get; set; }
+
+        public int SubscriptionTypeId { get; set; }
         public int GaragesTimeingSlotId { get; set; }
         public string ServiceDay { get; set; }
         public bool AutoRenewalSubscription { get; set; }

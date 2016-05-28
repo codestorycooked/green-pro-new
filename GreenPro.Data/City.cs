@@ -23,6 +23,7 @@ namespace GreenPro.Data
         public int Id { get; set; }
         public string CityName { get; set; }
         public Nullable<int> StateID { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual State State { get; set; }

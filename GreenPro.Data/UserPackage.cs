@@ -43,6 +43,9 @@ namespace GreenPro.Data
         public string ServiceDay { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> GaragesTimeingSlotId { get; set; }
+        public Nullable<System.DateTime> NextServiceDate { get; set; }
+        public Nullable<System.DateTime> LastServiceDate { get; set; }
+        public int SubscriptionTypeId { get; set; }
     
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

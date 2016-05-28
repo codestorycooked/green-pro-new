@@ -212,6 +212,7 @@ namespace GreenPro.WebClient.Controllers
                 {
                     userPackages.PaymentRecieved = true;
                     userPackages.IsActive = true;
+                    userPackages.NextServiceDate = serviceDate;
                     db.Entry(userPackages).State = EntityState.Modified;
                     db.SaveChanges();
                 }

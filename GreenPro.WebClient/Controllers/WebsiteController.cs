@@ -44,7 +44,7 @@ namespace GreenPro.WebClient.Controllers
         {
             //Check the car type and Pakcage of user may be later
             UserPackageAddOnViewModel packageDetails = new UserPackageAddOnViewModel();
-
+            packageDetails.SubscriptionTypeId = 1;
             if (Session["SelectedCar"] != null)
             {
                 var car = Session["SelectedCar"] as CarUser;
@@ -170,6 +170,7 @@ namespace GreenPro.WebClient.Controllers
                 CreatedDt = DateTime.Now,
                 PaymentRecieved = false,
                 ServiceDay=model.ServiceDay,
+                SubscriptionTypeId=model.SubscriptionTypeId,
                 GaragesTimeingSlotId=model.GaragesTimeingSlotId,
             };
             db.UserPackages.Add(savingEntity);

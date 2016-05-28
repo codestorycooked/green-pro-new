@@ -195,6 +195,7 @@
     <Compile Include="State.cs">
       <DependentUpon>GreenDBPro.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubscriptionType.cs" />
     <Compile Include="Tax.cs">
       <DependentUpon>GreenDBPro.tt</DependentUpon>
     </Compile>

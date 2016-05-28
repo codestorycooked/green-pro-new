@@ -151,6 +151,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CityName" Type="nvarchar" MaxLength="100" />
           <Property Name="StateID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="CrewAdminMember">
           <Key>
@@ -417,6 +418,9 @@
           <Property Name="ServiceDay" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="GaragesTimeingSlotId" Type="int" />
+          <Property Name="NextServiceDate" Type="date" />
+          <Property Name="LastServiceDate" Type="date" />
+          <Property Name="SubscriptionTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserPackagesAddons">
           <Key>
@@ -1852,6 +1856,7 @@
           <NavigationProperty Name="AspNetUsers" Relationship="GreenProDbModel.FK_AspNetUsers_Cities" FromRole="City" ToRole="AspNetUser" />
           <NavigationProperty Name="State" Relationship="GreenProDbModel.FK_Cities_State" FromRole="City" ToRole="State" />
           <NavigationProperty Name="Garages" Relationship="GreenProDbModel.FK_Garages_Cities" FromRole="City" ToRole="Garage" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="CrewAdminMember">
           <Key>
@@ -2095,6 +2100,9 @@
           <NavigationProperty Name="PaypalAutoPayments" Relationship="GreenProDbModel.FK_PaypalAutoPayments_UserPackageID" FromRole="UserPackage" ToRole="PaypalAutoPayment" />
           <Property Name="GaragesTimeingSlotId" Type="Int32" />
           <NavigationProperty Name="GargesTimeingSlot" Relationship="GreenProDbModel.FK_UserPackages_GargesTimeingSlots" FromRole="UserPackage" ToRole="GargesTimeingSlot" />
+          <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
+          <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
+          <Property Name="SubscriptionTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserPackagesAddon">
           <Key>
@@ -3042,6 +3050,7 @@
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="GreenProDbModel.City">
               <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="StateID" ColumnName="StateID" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -3240,6 +3249,9 @@
           <EntitySetMapping Name="UserPackages">
             <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
               <MappingFragment StoreEntitySet="UserPackages">
+                <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
+                <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
+                <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
                 <ScalarProperty Name="GaragesTimeingSlotId" ColumnName="GaragesTimeingSlotId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ServiceDay" ColumnName="ServiceDay" />

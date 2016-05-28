@@ -112,7 +112,8 @@ namespace GreenPro.AdminInterface.Controllers
                     on c.CarId equals up.CarId
                 join p in db.Packages
                 on up.PackageId equals p.PackageId
-                where c.GarageId == model.GarageId && up.PaymentRecieved == true && up.IsActive == true && up.ServiceDay == model.ServiceDay
+                where c.GarageId == model.GarageId && up.PaymentRecieved == true && up.IsActive == true && up.ServiceDay == model.ServiceDay 
+                && up.NextServiceDate==model.ServiceDate
                 select new { CarId = c.CarId, DisplayName = c.DisplayName, LicenseNumber = c.LicenseNumber, c.Make, c.Color }).ToList();
 
             if (carList.Count <= 0)

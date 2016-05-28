@@ -146,6 +146,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CityName" Type="nvarchar" MaxLength="100" />
     <Property Name="StateID" Type="int" />
+    <Property Name="IsActive" Type="bit" />
   </EntityType>
   <EntityType Name="CrewAdminMember">
     <Key>
@@ -412,6 +413,9 @@
     <Property Name="ServiceDay" Type="nvarchar" MaxLength="50" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="GaragesTimeingSlotId" Type="int" />
+    <Property Name="NextServiceDate" Type="date" />
+    <Property Name="LastServiceDate" Type="date" />
+    <Property Name="SubscriptionTypeId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserPackagesAddons">
     <Key>

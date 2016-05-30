@@ -132,6 +132,23 @@ namespace GreenPro.WebClient.Controllers
                     }
 
 
+
+                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    {
+                        Text = "7 Days",
+                        Value = "1"
+                    });
+                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    {
+                        Text = "14 Days",
+                        Value = "2"
+                    });
+                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    {
+                        Text = "28 Days",
+                        Value = "3"
+                    });
+
                 }
             }
 

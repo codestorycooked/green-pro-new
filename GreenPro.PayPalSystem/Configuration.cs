@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace GreenPro.PayPalSystem
 {
     public static class Configuration
@@ -16,9 +17,11 @@ namespace GreenPro.PayPalSystem
 
 
             // sand box keys
-            configMap.Add("account1.apiUsername", "info-facilitator_api1.circustechnologies.in");
-            configMap.Add("account1.apiPassword", "5WGM7VSSHURD4B3Q");
-            configMap.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31AqJ7QThoYow7gi5.EWtm3QK05dUB");
+            configMap.Add("account1.apiUsername", Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["apiUsername"]));
+            configMap.Add("account1.apiPassword", Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["apiPassword"]));
+            configMap.Add("account1.apiSignature", Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["apiSignature"]));
+
+
 
             // live keys
             //configMap.Add("account1.apiUsername", "iaya_api1.gprowash.com");
@@ -50,7 +53,7 @@ namespace GreenPro.PayPalSystem
             Dictionary<string, string> configMap = new Dictionary<string, string>();
 
             // Endpoints are varied depending on whether sandbox OR live is chosen for mode
-            configMap.Add("mode", "sandbox");
+            configMap.Add("mode", Convert.ToString(System.Configuration.ConfigurationManager.AppSettings["mode"]));
             
             //configMap.Add("mode", "live");
 

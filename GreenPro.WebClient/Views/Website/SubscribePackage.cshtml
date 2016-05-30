@@ -9,8 +9,7 @@
     <div class="row">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(m => m.PackageID)
-        @Html.HiddenFor(m => m.GarageId)
-        @Html.HiddenFor(m => m.SubscriptionTypeId)
+        @Html.HiddenFor(m => m.GarageId)        
         <div class="clearfix"></div>
         <div class="col-md-9">
             <div class="col-md-12">
@@ -69,6 +68,16 @@
                                 <div class="col-md-9">
                                     @Html.DropDownListFor(model => model.GaragesTimeingSlotId, Model.AvailableGaragesTimeingSlots, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.GaragesTimeingSlotId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    Subscription Type
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.SubscriptionTypeId, Model.AvailableSubscriptionTypes, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SubscriptionTypeId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 

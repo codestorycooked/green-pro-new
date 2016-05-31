@@ -679,6 +679,7 @@
     <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
     <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
     <Property Name="SubscriptionTypeId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentMethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UserPackagesAddon">
     <Key>

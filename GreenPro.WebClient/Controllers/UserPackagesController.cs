@@ -43,6 +43,7 @@ namespace GreenPro.WebClient.Controllers
             userPackageModel.TotalPrice = userPackage.TotalPrice;
             userPackageModel.TaxAmount = userPackage.TaxAmount;
             userPackageModel.TipAmount = userPackage.TipAmount;
+            userPackageModel.SubscriptionType = SubscriptionTypeInfo.GetSubscriptionTypeInfo(userPackage.SubscriptionTypeId);
             userPackageModel.ServiceDay = userPackage.ServiceDay;
             userPackageModel.TimeSlot = userPackage.GaragesTimeingSlotId.HasValue ? userPackage.GargesTimeingSlot.SlotTimeing : "";
             userPackageModel.SubscribedDate = userPackage.SubscribedDate;

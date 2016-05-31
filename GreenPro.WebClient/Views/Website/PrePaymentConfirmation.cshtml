@@ -106,9 +106,14 @@
 
             <a href="@url" data-modal=""><button type="button" class="line-btn light">@text</button></a> 
             &nbsp;  <br /><br />
-            <button type="submit" class="line-btn light">Pay using Paypal</button>
-            &nbsp;
+            @*<button type="submit" class="line-btn light">Pay using Paypal</button>*@
+                
+                <input type="submit" class="line-btn light" value="Pay using Paypal" name="PaymentMethodName" />
+    &nbsp;
             <br /><br />
+                <input type="submit" class="line-btn light" value="Pay by Credit Card" name="PaymentMethodName" />
+                &nbsp;
+                <br /><br />
             <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /><br /><br />
             <p class="alert alert-danger">Note: Paypal is our payment system. We do not store card numbers or other sensitive information on our website.</p>
         </div>

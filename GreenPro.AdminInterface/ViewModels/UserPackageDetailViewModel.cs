@@ -34,7 +34,9 @@ namespace GreenPro.AdminInterface.ViewModels
         public Nullable<System.DateTime> SubscriptionEndDate { get; set; }
         public string ServiceDay { get; set; }
         public string TimeSlot { get; set; }
+        public string SubscriptionType { get; set; }
 
+      
         public PackageDetailViewModel Package { get; set; }
 
         public IList<PackageCarServiceViewModel> Services { get; set; }

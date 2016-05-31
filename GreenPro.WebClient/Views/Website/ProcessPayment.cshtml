@@ -1,0 +1,176 @@
+﻿@model GreenPro.WebClient.ViewModel.UserPackageAddOnPaymentInformation
+<div class="col-md-12 panel panel-default">
+<div class="">
+    <div class="col-md-12 sum"><h3>Payment Information</h3> <hr /></div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.TextBoxFor(m => m.FinalPrice, new { @class = "form-control", @readonly = "readonly", style = "display:none;" })
+    @Html.HiddenFor(m => m.UserPackageID)
+    <div class="form-horizontal">
+        <div class="col-md-8">               
+                @if (Model.Warnings.Count > 0)
+                {
+                    <div class="form-group text-danger">
+                        <ul>
+                            @foreach (var warning in Model.Warnings)
+                            {
+                                <li>@warning</li>
+                            }
+                        </ul>
+                    </div>
+                }
+
+                
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CreditCardType, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.CreditCardType, Model.CreditCardTypes, new { @class = "form-control", style = "width:100%;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NameOnCard, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.NameOnCard, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CardNumber, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="CardExpiryMonth" class="col-md-4 control-label">Card Expire Date </label>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(model => model.CardExpiryMonth, Model.ExpireMonths, new { @class = "form-control", style = "width:105px;float:left;margin-right:10px;" })  @Html.DropDownListFor(model => model.CardExpiryYear, Model.ExpireYears, new { @class = "form-control", style = "width:105px;" })
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CardSecurityCode, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.CardSecurityCode, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-8">
+                        <input type="submit" id="pay-now" class="ine-btn light" value="Process Payment and Finalize Order" />
+                    </div>
+                </div>
+
+           
+
+
+        </div>
+
+        <div class="col-md-3 panel panel-default">
+
+            <h4 class="panel-heading">Total</h4>
+            <div class="panel-body">
+                <h1>$@Model.FinalPrice.ToString("00.00")&nbsp;<span style="font-size:16px;"> (Tax added $@Model.TaxAmount.ToString("00.00") at @Model.TaxPercentage%)</span></h1>
+
+
+                @*@Html.RadioButtonFor(m => m.AcceptAgreement, "true") <a data-modal='' href='/Website/TermsCondition'>I Accept Terms & Conditions</a>
+               <br />
+
+
+                @Html.ValidationMessageFor(m => m.AcceptAgreement)<br />
+                @{
+                        GreenPro.Data.GreenProDbEntities db = new GreenPro.Data.GreenProDbEntities();
+
+                        var text = "";
+                        var url="";
+                        if (Model.UserPackge.TipAmount <= 0)
+                        {
+                            url = "/Website/TipAmount?id=" + Model.UserPackge.Id;
+                            text = "Add Tip Amount";
+
+                        }
+                        else {
+                            url = "/Website/DeleteTip?id=" + Model.UserPackge.Id;
+                            text = "Edit Tip Amount";
+                        }
+
+                }
+
+                <a href="@url" data-modal=""><button type="button" class="line-btn light">@text</button></a>
+                &nbsp;
+                <br /><br />*@
+
+                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /><br /><br />
+                <p class="alert alert-danger">Note: Paypal is our payment system. We do not store card numbers or other sensitive information on our website.</p>
+            </div>
+        </div>
+    </div>
+
+
+}
+</div>
+<!-- modal placeholder-->
+<div id='myModal' class='modal fade in' style="top:50px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $("form").removeData("validator");
+        $("form").removeData("unobtrusiveValidation");
+        $.validator.unobtrusive.parse("form");
+</script>
+<script>
+    $(document).ready(function () { OnSuccess() });
+    function OnSuccess() {
+
+
+        $.ajaxSetup({ cache: false });
+        $("a[data-modal]").on("click", function (e) {
+            $('#myModalContent').load(this.href, function () {
+                $('#myModal').modal({
+                    keyboard: true
+                }, 'show');
+
+                bindForm(this);
+
+            });
+            return false;
+        });
+
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $('#progress').show();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#myModal').modal('hide');
+                            $('#progress').hide();
+                            location.reload();
+                        } else {
+                            $('#progress').hide();
+                            $('#myModalContent').html(result);
+
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
+    }
+</script>
+}
+

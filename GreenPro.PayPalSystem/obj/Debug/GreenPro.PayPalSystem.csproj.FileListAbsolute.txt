@@ -19,3 +19,8 @@ F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin\Debug\PayPalMerchantSDK.xml
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\obj\Debug\GreenPro.PayPalSystem.dll
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\obj\Debug\GreenPro.PayPalSystem.pdb
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin\Debug\GreenPro.Data.dll
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin\Debug\EntityFramework.dll
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin\Debug\GreenPro.Data.pdb
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\bin\Debug\EntityFramework.xml
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.PayPalSystem\obj\Debug\GreenPro.PayPalSystem.csprojResolveAssemblyReference.cache

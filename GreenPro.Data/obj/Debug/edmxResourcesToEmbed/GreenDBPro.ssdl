@@ -416,6 +416,7 @@
     <Property Name="NextServiceDate" Type="date" />
     <Property Name="LastServiceDate" Type="date" />
     <Property Name="SubscriptionTypeId" Type="int" Nullable="false" />
+    <Property Name="PaymentMethodName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserPackagesAddons">
     <Key>

@@ -249,6 +249,7 @@
     <Compile Include="ViewModel\GarageSearchViewModel.cs" />
     <Compile Include="ViewModel\PackageViewModel.cs" />
     <Compile Include="ViewModel\SubscriptionViewModel.cs" />
+    <Compile Include="ViewModel\UserPackageAddOnPaymentInformation.cs" />
     <Compile Include="ViewModel\UserPackageAddons.cs" />
     <Compile Include="ViewModel\UserPackageAddOnViewModel.cs" />
     <Compile Include="Controllers\UserTransactionsController.cs" />
@@ -663,6 +664,8 @@
     <Content Include="Views\Common\GetUserName.cshtml" />
     <Content Include="Views\Shared\_ColumnsTwo.cshtml" />
     <Content Include="Views\Account\CustomerNavigation.cshtml" />
+    <Content Include="Views\Website\ProcessPayment.cshtml" />
+    <Content Include="Views\PayPal\Completed.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

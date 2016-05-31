@@ -53,6 +53,7 @@ namespace GreenPro.AdminInterface.Controllers
             userPackageModel.ServiceDay = userPackage.ServiceDay;
             userPackageModel.TimeSlot = userPackage.GaragesTimeingSlotId.HasValue ? userPackage.GargesTimeingSlot.SlotTimeing : "";
             userPackageModel.SubscribedDate = userPackage.SubscribedDate;
+            userPackageModel.SubscriptionType = SubscriptionTypeInfo.GetSubscriptionTypeInfo(userPackage.SubscriptionTypeId);
 
             userPackageModel.Package = new PackageDetailViewModel();
             userPackageModel.Package.Package_Name = userPackage.Package.Package_Name;

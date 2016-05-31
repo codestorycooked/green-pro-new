@@ -13,11 +13,21 @@ namespace GreenPro.WebClient
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            // Completed
+            routes.MapRoute("Completed",
+                            "completed/{id}",
+                            new { controller = "PayPal", action = "Completed" },
+                            new { id = @"\d+" },
+                            new[] { "GreenPro.WebClient.Controllers" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }

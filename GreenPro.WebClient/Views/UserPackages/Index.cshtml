@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GreenPro.Data.UserPackage>
+﻿@model IEnumerable<UserPackage>
+@using GreenPro.Data;
 @using GreenPro.WebClient.Models;
 
 @using GridMvc.Html
@@ -37,6 +38,18 @@
                                 <li class="">
                                     <label for="">Package Name:</label>
                                     @userSubscriptions.Package.Package_Name
+                                </li>
+                               
+                                <li class="">
+                                    <label for="">Subscription Type:</label>
+                                    @{
+                                        string type = SubscriptionTypeInfo.GetSubscriptionTypeInfo(userSubscriptions.SubscriptionTypeId);
+                                        if (!string.IsNullOrEmpty(type))
+                                        {
+                                            <text> Every </text> @type
+                                        }
+                                    }
+                                    
                                 </li>
 
                                 <li class="">

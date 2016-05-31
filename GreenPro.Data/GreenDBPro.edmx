@@ -421,6 +421,7 @@
           <Property Name="NextServiceDate" Type="date" />
           <Property Name="LastServiceDate" Type="date" />
           <Property Name="SubscriptionTypeId" Type="int" Nullable="false" />
+          <Property Name="PaymentMethodName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UserPackagesAddons">
           <Key>
@@ -2103,6 +2104,7 @@
           <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
           <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
           <Property Name="SubscriptionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserPackagesAddon">
           <Key>
@@ -3249,6 +3251,7 @@
           <EntitySetMapping Name="UserPackages">
             <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
               <MappingFragment StoreEntitySet="UserPackages">
+                <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
                 <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
                 <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
                 <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />

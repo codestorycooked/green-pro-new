@@ -334,6 +334,7 @@
     <EntitySetMapping Name="UserPackages">
       <EntityTypeMapping TypeName="GreenProDbModel.UserPackage">
         <MappingFragment StoreEntitySet="UserPackages">
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
           <ScalarProperty Name="SubscriptionTypeId" ColumnName="SubscriptionTypeId" />
           <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
           <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />

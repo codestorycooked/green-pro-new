@@ -99,6 +99,17 @@
                                         @Model.Package.Package_Name
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2"> Subscription Type </label>
+                                    <div class="col-md-10">
+                                        @if (!string.IsNullOrEmpty(Model.SubscriptionType))
+                                        {
+                                            <text> Every </text> @Model.SubscriptionType
+                                        }
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label col-md-2"> Service Day </label>
                                     <div class="col-md-10">

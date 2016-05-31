@@ -46,6 +46,7 @@ namespace GreenPro.Data
         public Nullable<System.DateTime> NextServiceDate { get; set; }
         public Nullable<System.DateTime> LastServiceDate { get; set; }
         public int SubscriptionTypeId { get; set; }
+        public string PaymentMethodName { get; set; }
     
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }

@@ -213,6 +213,7 @@ namespace GreenPro.WebClient.Controllers
                     userPackages.PaymentRecieved = true;
                     userPackages.IsActive = true;
                     userPackages.NextServiceDate = serviceDate;
+                    userPackages.PaymentMethodName = "paypal";
                     db.Entry(userPackages).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -229,6 +230,13 @@ namespace GreenPro.WebClient.Controllers
 
             // Send Notification Mail Admin for buy new subscrition.
             _workflowMessageService.SendNewSubscriptionNotificationToAdmin(userInfo.FirstName + " " + userInfo.LastName, userInfo.UserName, userPackages.Package.Package_Name, userPackages.SubscribedDate.ToString(), userPackages.CarUser.Garage.Garage_Name);
+
+            return View();
+        }
+
+
+        public ActionResult Completed(int id)
+        {
 
             return View();
         }

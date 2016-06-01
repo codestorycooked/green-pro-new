@@ -286,6 +286,8 @@ namespace GreenPro.AdminInterface.Controllers
         [FormValueRequired("btnEndJob")]
         public ActionResult CurrentCarServiceEndJob(CurrentCarServiceDetailModel model)
         {
+            
+
             // Get Car Information
             var CarServiceDetail = db.Garage_CarDaySetting.Where(q => q.Id == model.CurrentCarServiceId
                 && q.EntityTypeKey == (int)EntityTypeKey.Car
@@ -299,19 +301,29 @@ namespace GreenPro.AdminInterface.Controllers
             db.SaveChanges();
             string ServiceName = string.Empty;
             int carId = Convert.ToInt32(CarServiceDetail.EntityTypeValue);
+
+          
+
+
             var aspCar = db.CarUsers.Where(c => c.CarId == carId).SingleOrDefault();
             if (aspCar != null)
             {
+                // Set Last and Next service date userPackage
+                var activeUserPackage = aspCar.UserPackages.Where(u => u.PaymentRecieved == true && u.IsActive == true).FirstOrDefault();
+                if (activeUserPackage != null)
+                {
+                    activeUserPackage.LastServiceDate = activeUserPackage.NextServiceDate;
+                    activeUserPackage.NextServiceDate = Convert.ToDateTime(activeUserPackage.NextServiceDate).AddDays(activeUserPackage.SubscriptionTypeId * 7);
+                }
+
                 model.CarService = new CarServices()
                 {
                     ServiceDayId = CarServiceDetail.Id,
                     CarId = aspCar.CarId,
                     CarDisplayName = aspCar.DisplayName,
-
                     Color = aspCar.Color,
                     LicenseNumber = aspCar.LicenseNumber,
-                    serviceStatus = (ServiceStatus)CarServiceDetail.ServiceStatusId,
-                    //ServiceStatusId = CarServiceDetail.ServiceStatusId,
+                    serviceStatus = (ServiceStatus)CarServiceDetail.ServiceStatusId,                   
 
                 };
 

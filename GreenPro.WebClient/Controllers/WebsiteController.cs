@@ -489,7 +489,15 @@ namespace GreenPro.WebClient.Controllers
                                         nextServiceDate = currentDate.AddDays(i);
                                         if (userPackage.ServiceDay == nextServiceDate.DayOfWeek.ToString())
                                         {
-                                            serviceDate = nextServiceDate.AddDays(7);
+                                            if (userPackage.SubscriptionTypeId == 1)
+                                                serviceDate = nextServiceDate.AddDays(7);
+                                            else if (userPackage.SubscriptionTypeId == 2)
+                                                serviceDate = nextServiceDate.AddDays(14);
+                                            else if (userPackage.SubscriptionTypeId == 3)
+                                                serviceDate = nextServiceDate.AddDays(28);
+                                            else
+                                                serviceDate = nextServiceDate.AddDays(7);
+
                                             break;
                                         }
                                     }

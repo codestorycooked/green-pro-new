@@ -41,12 +41,12 @@
                                 </li>
                                
                                 <li class="">
-                                    <label for="">Subscription Type:</label>
+                                    <label for="">Wash Frequency:</label>
                                     @{
                                         string type = SubscriptionTypeInfo.GetSubscriptionTypeInfo(userSubscriptions.SubscriptionTypeId);
                                         if (!string.IsNullOrEmpty(type))
                                         {
-                                            <text> Every </text> @type
+                                             @type
                                         }
                                     }
                                     

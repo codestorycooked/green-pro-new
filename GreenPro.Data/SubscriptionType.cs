@@ -17,13 +17,13 @@ namespace GreenPro.Data
         {
             string subscriptionType = string.Empty;
             if (SubscriptionTypeId == 1)
-                subscriptionType = "7 Days";
+                subscriptionType = "Weekly";
 
             if (SubscriptionTypeId == 2)
-                subscriptionType = "14 Days";
+                subscriptionType = "Bi-Weekly";
 
             if (SubscriptionTypeId == 3)
-                subscriptionType = "28 Days";
+                subscriptionType = "Monthly";
 
             return subscriptionType;
         }

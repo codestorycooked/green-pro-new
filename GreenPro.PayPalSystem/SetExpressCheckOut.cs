@@ -158,6 +158,7 @@ namespace GreenPro.PayPalSystem
             //Optional get from paypal  ecDetails.AddressOverride
             //optional ecDetails.NoShipping
             ecDetails.SolutionType = (SolutionTypeType)Enum.Parse(typeof(SolutionTypeType), "SOLE");
+            //ecDetails.LandingPage = (LandingPageType)Enum.Parse(typeof(LandingPageType), "BILLING");
 
             //Adding payment details
             PaymentDetailsType paymentDetails = new PaymentDetailsType();

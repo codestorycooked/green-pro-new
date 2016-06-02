@@ -143,17 +143,17 @@ namespace GreenPro.WebClient.Controllers
 
                     packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
                     {
-                        Text = "7 Days",
+                        Text = "Weekly",
                         Value = "1"
                     });
                     packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
                     {
-                        Text = "14 Days",
+                        Text = "Bi-Weekly",
                         Value = "2"
                     });
                     packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
                     {
-                        Text = "28 Days",
+                        Text = "Monthly",
                         Value = "3"
                     });
 
@@ -313,6 +313,9 @@ namespace GreenPro.WebClient.Controllers
 
         public ActionResult ProcessPayment(int id)
         {
+            if(id>0)
+                return RedirectToAction("ProcessPaypalPayment", "Paypal", new { userpackageid = id });
+
             UserPackageAddOnPaymentInformation userAndAddon = new UserPackageAddOnPaymentInformation();
             userAndAddon.UserPackge = db.UserPackages.Where(a => a.Id == id).FirstOrDefault();
             userAndAddon.Addons = db.UserPackagesAddons.Where(a => a.UserPackageID == id);
@@ -388,6 +391,9 @@ namespace GreenPro.WebClient.Controllers
         [HttpPost]
         public ActionResult ProcessPayment(UserPackageAddOnPaymentInformation model)
         {
+            if (model.UserPackageID > 0)
+                return RedirectToAction("ProcessPaypalPayment", "Paypal", new { userpackageid = model.UserPackageID });
+
             var userid = User.Identity.GetUserId();
 
             if (ModelState.IsValid)

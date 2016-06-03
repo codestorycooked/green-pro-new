@@ -580,6 +580,7 @@
     <NavigationProperty Name="Package_Services" Relationship="GreenProDbModel.FK_Package_Services_Packages" FromRole="Package" ToRole="Package_Services" />
     <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_Packages" FromRole="Package" ToRole="UserPackage" />
     <NavigationProperty Name="WorkDones" Relationship="GreenProDbModel.FK_WorkDone_Packages" FromRole="Package" ToRole="WorkDone" />
+    <Property Name="SubscriptionTypes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PayPalLog">
     <Key>

@@ -29,6 +29,7 @@ namespace GreenPro.Data
         public decimal Package_Price { get; set; }
         public System.DateTime CreateDt { get; set; }
         public string CreatedBy { get; set; }
+        public string SubscriptionTypes { get; set; }
     
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual ICollection<CarServiceEntry> CarServiceEntries { get; set; }

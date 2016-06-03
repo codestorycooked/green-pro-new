@@ -322,6 +322,7 @@
           <Property Name="Package_Price" Type="money" Nullable="false" />
           <Property Name="CreateDt" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubscriptionTypes" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PaypalAutoPayments">
           <Key>
@@ -2005,6 +2006,7 @@
           <NavigationProperty Name="Package_Services" Relationship="GreenProDbModel.FK_Package_Services_Packages" FromRole="Package" ToRole="Package_Services" />
           <NavigationProperty Name="UserPackages" Relationship="GreenProDbModel.FK_UserPackages_Packages" FromRole="Package" ToRole="UserPackage" />
           <NavigationProperty Name="WorkDones" Relationship="GreenProDbModel.FK_WorkDone_Packages" FromRole="Package" ToRole="WorkDone" />
+          <Property Name="SubscriptionTypes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PayPalLog">
           <Key>
@@ -3181,6 +3183,7 @@
           <EntitySetMapping Name="Packages">
             <EntityTypeMapping TypeName="GreenProDbModel.Package">
               <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="SubscriptionTypes" ColumnName="SubscriptionTypes" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreateDt" ColumnName="CreateDt" />
                 <ScalarProperty Name="Package_Price" ColumnName="Package_Price" />

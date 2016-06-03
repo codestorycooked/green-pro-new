@@ -6,6 +6,8 @@ using System.Net;
 using System.Web.Mvc;
 using GreenPro.Data;
 using GreenPro.AdminInterface.ViewModels;
+using GreenPro.AdminInterface.Models;
+using GreenPro.AdminInterface.Helper;
 
 namespace GreenPro.AdminInterface.Controllers
 {
@@ -139,9 +141,11 @@ namespace GreenPro.AdminInterface.Controllers
         // GET: Packages/Create
         public ActionResult Create()
         {
+            MasterPackageViewModel model = new MasterPackageViewModel();
+
             ViewBag.Services = db.Services.ToList();
-            ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Description");
-            return View();
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
+            return View(model);
         }
 
         // POST: Packages/Create
@@ -149,7 +153,7 @@ namespace GreenPro.AdminInterface.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Package_Name,Package_Description,Package_Price,CarTypeId")] Package package, string[] selectedServices)
+        public ActionResult Create(MasterPackageViewModel model, string[] selectedServices)
         {
             //ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Description", package.CarTypeId); //comment by circus
             ViewBag.Services = db.Services.ToList();
@@ -157,11 +161,21 @@ namespace GreenPro.AdminInterface.Controllers
             {
                 ModelState.Remove("CreatedBy");
                 ModelState.Remove("CreateDt");
-               
-                package.CreatedBy = "Admin";
-                package.CreateDt = DateTime.Now;
+                
                 if (ModelState.IsValid)
                 {
+                    Package package = new Package();
+                    package.Package_Name = model.Package_Name;
+                    package.Package_Description = model.Package_Description;
+                    package.Package_Price = model.Package_Price;
+                    package.SubscriptionTypes = string.Join(",", model.SubscriptionTypes);
+
+                    if (string.IsNullOrEmpty(package.SubscriptionTypes))
+                        package.SubscriptionTypes = "1";
+
+                    package.CreatedBy = "Admin";
+                    package.CreateDt = DateTime.Now;
+
 
                     db.Packages.Add(package);
                    // db.SaveChanges();
@@ -188,8 +202,8 @@ namespace GreenPro.AdminInterface.Controllers
 
 
 
-
-            return View(package);
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
+            return View(model);
         }
 
         // GET: Packages/Edit/5
@@ -199,17 +213,31 @@ namespace GreenPro.AdminInterface.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //ViewBag.ServicesAvailable = db.Services.
-            //    ViewBag.ServicesAdded = db.Services.
+            
             Package package = db.Packages.Find(id);
+            MasterPackageViewModel model = new MasterPackageViewModel();
+
+
             if (package == null)
             {
                 return HttpNotFound();
             }
+
+            model.PackageId = package.PackageId;
+            model.Package_Name = package.Package_Name;
+            model.Package_Description = package.Package_Description;
+            model.Package_Price = package.Package_Price;
+            if (!string.IsNullOrEmpty(package.SubscriptionTypes))
+                model.SubscriptionTypes = package.SubscriptionTypes.Split(',');
+            else
+                model.SubscriptionTypes = new string[] { "1" };
+            
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
+
             ViewBag.Services = db.Services.ToList();
             ViewBag.CheckedServices = package.Package_Services.Select(a => a.Service).ToList();
-            //ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Description", package.CarTypeId);
-            return View(package);
+
+            return View(model);
         }
 
         // POST: Packages/Edit/5
@@ -217,14 +245,29 @@ namespace GreenPro.AdminInterface.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Package package, string[] selectedServices)
+        public ActionResult Edit(MasterPackageViewModel model, string[] selectedServices)
         {
+            Package package = db.Packages.Find(model.PackageId);
+            
+            if (package == null)
+            {
+                return HttpNotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                db.Entry(package).State = EntityState.Modified;
-                package.CreateDt = DateTime.Now;
+                package.Package_Name = model.Package_Name;
+                package.Package_Description = model.Package_Description;
+                package.Package_Price = model.Package_Price;
+                package.SubscriptionTypes = string.Join(",", model.SubscriptionTypes);
+
+                if (string.IsNullOrEmpty(package.SubscriptionTypes))
+                    package.SubscriptionTypes = "1";
+
+                //db.Entry(package).State = EntityState.Modified;
+                //.CreateDt = DateTime.Now;
                 db.SaveChanges();
-                var deleteList = db.Package_Services.Where(a => a.PackageID == package.PackageId).ToList();
+                var deleteList = db.Package_Services.Where(a => a.PackageID == model.PackageId).ToList();
                 db.Package_Services.RemoveRange(deleteList);
                 var packageServices = new List<Package_Services>();
                 foreach (var service in selectedServices)
@@ -242,8 +285,8 @@ namespace GreenPro.AdminInterface.Controllers
 
             ViewBag.Services = db.Services.ToList();
             ViewBag.CheckedServices = package.Package_Services.Select(a => a.Service).ToList();
-
-            //ViewBag.CarTypeId = new SelectList(db.CarTypes, "Id", "Description", package.CarTypeId);
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
+            
             return View(package);
         }
 

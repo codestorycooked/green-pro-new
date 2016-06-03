@@ -317,6 +317,7 @@
     <Property Name="Package_Price" Type="money" Nullable="false" />
     <Property Name="CreateDt" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SubscriptionTypes" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="PaypalAutoPayments">
     <Key>

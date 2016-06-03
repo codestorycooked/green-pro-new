@@ -224,6 +224,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
+    <Compile Include="Models\MasterPackageViewModel.cs" />
     <Compile Include="Models\NotifyType.cs" />
     <Compile Include="Models\PaypalAutoPaymentModel.cs" />
     <Compile Include="ParameterBasedOnFormNameAttribute.cs" />

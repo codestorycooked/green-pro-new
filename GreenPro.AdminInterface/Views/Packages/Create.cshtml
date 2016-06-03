@@ -1,4 +1,5 @@
-﻿@model GreenPro.Data.Package
+﻿@model GreenPro.AdminInterface.Models.MasterPackageViewModel
+@using System.Linq;
 
 @{
     ViewBag.Title = "Create";
@@ -42,6 +43,18 @@
                     @Html.ValidationMessageFor(model => model.Package_Price, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubscriptionTypes, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">                    
+                    @foreach (var serviceType in Model.AvailableSubscriptionTypes)
+                    {
+
+                        <input type="checkbox" name="SubscriptionTypes" value="@serviceType.Value" /> @serviceType.Text
+                    }
+                </div>
+            </div>
+
         </div>
         <div class="col-md-6">
             <h4>Services</h4>

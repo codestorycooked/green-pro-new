@@ -11,12 +11,14 @@ namespace GreenPro.AdminInterface.Models
         public GarageViewModel()
         {
             AvailableServiceDays = new List<SelectListItem>();
+            AvailableSubscriptionTypes = new List<SelectListItem>();
             AvailableCitys = new List<SelectListItem>();
             AvailableStates = new List<SelectListItem>();
         }
 
 
         public virtual IList<SelectListItem> AvailableServiceDays { get; set; }
+        public virtual IList<SelectListItem> AvailableSubscriptionTypes { get; set; }
         public virtual IList<SelectListItem> AvailableCitys { get; set; }
         public virtual IList<SelectListItem> AvailableStates { get; set; }
         
@@ -39,6 +41,8 @@ namespace GreenPro.AdminInterface.Models
         public Nullable<System.TimeSpan> OpenTime { get; set; }
         public System.TimeSpan CloseTime { get; set; }
         public string[] ServiceDays { get; set; }
+        public string[] SubscriptionTypes { get; set; }
+
 
     }
 }

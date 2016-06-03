@@ -72,7 +72,7 @@ namespace GreenPro.AdminInterface.Controllers
 
             ViewBag.StateId = new SelectList(db.States, "Id", "StateName");
             ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");                       
-            model.AvailableServiceDays = ListHelper.GetDayNameList();
+            model.AvailableServiceDays = ListHelper.GetDayNameList();            
             return View(model);
         }
 
@@ -114,6 +114,8 @@ namespace GreenPro.AdminInterface.Controllers
                 //entity.ServiceDays = model.ServiceDays;
 
                 entity.ServiceDays = string.Join(",",model.ServiceDays);
+                
+                
 
                 entity.Country = "US";
                 entity.CreatedDt = DateTime.Now.Date;
@@ -150,6 +152,7 @@ namespace GreenPro.AdminInterface.Controllers
             ViewBag.StateId = new SelectList(db.States, "Id", "StateName", model.State);
             ViewBag.CityId = new SelectList(db.Cities.Where(b => b.StateID == model.State), "Id", "CityName", model.City);
             model.AvailableServiceDays = ListHelper.GetDayNameList();
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
             return View(model);
         }
 
@@ -183,9 +186,10 @@ namespace GreenPro.AdminInterface.Controllers
             model.Pincode = entity.Pincode;
             model.OpenTime = entity.OpenTime;
             model.CloseTime = entity.CloseTime;
-            model.ServiceDays = entity.ServiceDays.Split(',');
-            model.AvailableServiceDays = ListHelper.GetDayNameList();
+            model.ServiceDays = entity.ServiceDays.Split(',');           
 
+            model.AvailableServiceDays = ListHelper.GetDayNameList();
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
 
             return View(model);
         }
@@ -244,7 +248,7 @@ namespace GreenPro.AdminInterface.Controllers
                 entity.OpenTime = model.OpenTime;
                 entity.CloseTime = model.CloseTime;
                 //entity.ServiceDays = model.ServiceDays; 
-                entity.ServiceDays = string.Join(",", model.ServiceDays);
+                entity.ServiceDays = string.Join(",", model.ServiceDays);                
 
                 if (findLatLong)
                 {
@@ -282,6 +286,7 @@ namespace GreenPro.AdminInterface.Controllers
             ViewBag.StateId = new SelectList(db.States, "Id", "StateName", model.State);
             ViewBag.CityId = new SelectList(db.Cities.Where(b => b.StateID == model.State), "Id", "CityName", model.City);
             model.AvailableServiceDays = ListHelper.GetDayNameList();
+            model.AvailableSubscriptionTypes = ListHelper.GetSubscriptionTypeList();
             return View(model);
         }
 

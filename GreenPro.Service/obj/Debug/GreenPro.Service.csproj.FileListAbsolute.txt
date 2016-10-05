@@ -36,3 +36,5 @@ F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debu
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.csprojResolveAssemblyReference.cache
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.exe
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.pdb
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.dll
+F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.xml

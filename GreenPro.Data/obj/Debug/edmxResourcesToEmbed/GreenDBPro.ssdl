@@ -429,6 +429,7 @@
     <Property Name="ActualPrice" Type="money" Nullable="false" />
     <Property Name="DiscountPrice" Type="money" Nullable="false" />
     <Property Name="CreatedDt" Type="datetime" />
+    <Property Name="NextServiceDate" Type="date" />
   </EntityType>
   <EntityType Name="UserTransactions">
     <Key>

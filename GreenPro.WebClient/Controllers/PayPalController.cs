@@ -224,6 +224,18 @@ namespace GreenPro.WebClient.Controllers
                     userPackages.PaymentMethodName = "paypal";
                     db.Entry(userPackages).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    ///Added By Sachin 29 SEP 2016
+                    var addOnsServices = userPackages.UserPackagesAddons.ToList();
+                    foreach (var addOns in addOnsServices)
+                    {
+                        if (!addOns.NextServiceDate.HasValue)
+                        {
+                            addOns.NextServiceDate = serviceDate;
+                            db.SaveChanges();
+                        }
+                    }
+
                 }
 
 

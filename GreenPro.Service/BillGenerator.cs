@@ -55,7 +55,13 @@ namespace GreenPro.Service
                     var car = db.CarUsers.FirstOrDefault(a => a.CarId == userPackage.CarId);
                     var package = db.Packages.FirstOrDefault(a => a.PackageId == userPackage.PackageId);
                     var JobDetail = db.Garage_CarDaySetting.Where(i => i.Id == JobId).SingleOrDefault();
-                    decimal finalPrice = userPackage.TotalPrice + userPackage.TaxAmount + userPackage.TipAmount;
+                    //decimal finalPrice = userPackage.TotalPrice + userPackage.TaxAmount + userPackage.TipAmount; // Comment By Nitendra 28 SEP 2016
+
+                    decimal AddOnsPrice = 0M;
+                    AddOnsPrice = userPackage.UserPackagesAddons.Sum(s => s.ActualPrice);
+
+                    decimal finalPrice = userPackage.ActualPrice + AddOnsPrice+userPackage.TaxAmount;
+
                     if (userPackage != null && (car != null && (car.AutoRenewal)))
                     {
                         string message = string.Empty;

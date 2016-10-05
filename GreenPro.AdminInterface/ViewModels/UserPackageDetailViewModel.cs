@@ -64,6 +64,7 @@ namespace GreenPro.AdminInterface.ViewModels
         public int ServiceID { get; set; }
         public string Service_Name { get; set; }
         public string Service_Description { get; set; }
+        public DateTime? ServiceDate { get; set; }
         public decimal Service_Price { get; set; }
         public bool IsAddOn { get; set; }
     }

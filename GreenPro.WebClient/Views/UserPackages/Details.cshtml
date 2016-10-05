@@ -177,8 +177,8 @@
                                                     <b>Service Name</b>
                                                 </td>
                                                 @*<td>
-                                                        <b>Is AddOn</b>
-                                                    </td>*@
+                            <b>Is AddOn</b>
+                        </td>*@
                                             </tr>
                                             @foreach (var service in Model.Services)
                                             {
@@ -187,11 +187,28 @@
                                                         @service.Service_Name
                                                     </td>
                                                     @*<td>
-                                                            @service.IsAddOn
-                                                        </td>*@
+                                @service.IsAddOn
+                            </td>*@
                                                 </tr>
                                             }
                                         </table>
+                                    }
+
+                                    @if (Model.AvailableAddOns.Count > 0 && Model.AddonsAvailableForEdit)
+                                    {
+                                        <ul>
+                                            @foreach (var addons in Model.AvailableAddOns)
+                                            {
+                                               var selected = ((IList<int>)Model.Services.Where(s=>s.IsAddOn).Select(i=>i.ServiceID).ToList()).Contains(addons.ServiceID);
+                                                <li>
+                                                    <input type="checkbox" name="ServiceID" value="@addons.ServiceID" @(selected ? " checked=checked" : null) /> @addons.Service_Name
+                                                </li>
+                                                
+
+                                                }
+                                        </ul>
+
+    <input type="submit" value="Edit" name="btnAddOnsEdit" class="btn btn-danger" />
                                     }
 
                                 </div>

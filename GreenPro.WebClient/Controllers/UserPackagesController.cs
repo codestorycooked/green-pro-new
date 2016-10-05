@@ -27,6 +27,13 @@ namespace GreenPro.WebClient.Controllers
         // GET: UserPackages/Details/5
         public ActionResult Details(int? id)
         {
+            DateTime cTime = DateTime.Now;
+            DateTime nTime = cTime.AddDays(2);
+            double dayDiff = 0;
+            dayDiff = nTime.Subtract(cTime).TotalDays;
+
+            //Response.Write("dayDiff : " + dayDiff);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,6 +43,8 @@ namespace GreenPro.WebClient.Controllers
             {
                 return HttpNotFound();
             }
+
+            DateTime currentDate = DateTime.Now;
 
             UserPackageDetailViewModel userPackageModel = new UserPackageDetailViewModel();
             userPackageModel.Id = userPackage.Id;
@@ -60,23 +69,48 @@ namespace GreenPro.WebClient.Controllers
             foreach (var service in ServiceList)
             {
                 CarServiceViewModel serviceModel = new CarServiceViewModel();
+                serviceModel.ServiceID = service.ServiceID;
                 serviceModel.Service_Name = service.Service_Name;
                 userPackageModel.Services.Add(serviceModel);
             }
 
             if (userPackage.UserPackagesAddons.Count > 0)
             {
-                foreach (var userPackagesAddon in userPackage.UserPackagesAddons)
+                foreach (var userPackagesAddon in userPackage.UserPackagesAddons.Where(a=>a.NextServiceDate==userPackage.NextServiceDate).ToList())
                 {
                     CarServiceViewModel serviceModel = new CarServiceViewModel();
+                    serviceModel.ServiceID = userPackagesAddon.Service.ServiceID;
                     serviceModel.Service_Name = userPackagesAddon.Service.Service_Name;
                     serviceModel.IsAddOn = true;
                     userPackageModel.Services.Add(serviceModel);
                 }
             }
 
+
+            // Available AddOns List
+
             /// Prepare Car Model
             /// 
+
+            userPackageModel.AvailableAddOns=new List<AddOnsServiceModel>();
+            var addOnsService = db.Services.Where(s => s.IsAddOn).ToList();
+            foreach (var addOns in addOnsService)
+            {
+                userPackageModel.AvailableAddOns.Add(new AddOnsServiceModel()
+                {
+                    ServiceID = addOns.ServiceID,
+                    Service_Name = addOns.Service_Name,
+                    Service_Description = addOns.Service_Description,
+                    Service_Price = addOns.Service_Price,
+                });
+            }
+
+             cTime = DateTime.Now;
+             nTime= Convert.ToDateTime(userPackage.NextServiceDate);
+             dayDiff = 0;
+             dayDiff = nTime.Subtract(cTime).TotalDays;
+             userPackageModel.AddonsAvailableForEdit = dayDiff>1 ? true : false;
+
             CarViewModel carModel = new CarViewModel();
 
             var item = db.CarUsers.Where(c => c.CarId == userPackage.CarId).SingleOrDefault();
@@ -121,6 +155,11 @@ namespace GreenPro.WebClient.Controllers
                     userPackageModel.PaymentHistorys.Add(paymentViewModel);
 
                 }
+
+                var NextPaymentPaid = paypalAutoPaymentList.FirstOrDefault(p => p.ServiceDate == userPackage.NextServiceDate);
+                userPackageModel.AddonsAvailableForEdit = NextPaymentPaid==null ? true : false;
+
+
             }
 
             return View(userPackageModel);
@@ -143,6 +182,60 @@ namespace GreenPro.WebClient.Controllers
 
             return RedirectToAction("Details", new { Id = model.Id });
         }
+
+
+
+        [HttpPost, ActionName("Details")]
+        [FormValueRequired("btnAddOnsEdit")]
+        public ActionResult AddOnsEdit(UserPackageDetailViewModel model)
+        {
+            UserPackage userPackage = db.UserPackages.Find(model.Id);
+            if (userPackage == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Remove Existing Add ons packages
+            if (userPackage.UserPackagesAddons.Count > 0)
+            {
+                foreach (var userPackagesAddon in userPackage.UserPackagesAddons.Where(a => a.NextServiceDate == userPackage.NextServiceDate).ToList())
+                {
+                    db.UserPackagesAddons.Remove(userPackagesAddon);
+                    db.SaveChanges();
+                }
+            }
+
+            var addOnsService = db.Services.Where(s => s.IsAddOn).ToList();
+
+            if (model.ServiceID.Length > 0)
+            {
+                foreach (int serviceId in model.ServiceID)
+                {
+                    var service = addOnsService.Where(i => i.ServiceID == serviceId).FirstOrDefault();
+
+                    if (service != null)
+                    {
+                        var userPackageAddOne = new UserPackagesAddon();
+                        userPackageAddOne.UserPackageID = userPackage.Id;
+                        userPackageAddOne.ServiceID = service.ServiceID;
+                        userPackageAddOne.ActualPrice = service.Service_Price;
+                        userPackageAddOne.DiscountPrice = 0M;
+                        userPackageAddOne.CreatedDt = DateTime.Now;
+                        userPackageAddOne.NextServiceDate = userPackage.NextServiceDate;
+                        userPackage.UserPackagesAddons.Add(userPackageAddOne);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+
+
+            //userPackage.IsActive = false;
+            //db.SaveChanges();
+
+            return RedirectToAction("Details", new { Id = model.Id });
+        }
+
         // GET: UserPackages/Delete/5
         public ActionResult Delete(int? id)
         {

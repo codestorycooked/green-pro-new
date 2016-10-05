@@ -241,6 +241,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\AddOnsServiceModel.cs" />
     <Compile Include="ViewModel\AdhocUserPackageAddOn.cs" />
     <Compile Include="ViewModel\AdhocUserPackageAddOnViewModel.cs" />
     <Compile Include="ViewModel\CarGarageUserViewModel.cs" />

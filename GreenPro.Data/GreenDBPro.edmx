@@ -434,6 +434,7 @@
           <Property Name="ActualPrice" Type="money" Nullable="false" />
           <Property Name="DiscountPrice" Type="money" Nullable="false" />
           <Property Name="CreatedDt" Type="datetime" />
+          <Property Name="NextServiceDate" Type="date" />
         </EntityType>
         <EntityType Name="UserTransactions">
           <Key>
@@ -2120,6 +2121,7 @@
           <Property Name="CreatedDt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Service" Relationship="GreenProDbModel.FK_UserPackagesAddons_ToServices" FromRole="UserPackagesAddon" ToRole="Service" />
           <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UserPackagesAddons_UserPackages" FromRole="UserPackagesAddon" ToRole="UserPackage" />
+          <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="UserTransaction">
           <Key>
@@ -3283,6 +3285,7 @@
           <EntitySetMapping Name="UserPackagesAddons">
             <EntityTypeMapping TypeName="GreenProDbModel.UserPackagesAddon">
               <MappingFragment StoreEntitySet="UserPackagesAddons">
+                <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
                 <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
                 <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
                 <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />

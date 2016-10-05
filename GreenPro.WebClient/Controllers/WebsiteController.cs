@@ -139,23 +139,34 @@ namespace GreenPro.WebClient.Controllers
                         }
                     }
 
+                    var package = db.Packages.Where(a => a.PackageId == packageid).FirstOrDefault();
+                    if (package == null)
+                    {
+                        return HttpNotFound();
+                    }
 
+                    var SubscriptionTypeArray = package.SubscriptionTypes.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                    var SubsscriptionInfoList = SubscriptionTypeInfo.GetSubscriptionTypeList();
 
-                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    foreach (var item in SubsscriptionInfoList)
                     {
-                        Text = "Weekly",
-                        Value = "1"
-                    });
-                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
-                    {
-                        Text = "Bi-Weekly",
-                        Value = "2"
-                    });
-                    packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
-                    {
-                        Text = "Monthly",
-                        Value = "3"
-                    });
+                        if (SubscriptionTypeArray.Contains(item.Value))
+                        {
+                            packageDetails.AvailableSubscriptionTypes.Add(item);
+                        }
+                    }
+
+                   
+                    //packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    //{
+                    //    Text = "Bi-Weekly",
+                    //    Value = "2"
+                    //});
+                    //packageDetails.AvailableSubscriptionTypes.Add(new SelectListItem()
+                    //{
+                    //    Text = "Monthly",
+                    //    Value = "3"
+                    //});
 
                 }
             }
@@ -205,16 +216,27 @@ namespace GreenPro.WebClient.Controllers
             if (services != null)
             {
                 //Save user addons
-                UserPackagesAddon addon = new UserPackagesAddon();
+                UserPackagesAddon addon = null;
                 foreach (var item in services)
                 {
-                    addon.ServiceID = Convert.ToInt32(item);
-                    addon.UserPackageID = savingEntity.Id;
-                    addon.ActualPrice = 0;
-                    addon.DiscountPrice = 0;
-                    addon.CreatedDt = DateTime.Now;
-                    db.UserPackagesAddons.Add(addon);
-                    db.SaveChanges();
+                    int serviceId = 0;
+                    int.TryParse(item, out serviceId);
+                    if (serviceId > 0)
+                    {
+                        
+                        var serviceAddOns = db.Services.FirstOrDefault(s => s.ServiceID == serviceId);
+                        if (serviceAddOns != null)
+                        {
+                            addon = new UserPackagesAddon();
+                            addon.ServiceID = Convert.ToInt32(item);
+                            addon.UserPackageID = savingEntity.Id;
+                            addon.ActualPrice = serviceAddOns.Service_Price;
+                            addon.DiscountPrice = 0;
+                            addon.CreatedDt = DateTime.Now;
+                            db.UserPackagesAddons.Add(addon);
+                            db.SaveChanges();
+                        }
+                    }
                 }
             }
             if (Session["NewServiceGarageId"] != null)
@@ -532,6 +554,16 @@ namespace GreenPro.WebClient.Controllers
                                 userPackage.PaymentMethodName = "credit card";
                                 db.Entry(userPackage).State = EntityState.Modified;
                                 db.SaveChanges();
+
+                                var addOnsServices = userPackage.UserPackagesAddons.ToList();
+                                foreach (var addOns in addOnsServices)
+                                {
+                                    if (!addOns.NextServiceDate.HasValue)
+                                    {
+                                        addOns.NextServiceDate = serviceDate;
+                                        db.SaveChanges();
+                                    }
+                                }
                             }
 
 

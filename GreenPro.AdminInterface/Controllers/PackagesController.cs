@@ -79,6 +79,7 @@ namespace GreenPro.AdminInterface.Controllers
                     PackageCarServiceViewModel serviceModel = new PackageCarServiceViewModel();
                     serviceModel.Service_Name = userPackagesAddon.Service.Service_Name;
                     serviceModel.IsAddOn = true;
+                    serviceModel.ServiceDate = userPackagesAddon.NextServiceDate;
                     userPackageModel.Services.Add(serviceModel);
                 }
             }

@@ -10,12 +10,13 @@ namespace GreenPro.WebClient.ViewModel
         public UserPackageDetailViewModel()
         {
             Services=new List<CarServiceViewModel>();
+            AvailableAddOns = new List<AddOnsServiceModel>();
             CarModel = new CarViewModel();
             Package = new PackageDetailViewModel();
             PaymentHistorys = new List<PaypalAutoPaymentsViewModel>();
         }
 
-    
+       
         public int Id { get; set; }
         public string UserId { get; set; }
         public string CustomerName { get; set; }
@@ -37,10 +38,16 @@ namespace GreenPro.WebClient.ViewModel
         public string ServiceDay { get; set; }
         public string TimeSlot { get; set; }
         public bool IsActive { get; set; }
+
+        public int[] ServiceID { get; set; }
+
+        public bool AddonsAvailableForEdit { get; set; }
        
        public  PackageDetailViewModel Package { get; set; }
         
         public IList<CarServiceViewModel> Services { get; set; }
+
+        public IList<AddOnsServiceModel> AvailableAddOns { get; set; }
 
         public IList<PaypalAutoPaymentsViewModel> PaymentHistorys { get; set; }
 

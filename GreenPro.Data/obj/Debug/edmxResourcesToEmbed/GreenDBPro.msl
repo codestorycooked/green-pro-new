@@ -364,6 +364,7 @@
     <EntitySetMapping Name="UserPackagesAddons">
       <EntityTypeMapping TypeName="GreenProDbModel.UserPackagesAddon">
         <MappingFragment StoreEntitySet="UserPackagesAddons">
+          <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
           <ScalarProperty Name="CreatedDt" ColumnName="CreatedDt" />
           <ScalarProperty Name="DiscountPrice" ColumnName="DiscountPrice" />
           <ScalarProperty Name="ActualPrice" ColumnName="ActualPrice" />

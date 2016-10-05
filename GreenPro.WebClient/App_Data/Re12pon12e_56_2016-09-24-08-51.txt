@@ -1,0 +1,3 @@
+Paypal ProcessPaypalPayment ActionResult: 24-09-2016 08:51:12
+
+responseFrom Paypal: {"ApiStatus":"SUCCESS","ResponseError":null,"ResponseRedirectURL":"https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&token=EC-1Y567191KY111301C","ECToken":"EC-1Y567191KY111301C","BillingAgreementID":null,"Timestamp":"2016-09-24T03:21:03Z","CorrelationID":"ebaa1b588fb37","ACK":"SUCCESS"}

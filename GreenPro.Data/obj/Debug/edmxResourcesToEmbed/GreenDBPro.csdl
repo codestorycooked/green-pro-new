@@ -694,6 +694,7 @@
     <Property Name="CreatedDt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Service" Relationship="GreenProDbModel.FK_UserPackagesAddons_ToServices" FromRole="UserPackagesAddon" ToRole="Service" />
     <NavigationProperty Name="UserPackage" Relationship="GreenProDbModel.FK_UserPackagesAddons_UserPackages" FromRole="UserPackagesAddon" ToRole="UserPackage" />
+    <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="UserTransaction">
     <Key>

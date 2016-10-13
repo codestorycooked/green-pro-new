@@ -1,12 +1,15 @@
-﻿CREATE TABLE [dbo].[AutomaticPayments]
+﻿CREATE TABLE [dbo].[AutomaticPayments](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserID] [nvarchar](155) NULL,
+	[UserPackageID] [int] NULL,
+	[TotalAmount] [money] NULL,
+	[Remarks] [nvarchar](255) NULL,
+	[TransactionDate] [datetime] NULL,
+	[PaypalBillingID] [nvarchar](50) NULL,
+	[PayPalECToken] [nvarchar](50) NULL,
+	[AdhocUserPackageID] [int] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	[Id] INT NOT NULL PRIMARY KEY IDentity, 
-    [UserID] NVARCHAR(155) NULL, 
-    [UserPackageID] INT NULL, 
-    [TotalAmount] MONEY NULL, 
-    [Remarks] NVARCHAR(255) NULL, 
-    [TransactionDate] DATETIME NULL, 
-    [PaypalBillingID] NVARCHAR(50) NULL, 
-    [PayPalECToken] NVARCHAR(50) NULL, 
-    [AdhocUserPackageID] INT NULL
-)
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]

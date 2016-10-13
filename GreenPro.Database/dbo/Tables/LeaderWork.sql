@@ -1,9 +1,9 @@
-﻿CREATE TABLE [dbo].[LeaderWork]
+﻿CREATE TABLE [dbo].[LeaderWork](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LeaderID] [nvarchar](50) NOT NULL,
+	[UserPackageID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
 (
-	[Id] INT NOT NULL PRIMARY KEY Identity, 
-    [LeaderID] NVARCHAR(50) NOT NULL, 
-    [UserPackageID] INT NOT NULL,
-
-)
-
-
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]

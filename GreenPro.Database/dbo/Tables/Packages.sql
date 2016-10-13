@@ -1,11 +1,13 @@
-﻿CREATE TABLE [dbo].[Packages]
+﻿CREATE TABLE [dbo].[Packages](
+	[PackageId] [int] IDENTITY(1,1) NOT NULL,
+	[Package_Name] [nvarchar](100) NOT NULL,
+	[Package_Description] [nvarchar](255) NOT NULL,
+	[Package_Price] [money] NOT NULL,
+	[CreateDt] [datetime] NOT NULL,
+	[CreatedBy] [nvarchar](50) NOT NULL,
+	[SubscriptionTypes] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
 (
-	[PackageId] INT NOT NULL PRIMARY KEY Identity, 
-    [Package_Name] NVARCHAR(100) NOT NULL, 
-    [Package_Description] NVARCHAR(255) NOT NULL, 
-	[CarTypeId] int not null,
-    [Package_Price] MONEY NOT NULL, 
-    [CreateDt] DATETIME NOT NULL, 
-    [CreatedBy] NVARCHAR(50) NOT NULL, 
-    CONSTRAINT [FK_Packages_CarTypes] FOREIGN KEY ([CarTypeId]) REFERENCES [CarTypes]([Id])   
-)
+	[PackageId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]

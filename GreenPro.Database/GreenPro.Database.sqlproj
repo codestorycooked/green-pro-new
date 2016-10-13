@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{765ed71f-1c29-4961-bedd-46ba952e78ca}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -70,46 +70,63 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Scripts\" />
     <Folder Include="dbo\data" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="dbo\Tables\AspNetRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\Garages.sql" />
+    <Build Include="Logs.sql" />
+    <Build Include="dbo\Tables\LogDetailCarSide.sql" />
+    <Build Include="dbo\Tables\LeaderWork.sql" />
+    <Build Include="dbo\Tables\GarageTeam.sql" />
     <Build Include="dbo\Tables\Services.sql" />
     <Build Include="dbo\Tables\Packages.sql" />
-    <Build Include="dbo\Tables\Package_Services.sql" />
-    <Build Include="dbo\Tables\Weekdays.sql" />
-    <Build Include="dbo\Tables\GarrageWeekday.sql" />
-    <Build Include="dbo\Tables\UserPackages.sql" />
-    <Build Include="dbo\Tables\CarUsers.sql" />
-    <Build Include="dbo\Tables\CarTypes.sql" />
-    <Build Include="dbo\Tables\UserTransactions.sql" />
-    <Build Include="dbo\Tables\States.sql" />
-    <Build Include="dbo\Tables\Cities.sql" />
-    <Build Include="dbo\Tables\PayPalLogs.sql" />
-    <Build Include="dbo\Tables\UserPackagesAddons.sql" />
-    <Build Include="dbo\Tables\AdhocUserPackages.sql" />
-    <Build Include="dbo\Tables\AdhocUserPackagesAddons.sql" />
     <Build Include="dbo\Tables\AutomaticPayments.sql" />
-    <Build Include="Logs.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\Garage_LeaderSetting.sql" />
+    <Build Include="dbo\Tables\Garage_CarDaySetting.sql" />
+    <Build Include="dbo\Tables\Weekdays.sql" />
+    <Build Include="dbo\Tables\CarTypes.sql" />
     <Build Include="dbo\Tables\Tax.sql" />
-    <Build Include="dbo\Tables\CrewAdminMember.sql" />
-    <Build Include="dbo\Tables\CarServiceEntries.sql" />
-    <Build Include="dbo\Tables\WorkDone.sql" />
-    <Build Include="dbo\Tables\WorkLogDetails.sql" />
-    <Build Include="dbo\Tables\LogDetailCarSide.sql" />
+    <Build Include="dbo\Tables\States.sql" />
+    <Build Include="dbo\Tables\StateProvince.sql" />
+    <Build Include="dbo\Tables\Cities.sql" />
+    <Build Include="dbo\Tables\Package_Services.sql" />
+    <Build Include="dbo\Tables\Garages.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
     <Build Include="dbo\Tables\WorkerGarages.sql" />
-    <Build Include="dbo\Tables\LeaderMember.sql" />
+    <Build Include="dbo\Tables\WorkDone.sql" />
+    <Build Include="dbo\Tables\GarrageWeekday.sql" />
+    <Build Include="dbo\Tables\GargesTimeingSlots.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\CarUsers.sql" />
+    <Build Include="dbo\Tables\CrewAdminMember.sql" />
     <Build Include="dbo\Tables\GarageMaxCars.sql" />
+    <Build Include="dbo\Tables\LeaderMember.sql" />
     <Build Include="dbo\Tables\LeaderGarageDay.sql" />
-    <Build Include="dbo\Tables\LeaderWork.sql" />
     <Build Include="dbo\Tables\LeaderCarJob.sql" />
+    <Build Include="dbo\Tables\WorkLogDetails.sql" />
+    <Build Include="dbo\Tables\CarServiceEntries.sql" />
+    <Build Include="dbo\Tables\UserPackages.sql" />
+    <Build Include="dbo\Tables\UserTransactions.sql" />
+    <Build Include="dbo\Tables\UserPackagesAddons.sql" />
     <Build Include="dbo\Tables\UnAssignedCars.sql" />
+    <Build Include="dbo\Tables\AdhocUserPackages.sql" />
+    <Build Include="dbo\Tables\PayPalLogs.sql" />
     <Build Include="dbo\Tables\PaypalAutoPayments.sql" />
+    <Build Include="dbo\Tables\AdhocUserPackagesAddons.sql" />
+    <Build Include="dbo\Functions\Splitstring_to_table.sql" />
+    <Build Include="dbo\Stored Procedures\Sproc_InsertOrUpdateLeaderSetting.sql" />
+    <Build Include="dbo\Stored Procedures\Sproc_InsertOrUpdateGarage_CarDaySetting.sql" />
+    <Build Include="dbo\Stored Procedures\GetAllAvailableGaragesCitiesList.sql" />
+    <Build Include="dbo\Stored Procedures\SetNextWashedDate.sql" />
+    <Build Include="dbo\Stored Procedures\GetServicesByCarId.sql" />
+    <Build Include="dbo\Stored Procedures\GetGarage_CarDaySettingPaymentDetail.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <None Include="dbo\data\PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GreenPro.Database.publish.old.xml" />
@@ -119,6 +136,6 @@
     <RefactorLog Include="GreenPro.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="dbo\data\Data.PostDeployment.sql" />
+    <PostDeploy Include="dbo\data\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

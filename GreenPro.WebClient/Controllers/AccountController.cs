@@ -42,7 +42,7 @@ namespace GreenPro.WebClient.Controllers
 
             var userid = User.Identity.GetUserId();
             AspNetUser user = db.AspNetUsers.Where(b => b.Id == userid).First();
-            ViewBag.StateId = new SelectList(db.States.OrderBy(m=>m.StateName), "Id", "StateName", user.State);
+            ViewBag.StateId = new SelectList(db.States.OrderBy(m => m.StateName), "Id", "StateName", user.State);
             ViewBag.CityId = new SelectList(db.Cities.Where(b => b.StateID == user.State), "Id", "CityName", user.City);
             if (user == null)
             {
@@ -182,7 +182,7 @@ namespace GreenPro.WebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl, string provider, string source = null)
         {
-            
+
 
             if (!ModelState.IsValid)
             {
@@ -197,7 +197,7 @@ namespace GreenPro.WebClient.Controllers
             {
                 case SignInStatus.Success:
                     var returnURL = GetCookie("returnURL");
-                    if (returnURL!=null)
+                    if (returnURL != null)
                     {
                         if (!string.IsNullOrEmpty(returnURL.Value))
                             return RedirectToLocal(returnURL.Value);
@@ -267,7 +267,7 @@ namespace GreenPro.WebClient.Controllers
         public ActionResult Register()
         {
             LoadStatesAndCity();
-            
+
             // added by 05 May 2016
             RegisterViewModel model = new RegisterViewModel();
             return View(model);
@@ -278,7 +278,7 @@ namespace GreenPro.WebClient.Controllers
         private void LoadStatesAndCity()
         {
             GreenProDbEntities db = new GreenProDbEntities();
-            ViewBag.StateId = new SelectList(db.States.OrderBy(o=>o.StateName), "Id", "StateName");
+            ViewBag.StateId = new SelectList(db.States.OrderBy(o => o.StateName), "Id", "StateName");
             ViewBag.CityId = new SelectList(db.Cities, "Id", "CityName");
         }
 
@@ -295,26 +295,31 @@ namespace GreenPro.WebClient.Controllers
             model.Email = model.Email;
             if (ModelState.IsValid)
             {
-                DateTime dateOfBirth = new DateTime(1970,1,1);
+                DateTime dateOfBirth = new DateTime(1970, 1, 1);
                 try
                 {
                     dateOfBirth = new DateTime(model.DateOfBirthYear.Value, model.DateOfBirthMonth.Value, model.DateOfBirthDay.Value);
                 }
-                catch {
+                catch
+                {
                     dateOfBirth = new DateTime(1971, 1, 1);
                 }
 
                 //var user = new ApplicationUser() { Email = model.UserName, UserName = model.UserName, FirstName = model.FirstName, LastName = model.LastName, DateofBirth = model.DateofBirth, Address = model.Address, State = model.StateId, City = model.CityId, Pincode = model.Pincode, EmailConfirmed = true };
 
-                var user = new ApplicationUser() { Email = model.UserName, 
-                    UserName = model.UserName, 
-                    FirstName = model.FirstName, 
+                var user = new ApplicationUser()
+                {
+                    Email = model.UserName,
+                    UserName = model.UserName,
+                    FirstName = model.FirstName,
                     LastName = model.LastName,
-                                                   DateofBirth = dateOfBirth, 
-                    Address = model.Address, State = model.StateId, 
-                    City = model.CityId, 
-                    Pincode = model.Pincode, 
-                    EmailConfirmed = true };
+                    DateofBirth = dateOfBirth,
+                    Address = model.Address,
+                    State = model.StateId,
+                    City = model.CityId,
+                    Pincode = model.Pincode,
+                    EmailConfirmed = true
+                };
 
                 user.PhoneNumber = model.PhoneNumber;
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -348,7 +353,7 @@ namespace GreenPro.WebClient.Controllers
                     if (!string.IsNullOrEmpty(redirectReturnUr))
                         return RedirectToLocal(redirectReturnUr);
                     else
-                    return RedirectToAction("Index", "CarUsers", null);
+                        return RedirectToAction("Index", "CarUsers", null);
                 }
                 AddErrors(result);
             }

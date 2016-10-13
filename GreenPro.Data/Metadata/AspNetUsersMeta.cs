@@ -46,21 +46,21 @@ namespace GreenPro.Data
             [StringLength(100)]
             public string LastName { get; set; }
 
-            [DisplayName("Date of Birth")]
-            [Required(ErrorMessage="Date of Birth is Required.")]            
-            [DataType(DataType.Date)]
-            public System.DateTime DateofBirth { get; set; }
+            //[DisplayName("Date of Birth")]
+            //[Required(ErrorMessage="Date of Birth is Required.")]            
+            //[DataType(DataType.Date)]
+            //public System.DateTime DateofBirth { get; set; }
 
-            [DisplayName("Address")]
-            [Required(ErrorMessage="Address is Required.")]            
-            [StringLength(100)]
-            public string Address { get; set; }
+            //[DisplayName("Address")]
+            //[Required(ErrorMessage="Address is Required.")]            
+            //[StringLength(100)]
+            //public string Address { get; set; }
             
-            [Required(ErrorMessage="State Required.")]                        
-            public int State { get; set; }
+            //[Required(ErrorMessage="State Required.")]                        
+            //public int State { get; set; }
             
-            [Required(ErrorMessage="City is Required.")]                        
-            public int City { get; set; }
+            //[Required(ErrorMessage="City is Required.")]                        
+            //public int City { get; set; }
 
             [Display(Name="Zip Code")]
 

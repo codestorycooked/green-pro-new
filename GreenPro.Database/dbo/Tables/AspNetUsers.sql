@@ -12,15 +12,16 @@
 	[AccessFailedCount] [int] NOT NULL,
 	[UserName] [nvarchar](256) NOT NULL,
 	[FirstName] [nvarchar](50) NOT NULL,
-	[LastName] [nvarchar](50) NOT NULL,
-	[DateofBirth] [date] NOT NULL,
-	[Address] [nvarchar](512) NOT NULL,
-	[State] [int] NOT NULL,
-	[City] [int] NOT NULL,
-	[Pincode] [nvarchar](20) NOT NULL,
+	[LastName] [nvarchar](50) NULL,
+	[DateofBirth] [date] NULL,
+	[Address] [nvarchar](512) NULL,
+	[State] [int] NULL,
+	[City] [int] NULL,
+	[Pincode] [nvarchar](20) NULL,
 	[Balance] [int] NOT NULL,
 	[IsDelete] [bit] NOT NULL,
- CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
+ [ProfilePic] NTEXT NULL, 
+    CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]

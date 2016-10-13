@@ -14,6 +14,7 @@ namespace GreenPro.Data
     
     public partial class AdhocUserPackage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AdhocUserPackage()
         {
             this.AdhocUserPackagesAddons = new HashSet<AdhocUserPackagesAddon>();
@@ -40,6 +41,7 @@ namespace GreenPro.Data
         public virtual Package Package { get; set; }
         public virtual UserPackage UserPackage { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdhocUserPackagesAddon> AdhocUserPackagesAddons { get; set; }
     }
 }

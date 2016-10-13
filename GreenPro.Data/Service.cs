@@ -14,23 +14,24 @@ namespace GreenPro.Data
     
     public partial class Service
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Service()
         {
             this.AdhocUserPackagesAddons = new HashSet<AdhocUserPackagesAddon>();
             this.Package_Services = new HashSet<Package_Services>();
-            this.UserPackagesAddons = new HashSet<UserPackagesAddon>();
         }
     
         public int ServiceID { get; set; }
         public string Service_Name { get; set; }
         public string Service_Description { get; set; }
         public decimal Service_Price { get; set; }
+        public bool IsAddOn { get; set; }
         public System.DateTime CreateDt { get; set; }
         public string CreatedBy { get; set; }
-        public bool IsAddOn { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdhocUserPackagesAddon> AdhocUserPackagesAddons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package_Services> Package_Services { get; set; }
-        public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
     }
 }

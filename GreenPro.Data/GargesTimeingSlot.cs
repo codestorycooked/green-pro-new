@@ -14,17 +14,11 @@ namespace GreenPro.Data
     
     public partial class GargesTimeingSlot
     {
-        public GargesTimeingSlot()
-        {
-            this.UserPackages = new HashSet<UserPackage>();
-        }
-    
         public int Id { get; set; }
         public string SlotTimeing { get; set; }
         public bool IsActive { get; set; }
         public int GarageId { get; set; }
     
-        public virtual ICollection<UserPackage> UserPackages { get; set; }
         public virtual Garage Garage { get; set; }
     }
 }

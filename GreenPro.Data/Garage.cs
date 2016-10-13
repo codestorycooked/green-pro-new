@@ -14,15 +14,16 @@ namespace GreenPro.Data
     
     public partial class Garage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Garage()
         {
             this.CarUsers = new HashSet<CarUser>();
             this.GarageMaxCars = new HashSet<GarageMaxCar>();
+            this.GargesTimeingSlots = new HashSet<GargesTimeingSlot>();
             this.GarrageWeekdays = new HashSet<GarrageWeekday>();
             this.LeaderCarJobs = new HashSet<LeaderCarJob>();
             this.UnAssignedCars = new HashSet<UnAssignedCar>();
             this.WorkerGarages = new HashSet<WorkerGarage>();
-            this.GargesTimeingSlots = new HashSet<GargesTimeingSlot>();
         }
     
         public int GarageId { get; set; }
@@ -44,14 +45,21 @@ namespace GreenPro.Data
         public System.TimeSpan CloseTime { get; set; }
         public string ServiceDays { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarUser> CarUsers { get; set; }
         public virtual City City1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GarageMaxCar> GarageMaxCars { get; set; }
         public virtual State State1 { get; set; }
-        public virtual ICollection<GarrageWeekday> GarrageWeekdays { get; set; }
-        public virtual ICollection<LeaderCarJob> LeaderCarJobs { get; set; }
-        public virtual ICollection<UnAssignedCar> UnAssignedCars { get; set; }
-        public virtual ICollection<WorkerGarage> WorkerGarages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GargesTimeingSlot> GargesTimeingSlots { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GarrageWeekday> GarrageWeekdays { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LeaderCarJob> LeaderCarJobs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnAssignedCar> UnAssignedCars { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkerGarage> WorkerGarages { get; set; }
     }
 }

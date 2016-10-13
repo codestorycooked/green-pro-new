@@ -12,18 +12,13 @@ namespace GreenPro.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Weekday
+    public partial class StateProvince
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Weekday()
-        {
-            this.GarrageWeekdays = new HashSet<GarrageWeekday>();
-        }
-    
         public int Id { get; set; }
-        public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GarrageWeekday> GarrageWeekdays { get; set; }
+        public int CountryId { get; set; }
+        public string Name { get; set; }
+        public string Abbreviation { get; set; }
+        public bool Published { get; set; }
+        public int DisplayOrder { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace GreenPro.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GreenProDbEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public GreenProDbEntities()
-            : base("name=GreenProDbEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace GreenPro.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual DbSet<AdhocUserPackagesAddon> AdhocUserPackagesAddons { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
@@ -33,11 +34,16 @@ namespace GreenPro.Data
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AutomaticPayment> AutomaticPayments { get; set; }
         public virtual DbSet<CarServiceEntry> CarServiceEntries { get; set; }
+        public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<CarUser> CarUsers { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<CrewAdminMember> CrewAdminMembers { get; set; }
+        public virtual DbSet<Garage_CarDaySetting> Garage_CarDaySetting { get; set; }
+        public virtual DbSet<Garage_LeaderSetting> Garage_LeaderSetting { get; set; }
         public virtual DbSet<GarageMaxCar> GarageMaxCars { get; set; }
         public virtual DbSet<Garage> Garages { get; set; }
+        public virtual DbSet<GarageTeam> GarageTeams { get; set; }
+        public virtual DbSet<GargesTimeingSlot> GargesTimeingSlots { get; set; }
         public virtual DbSet<GarrageWeekday> GarrageWeekdays { get; set; }
         public virtual DbSet<LeaderCarJob> LeaderCarJobs { get; set; }
         public virtual DbSet<LeaderGarageDay> LeaderGarageDays { get; set; }
@@ -47,8 +53,10 @@ namespace GreenPro.Data
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Package_Services> Package_Services { get; set; }
         public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<PaypalAutoPayment> PaypalAutoPayments { get; set; }
         public virtual DbSet<PayPalLog> PayPalLogs { get; set; }
         public virtual DbSet<Service> Services { get; set; }
+        public virtual DbSet<StateProvince> StateProvinces { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }
         public virtual DbSet<UnAssignedCar> UnAssignedCars { get; set; }
@@ -59,11 +67,5 @@ namespace GreenPro.Data
         public virtual DbSet<WorkDone> WorkDones { get; set; }
         public virtual DbSet<WorkerGarage> WorkerGarages { get; set; }
         public virtual DbSet<WorkLogDetail> WorkLogDetails { get; set; }
-        public virtual DbSet<GarageTeam> GarageTeams { get; set; }
-        public virtual DbSet<Garage_LeaderSetting> Garage_LeaderSetting { get; set; }
-        public virtual DbSet<Garage_CarDaySetting> Garage_CarDaySetting { get; set; }
-        public virtual DbSet<CarType> CarTypes { get; set; }
-        public virtual DbSet<PaypalAutoPayment> PaypalAutoPayments { get; set; }
-        public virtual DbSet<GargesTimeingSlot> GargesTimeingSlots { get; set; }
     }
 }

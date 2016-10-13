@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a2e7eb07d1741708a5436d1fbe58599" Name="Diagram1">
+        <EntityTypeShape EntityType="GreenProDbEntities.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AdhocUserPackage" Width="1.5" PointX="13.5" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AdhocUserPackagesAddon" Width="1.5" PointX="15.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AspNetRole" Width="1.5" PointX="3" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AspNetUser" Width="1.5" PointX="5.25" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.AutomaticPayment" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.CarServiceEntry" Width="1.5" PointX="10.5" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.CarType" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.CarUser" Width="1.5" PointX="10.5" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.City" Width="1.5" PointX="3" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.CrewAdminMember" Width="1.5" PointX="7.5" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Garage_CarDaySetting" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Garage_LeaderSetting" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.GarageMaxCar" Width="1.5" PointX="10.5" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Garage" Width="1.5" PointX="8.25" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.GarageTeam" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.GargesTimeingSlot" Width="1.5" PointX="10.5" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.GarrageWeekday" Width="1.5" PointX="13.5" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.LeaderCarJob" Width="1.5" PointX="15.75" PointY="40.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.LeaderGarageDay" Width="1.5" PointX="15.75" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.LeaderMember" Width="1.5" PointX="7.5" PointY="55.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.LeaderWork" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.LogDetailCarSide" Width="1.5" PointX="7.5" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Log" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Package_Services" Width="1.5" PointX="15.75" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Package" Width="1.5" PointX="5.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.PaypalAutoPayment" Width="1.5" PointX="21" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.PayPalLog" Width="1.5" PointX="21" PointY="41.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Service" Width="1.5" PointX="13.5" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.StateProvince" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.State" Width="1.5" PointX="0.75" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Tax" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.UnAssignedCar" Width="1.5" PointX="24" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.UserPackage" Width="1.5" PointX="18.75" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.UserPackagesAddon" Width="1.5" PointX="21" PointY="48.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.UserTransaction" Width="1.5" PointX="24" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.Weekday" Width="1.5" PointX="11.25" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.WorkDone" Width="1.5" PointX="7.5" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.WorkerGarage" Width="1.5" PointX="13.5" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GreenProDbEntities.WorkLogDetail" Width="1.5" PointX="9.75" PointY="27.75" IsExpanded="true" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackages_CarUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackages_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackages_UserPackages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackagesAddons_AdhocUserPackages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AdhocUserPackagesAddons_ToServices" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AspNetUsers_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_AspNetUsers_States" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CarOwnerId_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CarUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CrewAdmin_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CrewLeader_AspNetUSer" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CrewMember_AspNetUSer" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CrewMember_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_LeaderCarJob_AspNetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_PaypalAutoPayments_AspNEtUSERs" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserPackages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserTransactions_ASpnetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkDone_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkDone_AspNetUsers2" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkererId_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkerGarages_AspNetUser" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CarServiceEntries_CarUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CarServiceEntries_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_CarUsers_Garage" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_LeaderCarJob_CarUser" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserPackages_CarUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_Cities_State" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_Garages_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_GarageMaxCars_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_Garages_States" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_GargesTimeingSlots_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_GarrageWeekday_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_LeaderCarJob_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UnAssignedCars_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkerGarages_Garages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_GarrageWeekday_Weekdays" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_LeaderGarageDay_WorkerGarages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkLogDetails_LogDetailCarSide" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_Package_Services_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_Package_Services_Services" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserPackages_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkDone_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_PaypalAutoPayments_UserPackageID" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_PayPalLogs_UserPackage" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UnAssignedCars_Packages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserPackagesAddons_UserPackages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_UserTransactions_UserPackages" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.FK_WorkLogDetails_WorkDone" ManuallyRouted="false" />
+        <AssociationConnector Association="GreenProDbEntities.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

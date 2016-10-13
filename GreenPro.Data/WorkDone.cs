@@ -14,6 +14,7 @@ namespace GreenPro.Data
     
     public partial class WorkDone
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkDone()
         {
             this.WorkLogDetails = new HashSet<WorkLogDetail>();
@@ -32,6 +33,7 @@ namespace GreenPro.Data
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
         public virtual Package Package { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkLogDetail> WorkLogDetails { get; set; }
     }
 }

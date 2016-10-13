@@ -14,6 +14,7 @@ namespace GreenPro.Data
     
     public partial class CarUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarUser()
         {
             this.AdhocUserPackages = new HashSet<AdhocUserPackage>();
@@ -33,11 +34,15 @@ namespace GreenPro.Data
         public bool IsDeleted { get; set; }
         public Nullable<int> GarageId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarServiceEntry> CarServiceEntries { get; set; }
         public virtual Garage Garage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaderCarJob> LeaderCarJobs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPackage> UserPackages { get; set; }
     }
 }

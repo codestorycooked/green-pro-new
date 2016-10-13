@@ -14,6 +14,7 @@ namespace GreenPro.Data
     
     public partial class WorkerGarage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkerGarage()
         {
             this.LeaderGarageDays = new HashSet<LeaderGarageDay>();
@@ -26,6 +27,7 @@ namespace GreenPro.Data
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Garage Garage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaderGarageDay> LeaderGarageDays { get; set; }
     }
 }

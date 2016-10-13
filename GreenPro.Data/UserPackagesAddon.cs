@@ -22,7 +22,6 @@ namespace GreenPro.Data
         public Nullable<System.DateTime> CreatedDt { get; set; }
         public Nullable<System.DateTime> NextServiceDate { get; set; }
     
-        public virtual Service Service { get; set; }
         public virtual UserPackage UserPackage { get; set; }
     }
 }

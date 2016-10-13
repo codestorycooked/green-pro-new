@@ -14,14 +14,15 @@ namespace GreenPro.Data
     
     public partial class UserPackage
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserPackage()
         {
             this.AdhocUserPackages = new HashSet<AdhocUserPackage>();
+            this.PaypalAutoPayments = new HashSet<PaypalAutoPayment>();
             this.PayPalLogs = new HashSet<PayPalLog>();
             this.UnAssignedCars = new HashSet<UnAssignedCar>();
             this.UserPackagesAddons = new HashSet<UserPackagesAddon>();
             this.UserTransactions = new HashSet<UserTransaction>();
-            this.PaypalAutoPayments = new HashSet<PaypalAutoPayment>();
         }
     
         public int Id { get; set; }
@@ -48,15 +49,20 @@ namespace GreenPro.Data
         public int SubscriptionTypeId { get; set; }
         public string PaymentMethodName { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CarUser CarUser { get; set; }
         public virtual Package Package { get; set; }
-        public virtual ICollection<PayPalLog> PayPalLogs { get; set; }
-        public virtual ICollection<UnAssignedCar> UnAssignedCars { get; set; }
-        public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
-        public virtual ICollection<UserTransaction> UserTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaypalAutoPayment> PaypalAutoPayments { get; set; }
-        public virtual GargesTimeingSlot GargesTimeingSlot { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PayPalLog> PayPalLogs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnAssignedCar> UnAssignedCars { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserTransaction> UserTransactions { get; set; }
     }
 }

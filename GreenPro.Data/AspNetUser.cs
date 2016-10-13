@@ -14,6 +14,7 @@ namespace GreenPro.Data
     
     public partial class AspNetUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
             this.AdhocUserPackages = new HashSet<AdhocUserPackage>();
@@ -26,6 +27,7 @@ namespace GreenPro.Data
             this.LeaderMembers1 = new HashSet<LeaderMember>();
             this.CrewAdminMembers1 = new HashSet<CrewAdminMember>();
             this.LeaderCarJobs = new HashSet<LeaderCarJob>();
+            this.PaypalAutoPayments = new HashSet<PaypalAutoPayment>();
             this.UserPackages = new HashSet<UserPackage>();
             this.UserTransactions = new HashSet<UserTransaction>();
             this.WorkDones = new HashSet<WorkDone>();
@@ -33,7 +35,6 @@ namespace GreenPro.Data
             this.CarServiceEntries1 = new HashSet<CarServiceEntry>();
             this.WorkerGarages = new HashSet<WorkerGarage>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.PaypalAutoPayments = new HashSet<PaypalAutoPayment>();
         }
     
         public string Id { get; set; }
@@ -50,33 +51,52 @@ namespace GreenPro.Data
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public System.DateTime DateofBirth { get; set; }
+        public Nullable<System.DateTime> DateofBirth { get; set; }
         public string Address { get; set; }
-        public int State { get; set; }
-        public int City { get; set; }
+        public Nullable<int> State { get; set; }
+        public Nullable<int> City { get; set; }
         public string Pincode { get; set; }
         public int Balance { get; set; }
         public bool IsDelete { get; set; }
+        public string ProfilePic { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdhocUserPackage> AdhocUserPackages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual City City1 { get; set; }
         public virtual State State1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarServiceEntry> CarServiceEntries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarUser> CarUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CrewAdminMember> CrewAdminMembers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaderMember> LeaderMembers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaderMember> LeaderMembers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CrewAdminMember> CrewAdminMembers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LeaderCarJob> LeaderCarJobs { get; set; }
-        public virtual ICollection<UserPackage> UserPackages { get; set; }
-        public virtual ICollection<UserTransaction> UserTransactions { get; set; }
-        public virtual ICollection<WorkDone> WorkDones { get; set; }
-        public virtual ICollection<WorkDone> WorkDones1 { get; set; }
-        public virtual ICollection<CarServiceEntry> CarServiceEntries1 { get; set; }
-        public virtual ICollection<WorkerGarage> WorkerGarages { get; set; }
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaypalAutoPayment> PaypalAutoPayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPackage> UserPackages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserTransaction> UserTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkDone> WorkDones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkDone> WorkDones1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CarServiceEntry> CarServiceEntries1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkerGarage> WorkerGarages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

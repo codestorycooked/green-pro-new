@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("GreenPro.Api")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PUNE CCH")]
+[assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyProduct("GreenPro.Api")]
-[assembly: AssemblyCopyright("Copyright © PUNE CCH 2014")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("44d6dca6-2ca5-4236-8d6c-714a6097491b")]
+[assembly: Guid("0982b66c-1380-4166-9a74-33f8d29e53a0")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.Data", "GreenPro.Data\GreenPro.Data.csproj", "{B396B636-ADBB-4152-9C04-A6C46D8A1BFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.Api", "GreenPro.Api\GreenPro.Api.csproj", "{857A2BE6-3F75-49F2-955A-5B2635C53751}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.AdminInterface", "GreenPro.AdminInterface\GreenPro.AdminInterface.csproj", "{376F4EBE-2263-44FE-B835-B97DCED9D26A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.WebClient", "GreenPro.WebClient\GreenPro.WebClient.csproj", "{427F222F-6F47-4D18-855B-05072052C038}"
@@ -19,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.Service", "GreenPr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "GreenPro.Database", "GreenPro.Database\GreenPro.Database.sqlproj", "{765ED71F-1C29-4961-BEDD-46BA952E78CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenPro.Api", "GreenPro.Api\GreenPro.Api.csproj", "{97C4C410-A916-42B2-BCD7-79C5C3B098DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +29,6 @@ Global
 		{B396B636-ADBB-4152-9C04-A6C46D8A1BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B396B636-ADBB-4152-9C04-A6C46D8A1BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B396B636-ADBB-4152-9C04-A6C46D8A1BFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{857A2BE6-3F75-49F2-955A-5B2635C53751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{857A2BE6-3F75-49F2-955A-5B2635C53751}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{857A2BE6-3F75-49F2-955A-5B2635C53751}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{857A2BE6-3F75-49F2-955A-5B2635C53751}.Release|Any CPU.Build.0 = Release|Any CPU
 		{376F4EBE-2263-44FE-B835-B97DCED9D26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{376F4EBE-2263-44FE-B835-B97DCED9D26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{376F4EBE-2263-44FE-B835-B97DCED9D26A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +55,10 @@ Global
 		{765ED71F-1C29-4961-BEDD-46BA952E78CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{765ED71F-1C29-4961-BEDD-46BA952E78CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{765ED71F-1C29-4961-BEDD-46BA952E78CA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{97C4C410-A916-42B2-BCD7-79C5C3B098DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C4C410-A916-42B2-BCD7-79C5C3B098DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C4C410-A916-42B2-BCD7-79C5C3B098DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C4C410-A916-42B2-BCD7-79C5C3B098DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

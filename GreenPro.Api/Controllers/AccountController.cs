@@ -375,9 +375,10 @@ namespace GreenPro.Api.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && _userManager != null)
             {
-                UserManager.Dispose();
+                _userManager.Dispose();
+                _userManager = null;
             }
 
             base.Dispose(disposing);

@@ -6,18 +6,9 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace GreenPro.Api.Models
 {
-
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-
-        // You will not likely need to customize there, but it is necessary/easier to create our own 
-        // project-specific implementations, so here they are:
-        public class ApplicationUserLogin : IdentityUserLogin<string> { }
-        public class ApplicationUserClaim : IdentityUserClaim<string> { }
-        public class ApplicationUserRole : IdentityUserRole<string> { }
-
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

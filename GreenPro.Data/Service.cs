@@ -19,6 +19,7 @@ namespace GreenPro.Data
         {
             this.AdhocUserPackagesAddons = new HashSet<AdhocUserPackagesAddon>();
             this.Package_Services = new HashSet<Package_Services>();
+            this.UserPackagesAddons = new HashSet<UserPackagesAddon>();
         }
     
         public int ServiceID { get; set; }
@@ -33,5 +34,7 @@ namespace GreenPro.Data
         public virtual ICollection<AdhocUserPackagesAddon> AdhocUserPackagesAddons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package_Services> Package_Services { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
     }
 }

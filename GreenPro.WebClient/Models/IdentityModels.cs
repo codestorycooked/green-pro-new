@@ -18,12 +18,12 @@ namespace GreenPro.WebClient.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public System.DateTime DateofBirth { get; set; }
+        public  System.DateTime? DateofBirth { get; set; }
         public string Address { get; set; }
         public int State { get; set; }
         public int City { get; set; }
         public string Pincode { get; set; }
-        public int Balance { get; set; } 
+        public int Balance { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -44,7 +44,7 @@ namespace GreenPro.WebClient.Models
         {
             // Set the database intializer which is run once during application start
             // This seeds the database with admin user credentials and admin role
-           // Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            // Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
         }
 
         public static ApplicationDbContext Create()

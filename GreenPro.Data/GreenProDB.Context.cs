@@ -12,11 +12,13 @@ namespace GreenPro.Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class Entities : DbContext
+    public partial class GreenProDbEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public GreenProDbEntities()
+            : base("name=GreenProDbEntities")
         {
         }
     
@@ -67,5 +69,109 @@ namespace GreenPro.Data
         public virtual DbSet<WorkDone> WorkDones { get; set; }
         public virtual DbSet<WorkerGarage> WorkerGarages { get; set; }
         public virtual DbSet<WorkLogDetail> WorkLogDetails { get; set; }
+    
+        public virtual ObjectResult<GetAllAvailableGaragesCitiesList_Result> GetAllAvailableGaragesCitiesList()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllAvailableGaragesCitiesList_Result>("GetAllAvailableGaragesCitiesList");
+        }
+    
+        public virtual ObjectResult<GetGarage_CarDaySettingPaymentDetail_Result> GetGarage_CarDaySettingPaymentDetail(Nullable<System.DateTime> serviceDate)
+        {
+            var serviceDateParameter = serviceDate.HasValue ?
+                new ObjectParameter("ServiceDate", serviceDate) :
+                new ObjectParameter("ServiceDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetGarage_CarDaySettingPaymentDetail_Result>("GetGarage_CarDaySettingPaymentDetail", serviceDateParameter);
+        }
+    
+        public virtual ObjectResult<GetServicesByCarId_Result> GetServicesByCarId(Nullable<int> carId)
+        {
+            var carIdParameter = carId.HasValue ?
+                new ObjectParameter("CarId", carId) :
+                new ObjectParameter("CarId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetServicesByCarId_Result>("GetServicesByCarId", carIdParameter);
+        }
+    
+        public virtual int SetNextWashedDate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetNextWashedDate");
+        }
+    
+        [DbFunction("GreenProDbEntities", "Splitstring_to_table")]
+        public virtual IQueryable<string> Splitstring_to_table(string @string, string delimiter)
+        {
+            var stringParameter = @string != null ?
+                new ObjectParameter("string", @string) :
+                new ObjectParameter("string", typeof(string));
+    
+            var delimiterParameter = delimiter != null ?
+                new ObjectParameter("delimiter", delimiter) :
+                new ObjectParameter("delimiter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[GreenProDbEntities].[Splitstring_to_table](@string, @delimiter)", stringParameter, delimiterParameter);
+        }
+    
+        public virtual int Sproc_InsertOrUpdateGarage_CarDaySetting(Nullable<int> garageTeamId, Nullable<int> entityTypeKey, string entityTypeValues, Nullable<int> garageId, string serviceDay, Nullable<System.DateTime> carServiceDate, Nullable<bool> isLocked, Nullable<bool> isPaid)
+        {
+            var garageTeamIdParameter = garageTeamId.HasValue ?
+                new ObjectParameter("GarageTeamId", garageTeamId) :
+                new ObjectParameter("GarageTeamId", typeof(int));
+    
+            var entityTypeKeyParameter = entityTypeKey.HasValue ?
+                new ObjectParameter("EntityTypeKey", entityTypeKey) :
+                new ObjectParameter("EntityTypeKey", typeof(int));
+    
+            var entityTypeValuesParameter = entityTypeValues != null ?
+                new ObjectParameter("EntityTypeValues", entityTypeValues) :
+                new ObjectParameter("EntityTypeValues", typeof(string));
+    
+            var garageIdParameter = garageId.HasValue ?
+                new ObjectParameter("GarageId", garageId) :
+                new ObjectParameter("GarageId", typeof(int));
+    
+            var serviceDayParameter = serviceDay != null ?
+                new ObjectParameter("ServiceDay", serviceDay) :
+                new ObjectParameter("ServiceDay", typeof(string));
+    
+            var carServiceDateParameter = carServiceDate.HasValue ?
+                new ObjectParameter("CarServiceDate", carServiceDate) :
+                new ObjectParameter("CarServiceDate", typeof(System.DateTime));
+    
+            var isLockedParameter = isLocked.HasValue ?
+                new ObjectParameter("IsLocked", isLocked) :
+                new ObjectParameter("IsLocked", typeof(bool));
+    
+            var isPaidParameter = isPaid.HasValue ?
+                new ObjectParameter("IsPaid", isPaid) :
+                new ObjectParameter("IsPaid", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sproc_InsertOrUpdateGarage_CarDaySetting", garageTeamIdParameter, entityTypeKeyParameter, entityTypeValuesParameter, garageIdParameter, serviceDayParameter, carServiceDateParameter, isLockedParameter, isPaidParameter);
+        }
+    
+        public virtual int Sproc_InsertOrUpdateLeaderSetting(Nullable<int> garageTeamId, Nullable<int> entityTypeKey, string entityTypeValues, Nullable<int> garageId, string serviceDay)
+        {
+            var garageTeamIdParameter = garageTeamId.HasValue ?
+                new ObjectParameter("GarageTeamId", garageTeamId) :
+                new ObjectParameter("GarageTeamId", typeof(int));
+    
+            var entityTypeKeyParameter = entityTypeKey.HasValue ?
+                new ObjectParameter("EntityTypeKey", entityTypeKey) :
+                new ObjectParameter("EntityTypeKey", typeof(int));
+    
+            var entityTypeValuesParameter = entityTypeValues != null ?
+                new ObjectParameter("EntityTypeValues", entityTypeValues) :
+                new ObjectParameter("EntityTypeValues", typeof(string));
+    
+            var garageIdParameter = garageId.HasValue ?
+                new ObjectParameter("GarageId", garageId) :
+                new ObjectParameter("GarageId", typeof(int));
+    
+            var serviceDayParameter = serviceDay != null ?
+                new ObjectParameter("ServiceDay", serviceDay) :
+                new ObjectParameter("ServiceDay", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sproc_InsertOrUpdateLeaderSetting", garageTeamIdParameter, entityTypeKeyParameter, entityTypeValuesParameter, garageIdParameter, serviceDayParameter);
+        }
     }
 }

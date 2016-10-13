@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GreenProDbEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GreenPro.DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -998,6 +998,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserPackages_GarageTimingSlot">
+          <End Role="GargesTimeingSlots" Type="Self.GargesTimeingSlots" Multiplicity="0..1" />
+          <End Role="UserPackages" Type="Self.UserPackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GargesTimeingSlots">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPackages">
+              <PropertyRef Name="GaragesTimeingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserPackages_Packages">
           <End Role="Packages" Type="Self.Packages" Multiplicity="1" />
           <End Role="UserPackages" Type="Self.UserPackages" Multiplicity="*" />
@@ -1019,6 +1031,18 @@
             </Principal>
             <Dependent Role="UserPackages">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPackagesAddons_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="UserPackagesAddons" Type="Self.UserPackagesAddons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="UserPackagesAddons">
+              <PropertyRef Name="ServiceID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1154,7 +1178,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GreenProDbEntitiesStoreContainer">
+        <Function Name="GetAllAvailableGaragesCitiesList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetGarage_CarDaySettingPaymentDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ServiceDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="GetServicesByCarId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CarId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SetNextWashedDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Splitstring_to_table" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="string" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="delimiter" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="data" Type="nvarchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="Sproc_InsertOrUpdateGarage_CarDaySetting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GarageTeamId" Type="int" Mode="In" />
+          <Parameter Name="EntityTypeKey" Type="int" Mode="In" />
+          <Parameter Name="EntityTypeValues" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GarageId" Type="int" Mode="In" />
+          <Parameter Name="ServiceDay" Type="nvarchar" Mode="In" />
+          <Parameter Name="CarServiceDate" Type="date" Mode="In" />
+          <Parameter Name="IsLocked" Type="bit" Mode="In" />
+          <Parameter Name="IsPaid" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sproc_InsertOrUpdateLeaderSetting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GarageTeamId" Type="int" Mode="In" />
+          <Parameter Name="EntityTypeKey" Type="int" Mode="In" />
+          <Parameter Name="EntityTypeValues" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="GarageId" Type="int" Mode="In" />
+          <Parameter Name="ServiceDay" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="GreenProDatabaseModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdhocUserPackages" EntityType="Self.AdhocUserPackages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdhocUserPackagesAddons" EntityType="Self.AdhocUserPackagesAddons" Schema="dbo" store:Type="Tables" />
@@ -1358,6 +1418,10 @@
             <End Role="CarUsers" EntitySet="CarUsers" />
             <End Role="UserPackages" EntitySet="UserPackages" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserPackages_GarageTimingSlot" Association="Self.FK_UserPackages_GarageTimingSlot">
+            <End Role="GargesTimeingSlots" EntitySet="GargesTimeingSlots" />
+            <End Role="UserPackages" EntitySet="UserPackages" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserPackages_Packages" Association="Self.FK_UserPackages_Packages">
             <End Role="Packages" EntitySet="Packages" />
             <End Role="UserPackages" EntitySet="UserPackages" />
@@ -1365,6 +1429,10 @@
           <AssociationSet Name="FK_UserPackages_Users" Association="Self.FK_UserPackages_Users">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="UserPackages" EntitySet="UserPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPackagesAddons_Services" Association="Self.FK_UserPackagesAddons_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="UserPackagesAddons" EntitySet="UserPackagesAddons" />
           </AssociationSet>
           <AssociationSet Name="FK_UserPackagesAddons_UserPackages" Association="Self.FK_UserPackagesAddons_UserPackages">
             <End Role="UserPackages" EntitySet="UserPackages" />
@@ -1414,7 +1482,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="GreenProDbEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="GreenPro.DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -1708,6 +1776,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="GarageId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Garage" Relationship="Self.FK_GargesTimeingSlots_Garages" FromRole="GargesTimeingSlots" ToRole="Garages" />
+          <NavigationProperty Name="UserPackages" Relationship="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot" FromRole="GargesTimeingSlot" ToRole="UserPackage" />
         </EntityType>
         <EntityType Name="GarrageWeekday">
           <Key>
@@ -1857,6 +1926,7 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AdhocUserPackagesAddons" Relationship="Self.FK_AdhocUserPackagesAddons_ToServices" FromRole="Services" ToRole="AdhocUserPackagesAddons" />
           <NavigationProperty Name="Package_Services" Relationship="Self.FK_Package_Services_Services" FromRole="Services" ToRole="Package_Services" />
+          <NavigationProperty Name="UserPackagesAddons" Relationship="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services" FromRole="Service" ToRole="UserPackagesAddon" />
         </EntityType>
         <EntityType Name="StateProvince">
           <Key>
@@ -1934,6 +2004,7 @@
           <NavigationProperty Name="UnAssignedCars" Relationship="Self.FK_UnAssignedCars_Packages" FromRole="UserPackages" ToRole="UnAssignedCars" />
           <NavigationProperty Name="UserPackagesAddons" Relationship="Self.FK_UserPackagesAddons_UserPackages" FromRole="UserPackages" ToRole="UserPackagesAddons" />
           <NavigationProperty Name="UserTransactions" Relationship="Self.FK_UserTransactions_UserPackages" FromRole="UserPackages" ToRole="UserTransactions" />
+          <NavigationProperty Name="GargesTimeingSlot" Relationship="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot" FromRole="UserPackage" ToRole="GargesTimeingSlot" />
         </EntityType>
         <EntityType Name="UserPackagesAddon">
           <Key>
@@ -1947,6 +2018,7 @@
           <Property Name="CreatedDt" Type="DateTime" Precision="3" />
           <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="UserPackage" Relationship="Self.FK_UserPackagesAddons_UserPackages" FromRole="UserPackagesAddons" ToRole="UserPackages" />
+          <NavigationProperty Name="Service" Relationship="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services" FromRole="UserPackagesAddon" ToRole="Service" />
         </EntityType>
         <EntityType Name="UserTransaction">
           <Key>
@@ -2636,7 +2708,7 @@
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GreenProDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="AdhocUserPackages" EntityType="Self.AdhocUserPackage" />
           <EntitySet Name="AdhocUserPackagesAddons" EntityType="Self.AdhocUserPackagesAddon" />
@@ -2887,22 +2959,109 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="GetAllAvailableGaragesCitiesList" ReturnType="Collection(GreenPro.DatabaseModel.GetAllAvailableGaragesCitiesList_Result)" />
+          <FunctionImport Name="GetGarage_CarDaySettingPaymentDetail" ReturnType="Collection(GreenPro.DatabaseModel.GetGarage_CarDaySettingPaymentDetail_Result)">
+          <Parameter Name="ServiceDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetServicesByCarId" ReturnType="Collection(GreenPro.DatabaseModel.GetServicesByCarId_Result)">
+          <Parameter Name="CarId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SetNextWashedDate" />
+          <FunctionImport Name="Splitstring_to_table" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="string" Mode="In" Type="String" />
+            <Parameter Name="delimiter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sproc_InsertOrUpdateGarage_CarDaySetting">
+            <Parameter Name="GarageTeamId" Mode="In" Type="Int32" />
+            <Parameter Name="EntityTypeKey" Mode="In" Type="Int32" />
+            <Parameter Name="EntityTypeValues" Mode="In" Type="String" />
+            <Parameter Name="GarageId" Mode="In" Type="Int32" />
+            <Parameter Name="ServiceDay" Mode="In" Type="String" />
+            <Parameter Name="CarServiceDate" Mode="In" Type="DateTime" />
+            <Parameter Name="IsLocked" Mode="In" Type="Boolean" />
+            <Parameter Name="IsPaid" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sproc_InsertOrUpdateLeaderSetting">
+            <Parameter Name="GarageTeamId" Mode="In" Type="Int32" />
+            <Parameter Name="EntityTypeKey" Mode="In" Type="Int32" />
+            <Parameter Name="EntityTypeValues" Mode="In" Type="String" />
+            <Parameter Name="GarageId" Mode="In" Type="Int32" />
+            <Parameter Name="ServiceDay" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_UserPackagesAddons_Services" Association="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="UserPackagesAddon" EntitySet="UserPackagesAddons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPackages_GarageTimingSlot" Association="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot">
+            <End Role="GargesTimeingSlot" EntitySet="GargesTimeingSlots" />
+            <End Role="UserPackage" EntitySet="UserPackages" />
+          </AssociationSet>
         </EntityContainer>
+        <ComplexType Name="GetAllAvailableGaragesCitiesList_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="203" />
+          <Property Type="Int32" Name="StateId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetGarage_CarDaySettingPaymentDetail_Result">
+          <Property Type="Int32" Name="UserPackageID" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int32" Name="JobId" Nullable="false" />
+          <Property Type="Int32" Name="CarId" Nullable="true" />
+          <Property Type="DateTime" Name="CarServiceDate" Nullable="false" />
+          <Property Type="Boolean" Name="IsPaid" Nullable="true" />
+          <Property Type="Int32" Name="LogId" Nullable="false" />
+          <Property Type="String" Name="BillingAggrementID" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ECToken" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CorrelationID" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetServicesByCarId_Result">
+          <Property Type="Int32" Name="ServiceID" Nullable="false" />
+          <Property Type="String" Name="Service_Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Service_Description" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Service_Price" Nullable="false" Precision="19" />
+          <Property Type="Boolean" Name="IsAddOn" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDt" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <Association Name="FK_UserPackagesAddons_Services">
+          <End Type="GreenPro.DatabaseModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="GreenPro.DatabaseModel.UserPackagesAddon" Role="UserPackagesAddon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="UserPackagesAddon">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPackages_GarageTimingSlot">
+          <End Type="GreenPro.DatabaseModel.GargesTimeingSlot" Role="GargesTimeingSlot" Multiplicity="0..1" />
+          <End Type="GreenPro.DatabaseModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GargesTimeingSlot">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPackage">
+              <PropertyRef Name="GaragesTimeingSlotId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GreenProDbEntitiesStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="GreenProDatabaseModelStoreContainer" CdmEntityContainer="GreenProDbEntities">
           <EntitySetMapping Name="C__RefactorLog">
-            <EntityTypeMapping TypeName="GreenProDbEntities.C__RefactorLog">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
                 <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AdhocUserPackages">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AdhocUserPackage">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AdhocUserPackage">
               <MappingFragment StoreEntitySet="AdhocUserPackages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2924,7 +3083,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AdhocUserPackagesAddons">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AdhocUserPackagesAddon">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AdhocUserPackagesAddon">
               <MappingFragment StoreEntitySet="AdhocUserPackagesAddons">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
@@ -2936,7 +3095,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AspNetRole">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2944,7 +3103,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AspNetUserClaim">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -2954,7 +3113,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AspNetUserLogin">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -2963,7 +3122,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AspNetUser">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -2991,7 +3150,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AutomaticPayments">
-            <EntityTypeMapping TypeName="GreenProDbEntities.AutomaticPayment">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.AutomaticPayment">
               <MappingFragment StoreEntitySet="AutomaticPayments">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -3006,7 +3165,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarServiceEntries">
-            <EntityTypeMapping TypeName="GreenProDbEntities.CarServiceEntry">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.CarServiceEntry">
               <MappingFragment StoreEntitySet="CarServiceEntries">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CarOwnerId" ColumnName="CarOwnerId" />
@@ -3018,7 +3177,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarTypes">
-            <EntityTypeMapping TypeName="GreenProDbEntities.CarType">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.CarType">
               <MappingFragment StoreEntitySet="CarTypes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3026,7 +3185,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CarUsers">
-            <EntityTypeMapping TypeName="GreenProDbEntities.CarUser">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.CarUser">
               <MappingFragment StoreEntitySet="CarUsers">
                 <ScalarProperty Name="CarId" ColumnName="CarId" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
@@ -3042,7 +3201,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="GreenProDbEntities.City">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.City">
               <MappingFragment StoreEntitySet="Cities">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CityName" ColumnName="CityName" />
@@ -3052,7 +3211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CrewAdminMembers">
-            <EntityTypeMapping TypeName="GreenProDbEntities.CrewAdminMember">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.CrewAdminMember">
               <MappingFragment StoreEntitySet="CrewAdminMember">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CrewMemberId" ColumnName="CrewMemberId" />
@@ -3061,7 +3220,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Garage_CarDaySetting">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Garage_CarDaySetting">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Garage_CarDaySetting">
               <MappingFragment StoreEntitySet="Garage_CarDaySetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarageTeamId" ColumnName="GarageTeamId" />
@@ -3082,7 +3241,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Garage_LeaderSetting">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Garage_LeaderSetting">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Garage_LeaderSetting">
               <MappingFragment StoreEntitySet="Garage_LeaderSetting">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarageTeamId" ColumnName="GarageTeamId" />
@@ -3095,7 +3254,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GarageMaxCars">
-            <EntityTypeMapping TypeName="GreenProDbEntities.GarageMaxCar">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.GarageMaxCar">
               <MappingFragment StoreEntitySet="GarageMaxCars">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarageID" ColumnName="GarageID" />
@@ -3105,7 +3264,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Garages">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Garage">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Garage">
               <MappingFragment StoreEntitySet="Garages">
                 <ScalarProperty Name="GarageId" ColumnName="GarageId" />
                 <ScalarProperty Name="Garage_Name" ColumnName="Garage_Name" />
@@ -3129,7 +3288,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GarageTeams">
-            <EntityTypeMapping TypeName="GreenProDbEntities.GarageTeam">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.GarageTeam">
               <MappingFragment StoreEntitySet="GarageTeam">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarageId" ColumnName="GarageId" />
@@ -3140,7 +3299,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GargesTimeingSlots">
-            <EntityTypeMapping TypeName="GreenProDbEntities.GargesTimeingSlot">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.GargesTimeingSlot">
               <MappingFragment StoreEntitySet="GargesTimeingSlots">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SlotTimeing" ColumnName="SlotTimeing" />
@@ -3150,7 +3309,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GarrageWeekdays">
-            <EntityTypeMapping TypeName="GreenProDbEntities.GarrageWeekday">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.GarrageWeekday">
               <MappingFragment StoreEntitySet="GarrageWeekday">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarrageId" ColumnName="GarrageId" />
@@ -3159,7 +3318,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LeaderCarJobs">
-            <EntityTypeMapping TypeName="GreenProDbEntities.LeaderCarJob">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.LeaderCarJob">
               <MappingFragment StoreEntitySet="LeaderCarJob">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Day" ColumnName="Day" />
@@ -3170,7 +3329,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LeaderGarageDays">
-            <EntityTypeMapping TypeName="GreenProDbEntities.LeaderGarageDay">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.LeaderGarageDay">
               <MappingFragment StoreEntitySet="LeaderGarageDay">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="WorkerGarageID" ColumnName="WorkerGarageID" />
@@ -3179,7 +3338,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LeaderMembers">
-            <EntityTypeMapping TypeName="GreenProDbEntities.LeaderMember">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.LeaderMember">
               <MappingFragment StoreEntitySet="LeaderMember">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CrewLeaderID" ColumnName="CrewLeaderID" />
@@ -3188,7 +3347,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LeaderWorks">
-            <EntityTypeMapping TypeName="GreenProDbEntities.LeaderWork">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.LeaderWork">
               <MappingFragment StoreEntitySet="LeaderWork">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="LeaderID" ColumnName="LeaderID" />
@@ -3197,7 +3356,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LogDetailCarSides">
-            <EntityTypeMapping TypeName="GreenProDbEntities.LogDetailCarSide">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.LogDetailCarSide">
               <MappingFragment StoreEntitySet="LogDetailCarSide">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3205,7 +3364,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Log">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Log">
               <MappingFragment StoreEntitySet="Logs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="source" ColumnName="source" />
@@ -3217,7 +3376,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Package_Services">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Package_Services">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Package_Services">
               <MappingFragment StoreEntitySet="Package_Services">
                 <ScalarProperty Name="PackageServiceId" ColumnName="PackageServiceId" />
                 <ScalarProperty Name="PackageID" ColumnName="PackageID" />
@@ -3226,7 +3385,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Package">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Package">
               <MappingFragment StoreEntitySet="Packages">
                 <ScalarProperty Name="PackageId" ColumnName="PackageId" />
                 <ScalarProperty Name="Package_Name" ColumnName="Package_Name" />
@@ -3239,7 +3398,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaypalAutoPayments">
-            <EntityTypeMapping TypeName="GreenProDbEntities.PaypalAutoPayment">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.PaypalAutoPayment">
               <MappingFragment StoreEntitySet="PaypalAutoPayments">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TrasactionID" ColumnName="TrasactionID" />
@@ -3259,7 +3418,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PayPalLogs">
-            <EntityTypeMapping TypeName="GreenProDbEntities.PayPalLog">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.PayPalLog">
               <MappingFragment StoreEntitySet="PayPalLogs">
                 <ScalarProperty Name="LogId" ColumnName="LogId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3277,7 +3436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Service">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Service">
               <MappingFragment StoreEntitySet="Services">
                 <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
                 <ScalarProperty Name="Service_Name" ColumnName="Service_Name" />
@@ -3290,7 +3449,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StateProvinces">
-            <EntityTypeMapping TypeName="GreenProDbEntities.StateProvince">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.StateProvince">
               <MappingFragment StoreEntitySet="StateProvince">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
@@ -3302,7 +3461,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="States">
-            <EntityTypeMapping TypeName="GreenProDbEntities.State">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.State">
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
@@ -3310,7 +3469,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Taxes">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Tax">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Tax">
               <MappingFragment StoreEntitySet="Tax">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -3319,7 +3478,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnAssignedCars">
-            <EntityTypeMapping TypeName="GreenProDbEntities.UnAssignedCar">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.UnAssignedCar">
               <MappingFragment StoreEntitySet="UnAssignedCars">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GarageID" ColumnName="GarageID" />
@@ -3329,7 +3488,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserPackages">
-            <EntityTypeMapping TypeName="GreenProDbEntities.UserPackage">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.UserPackage">
               <MappingFragment StoreEntitySet="UserPackages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -3358,7 +3517,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserPackagesAddons">
-            <EntityTypeMapping TypeName="GreenProDbEntities.UserPackagesAddon">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.UserPackagesAddon">
               <MappingFragment StoreEntitySet="UserPackagesAddons">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
@@ -3371,7 +3530,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTransactions">
-            <EntityTypeMapping TypeName="GreenProDbEntities.UserTransaction">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.UserTransaction">
               <MappingFragment StoreEntitySet="UserTransactions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
@@ -3387,7 +3546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Weekdays">
-            <EntityTypeMapping TypeName="GreenProDbEntities.Weekday">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.Weekday">
               <MappingFragment StoreEntitySet="Weekdays">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -3395,7 +3554,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkDones">
-            <EntityTypeMapping TypeName="GreenProDbEntities.WorkDone">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.WorkDone">
               <MappingFragment StoreEntitySet="WorkDone">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CrewLeaderID" ColumnName="CrewLeaderID" />
@@ -3410,7 +3569,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkerGarages">
-            <EntityTypeMapping TypeName="GreenProDbEntities.WorkerGarage">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.WorkerGarage">
               <MappingFragment StoreEntitySet="WorkerGarages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CrewLeaderId" ColumnName="CrewLeaderId" />
@@ -3420,7 +3579,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="WorkLogDetails">
-            <EntityTypeMapping TypeName="GreenProDbEntities.WorkLogDetail">
+            <EntityTypeMapping TypeName="GreenPro.DatabaseModel.WorkLogDetail">
               <MappingFragment StoreEntitySet="WorkLogDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
@@ -3431,7 +3590,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="GreenProDbEntities.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="GreenPro.DatabaseModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
@@ -3439,6 +3598,48 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllAvailableGaragesCitiesList" FunctionName="GreenPro.DatabaseModel.Store.GetAllAvailableGaragesCitiesList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GreenPro.DatabaseModel.GetAllAvailableGaragesCitiesList_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetGarage_CarDaySettingPaymentDetail" FunctionName="GreenPro.DatabaseModel.Store.GetGarage_CarDaySettingPaymentDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GreenPro.DatabaseModel.GetGarage_CarDaySettingPaymentDetail_Result">
+                <ScalarProperty Name="UserPackageID" ColumnName="UserPackageID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="CarServiceDate" ColumnName="CarServiceDate" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="BillingAggrementID" ColumnName="BillingAggrementID" />
+                <ScalarProperty Name="ECToken" ColumnName="ECToken" />
+                <ScalarProperty Name="CorrelationID" ColumnName="CorrelationID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetServicesByCarId" FunctionName="GreenPro.DatabaseModel.Store.GetServicesByCarId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GreenPro.DatabaseModel.GetServicesByCarId_Result">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="Service_Name" ColumnName="Service_Name" />
+                <ScalarProperty Name="Service_Description" ColumnName="Service_Description" />
+                <ScalarProperty Name="Service_Price" ColumnName="Service_Price" />
+                <ScalarProperty Name="IsAddOn" ColumnName="IsAddOn" />
+                <ScalarProperty Name="CreateDt" ColumnName="CreateDt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SetNextWashedDate" FunctionName="GreenPro.DatabaseModel.Store.SetNextWashedDate" />
+          <FunctionImportMapping FunctionImportName="Splitstring_to_table" FunctionName="GreenPro.DatabaseModel.Store.Splitstring_to_table" />
+          <FunctionImportMapping FunctionImportName="Sproc_InsertOrUpdateGarage_CarDaySetting" FunctionName="GreenPro.DatabaseModel.Store.Sproc_InsertOrUpdateGarage_CarDaySetting" />
+          <FunctionImportMapping FunctionImportName="Sproc_InsertOrUpdateLeaderSetting" FunctionName="GreenPro.DatabaseModel.Store.Sproc_InsertOrUpdateLeaderSetting" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

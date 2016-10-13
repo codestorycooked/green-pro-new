@@ -14,11 +14,19 @@ namespace GreenPro.Data
     
     public partial class GargesTimeingSlot
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GargesTimeingSlot()
+        {
+            this.UserPackages = new HashSet<UserPackage>();
+        }
+    
         public int Id { get; set; }
         public string SlotTimeing { get; set; }
         public bool IsActive { get; set; }
         public int GarageId { get; set; }
     
         public virtual Garage Garage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPackage> UserPackages { get; set; }
     }
 }

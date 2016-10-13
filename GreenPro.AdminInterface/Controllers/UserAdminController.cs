@@ -24,7 +24,7 @@ namespace GreenPro.AdminInterface.Controllers
             _db = new GreenProDbEntities();
         }
 
-        
+
 
         public ActionResult Landing()
         {
@@ -69,7 +69,7 @@ namespace GreenPro.AdminInterface.Controllers
         {
             //var userList = _db.AspNetUsers.Where(u => u.IsDelete == false).ToList();           
 
-            var userList = _db.AspNetUsers.Where(u => u.IsDelete == false && u.AspNetRoles.Any(r=>r.Name=="Users")).ToList();     
+            var userList = _db.AspNetUsers.Where(u => u.IsDelete == false && u.AspNetRoles.Any(r => r.Name == "Users")).ToList();
 
             return View(userList);
         }
@@ -77,7 +77,7 @@ namespace GreenPro.AdminInterface.Controllers
         public ActionResult GaragesEmployee()
         {
             var userList = _db.AspNetUsers.Where(u => u.IsDelete == false && u.AspNetRoles.Any(r => r.Name == "Crew Leader" || r.Name == "Crew Member" || r.Name == "Admin")).ToList();
-            return View(userList);            
+            return View(userList);
         }
 
         //
@@ -110,7 +110,7 @@ namespace GreenPro.AdminInterface.Controllers
             return View();
         }
 
-     
+
 
         [HttpPost]
         public async Task<ActionResult> Create(RegisterViewModel userViewModel, string[] garages)
@@ -221,17 +221,17 @@ namespace GreenPro.AdminInterface.Controllers
             EditUserViewModel model = new EditUserViewModel()
             {
                 Id = user.Id,
-                  Email = user.Email,
-                  UserName=user.Email,
-                  FirstName=user.FirstName,
-                  LastName=user.LastName,
-                  DateofBirth=user.DateofBirth,
-                  DateofBirthStr=user.DateofBirth.ToString("MM/dd/yyyy"),
-                  Address=user.Address,
-                  StateId=user.State,
-                  CityId=user.City,
-                  PhoneNumber=user.PhoneNumber,
-                  Pincode=user.Pincode,
+                Email = user.Email,
+                UserName = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DateofBirth = user.DateofBirth,
+                DateofBirthStr = user.DateofBirth.ToString(),
+                Address = user.Address,
+                StateId = user.State,
+                CityId = user.City,
+                PhoneNumber = user.PhoneNumber,
+                Pincode = user.Pincode,
 
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
@@ -278,15 +278,15 @@ namespace GreenPro.AdminInterface.Controllers
                 user.UserName = editUser.UserName;
                 user.Email = editUser.UserName;
 
-                user.FirstName=editUser.FirstName;
-                user.LastName=editUser.LastName;
-                user.Address=editUser.Address;
+                user.FirstName = editUser.FirstName;
+                user.LastName = editUser.LastName;
+                user.Address = editUser.Address;
                 user.City = editUser.CityId;
                 user.State = editUser.StateId;
                 user.Pincode = editUser.Pincode;
                 user.PhoneNumber = editUser.PhoneNumber;
-                user.DateofBirth = editUser.DateofBirth; 
-                
+                user.DateofBirth = editUser.DateofBirth;
+
 
                 var updateResult = UserManager.Update(user);
                 if (!updateResult.Succeeded)
@@ -295,7 +295,7 @@ namespace GreenPro.AdminInterface.Controllers
                     return View(editUser);
                 }
 
-               
+
 
                 var result = await UserManager.AddToRolesAsync(user.Id, selectedRole.Except(userRoles).ToArray<string>());
                 if (!result.Succeeded)

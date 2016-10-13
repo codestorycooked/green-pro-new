@@ -64,5 +64,6 @@ namespace GreenPro.Data
         public virtual ICollection<UserPackagesAddon> UserPackagesAddons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTransaction> UserTransactions { get; set; }
+        public virtual GargesTimeingSlot GargesTimeingSlot { get; set; }
     }
 }

@@ -10,3 +10,17 @@ F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\bin\Release\New
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.csprojResolveAssemblyReference.cache
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.dll
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Data\obj\Release\GreenPro.Data.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\GreenPro.Data.dll.config
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\GreenPro.Data.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\GreenPro.Data.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\EntityFramework.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\Newtonsoft.Json.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\System.Web.Mvc.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\EntityFramework.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\Newtonsoft.Json.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\bin\Release\System.Web.Mvc.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\obj\Release\GreenPro.Data.csprojResolveAssemblyReference.cache
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\obj\Release\GreenPro.Data.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Data\obj\Release\GreenPro.Data.pdb

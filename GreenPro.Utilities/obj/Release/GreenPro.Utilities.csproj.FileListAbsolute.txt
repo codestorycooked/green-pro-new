@@ -18,3 +18,25 @@ F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Utilities\obj\Releas
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Utilities\obj\Release\GreenPro.Utilities.csproj.GenerateResource.Cache
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Utilities\obj\Release\GreenPro.Utilities.dll
 F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Utilities\obj\Release\GreenPro.Utilities.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\GreenPro.Utilities.dll.config
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\GreenPro.Utilities.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\GreenPro.Utilities.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\EntityFramework.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\GreenPro.Data.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\Mandrill.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\Newtonsoft.Json.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\RestSharp.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\System.Web.Mvc.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\GreenPro.Data.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\EntityFramework.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\Mandrill.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\Newtonsoft.Json.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\RestSharp.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\bin\Release\System.Web.Mvc.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\obj\Release\GreenPro.Utilities.csprojResolveAssemblyReference.cache
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\obj\Release\GreenPro.Utilities.Properties.Resources.resources
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\obj\Release\GreenPro.Utilities.csproj.GenerateResource.Cache
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\obj\Release\GreenPro.Utilities.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Utilities\obj\Release\GreenPro.Utilities.pdb

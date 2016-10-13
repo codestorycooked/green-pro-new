@@ -31,6 +31,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -331,6 +332,7 @@
     <None Include="Properties\PublishProfiles\GreenPro-Admin.pubxml" />
     <None Include="Properties\PublishProfiles\greenproadmin - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\greenproadmin - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\greenproadmin.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />

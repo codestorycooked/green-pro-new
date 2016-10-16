@@ -49,6 +49,9 @@ namespace GreenPro.WebClient.Controllers
 
         public ActionResult Index(int? page, string state, string searchText, int? GarageId)
         {
+            DateTime currentDate = DateTime.Now;
+            
+
             int currentPageIndex = page.HasValue ? page.Value : 1;
             int gId = 0;
             gId = GarageId.HasValue ? GarageId.Value : 0;
@@ -104,7 +107,16 @@ namespace GreenPro.WebClient.Controllers
                         gModel.Garage_Name = item.Garage_Name;
                         gModel.Garage_Address = item.Garage_Address;
                         gModel.OpenTime = item.OpenTime;
-                        gModel.CloseTime = item.CloseTime;
+
+                        if (item.OpenTime.HasValue)
+                        {
+                            DateTime opentime = DateTime.Today.Add(item.OpenTime.Value);
+                            gModel.OpenTimeStr = opentime.ToString("hh:mm tt");
+                        }
+                        gModel.CloseTime = item.CloseTime;                       
+                        DateTime closetime = DateTime.Today.Add(item.CloseTime);
+                        gModel.CloseTimeStr = closetime.ToString("hh:mm tt");                        
+
                         gModel.ServiceDays = item.ServiceDays;
                         if (item.City1 != null)
                             gModel.City = item.City1.CityName;

@@ -44,10 +44,16 @@ namespace GreenPro.Api.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
+        [Display(Name = "Name")]
+        public string FirstName { get; set; }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string ProfilePic { get; set; }
     }
 
     public class RegisterExternalBindingModel
@@ -55,6 +61,10 @@ namespace GreenPro.Api.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        public string FirstName { get; set; }
+        public string ProfilePic { get; set; }
     }
 
     public class RemoveLoginBindingModel

@@ -14,6 +14,8 @@ namespace GreenPro.WebClient.ViewModel
         public string State { get; set; }
         public string City { get; set; }
         public Nullable<System.TimeSpan> OpenTime { get; set; }
+        public string OpenTimeStr { get; set; }
+        public string CloseTimeStr { get; set; }
         public System.TimeSpan CloseTime { get; set; }
         public string Pincode { get; set; }
         public double Latitute { get; set; }

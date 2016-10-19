@@ -10,12 +10,72 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using GreenPro.Data;
+using GreenPro.Api.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace GreenPro.Api.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/carusers")]
     public class CarUsersController : ApiController
     {
         private GreenProDbEntities db = new GreenProDbEntities();
+
+        private const string LocalLoginProvider = "Local";
+        private ApplicationUserManager _userManager;
+
+        public CarUsersController()
+        {
+        }
+
+        public CarUsersController(ApplicationUserManager userManager,
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            UserManager = userManager;
+            AccessTokenFormat = accessTokenFormat;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+
+
+        [Route("usercarlist")]
+        [HttpGet]
+        public  IHttpActionResult UserCarList()
+        {
+            IdentityUser user =  UserManager.FindById(User.Identity.GetUserId());
+            //var carUsers =  db.CarUsers.Where(u => u.AspNetUser.Id == "").ToList();      
+            var carUsers = db.CarUsers.ToList();
+            carUsers = db.CarUsers.Where(u => u.AspNetUser.Id == user.Id).ToList();
+            UserCarListResponse response = new UserCarListResponse();
+            CarUserViewModel carModel = null;
+            foreach (var car in carUsers)
+            {
+                carModel = new CarUserViewModel();
+                carModel.CarId = car.CarId;
+                carModel.DisplayName = car.DisplayName;
+                carModel.Color = car.Color;
+                carModel.LicenseNumber = car.LicenseNumber;
+                carModel.PurchaseYear = car.PurchaseYear;
+                carModel.Make = car.Make;
+                response.cars.Add(carModel);
+            }
+            return Ok(response);
+        }
 
         // GET: api/CarUsers
         public IQueryable<CarUser> GetCarUsers()

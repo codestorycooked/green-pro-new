@@ -19,11 +19,14 @@
                 </div>
                 <div id="collapse@(item.GarageId)" class="">
                     <div class="panel-body">
-                        <div>@item.Garage_Address, @item.City, @item.State @item.Pincode</div>
-                        <div><b>Open Time: </b>@item.OpenTime to @item.CloseTime</div>
-                        <div><b>Service Days: </b>@item.ServiceDays</div>
-                        <div style="text-align:right">  <a href="@string.Format("/Packages/Index/{0}", item.GarageId)" class='line-btn light'>Subscribe</a></div>
-                        <hr />
+                        <div class="col-md-12">
+                            <div>@item.Garage_Address, @item.City, @item.State @item.Pincode</div>
+                            <div><b>Wash Time: </b>@item.OpenTimeStr to @item.CloseTimeStr</div>
+                            <div><b>Service Days: </b>@item.ServiceDays</div>
+                            <div style="text-align:right">  <a href="@string.Format("/Packages/Index/{0}", item.GarageId)" class='line-btn light'>Subscribe</a></div>
+                            <hr />
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -16,6 +16,9 @@ using Microsoft.Owin.Security.OAuth;
 using GreenPro.Api.Models;
 using GreenPro.Api.Providers;
 using GreenPro.Api.Results;
+using GreenPro.Data;
+using System.Data.Entity;
+using System.Linq;
 
 namespace GreenPro.Api.Controllers
 {
@@ -264,7 +267,7 @@ namespace GreenPro.Api.Controllers
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName, user.Id);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -357,7 +360,7 @@ namespace GreenPro.Api.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { FirstName = model.FirstName, ProfilePic = model.ProfilePic, UserName = model.Email, Email = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
@@ -383,7 +386,49 @@ namespace GreenPro.Api.Controllers
 
             base.Dispose(disposing);
         }
+        [HttpPost]
+        [Route("Profile")]
+        public async Task<IHttpActionResult> Profile(AspNetUser user, string CityId, string StateId)
+        {
+            try
+            {
+                GreenProDbEntities db = new GreenProDbEntities();
+                ModelState.Remove("State");
+                ModelState.Remove("City");
+                if (ModelState.IsValid)
+                {
+                    user.State = Convert.ToInt32(StateId);
+                    user.City = Convert.ToInt32(CityId);
+                    db.Entry(user).State = EntityState.Modified;
+                    int i = await db.SaveChangesAsync();
+                    return Ok();
+                }
+                return BadRequest("There was error updating profile");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
+        [Authorize]
+        [HttpGet]
+        public IHttpActionResult ProfileByID(string UserID)
+        {
+
+            GreenProDbEntities db = new GreenProDbEntities();
+
+            var userid = UserID;
+            AspNetUser user = db.AspNetUsers.Where(b => b.Id == userid).First();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+
+        }
         #region Helpers
 
         private IAuthenticationManager Authentication

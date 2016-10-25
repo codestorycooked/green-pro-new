@@ -19,6 +19,9 @@ using GreenPro.Api.Results;
 using GreenPro.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Http.Description;
+using System.Data.Entity.Infrastructure;
+using System.Net;
 
 namespace GreenPro.Api.Controllers
 {
@@ -413,6 +416,7 @@ namespace GreenPro.Api.Controllers
 
         [Authorize]
         [HttpGet]
+        [ResponseType(typeof(AspNetUser))]
         public IHttpActionResult ProfileByID(string UserID)
         {
 
@@ -428,6 +432,47 @@ namespace GreenPro.Api.Controllers
 
             return Ok(user);
 
+        }
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> UpdateProfile(string id, AspNetUser user)
+        {
+            GreenProDbEntities db = new GreenProDbEntities();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(user).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProfileUserIdExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private bool ProfileUserIdExists(string id)
+        {
+            GreenProDbEntities db = new GreenProDbEntities();
+            return db.AspNetUsers.Count(e => e.Id == id) > 0;
         }
         #region Helpers
 

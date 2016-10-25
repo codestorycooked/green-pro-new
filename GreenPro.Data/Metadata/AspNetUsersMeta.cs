@@ -19,7 +19,7 @@ namespace GreenPro.Data
             [StringLength(256)]
             public String Email { get; set; }
 
-           
+
 
             [DisplayName("Password Hash")]
             public String PasswordHash { get; set; }
@@ -27,7 +27,7 @@ namespace GreenPro.Data
 
 
             [DisplayName("Phone Number")]
-            [Required]
+            
             public String PhoneNumber { get; set; }
 
 
@@ -38,11 +38,11 @@ namespace GreenPro.Data
             public String UserName { get; set; }
 
             [DisplayName("First Name")]
-            [Required(ErrorMessage="First Name is Required.")]            
+            [Required(ErrorMessage = "First Name is Required.")]
             [StringLength(100)]
             public string FirstName { get; set; }
             [DisplayName("Last Name")]
-            [Required(ErrorMessage="First Name is Required.")]            
+            
             [StringLength(100)]
             public string LastName { get; set; }
 
@@ -55,16 +55,10 @@ namespace GreenPro.Data
             //[Required(ErrorMessage="Address is Required.")]            
             //[StringLength(100)]
             //public string Address { get; set; }
-            
-            //[Required(ErrorMessage="State Required.")]                        
-            //public int State { get; set; }
-            
-            //[Required(ErrorMessage="City is Required.")]                        
-            //public int City { get; set; }
 
-            [Display(Name="Zip Code")]
-
-            [Required(ErrorMessage="Zip Code is Required.")]                        
+            public int State { get; set; }
+            public int City { get; set; }
+            [Display(Name = "Zip Code")]
             public string Pincode { get; set; }
         }
     }

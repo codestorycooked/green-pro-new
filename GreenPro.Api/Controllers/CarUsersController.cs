@@ -55,26 +55,18 @@ namespace GreenPro.Api.Controllers
 
         [Route("usercarlist")]
         [HttpGet]
-        public  IHttpActionResult UserCarList()
+        [ResponseType(typeof(CarUser))]
+        public IHttpActionResult UserCarList(string userid)
         {
-            IdentityUser user =  UserManager.FindById(User.Identity.GetUserId());
-            //var carUsers =  db.CarUsers.Where(u => u.AspNetUser.Id == "").ToList();      
-            var carUsers = db.CarUsers.ToList();
-            carUsers = db.CarUsers.Where(u => u.AspNetUser.Id == user.Id).ToList();
-            UserCarListResponse response = new UserCarListResponse();
-            CarUserViewModel carModel = null;
-            foreach (var car in carUsers)
+            if (String.IsNullOrEmpty(userid))
             {
-                carModel = new CarUserViewModel();
-                carModel.CarId = car.CarId;
-                carModel.DisplayName = car.DisplayName;
-                carModel.Color = car.Color;
-                carModel.LicenseNumber = car.LicenseNumber;
-                carModel.PurchaseYear = car.PurchaseYear;
-                carModel.Make = car.Make;
-                response.cars.Add(carModel);
+                return BadRequest("UserId Required");
             }
-            return Ok(response);
+            else {
+                var userCar = db.CarUsers.Where(u => u.UserId == userid);
+                return Ok(userCar);
+            }
+
         }
 
         // GET: api/CarUsers

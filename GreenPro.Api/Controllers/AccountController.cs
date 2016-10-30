@@ -453,6 +453,7 @@ namespace GreenPro.Api.Controllers
             try
             {
                 await db.SaveChangesAsync();
+                return StatusCode(HttpStatusCode.OK);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -466,7 +467,7 @@ namespace GreenPro.Api.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+
         }
 
         private bool ProfileUserIdExists(string id)

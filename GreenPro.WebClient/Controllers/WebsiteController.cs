@@ -208,6 +208,7 @@ namespace GreenPro.WebClient.Controllers
                 ServiceDay=model.ServiceDay,
                 SubscriptionTypeId=model.SubscriptionTypeId,
                 GaragesTimeingSlotId=model.GaragesTimeingSlotId,
+                NextServiceDate=model.StartServiceDate.HasValue?model.StartServiceDate:null
             };
             db.UserPackages.Add(savingEntity);
 
@@ -281,10 +282,14 @@ namespace GreenPro.WebClient.Controllers
             var userPackagesList = db.UserPackages.Where(a => a.UserId == userid && a.PaymentRecieved == true && a.IsActive == true).ToList();
             foreach (var timeSlot in garageTimeSlotList)
             {
-                var userPackageByTimeSlot = userPackagesList.Where(u => u.GaragesTimeingSlotId == timeSlot.Id && u.ServiceDay == serviceDay).FirstOrDefault();
-                if (userPackageByTimeSlot != null)
-                    continue;
-                selectListItemList.Add(new SelectListItem { Text = timeSlot.SlotTimeing, Value = timeSlot.Id.ToString() });
+                //var userPackageByTimeSlot = userPackagesList.Where(u => u.GaragesTimeingSlotId == timeSlot.Id && u.ServiceDay == serviceDay).FirstOrDefault();
+                //if (userPackageByTimeSlot != null)
+                //    continue;
+
+                var userPackageByTimeSlot = userPackagesList.Where(u => u.GaragesTimeingSlotId == timeSlot.Id && u.ServiceDay == serviceDay).ToList().Count;
+                if (userPackageByTimeSlot<=3)
+                    selectListItemList.Add(new SelectListItem { Text = timeSlot.SlotTimeing, Value = timeSlot.Id.ToString() });
+                
             }
             return Json(selectListItemList);
         }

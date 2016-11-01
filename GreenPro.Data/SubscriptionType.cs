@@ -26,6 +26,9 @@ namespace GreenPro.Data
             if (SubscriptionTypeId == 3)
                 subscriptionType = "Monthly";
 
+            if (SubscriptionTypeId == 4)
+                subscriptionType = "One Time";
+
             return subscriptionType;
         }
 
@@ -33,6 +36,7 @@ namespace GreenPro.Data
         {
             IList<SelectListItem> ServiceStatus = new List<SelectListItem>();
 
+            ServiceStatus.Add(new SelectListItem() { Text = "One Time", Value = "4" });
             ServiceStatus.Add(new SelectListItem() { Text = "Weekly", Value = "1" });
             ServiceStatus.Add(new SelectListItem() { Text = "Bi-Weekly", Value = "2" });
             ServiceStatus.Add(new SelectListItem() { Text = "Monthly", Value = "3" });

@@ -1,0 +1,1567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreenPro.DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__RefactorLog">
+    <Key>
+      <PropertyRef Name="OperationKey" />
+    </Key>
+    <Property Name="OperationKey" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AdhocUserPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="SubscribedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="PriceWithAddOns" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DiscountPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Ipaddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExistingPackageId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentRecieved" Type="Boolean" Nullable="false" />
+    <Property Name="Processed" Type="Boolean" Nullable="false" />
+    <Property Name="TaxAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TipAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="CarUser" Relationship="Self.FK_AdhocUserPackages_CarUsers" FromRole="AdhocUserPackages" ToRole="CarUsers" />
+    <NavigationProperty Name="Package" Relationship="Self.FK_AdhocUserPackages_Packages" FromRole="AdhocUserPackages" ToRole="Packages" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_AdhocUserPackages_UserPackages" FromRole="AdhocUserPackages" ToRole="UserPackages" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AdhocUserPackages_Users" FromRole="AdhocUserPackages" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AdhocUserPackagesAddons" Relationship="Self.FK_AdhocUserPackagesAddons_AdhocUserPackages" FromRole="AdhocUserPackages" ToRole="AdhocUserPackagesAddons" />
+  </EntityType>
+  <EntityType Name="AdhocUserPackagesAddon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DiscountPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CreatedDt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AdhocUserPackage" Relationship="Self.FK_AdhocUserPackagesAddons_AdhocUserPackages" FromRole="AdhocUserPackagesAddons" ToRole="AdhocUserPackages" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_AdhocUserPackagesAddons_ToServices" FromRole="AdhocUserPackagesAddons" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="Pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Balance" Type="Int32" Nullable="false" />
+    <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+    <Property Name="ProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="Self.FK_AdhocUserPackages_Users" FromRole="AspNetUsers" ToRole="AdhocUserPackages" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="City1" Relationship="Self.FK_AspNetUsers_Cities" FromRole="AspNetUsers" ToRole="Cities" />
+    <NavigationProperty Name="State1" Relationship="Self.FK_AspNetUsers_States" FromRole="AspNetUsers" ToRole="States" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="Self.FK_CarOwnerId_AspNetUsers" FromRole="AspNetUsers" ToRole="CarServiceEntries" />
+    <NavigationProperty Name="CarUsers" Relationship="Self.FK_CarUsers_Users" FromRole="AspNetUsers" ToRole="CarUsers" />
+    <NavigationProperty Name="CrewAdminMembers" Relationship="Self.FK_CrewAdmin_AspNetUsers" FromRole="AspNetUsers" ToRole="CrewAdminMember" />
+    <NavigationProperty Name="LeaderMembers" Relationship="Self.FK_CrewLeader_AspNetUSer" FromRole="AspNetUsers" ToRole="LeaderMember" />
+    <NavigationProperty Name="LeaderMembers1" Relationship="Self.FK_CrewMember_AspNetUSer" FromRole="AspNetUsers" ToRole="LeaderMember" />
+    <NavigationProperty Name="CrewAdminMembers1" Relationship="Self.FK_CrewMember_AspNetUsers" FromRole="AspNetUsers" ToRole="CrewAdminMember" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="Self.FK_LeaderCarJob_AspNetUser" FromRole="AspNetUsers" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="PaypalAutoPayments" Relationship="Self.FK_PaypalAutoPayments_AspNEtUSERs" FromRole="AspNetUsers" ToRole="PaypalAutoPayments" />
+    <NavigationProperty Name="UserPackages" Relationship="Self.FK_UserPackages_Users" FromRole="AspNetUsers" ToRole="UserPackages" />
+    <NavigationProperty Name="UserTransactions" Relationship="Self.FK_UserTransactions_ASpnetUsers" FromRole="AspNetUsers" ToRole="UserTransactions" />
+    <NavigationProperty Name="WorkDones" Relationship="Self.FK_WorkDone_AspNetUsers1" FromRole="AspNetUsers" ToRole="WorkDone" />
+    <NavigationProperty Name="WorkDones1" Relationship="Self.FK_WorkDone_AspNetUsers2" FromRole="AspNetUsers" ToRole="WorkDone" />
+    <NavigationProperty Name="CarServiceEntries1" Relationship="Self.FK_WorkererId_AspNetUsers" FromRole="AspNetUsers" ToRole="CarServiceEntries" />
+    <NavigationProperty Name="WorkerGarages" Relationship="Self.FK_WorkerGarages_AspNetUser" FromRole="AspNetUsers" ToRole="WorkerGarages" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="AutomaticPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="155" FixedLength="false" Unicode="true" />
+    <Property Name="UserPackageID" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="PaypalBillingID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayPalECToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdhocUserPackageID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="CarServiceEntry">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CarOwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="WorkerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CarOwnerId_AspNetUsers" FromRole="CarServiceEntries" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_WorkererId_AspNetUsers" FromRole="CarServiceEntries" ToRole="AspNetUsers" />
+    <NavigationProperty Name="CarUser" Relationship="Self.FK_CarServiceEntries_CarUsers" FromRole="CarServiceEntries" ToRole="CarUsers" />
+    <NavigationProperty Name="Package" Relationship="Self.FK_CarServiceEntries_Packages" FromRole="CarServiceEntries" ToRole="Packages" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarUser">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LicenseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PurchaseYear" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AutoRenewal" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="Self.FK_AdhocUserPackages_CarUsers" FromRole="CarUsers" ToRole="AdhocUserPackages" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CarUsers_Users" FromRole="CarUsers" ToRole="AspNetUsers" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="Self.FK_CarServiceEntries_CarUsers" FromRole="CarUsers" ToRole="CarServiceEntries" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_CarUsers_Garage" FromRole="CarUsers" ToRole="Garages" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="Self.FK_LeaderCarJob_CarUser" FromRole="CarUsers" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="UserPackages" Relationship="Self.FK_UserPackages_CarUsers" FromRole="CarUsers" ToRole="UserPackages" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StateID" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_Cities" FromRole="Cities" ToRole="AspNetUsers" />
+    <NavigationProperty Name="State" Relationship="Self.FK_Cities_State" FromRole="Cities" ToRole="States" />
+    <NavigationProperty Name="Garages" Relationship="Self.FK_Garages_Cities" FromRole="Cities" ToRole="Garages" />
+  </EntityType>
+  <EntityType Name="CrewAdminMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewMemberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CrewAdminId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CrewAdmin_AspNetUsers" FromRole="CrewAdminMember" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_CrewMember_AspNetUsers" FromRole="CrewAdminMember" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Garage_CarDaySetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageTeamId" Type="Int32" Nullable="false" />
+    <Property Name="EntityTypeKey" Type="Int32" Nullable="false" />
+    <Property Name="EntityTypeValue" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <Property Name="ServiceDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CarServiceDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceStatusId" Type="Int32" Nullable="false" />
+    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Garage_LeaderSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageTeamId" Type="Int32" Nullable="false" />
+    <Property Name="EntityTypeKey" Type="Int32" Nullable="false" />
+    <Property Name="EntityTypeValue" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <Property Name="ServiceDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="GarageMaxCar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="CarPerCrewAdmin" Type="Int32" Nullable="false" />
+    <Property Name="DayRef" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_GarageMaxCars_Garages" FromRole="GarageMaxCars" ToRole="Garages" />
+  </EntityType>
+  <EntityType Name="Garage">
+    <Key>
+      <PropertyRef Name="GarageId" />
+    </Key>
+    <Property Name="GarageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Garage_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Garage_Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="State" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="Int32" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Pincode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Latitute" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contact_Person" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OpenTime" Type="Time" Precision="7" />
+    <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="ServiceDays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CarUsers" Relationship="Self.FK_CarUsers_Garage" FromRole="Garages" ToRole="CarUsers" />
+    <NavigationProperty Name="City1" Relationship="Self.FK_Garages_Cities" FromRole="Garages" ToRole="Cities" />
+    <NavigationProperty Name="GarageMaxCars" Relationship="Self.FK_GarageMaxCars_Garages" FromRole="Garages" ToRole="GarageMaxCars" />
+    <NavigationProperty Name="State1" Relationship="Self.FK_Garages_States" FromRole="Garages" ToRole="States" />
+    <NavigationProperty Name="GargesTimeingSlots" Relationship="Self.FK_GargesTimeingSlots_Garages" FromRole="Garages" ToRole="GargesTimeingSlots" />
+    <NavigationProperty Name="GarrageWeekdays" Relationship="Self.FK_GarrageWeekday_Garages" FromRole="Garages" ToRole="GarrageWeekday" />
+    <NavigationProperty Name="LeaderCarJobs" Relationship="Self.FK_LeaderCarJob_Garages" FromRole="Garages" ToRole="LeaderCarJob" />
+    <NavigationProperty Name="UnAssignedCars" Relationship="Self.FK_UnAssignedCars_Garages" FromRole="Garages" ToRole="UnAssignedCars" />
+    <NavigationProperty Name="WorkerGarages" Relationship="Self.FK_WorkerGarages_Garages" FromRole="Garages" ToRole="WorkerGarages" />
+  </EntityType>
+  <EntityType Name="GarageTeam">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="GargesTimeingSlot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SlotTimeing" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_GargesTimeingSlots_Garages" FromRole="GargesTimeingSlots" ToRole="Garages" />
+    <NavigationProperty Name="UserPackages" Relationship="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot" FromRole="GargesTimeingSlot" ToRole="UserPackage" />
+  </EntityType>
+  <EntityType Name="GarrageWeekday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarrageId" Type="Int32" Nullable="false" />
+    <Property Name="WeekdayId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_GarrageWeekday_Garages" FromRole="GarrageWeekday" ToRole="Garages" />
+    <NavigationProperty Name="Weekday" Relationship="Self.FK_GarrageWeekday_Weekdays" FromRole="GarrageWeekday" ToRole="Weekdays" />
+  </EntityType>
+  <EntityType Name="LeaderCarJob">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GarageId" Type="Int32" Nullable="false" />
+    <Property Name="LeaderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_LeaderCarJob_AspNetUser" FromRole="LeaderCarJob" ToRole="AspNetUsers" />
+    <NavigationProperty Name="CarUser" Relationship="Self.FK_LeaderCarJob_CarUser" FromRole="LeaderCarJob" ToRole="CarUsers" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_LeaderCarJob_Garages" FromRole="LeaderCarJob" ToRole="Garages" />
+  </EntityType>
+  <EntityType Name="LeaderGarageDay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkerGarageID" Type="Int32" Nullable="false" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="WorkerGarage" Relationship="Self.FK_LeaderGarageDay_WorkerGarages" FromRole="LeaderGarageDay" ToRole="WorkerGarages" />
+  </EntityType>
+  <EntityType Name="LeaderMember">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CrewMemberID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_CrewLeader_AspNetUSer" FromRole="LeaderMember" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_CrewMember_AspNetUSer" FromRole="LeaderMember" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="LeaderWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LeaderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LogDetailCarSide">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="WorkLogDetails" Relationship="Self.FK_WorkLogDetails_LogDetailCarSide" FromRole="LogDetailCarSide" ToRole="WorkLogDetails" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="source" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackStrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Package_Services">
+    <Key>
+      <PropertyRef Name="PackageServiceId" />
+    </Key>
+    <Property Name="PackageServiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Package" Relationship="Self.FK_Package_Services_Packages" FromRole="Package_Services" ToRole="Packages" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Package_Services_Services" FromRole="Package_Services" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageId" />
+    </Key>
+    <Property Name="PackageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Package_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Package_Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Package_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CreateDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubscriptionTypes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="Self.FK_AdhocUserPackages_Packages" FromRole="Packages" ToRole="AdhocUserPackages" />
+    <NavigationProperty Name="CarServiceEntries" Relationship="Self.FK_CarServiceEntries_Packages" FromRole="Packages" ToRole="CarServiceEntries" />
+    <NavigationProperty Name="Package_Services" Relationship="Self.FK_Package_Services_Packages" FromRole="Packages" ToRole="Package_Services" />
+    <NavigationProperty Name="UserPackages" Relationship="Self.FK_UserPackages_Packages" FromRole="Packages" ToRole="UserPackages" />
+    <NavigationProperty Name="WorkDones" Relationship="Self.FK_WorkDone_Packages" FromRole="Packages" ToRole="WorkDone" />
+  </EntityType>
+  <EntityType Name="PaypalAutoPayment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrasactionID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PendingReason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentDate" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="GrossAmount" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="UserPackageID" Type="Int32" />
+    <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="3" />
+    <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+    <Property Name="ServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BillingAggrementID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_PaypalAutoPayments_AspNEtUSERs" FromRole="PaypalAutoPayments" ToRole="AspNetUsers" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_PaypalAutoPayments_UserPackageID" FromRole="PaypalAutoPayments" ToRole="UserPackages" />
+  </EntityType>
+  <EntityType Name="PayPalLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApiSatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseError" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseRedirectURL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ECToken" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BillingAggrementID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TimeStamp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CorrelationID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ACK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServerDate" Type="DateTime" Precision="3" />
+    <Property Name="SubscriptionID" Type="Int32" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_PayPalLogs_UserPackage" FromRole="PayPalLogs" ToRole="UserPackages" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="ServiceID" />
+    </Key>
+    <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Service_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Service_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Service_Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="IsAddOn" Type="Boolean" Nullable="false" />
+    <Property Name="CreateDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AdhocUserPackagesAddons" Relationship="Self.FK_AdhocUserPackagesAddons_ToServices" FromRole="Services" ToRole="AdhocUserPackagesAddons" />
+    <NavigationProperty Name="Package_Services" Relationship="Self.FK_Package_Services_Services" FromRole="Services" ToRole="Package_Services" />
+    <NavigationProperty Name="UserPackagesAddons" Relationship="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services" FromRole="Service" ToRole="UserPackagesAddon" />
+  </EntityType>
+  <EntityType Name="StateProvince">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Abbreviation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Published" Type="Boolean" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_AspNetUsers_States" FromRole="States" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_State" FromRole="States" ToRole="Cities" />
+    <NavigationProperty Name="Garages" Relationship="Self.FK_Garages_States" FromRole="States" ToRole="Garages" />
+  </EntityType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TaxPercentage" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UnAssignedCar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_UnAssignedCars_Garages" FromRole="UnAssignedCars" ToRole="Garages" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_UnAssignedCars_Packages" FromRole="UnAssignedCars" ToRole="UserPackages" />
+  </EntityType>
+  <EntityType Name="UserPackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="CarId" Type="Int32" Nullable="false" />
+    <Property Name="SubscribedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="PriceWithAddOns" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DiscountPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Ipaddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaymentRecieved" Type="Boolean" Nullable="false" />
+    <Property Name="Processed" Type="Boolean" Nullable="false" />
+    <Property Name="TaxAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="TipAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="SubscriptionEndDate" Type="DateTime" Precision="3" />
+    <Property Name="ServiceDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="GaragesTimeingSlotId" Type="Int32" />
+    <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="SubscriptionTypeId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentMethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AdhocUserPackages" Relationship="Self.FK_AdhocUserPackages_UserPackages" FromRole="UserPackages" ToRole="AdhocUserPackages" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserPackages_Users" FromRole="UserPackages" ToRole="AspNetUsers" />
+    <NavigationProperty Name="CarUser" Relationship="Self.FK_UserPackages_CarUsers" FromRole="UserPackages" ToRole="CarUsers" />
+    <NavigationProperty Name="Package" Relationship="Self.FK_UserPackages_Packages" FromRole="UserPackages" ToRole="Packages" />
+    <NavigationProperty Name="PaypalAutoPayments" Relationship="Self.FK_PaypalAutoPayments_UserPackageID" FromRole="UserPackages" ToRole="PaypalAutoPayments" />
+    <NavigationProperty Name="PayPalLogs" Relationship="Self.FK_PayPalLogs_UserPackage" FromRole="UserPackages" ToRole="PayPalLogs" />
+    <NavigationProperty Name="UnAssignedCars" Relationship="Self.FK_UnAssignedCars_Packages" FromRole="UserPackages" ToRole="UnAssignedCars" />
+    <NavigationProperty Name="UserPackagesAddons" Relationship="Self.FK_UserPackagesAddons_UserPackages" FromRole="UserPackages" ToRole="UserPackagesAddons" />
+    <NavigationProperty Name="UserTransactions" Relationship="Self.FK_UserTransactions_UserPackages" FromRole="UserPackages" ToRole="UserTransactions" />
+    <NavigationProperty Name="GargesTimeingSlot" Relationship="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot" FromRole="UserPackage" ToRole="GargesTimeingSlot" />
+  </EntityType>
+  <EntityType Name="UserPackagesAddon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserPackageID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ActualPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DiscountPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CreatedDt" Type="DateTime" Precision="3" />
+    <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_UserPackagesAddons_UserPackages" FromRole="UserPackagesAddons" ToRole="UserPackages" />
+    <NavigationProperty Name="Service" Relationship="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services" FromRole="UserPackagesAddon" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="UserTransaction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" />
+    <Property Name="PaypalId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Userid" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BillingAggrementID" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TrasactionID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserTransactions_ASpnetUsers" FromRole="UserTransactions" ToRole="AspNetUsers" />
+    <NavigationProperty Name="UserPackage" Relationship="Self.FK_UserTransactions_UserPackages" FromRole="UserTransactions" ToRole="UserPackages" />
+  </EntityType>
+  <EntityType Name="Weekday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="GarrageWeekdays" Relationship="Self.FK_GarrageWeekday_Weekdays" FromRole="Weekdays" ToRole="GarrageWeekday" />
+  </EntityType>
+  <EntityType Name="WorkDone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CrewMemberId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PackageId" Type="Int32" Nullable="false" />
+    <Property Name="StartTimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="EndTimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedTimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_WorkDone_AspNetUsers1" FromRole="WorkDone" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_WorkDone_AspNetUsers2" FromRole="WorkDone" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Package" Relationship="Self.FK_WorkDone_Packages" FromRole="WorkDone" ToRole="Packages" />
+    <NavigationProperty Name="WorkLogDetails" Relationship="Self.FK_WorkLogDetails_WorkDone" FromRole="WorkDone" ToRole="WorkLogDetails" />
+  </EntityType>
+  <EntityType Name="WorkerGarage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CrewLeaderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GarageID" Type="Int32" Nullable="false" />
+    <Property Name="IsLeader" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_WorkerGarages_AspNetUser" FromRole="WorkerGarages" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Garage" Relationship="Self.FK_WorkerGarages_Garages" FromRole="WorkerGarages" ToRole="Garages" />
+    <NavigationProperty Name="LeaderGarageDays" Relationship="Self.FK_LeaderGarageDay_WorkerGarages" FromRole="WorkerGarages" ToRole="LeaderGarageDay" />
+  </EntityType>
+  <EntityType Name="WorkLogDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SideId" Type="Int32" Nullable="false" />
+    <Property Name="PrePost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImageRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WorkDoneId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LogDetailCarSide" Relationship="Self.FK_WorkLogDetails_LogDetailCarSide" FromRole="WorkLogDetails" ToRole="LogDetailCarSide" />
+    <NavigationProperty Name="WorkDone" Relationship="Self.FK_WorkLogDetails_WorkDone" FromRole="WorkLogDetails" ToRole="WorkDone" />
+  </EntityType>
+  <Association Name="FK_AdhocUserPackages_CarUsers">
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="1" />
+    <End Role="AdhocUserPackages" Type="Self.AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUsers">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="AdhocUserPackages">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_Packages">
+    <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+    <End Role="AdhocUserPackages" Type="Self.AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="AdhocUserPackages">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_UserPackages">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="1" />
+    <End Role="AdhocUserPackages" Type="Self.AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackages">
+        <PropertyRef Name="ExistingPackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackages_Users">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="AdhocUserPackages" Type="Self.AdhocUserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackagesAddons_AdhocUserPackages">
+    <End Role="AdhocUserPackages" Type="Self.AdhocUserPackage" Multiplicity="1" />
+    <End Role="AdhocUserPackagesAddons" Type="Self.AdhocUserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdhocUserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AdhocUserPackagesAddons">
+        <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdhocUserPackagesAddons_ToServices">
+    <End Role="Services" Type="Self.Service" Multiplicity="1" />
+    <End Role="AdhocUserPackagesAddons" Type="Self.AdhocUserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="AdhocUserPackagesAddons">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_Cities">
+    <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_States">
+    <End Role="States" Type="Self.State" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarOwnerId_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="CarServiceEntries" Type="Self.CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarServiceEntries">
+        <PropertyRef Name="CarOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarUsers_Users">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarUsers">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewAdmin_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="CrewAdminMember" Type="Self.CrewAdminMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CrewAdminMember">
+        <PropertyRef Name="CrewMemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewLeader_AspNetUSer">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="LeaderMember" Type="Self.LeaderMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderMember">
+        <PropertyRef Name="CrewLeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewMember_AspNetUSer">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="LeaderMember" Type="Self.LeaderMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderMember">
+        <PropertyRef Name="CrewMemberID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CrewMember_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="CrewAdminMember" Type="Self.CrewAdminMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CrewAdminMember">
+        <PropertyRef Name="CrewAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_AspNetUser">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="LeaderCarJob" Type="Self.LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="LeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaypalAutoPayments_AspNEtUSERs">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="PaypalAutoPayments" Type="Self.PaypalAutoPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaypalAutoPayments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_Users">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTransactions_ASpnetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserTransactions" Type="Self.UserTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTransactions">
+        <PropertyRef Name="Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="WorkDone" Type="Self.WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="CrewLeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_AspNetUsers2">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="WorkDone" Type="Self.WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="CrewMemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkererId_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="CarServiceEntries" Type="Self.CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CarServiceEntries">
+        <PropertyRef Name="WorkerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkerGarages_AspNetUser">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="WorkerGarages" Type="Self.WorkerGarage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkerGarages">
+        <PropertyRef Name="CrewLeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarServiceEntries_CarUsers">
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="1" />
+    <End Role="CarServiceEntries" Type="Self.CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUsers">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="CarServiceEntries">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarServiceEntries_Packages">
+    <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+    <End Role="CarServiceEntries" Type="Self.CarServiceEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="CarServiceEntries">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarUsers_Garage">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="0..1" />
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="CarUsers">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_CarUser">
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="1" />
+    <End Role="LeaderCarJob" Type="Self.LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUsers">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_CarUsers">
+    <End Role="CarUsers" Type="Self.CarUser" Multiplicity="1" />
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUsers">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="UserPackages">
+        <PropertyRef Name="CarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cities_State">
+    <End Role="States" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Cities" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="StateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Garages_Cities">
+    <End Role="Cities" Type="Self.City" Multiplicity="1" />
+    <End Role="Garages" Type="Self.Garage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Garages">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarageMaxCars_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="GarageMaxCars" Type="Self.GarageMaxCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GarageMaxCars">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Garages_States">
+    <End Role="States" Type="Self.State" Multiplicity="1" />
+    <End Role="Garages" Type="Self.Garage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="States">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Garages">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GargesTimeingSlots_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="GargesTimeingSlots" Type="Self.GargesTimeingSlot" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GargesTimeingSlots">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarrageWeekday_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="GarrageWeekday" Type="Self.GarrageWeekday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="GarrageWeekday">
+        <PropertyRef Name="GarrageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderCarJob_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="LeaderCarJob" Type="Self.LeaderCarJob" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="LeaderCarJob">
+        <PropertyRef Name="GarageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnAssignedCars_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="UnAssignedCars" Type="Self.UnAssignedCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="UnAssignedCars">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkerGarages_Garages">
+    <End Role="Garages" Type="Self.Garage" Multiplicity="1" />
+    <End Role="WorkerGarages" Type="Self.WorkerGarage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Garages">
+        <PropertyRef Name="GarageId" />
+      </Principal>
+      <Dependent Role="WorkerGarages">
+        <PropertyRef Name="GarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GarrageWeekday_Weekdays">
+    <End Role="Weekdays" Type="Self.Weekday" Multiplicity="1" />
+    <End Role="GarrageWeekday" Type="Self.GarrageWeekday" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Weekdays">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GarrageWeekday">
+        <PropertyRef Name="WeekdayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LeaderGarageDay_WorkerGarages">
+    <End Role="WorkerGarages" Type="Self.WorkerGarage" Multiplicity="1" />
+    <End Role="LeaderGarageDay" Type="Self.LeaderGarageDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkerGarages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaderGarageDay">
+        <PropertyRef Name="WorkerGarageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkLogDetails_LogDetailCarSide">
+    <End Role="LogDetailCarSide" Type="Self.LogDetailCarSide" Multiplicity="1" />
+    <End Role="WorkLogDetails" Type="Self.WorkLogDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LogDetailCarSide">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkLogDetails">
+        <PropertyRef Name="SideId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Services_Packages">
+    <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+    <End Role="Package_Services" Type="Self.Package_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="Package_Services">
+        <PropertyRef Name="PackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Services_Services">
+    <End Role="Services" Type="Self.Service" Multiplicity="1" />
+    <End Role="Package_Services" Type="Self.Package_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="Package_Services">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_Packages">
+    <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="UserPackages">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkDone_Packages">
+    <End Role="Packages" Type="Self.Package" Multiplicity="1" />
+    <End Role="WorkDone" Type="Self.WorkDone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Packages">
+        <PropertyRef Name="PackageId" />
+      </Principal>
+      <Dependent Role="WorkDone">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaypalAutoPayments_UserPackageID">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="0..1" />
+    <End Role="PaypalAutoPayments" Type="Self.PaypalAutoPayment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PaypalAutoPayments">
+        <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayPalLogs_UserPackage">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="0..1" />
+    <End Role="PayPalLogs" Type="Self.PayPalLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PayPalLogs">
+        <PropertyRef Name="SubscriptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UnAssignedCars_Packages">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="1" />
+    <End Role="UnAssignedCars" Type="Self.UnAssignedCar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UnAssignedCars">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackagesAddons_UserPackages">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="1" />
+    <End Role="UserPackagesAddons" Type="Self.UserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackagesAddons">
+        <PropertyRef Name="UserPackageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTransactions_UserPackages">
+    <End Role="UserPackages" Type="Self.UserPackage" Multiplicity="0..1" />
+    <End Role="UserTransactions" Type="Self.UserTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserPackages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTransactions">
+        <PropertyRef Name="PackageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkLogDetails_WorkDone">
+    <End Role="WorkDone" Type="Self.WorkDone" Multiplicity="1" />
+    <End Role="WorkLogDetails" Type="Self.WorkLogDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkDone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkLogDetails">
+        <PropertyRef Name="WorkDoneId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="GreenProDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+    <EntitySet Name="AdhocUserPackages" EntityType="Self.AdhocUserPackage" />
+    <EntitySet Name="AdhocUserPackagesAddons" EntityType="Self.AdhocUserPackagesAddon" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="AutomaticPayments" EntityType="Self.AutomaticPayment" />
+    <EntitySet Name="CarServiceEntries" EntityType="Self.CarServiceEntry" />
+    <EntitySet Name="CarTypes" EntityType="Self.CarType" />
+    <EntitySet Name="CarUsers" EntityType="Self.CarUser" />
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="CrewAdminMembers" EntityType="Self.CrewAdminMember" />
+    <EntitySet Name="Garage_CarDaySetting" EntityType="Self.Garage_CarDaySetting" />
+    <EntitySet Name="Garage_LeaderSetting" EntityType="Self.Garage_LeaderSetting" />
+    <EntitySet Name="GarageMaxCars" EntityType="Self.GarageMaxCar" />
+    <EntitySet Name="Garages" EntityType="Self.Garage" />
+    <EntitySet Name="GarageTeams" EntityType="Self.GarageTeam" />
+    <EntitySet Name="GargesTimeingSlots" EntityType="Self.GargesTimeingSlot" />
+    <EntitySet Name="GarrageWeekdays" EntityType="Self.GarrageWeekday" />
+    <EntitySet Name="LeaderCarJobs" EntityType="Self.LeaderCarJob" />
+    <EntitySet Name="LeaderGarageDays" EntityType="Self.LeaderGarageDay" />
+    <EntitySet Name="LeaderMembers" EntityType="Self.LeaderMember" />
+    <EntitySet Name="LeaderWorks" EntityType="Self.LeaderWork" />
+    <EntitySet Name="LogDetailCarSides" EntityType="Self.LogDetailCarSide" />
+    <EntitySet Name="Logs" EntityType="Self.Log" />
+    <EntitySet Name="Package_Services" EntityType="Self.Package_Services" />
+    <EntitySet Name="Packages" EntityType="Self.Package" />
+    <EntitySet Name="PaypalAutoPayments" EntityType="Self.PaypalAutoPayment" />
+    <EntitySet Name="PayPalLogs" EntityType="Self.PayPalLog" />
+    <EntitySet Name="Services" EntityType="Self.Service" />
+    <EntitySet Name="StateProvinces" EntityType="Self.StateProvince" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Taxes" EntityType="Self.Tax" />
+    <EntitySet Name="UnAssignedCars" EntityType="Self.UnAssignedCar" />
+    <EntitySet Name="UserPackages" EntityType="Self.UserPackage" />
+    <EntitySet Name="UserPackagesAddons" EntityType="Self.UserPackagesAddon" />
+    <EntitySet Name="UserTransactions" EntityType="Self.UserTransaction" />
+    <EntitySet Name="Weekdays" EntityType="Self.Weekday" />
+    <EntitySet Name="WorkDones" EntityType="Self.WorkDone" />
+    <EntitySet Name="WorkerGarages" EntityType="Self.WorkerGarage" />
+    <EntitySet Name="WorkLogDetails" EntityType="Self.WorkLogDetail" />
+    <AssociationSet Name="FK_AdhocUserPackages_CarUsers" Association="Self.FK_AdhocUserPackages_CarUsers">
+      <End Role="CarUsers" EntitySet="CarUsers" />
+      <End Role="AdhocUserPackages" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_Packages" Association="Self.FK_AdhocUserPackages_Packages">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="AdhocUserPackages" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_UserPackages" Association="Self.FK_AdhocUserPackages_UserPackages">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="AdhocUserPackages" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackages_Users" Association="Self.FK_AdhocUserPackages_Users">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AdhocUserPackages" EntitySet="AdhocUserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackagesAddons_AdhocUserPackages" Association="Self.FK_AdhocUserPackagesAddons_AdhocUserPackages">
+      <End Role="AdhocUserPackages" EntitySet="AdhocUserPackages" />
+      <End Role="AdhocUserPackagesAddons" EntitySet="AdhocUserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdhocUserPackagesAddons_ToServices" Association="Self.FK_AdhocUserPackagesAddons_ToServices">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="AdhocUserPackagesAddons" EntitySet="AdhocUserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_Cities" Association="Self.FK_AspNetUsers_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_States" Association="Self.FK_AspNetUsers_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarOwnerId_AspNetUsers" Association="Self.FK_CarOwnerId_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CarServiceEntries" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarUsers_Users" Association="Self.FK_CarUsers_Users">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CarUsers" EntitySet="CarUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewAdmin_AspNetUsers" Association="Self.FK_CrewAdmin_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CrewAdminMember" EntitySet="CrewAdminMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewLeader_AspNetUSer" Association="Self.FK_CrewLeader_AspNetUSer">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="LeaderMember" EntitySet="LeaderMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewMember_AspNetUSer" Association="Self.FK_CrewMember_AspNetUSer">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="LeaderMember" EntitySet="LeaderMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CrewMember_AspNetUsers" Association="Self.FK_CrewMember_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CrewAdminMember" EntitySet="CrewAdminMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_AspNetUser" Association="Self.FK_LeaderCarJob_AspNetUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaypalAutoPayments_AspNEtUSERs" Association="Self.FK_PaypalAutoPayments_AspNEtUSERs">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="PaypalAutoPayments" EntitySet="PaypalAutoPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_Users" Association="Self.FK_UserPackages_Users">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserPackages" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTransactions_ASpnetUsers" Association="Self.FK_UserTransactions_ASpnetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserTransactions" EntitySet="UserTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_AspNetUsers1" Association="Self.FK_WorkDone_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_AspNetUsers2" Association="Self.FK_WorkDone_AspNetUsers2">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkererId_AspNetUsers" Association="Self.FK_WorkererId_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="CarServiceEntries" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkerGarages_AspNetUser" Association="Self.FK_WorkerGarages_AspNetUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="WorkerGarages" EntitySet="WorkerGarages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarServiceEntries_CarUsers" Association="Self.FK_CarServiceEntries_CarUsers">
+      <End Role="CarUsers" EntitySet="CarUsers" />
+      <End Role="CarServiceEntries" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarServiceEntries_Packages" Association="Self.FK_CarServiceEntries_Packages">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="CarServiceEntries" EntitySet="CarServiceEntries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarUsers_Garage" Association="Self.FK_CarUsers_Garage">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="CarUsers" EntitySet="CarUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_CarUser" Association="Self.FK_LeaderCarJob_CarUser">
+      <End Role="CarUsers" EntitySet="CarUsers" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_CarUsers" Association="Self.FK_UserPackages_CarUsers">
+      <End Role="CarUsers" EntitySet="CarUsers" />
+      <End Role="UserPackages" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cities_State" Association="Self.FK_Cities_State">
+      <End Role="States" EntitySet="States" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Garages_Cities" Association="Self.FK_Garages_Cities">
+      <End Role="Cities" EntitySet="Cities" />
+      <End Role="Garages" EntitySet="Garages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarageMaxCars_Garages" Association="Self.FK_GarageMaxCars_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="GarageMaxCars" EntitySet="GarageMaxCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Garages_States" Association="Self.FK_Garages_States">
+      <End Role="States" EntitySet="States" />
+      <End Role="Garages" EntitySet="Garages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GargesTimeingSlots_Garages" Association="Self.FK_GargesTimeingSlots_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="GargesTimeingSlots" EntitySet="GargesTimeingSlots" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarrageWeekday_Garages" Association="Self.FK_GarrageWeekday_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="GarrageWeekday" EntitySet="GarrageWeekdays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderCarJob_Garages" Association="Self.FK_LeaderCarJob_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="LeaderCarJob" EntitySet="LeaderCarJobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnAssignedCars_Garages" Association="Self.FK_UnAssignedCars_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="UnAssignedCars" EntitySet="UnAssignedCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkerGarages_Garages" Association="Self.FK_WorkerGarages_Garages">
+      <End Role="Garages" EntitySet="Garages" />
+      <End Role="WorkerGarages" EntitySet="WorkerGarages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GarrageWeekday_Weekdays" Association="Self.FK_GarrageWeekday_Weekdays">
+      <End Role="Weekdays" EntitySet="Weekdays" />
+      <End Role="GarrageWeekday" EntitySet="GarrageWeekdays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LeaderGarageDay_WorkerGarages" Association="Self.FK_LeaderGarageDay_WorkerGarages">
+      <End Role="WorkerGarages" EntitySet="WorkerGarages" />
+      <End Role="LeaderGarageDay" EntitySet="LeaderGarageDays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkLogDetails_LogDetailCarSide" Association="Self.FK_WorkLogDetails_LogDetailCarSide">
+      <End Role="LogDetailCarSide" EntitySet="LogDetailCarSides" />
+      <End Role="WorkLogDetails" EntitySet="WorkLogDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Services_Packages" Association="Self.FK_Package_Services_Packages">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="Package_Services" EntitySet="Package_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Services_Services" Association="Self.FK_Package_Services_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Package_Services" EntitySet="Package_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_Packages" Association="Self.FK_UserPackages_Packages">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="UserPackages" EntitySet="UserPackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkDone_Packages" Association="Self.FK_WorkDone_Packages">
+      <End Role="Packages" EntitySet="Packages" />
+      <End Role="WorkDone" EntitySet="WorkDones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaypalAutoPayments_UserPackageID" Association="Self.FK_PaypalAutoPayments_UserPackageID">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="PaypalAutoPayments" EntitySet="PaypalAutoPayments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayPalLogs_UserPackage" Association="Self.FK_PayPalLogs_UserPackage">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="PayPalLogs" EntitySet="PayPalLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UnAssignedCars_Packages" Association="Self.FK_UnAssignedCars_Packages">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="UnAssignedCars" EntitySet="UnAssignedCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackagesAddons_UserPackages" Association="Self.FK_UserPackagesAddons_UserPackages">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="UserPackagesAddons" EntitySet="UserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTransactions_UserPackages" Association="Self.FK_UserTransactions_UserPackages">
+      <End Role="UserPackages" EntitySet="UserPackages" />
+      <End Role="UserTransactions" EntitySet="UserTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkLogDetails_WorkDone" Association="Self.FK_WorkLogDetails_WorkDone">
+      <End Role="WorkDone" EntitySet="WorkDones" />
+      <End Role="WorkLogDetails" EntitySet="WorkLogDetails" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <FunctionImport Name="GetAllAvailableGaragesCitiesList" ReturnType="Collection(GreenPro.DatabaseModel.GetAllAvailableGaragesCitiesList_Result)" />
+    <FunctionImport Name="GetGarage_CarDaySettingPaymentDetail" ReturnType="Collection(GreenPro.DatabaseModel.GetGarage_CarDaySettingPaymentDetail_Result)">
+      <Parameter Name="ServiceDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetServicesByCarId" ReturnType="Collection(GreenPro.DatabaseModel.GetServicesByCarId_Result)">
+      <Parameter Name="CarId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SetNextWashedDate" />
+    <FunctionImport Name="Splitstring_to_table" IsComposable="true" ReturnType="Collection(String)">
+      <Parameter Name="string" Mode="In" Type="String" />
+      <Parameter Name="delimiter" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Sproc_InsertOrUpdateGarage_CarDaySetting">
+      <Parameter Name="GarageTeamId" Mode="In" Type="Int32" />
+      <Parameter Name="EntityTypeKey" Mode="In" Type="Int32" />
+      <Parameter Name="EntityTypeValues" Mode="In" Type="String" />
+      <Parameter Name="GarageId" Mode="In" Type="Int32" />
+      <Parameter Name="ServiceDay" Mode="In" Type="String" />
+      <Parameter Name="CarServiceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IsLocked" Mode="In" Type="Boolean" />
+      <Parameter Name="IsPaid" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Sproc_InsertOrUpdateLeaderSetting">
+      <Parameter Name="GarageTeamId" Mode="In" Type="Int32" />
+      <Parameter Name="EntityTypeKey" Mode="In" Type="Int32" />
+      <Parameter Name="EntityTypeValues" Mode="In" Type="String" />
+      <Parameter Name="GarageId" Mode="In" Type="Int32" />
+      <Parameter Name="ServiceDay" Mode="In" Type="String" />
+    </FunctionImport>
+    <AssociationSet Name="FK_UserPackagesAddons_Services" Association="GreenPro.DatabaseModel.FK_UserPackagesAddons_Services">
+      <End Role="Service" EntitySet="Services" />
+      <End Role="UserPackagesAddon" EntitySet="UserPackagesAddons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPackages_GarageTimingSlot" Association="GreenPro.DatabaseModel.FK_UserPackages_GarageTimingSlot">
+      <End Role="GargesTimeingSlot" EntitySet="GargesTimeingSlots" />
+      <End Role="UserPackage" EntitySet="UserPackages" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetAllAvailableGaragesCitiesList_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="CityName" Nullable="true" MaxLength="203" />
+    <Property Type="Int32" Name="StateId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetGarage_CarDaySettingPaymentDetail_Result">
+    <Property Type="Int32" Name="UserPackageID" Nullable="false" />
+    <Property Type="Boolean" Name="IsActive" Nullable="false" />
+    <Property Type="Int32" Name="JobId" Nullable="false" />
+    <Property Type="Int32" Name="CarId" Nullable="true" />
+    <Property Type="DateTime" Name="CarServiceDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsPaid" Nullable="true" />
+    <Property Type="Int32" Name="LogId" Nullable="false" />
+    <Property Type="String" Name="BillingAggrementID" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ECToken" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CorrelationID" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetServicesByCarId_Result">
+    <Property Type="Int32" Name="ServiceID" Nullable="false" />
+    <Property Type="String" Name="Service_Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Service_Description" Nullable="false" MaxLength="200" />
+    <Property Type="Decimal" Name="Service_Price" Nullable="false" Precision="19" />
+    <Property Type="Boolean" Name="IsAddOn" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDt" Nullable="false" Precision="23" />
+    <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <Association Name="FK_UserPackagesAddons_Services">
+    <End Type="GreenPro.DatabaseModel.Service" Role="Service" Multiplicity="1" />
+    <End Type="GreenPro.DatabaseModel.UserPackagesAddon" Role="UserPackagesAddon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="ServiceID" />
+      </Principal>
+      <Dependent Role="UserPackagesAddon">
+        <PropertyRef Name="ServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPackages_GarageTimingSlot">
+    <End Type="GreenPro.DatabaseModel.GargesTimeingSlot" Role="GargesTimeingSlot" Multiplicity="0..1" />
+    <End Type="GreenPro.DatabaseModel.UserPackage" Role="UserPackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GargesTimeingSlot">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserPackage">
+        <PropertyRef Name="GaragesTimeingSlotId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

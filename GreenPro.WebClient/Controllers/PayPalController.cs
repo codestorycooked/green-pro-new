@@ -147,96 +147,111 @@ namespace GreenPro.WebClient.Controllers
             var userPackages = db.UserPackages.Find(user.SubscriptionID);
             if (userPackages != null)
             {
-               
-                string message = string.Empty;
-                string responseString = string.Empty;
-                var package = db.Packages.FirstOrDefault(a => a.PackageId == userPackages.PackageId);
-                string OriResponsePaypal = string.Empty;
-                DoReferenceTrasaction paypal = new DoReferenceTrasaction();
-                var doResponse = paypal.DoTransaction(log.BillingAggrementID, package.Package_Description, package.Package_Name, (double)finalPrice, "Weekly Renewal", out OriResponsePaypal);
-
-                ///Write paypal response in txt file.
-                responseString = JsonConvert.SerializeObject(response);
-                responseString = responseString + " : Paypal Response: " + OriResponsePaypal;
-                string fileName = userPackages.Id + "-" + log.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
-                System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), responseString);
-
-
-                PaypalAutoPayment paypalAutoPayment = new PaypalAutoPayment();
-                paypalAutoPayment.UserPackageID = userPackages.Id;
-                paypalAutoPayment.UserID = userPackages.UserId;
-                paypalAutoPayment.IsPaid = doResponse.PaymentStatus == "COMPLETED" ? true : false;
-                paypalAutoPayment.GrossAmount = String.Format("{0:0.00}", finalPrice); //Convert.ToString(finalPrice);
-                paypalAutoPayment.PaymentStatus = doResponse.PaymentStatus;
-                paypalAutoPayment.PaymentDate = doResponse.PaymentDate;
-                paypalAutoPayment.TrasactionID = doResponse.TransactionID;
-                paypalAutoPayment.BillingAggrementID = log.BillingAggrementID;
-                paypalAutoPayment.TransactionDate = DateTime.Now;            
-                
                 DateTime currentDate = DateTime.Now;
                 DateTime serviceDate = currentDate;
-                if (userPackages.ServiceDay == currentDate.DayOfWeek.ToString())
-                    serviceDate = currentDate.AddDays(7);
+
+                           
+                
+                
+
+                if (userPackages.SubscriptionTypeId == 4)
+                    serviceDate = userPackages.NextServiceDate.Value;
                 else
                 {
-                    DateTime nextServiceDate;
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        if (i == 1)
-                        {
-                            nextServiceDate = currentDate.AddDays(i);
-                            if (userPackages.ServiceDay == nextServiceDate.DayOfWeek.ToString())
-                            {
-                                if (userPackages.SubscriptionTypeId==1)
-                                    serviceDate = nextServiceDate.AddDays(7);
-                                else if (userPackages.SubscriptionTypeId == 2)
-                                    serviceDate = nextServiceDate.AddDays(14);
-                                else if (userPackages.SubscriptionTypeId == 3)
-                                    serviceDate = nextServiceDate.AddDays(28);
-                                else
-                                    serviceDate = nextServiceDate.AddDays(7);
+                    string message = string.Empty;
+                    string responseString = string.Empty;
+                    var package = db.Packages.FirstOrDefault(a => a.PackageId == userPackages.PackageId);
+                    string OriResponsePaypal = string.Empty;
+                    DoReferenceTrasaction paypal = new DoReferenceTrasaction();
+                    var doResponse = paypal.DoTransaction(log.BillingAggrementID, package.Package_Description, package.Package_Name, (double)finalPrice, "Weekly Renewal", out OriResponsePaypal);
 
-                                break;
-                            }
-                        }
-                        else
+                    ///Write paypal response in txt file.
+                    responseString = JsonConvert.SerializeObject(response);
+                    responseString = responseString + " : Paypal Response: " + OriResponsePaypal;
+                    string fileName = userPackages.Id + "-" + log.BillingAggrementID + "__" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm", CultureInfo.InvariantCulture) + ".txt";
+                    System.IO.File.WriteAllText(Server.MapPath("~/App_Data/" + fileName), responseString);
+
+
+                    PaypalAutoPayment paypalAutoPayment = new PaypalAutoPayment();
+                    paypalAutoPayment.UserPackageID = userPackages.Id;
+                    paypalAutoPayment.UserID = userPackages.UserId;
+                    paypalAutoPayment.IsPaid = doResponse.PaymentStatus == "COMPLETED" ? true : false;
+                    paypalAutoPayment.GrossAmount = String.Format("{0:0.00}", finalPrice); //Convert.ToString(finalPrice);
+                    paypalAutoPayment.PaymentStatus = doResponse.PaymentStatus;
+                    paypalAutoPayment.PaymentDate = doResponse.PaymentDate;
+                    paypalAutoPayment.TrasactionID = doResponse.TransactionID;
+                    paypalAutoPayment.BillingAggrementID = log.BillingAggrementID;
+                    paypalAutoPayment.TransactionDate = DateTime.Now;
+
+
+
+                    if (userPackages.ServiceDay == currentDate.DayOfWeek.ToString())
+                        serviceDate = currentDate.AddDays(7);
+                    else
+                    {
+                        DateTime nextServiceDate;
+                        for (int i = 1; i <= 6; i++)
                         {
-                            nextServiceDate = currentDate.AddDays(i);
-                            if (userPackages.ServiceDay == nextServiceDate.DayOfWeek.ToString())
+                            if (i == 1)
                             {
-                                serviceDate = currentDate.AddDays(i);
-                                break;
+                                nextServiceDate = currentDate.AddDays(i);
+                                if (userPackages.ServiceDay == nextServiceDate.DayOfWeek.ToString())
+                                {
+                                    if (userPackages.SubscriptionTypeId == 1)
+                                        serviceDate = nextServiceDate.AddDays(7);
+                                    else if (userPackages.SubscriptionTypeId == 2)
+                                        serviceDate = nextServiceDate.AddDays(14);
+                                    else if (userPackages.SubscriptionTypeId == 3)
+                                        serviceDate = nextServiceDate.AddDays(28);
+                                    else
+                                        serviceDate = nextServiceDate.AddDays(7);
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                nextServiceDate = currentDate.AddDays(i);
+                                if (userPackages.ServiceDay == nextServiceDate.DayOfWeek.ToString())
+                                {
+                                    serviceDate = currentDate.AddDays(i);
+                                    break;
+                                }
                             }
                         }
                     }
-                }
 
-                paypalAutoPayment.ServiceDate = serviceDate;
-                paypalAutoPayment.CreatedOn = DateTime.Now;
-                db.PaypalAutoPayments.Add(paypalAutoPayment);
-                db.SaveChanges();
-
-                if (paypalAutoPayment.IsPaid)
-                {
-                    userPackages.PaymentRecieved = true;
-                    userPackages.IsActive = true;
-                    userPackages.NextServiceDate = serviceDate;
-                    userPackages.PaymentMethodName = "paypal";
-                    db.Entry(userPackages).State = EntityState.Modified;
+                    paypalAutoPayment.ServiceDate = serviceDate;
+                    paypalAutoPayment.CreatedOn = DateTime.Now;
+                    db.PaypalAutoPayments.Add(paypalAutoPayment);
                     db.SaveChanges();
 
-                    ///Added By Sachin 29 SEP 2016
-                    var addOnsServices = userPackages.UserPackagesAddons.ToList();
-                    foreach (var addOns in addOnsServices)
+                    if (paypalAutoPayment.IsPaid)
                     {
-                        if (!addOns.NextServiceDate.HasValue)
+                        userPackages.PaymentRecieved = true;
+                        userPackages.IsActive = true;
+                        userPackages.NextServiceDate = serviceDate;
+                        userPackages.PaymentMethodName = "paypal";
+                        db.Entry(userPackages).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        ///Added By Sachin 29 SEP 2016
+                        var addOnsServices = userPackages.UserPackagesAddons.ToList();
+                        foreach (var addOns in addOnsServices)
                         {
-                            addOns.NextServiceDate = serviceDate;
-                            db.SaveChanges();
+                            if (!addOns.NextServiceDate.HasValue)
+                            {
+                                addOns.NextServiceDate = serviceDate;
+                                db.SaveChanges();
+                            }
                         }
+
                     }
 
                 }
+
+
+                
 
 
             }

@@ -228,11 +228,6 @@ namespace GreenPro.WebClient.Controllers
 
                 }
             }
-
-
-            //userPackage.IsActive = false;
-            //db.SaveChanges();
-
             return RedirectToAction("Details", new { Id = model.Id });
         }
 

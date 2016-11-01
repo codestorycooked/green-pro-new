@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" style="display:none;">
+                            <div class="form-group">
                                 <div class="col-md-3">
                                      Time
                                 </div>
@@ -80,6 +80,17 @@
                                     @Html.ValidationMessageFor(model => model.SubscriptionTypeId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-3">
+                                    Service Date
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.StartServiceDate, new { @class = "form-control", style="width:300px;", id = "datetimepicker1" })
+                                    <div class="col-md-4 control-label" style="text-align:left!important">Format: MM/DD/YYYY</div>
+                                </div>
+                            </div> 
 
                             </div>                            
                         </div>
@@ -235,17 +246,14 @@
 }
 @Html.HiddenFor(a => a.SelectedCar, new { @id = "selvalcar" })
 @section scripts{
-    <script>
-        $('#totalprice').affix({
-            offset: {
-                top: 50,
-                bottom: function () {
-                    return (this.bottom = $('.footer').outerHeight(true))
-                }
-            }
-        })
-</script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
 <script>
+
     var price = new Number('@Model.Packages.Package_Price'); // assign initial value
     var element = $('#baseprice'); // cache it
     function OnPriceChange(elementID, val) {
@@ -262,9 +270,9 @@
         $('#tp').val(price);
         $('#baseprice').html('$' + price.toPrecision(2));
     };
-</script>
 
-<script>
+
+
     function OnSuccess() {
 
 
@@ -310,6 +318,27 @@
 
 <script>
     $(document).ready(function () {
+
+        $('#totalprice').affix({
+            offset: {
+                top: 50,
+                bottom: function () {
+                    return (this.bottom = $('.footer').outerHeight(true))
+                }
+            }
+        });
+
+        $("#datetimepicker1").datepicker({
+            dateFormat: "mm/dd/yy",
+            beforeShowDay: function (date) {
+                var a = new Array();
+                a[0] = date.getDay() == 0;
+                a[1] = '';
+                a[2] = '';
+                return a;
+            }
+        });
+
         
         //For MyCars Flow
         if ($("input:radio[name=radioselectedcar1]:checked").val() > 0) {
@@ -361,6 +390,60 @@
                     alert('Failed to retrieve states.' + ex);
                 }
             });
+
+            var weekDayInt = 0;
+            if (serviceDayValue == "Sunday") {
+                weekDayInt = 0;
+            }
+
+            if (serviceDayValue == "Monday") {
+                weekDayInt = 1;
+            }
+
+            if (serviceDayValue == "Tuesday") {
+                weekDayInt = 2;
+            }
+
+            if (serviceDayValue == "Wednesday") {
+                weekDayInt = 3;
+            }
+
+            if (serviceDayValue == "Thursday") {
+                weekDayInt = 4;
+            }
+
+            if (serviceDayValue == "Friday") {
+                weekDayInt = 5;
+            }
+
+            if (serviceDayValue == "Saturday") {
+                weekDayInt = 6;
+            }
+
+            
+            $("#datetimepicker1").datepicker("refresh");
+            $("#datetimepicker1").datepicker("option", "beforeShowDay", function (date) {
+                var a = new Array();
+                a[0] = date.getDay() == weekDayInt;
+                a[1] = '';
+                a[2] = '';
+                return a;
+            });
+
+            //$("#datetimepicker1").datepicker("refresh");
+            //$("#datetimepicker1").datepicker({
+            //    beforeShowDay: function (date) {
+            //        var a = new Array();
+            //        a[0] = date.getDay() == 3;
+            //        a[1] = '';
+            //        a[2] = '';
+            //        return a;
+            //    }
+            //});
+            
+            
+                
+
             return false;
         });
 

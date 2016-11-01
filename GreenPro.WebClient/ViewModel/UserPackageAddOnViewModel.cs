@@ -31,6 +31,7 @@ namespace GreenPro.WebClient.ViewModel
         public int SubscriptionTypeId { get; set; }
         public int GaragesTimeingSlotId { get; set; }
         public string ServiceDay { get; set; }
+        public DateTime? StartServiceDate { get; set; }
         public bool AutoRenewalSubscription { get; set; }
         public IList<SelectListItem> AvailableServiceDays { get; set; }
         public IList<SelectListItem> AvailableGaragesTimeingSlots { get; set; }

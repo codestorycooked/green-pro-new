@@ -27,7 +27,7 @@ namespace GreenPro.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        
         public virtual DbSet<AdhocUserPackage> AdhocUserPackages { get; set; }
         public virtual DbSet<AdhocUserPackagesAddon> AdhocUserPackagesAddons { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }

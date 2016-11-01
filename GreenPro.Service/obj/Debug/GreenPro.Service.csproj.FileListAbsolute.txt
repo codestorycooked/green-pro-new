@@ -1,40 +1,21 @@
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.Service.exe.config
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.Service.exe
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.Service.pdb
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\EntityFramework.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.Data.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\Newtonsoft.Json.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\PayPalMerchantSDK.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\PayPalCoreSDK.dll
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.Data.pdb
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.pdb
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\EntityFramework.xml
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.xml
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\Newtonsoft.Json.xml
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\bin\Debug\PayPalMerchantSDK.xml
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\obj\Debug\GreenPro.Service.csprojResolveAssemblyReference.cache
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\obj\Debug\GreenPro.Service.exe
-F:\MyProject\Green Pro Waterless\project\Green-Pro\GreenPro.Service\obj\Debug\GreenPro.Service.pdb
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe.config
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.pdb
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\PayPalCoreSDK.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.pdb
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.pdb
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.xml
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.xml
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.xml
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.xml
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.csprojResolveAssemblyReference.cache
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.exe
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.pdb
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.dll
-F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.xml
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe.config
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.pdb
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\PayPalCoreSDK.dll
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.pdb
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.pdb
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.xml
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.xml
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.xml
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.xml
+E:\Project\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.xml
+E:\Project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.csprojResolveAssemblyReference.cache
+E:\Project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.exe
+E:\Project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.pdb

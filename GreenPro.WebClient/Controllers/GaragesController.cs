@@ -128,6 +128,7 @@ namespace GreenPro.WebClient.Controllers
                 }
 
                 
+
                 ViewBag.SearchTextData = searchText;
                 ViewBag.SearchGarageData = gId;
                 ViewBag.stateData = state;

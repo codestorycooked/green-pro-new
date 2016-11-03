@@ -59,17 +59,7 @@
                                     @Html.DropDownListFor(model => model.ServiceDay,Model.AvailableServiceDays, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.ServiceDay, "", new { @class = "text-danger" })
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                     Time
-                                </div>
-                                <div class="col-md-9">
-                                    @Html.DropDownListFor(model => model.GaragesTimeingSlotId, Model.AvailableGaragesTimeingSlots, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.GaragesTimeingSlotId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                            </div>                           
 
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -81,16 +71,26 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" id="date-block" style="display:none;">
 
-                                <div class="col-md-3">
+                                <div class="col-md-3" id="date-label">
                                     Service Date
                                 </div>
                                 <div class="col-md-9">
-                                    @Html.TextBoxFor(m => m.StartServiceDate, new { @class = "form-control", style="width:300px;", id = "datetimepicker1" })
+                                    @Html.TextBoxFor(m => m.StartServiceDate, new { @class = "form-control", style = "width:300px;", id = "datetimepicker1" })
                                     <div class="col-md-4 control-label" style="text-align:left!important">Format: MM/DD/YYYY</div>
                                 </div>
                             </div> 
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    Time
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.DropDownListFor(model => model.GaragesTimeingSlotId, Model.AvailableGaragesTimeingSlots, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GaragesTimeingSlotId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             </div>                            
                         </div>
@@ -207,6 +207,11 @@
                                 <button class="line-btn light" type="submit" value="Save" id="pay">Proceed and Pay</button>
 
                             </div>
+                            <div class="col-md-12">
+                                <div id="error-message" style="color:red;">
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -319,6 +324,25 @@
 <script>
     $(document).ready(function () {
 
+
+        $("#pay").on("click", function (e) {
+            var returnValue = false;
+
+            var subscriptionTypeId = $("#SubscriptionTypeId").val();
+            var selectedDate = $("#datetimepicker1").val();
+
+            if (subscriptionTypeId == 4 && selectedDate == "")
+            {
+                returnValue = false;
+                $("#error-message").html("Please Select Service Date.");
+            }
+                
+            else
+                returnValue = true;
+
+            return returnValue;
+        });
+
         $('#totalprice').affix({
             offset: {
                 top: 50,
@@ -370,8 +394,23 @@
         }
         
 
+        $("#SubscriptionTypeId").change(function () {
+            var subscriptionTypeValue = $("#SubscriptionTypeId").val();
+
+            if(subscriptionTypeValue==4){
+                $('#date-block').show();
+                $('#date-label').html("Service Date");
+            }
+            else{
+                $('#date-block').show();
+                $('#date-label').html("Start Date");
+            }
+        });
+
+
         $("#ServiceDay").change(function () {
             $("#GaragesTimeingSlotId").empty();
+            $("#error-message").html("");
             var serviceDayValue = $("#ServiceDay").val();
 
             $.ajax({

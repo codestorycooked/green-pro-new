@@ -150,12 +150,31 @@ namespace GreenPro.WebClient.Controllers
                 DateTime currentDate = DateTime.Now;
                 DateTime serviceDate = currentDate;
 
-                           
-                
-                
+
+
+
 
                 if (userPackages.SubscriptionTypeId == 4)
+                {
                     serviceDate = userPackages.NextServiceDate.Value;
+
+                    userPackages.PaymentRecieved = true;
+                    userPackages.IsActive = true;                    
+                    userPackages.PaymentMethodName = "paypal";
+                    db.Entry(userPackages).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    ///Added By Sachin 29 SEP 2016
+                    var addOnsServices = userPackages.UserPackagesAddons.ToList();
+                    foreach (var addOns in addOnsServices)
+                    {
+                        if (!addOns.NextServiceDate.HasValue)
+                        {
+                            addOns.NextServiceDate = serviceDate;
+                            db.SaveChanges();
+                        }
+                    }
+                }
                 else
                 {
                     string message = string.Empty;

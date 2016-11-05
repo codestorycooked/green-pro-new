@@ -55,17 +55,13 @@ namespace GreenPro.Api.Controllers
 
         [Route("usercarlist")]
         [HttpGet]
-        [ResponseType(typeof(CarUser))]
-        public IHttpActionResult UserCarList(string userid)
+
+        public IQueryable<CarUser> UserCarList(string userid)
         {
-            if (String.IsNullOrEmpty(userid))
-            {
-                return BadRequest("UserId Required");
-            }
-            else {
-                var userCar = db.CarUsers.Where(u => u.UserId == userid);
-                return Ok(userCar);
-            }
+
+            var userCar = db.CarUsers.Where(u => u.UserId == userid);
+            return userCar;
+
 
         }
 

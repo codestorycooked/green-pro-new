@@ -44,11 +44,10 @@ namespace GreenPro.Api.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName, user.Id);
+            AuthenticationProperties properties = CreateProperties(user.UserName);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
-
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
@@ -87,12 +86,11 @@ namespace GreenPro.Api.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName, string userid)
+        public static AuthenticationProperties CreateProperties(string userName)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName },
-                { "userId",userid}
+                { "userName", userName }
             };
             return new AuthenticationProperties(data);
         }

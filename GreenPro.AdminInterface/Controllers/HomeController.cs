@@ -34,6 +34,8 @@ namespace GreenPro.AdminInterface.Controllers
                 db.SaveChanges();
             }
 
+            db.Database.ExecuteSqlCommand("[dbo].[SetNextWashedDate]");
+
             bool result = User.IsInRole("Crew Leader");
             if (result)
             {

@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
-using System.Net.Http.Formatting;
-using System.Web.Http.Cors;
 
 namespace GreenPro.Api
 {
@@ -18,14 +16,10 @@ namespace GreenPro.Api
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-            //Enable Cors
-            //var corsAttr = new EnableCorsAttribute("*", "*", "*");
-            //config.EnableCors(corsAttr);
-                        // Web API routes
+
+            // Web API routes
             config.MapHttpAttributeRoutes();
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             config.Routes.MapHttpRoute(
@@ -33,6 +27,14 @@ namespace GreenPro.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
+            
+var json = config.Formatters.JsonFormatter;
+json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+
         }
     }
 }

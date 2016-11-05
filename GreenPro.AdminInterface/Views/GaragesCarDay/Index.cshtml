@@ -30,6 +30,10 @@
         text-align: center;
         vertical-align: middle;
     }
+
+    .colwidth{
+        width:25%!important;
+    }
 </style>
 
 
@@ -91,12 +95,12 @@
                         border-collapse: collapse;">
                                 <tbody>
                                     <tr class="headerstyle">
-                                        <th scope="col">
+                                        <th scope="col" class="colwidth">
                                             <strong>Leaders</strong>
                                         </th>
                                         @foreach (var team in Model.AvailableTeams)
                                         {
-                                            <th scope="col">
+                                            <th scope="col" class="colwidth">
                                                 <strong>@team.Text</strong>
                                                 @*<input type="checkbox" id="selectall-@(team.Value)" />*@
                                             </th>
@@ -108,14 +112,14 @@
                                     @foreach (var leader in Model.AvailableLeaders)
                                     {
                                         altRow = !altRow;
-                                        <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
-                                            <td>
+                                        <tr class="@(altRow ? "altrowstyle " : "rowstyle")">
+                                            <td class="colwidth">
                                                 <span>@Html.Raw(leader.Text)</span>
                                             </td>
                                             @foreach (var team in Model.AvailableTeams)
                                             {
                                                 var restricted = Model.SelectedLeaders.ContainsKey(leader.Value) && Model.SelectedLeaders[leader.Value][Convert.ToInt32(team.Value)];
-                                                <td>
+                                                <td class="colwidth">
                                                     <input id="restrict_@(team.Value)" class="restrict_@(team.Value)" type="radio" value="@(leader.Value)" name="restrict_@(team.Value)" @(restricted ? " checked=checked" : null) />
                                                 </td>
                                             }
@@ -133,12 +137,12 @@
                         border-collapse: collapse;">
                                 <tbody>
                                     <tr class="headerstyle">
-                                        <th scope="col">
+                                        <th scope="col" class="colwidth">
                                             <strong>Members</strong>
                                         </th>
                                         @foreach (var team in Model.AvailableTeams)
                                         {
-                                            <th scope="col">
+                                            <th scope="col" class="colwidth">
                                                 <strong>@team.Text</strong>
                                                 @*<input type="checkbox" id="selectall-@(team.Value)" />*@
                                             </th>
@@ -151,13 +155,13 @@
                                     {
                                         altRow = !altRow;
                                         <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
-                                            <td>
+                                            <td class="colwidth">
                                                 <span>@Html.Raw(member.Text)</span>
                                             </td>
                                             @foreach (var team in Model.AvailableTeams)
                                             {
                                                 var selectedMember = Model.SelectedMembers.ContainsKey(member.Value) && Model.SelectedMembers[member.Value][Convert.ToInt32(team.Value)];
-                                                <td>
+                                                <td class="colwidth">
                                                     <input id="member_@(team.Value)" class="member_@(team.Value)" type="checkbox" value="@(member.Value)" name="member_@(team.Value)" @(selectedMember ? " checked=checked" : null) />
                                                 </td>
                                             }
@@ -175,13 +179,13 @@
                         border-collapse: collapse;">
                                 <tbody>
                                     <tr class="headerstyle">
-                                        <th scope="col">
+                                        <th scope="col" class="colwidth">
                                             <strong>Cars</strong>
                                         </th>
                                         @foreach (var team in Model.AvailableTeams)
                                         {
-                                            <th scope="col">
-                                                <strong>@team.Text</strong>                                                
+                                            <th scope="col" class="colwidth">
+                                                <strong>@team.Text</strong>
                                             </th>
                                         }
                                     </tr>
@@ -192,13 +196,13 @@
                                     {
                                         altRow = !altRow;
                                         <tr class="@(altRow ? "altrowstyle" : "rowstyle")">
-                                            <td>
+                                            <td class="colwidth">
                                                 <span>@Html.Raw(car.Text)</span>
                                             </td>
                                             @foreach (var team in Model.AvailableTeams)
                                             {
                                                 var selectedCar = Model.SelectedCars.ContainsKey(Convert.ToInt32(car.Value)) && Model.SelectedCars[Convert.ToInt32(car.Value)][Convert.ToInt32(team.Value)];
-                                                <td>
+                                                <td class="colwidth">
                                                     <input id="car_@(team.Value)" class="car_@(team.Value)" type="checkbox" value="@(car.Value)" name="car_@(team.Value)" @(selectedCar ? " checked=checked" : null) />
                                                 </td>
                                             }

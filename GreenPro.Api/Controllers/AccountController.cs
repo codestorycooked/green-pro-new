@@ -287,7 +287,7 @@ namespace GreenPro.Api.Controllers
         private JObject GenerateLocalAccessTokenResponse(string userName, string id)
         {
 
-            var tokenExpiration = TimeSpan.FromDays(1);
+            var tokenExpiration = TimeSpan.FromDays(30);
 
             ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 

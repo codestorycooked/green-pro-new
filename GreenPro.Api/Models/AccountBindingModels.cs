@@ -37,6 +37,11 @@ namespace GreenPro.Api.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+        [Display(Name = "Profile Picure")]
+        public string ProfilePic { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
@@ -59,6 +64,12 @@ namespace GreenPro.Api.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string ProfilePic { get; set; }
+
+        public string Provider { get; set; }
+        public string ExternalAccessToken { get; set; }
+        public string Name { get; set; }
     }
 
     public class RemoveLoginBindingModel
@@ -85,4 +96,10 @@ namespace GreenPro.Api.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+    public class ParsedExternalAccessToken
+    {
+        public string user_id { get; set; }
+        public string app_id { get; set; }
+    }
 }
+

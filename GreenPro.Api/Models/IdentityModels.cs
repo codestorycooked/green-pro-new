@@ -10,13 +10,8 @@ namespace GreenPro.Api.Models
     public class ApplicationUser : IdentityUser
     {
         public string FirstName { get; set; }
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-            // Add custom user claims here
-            return userIdentity;
-        }
+        public string ProfilePic { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -25,7 +20,7 @@ namespace GreenPro.Api.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

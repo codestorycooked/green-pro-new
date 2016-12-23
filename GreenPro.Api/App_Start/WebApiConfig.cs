@@ -6,6 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Formatting;
+using Newtonsoft.Json;
 
 namespace GreenPro.Api
 {
@@ -24,13 +25,16 @@ namespace GreenPro.Api
                defaults: new { id = RouteParameter.Optional }
            );
             // Web API routes
-           
-           
+            var serializerSettings = new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            config.Formatters.JsonFormatter.SerializerSettings = serializerSettings;
+
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            //config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
+            
            
 
           

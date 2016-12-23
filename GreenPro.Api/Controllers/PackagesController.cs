@@ -24,7 +24,7 @@ namespace GreenPro.Api.Controllers
 
         [Route("AllPackages")]
         [HttpGet]
-        public PackagesResponse GetPackages()
+        public dynamic GetPackages()
         {
             // Store Customer Seleted Garage in session
             //Session["NewServiceGarageId"] = id;
@@ -59,12 +59,12 @@ namespace GreenPro.Api.Controllers
             }
 
             //return Ok(model);
-            return model;
+            return model.Packages;
         }
 
         [Route("AllAddOns")]
         [HttpGet]
-        public ServiceAddOnsResponse GetAddons()
+        public dynamic GetAddons()
         {
             ServiceAddOnsResponse model = new ServiceAddOnsResponse();
             try
@@ -82,7 +82,7 @@ namespace GreenPro.Api.Controllers
                     model.data.Add(serviceAddons);
                 }
                 model.Result = true;
-                return model;
+                return model.data;
             }
             catch (Exception ex)
             {

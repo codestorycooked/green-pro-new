@@ -14,4 +14,16 @@ namespace GreenPro.Api.ViewModels
 
         public IList<PackageViewModel> Packages { get; set; }
     }
+
+    public class ServiceAddOnsResponse : BaseResponse
+    {
+        public ServiceAddOnsResponse()
+        {
+            data = new List<Data.Service>();
+        }
+        public IList<Data.Service> data { get; set; }
+
+    }
 }
+
+

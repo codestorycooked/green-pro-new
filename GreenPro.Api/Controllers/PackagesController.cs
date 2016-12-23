@@ -22,14 +22,12 @@ namespace GreenPro.Api.Controllers
 
         }
 
-        [Route("allpackages")]
+        [Route("AllPackages")]
         [HttpGet]
-        public PackagesResponse Index()
+        public PackagesResponse GetPackages()
         {
             // Store Customer Seleted Garage in session
             //Session["NewServiceGarageId"] = id;
-
-            
 
             PackagesResponse model = new PackagesResponse();
 
@@ -57,11 +55,44 @@ namespace GreenPro.Api.Controllers
             }
             catch (Exception ex)
             {
-                
+
             }
 
             //return Ok(model);
             return model;
+        }
+
+        [Route("AllAddOns")]
+        [HttpGet]
+        public ServiceAddOnsResponse GetAddons()
+        {
+            ServiceAddOnsResponse model = new ServiceAddOnsResponse();
+            try
+            {
+
+                var service_Add = _db.Services.Where(a => a.IsAddOn == true).ToList();
+                Data.Service serviceAddons = null;
+                foreach (var item in service_Add)
+                {
+                    serviceAddons = new Data.Service();
+                    serviceAddons.Service_Description = item.Service_Description;
+                    serviceAddons.Service_Name = item.Service_Name;
+                    serviceAddons.Service_Price = item.Service_Price;
+                    serviceAddons.ServiceID = item.ServiceID;
+                    model.data.Add(serviceAddons);
+                }
+                model.Result = true;
+                return model;
+            }
+            catch (Exception ex)
+            {
+                model.Result = false;
+                model.ResponseMessage = ex.Message;
+                return model;
+
+            }
+
+
         }
     }
 }

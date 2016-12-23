@@ -38,3 +38,26 @@ F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debu
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.pdb
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.dll
 F:\MyProject\Green Pro Waterless\project\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe.config
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.exe
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Service.pdb
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\Microsoft.Web.Infrastructure.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\PayPalCoreSDK.dll
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.Data.pdb
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\GreenPro.PayPalSystem.pdb
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\Newtonsoft.Json.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\System.Web.Mvc.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\PayPalMerchantSDK.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\bin\Debug\Microsoft.Web.Infrastructure.xml
+D:\sampleApps\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.csprojResolveAssemblyReference.cache
+D:\sampleApps\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.exe
+D:\sampleApps\green-pro-new\GreenPro.Service\obj\Debug\GreenPro.Service.pdb

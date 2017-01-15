@@ -17,6 +17,7 @@ using GreenPro.Api.Models;
 using GreenPro.Api.Providers;
 using GreenPro.Api.Results;
 using Newtonsoft.Json.Linq;
+using System.Data.Entity;
 
 namespace GreenPro.Api.Controllers
 {
@@ -24,10 +25,55 @@ namespace GreenPro.Api.Controllers
     public class AccountController : ApiController
     {
         private AuthRepository _repo = null;
-
+        private GreenPro.Data.GreenProDbEntities db;
         public AccountController()
         {
             _repo = new AuthRepository();
+            db = new Data.GreenProDbEntities();
+        }
+
+        [HttpGet]        
+        public async Task<IHttpActionResult> GetUserDetails(string userID)
+        {
+            if (userID == string.Empty)
+            {
+                return BadRequest("User Information not present");
+            }
+
+            var user = await db.AspNetUsers.FindAsync(userID);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+                return Ok(user);
+
+        }
+
+        [HttpPut]
+        public async Task<IHttpActionResult> UpdateUser(string userID, GreenPro.Data.AspNetUser user)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (userID == string.Empty)
+            {
+                return BadRequest("User Information not present");
+            }
+            db.Entry(user).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+
         }
 
         // POST api/Account/Register

@@ -174,21 +174,7 @@ namespace GreenPro.Api.Controllers
             int garagdid = Convert.ToInt32(id);
             var model = from a in _db.Garages
                         where a.GarageId == garagdid
-                        select new
-                        {
-                            a.Garage_Name,
-                            a.Garage_Address,
-                            a.GargesTimeingSlots,
-                            a.GarrageWeekdays,
-                            a.CloseTime,
-                            a.OpenTime,
-                            a.Latitute,
-                            a.Longitude,
-                            a.Pincode,
-                            a.City,
-                            a.City1.Id
-
-                        };
+                        select a;
             if (model != null)
             {
                 return Ok(model);

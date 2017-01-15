@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using GreenPro.Data;
+﻿using GreenPro.Data;
+using GreenPro.PayPalSystem.Payments;
 using GreenPro.WebClient.ViewModel;
-using System.Net;
 using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
-using GreenPro.PayPalSystem.Payments;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 namespace GreenPro.WebClient.Controllers
 {
     [Authorize]
@@ -206,8 +205,8 @@ namespace GreenPro.WebClient.Controllers
                 CreatedDt = DateTime.Now,
                 PaymentRecieved = false,
                 ServiceDay=model.ServiceDay,
-                SubscriptionTypeId=model.SubscriptionTypeId,
-                GaragesTimeingSlotId=model.GaragesTimeingSlotId,
+                SubscriptionTypeId=model.SubscriptionTypeId
+               // GaragesTimeingSlotId=model.GaragesTimeingSlotId,
             };
             db.UserPackages.Add(savingEntity);
 

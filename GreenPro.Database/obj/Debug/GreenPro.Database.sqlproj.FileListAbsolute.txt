@@ -15,3 +15,7 @@ C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Debug\GreenPr
 C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.pdb
 C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.dll
 C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\Model.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\refactor.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\postdeploy.sql
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\predeploy.sql

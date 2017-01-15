@@ -1,0 +1,46 @@
+﻿
+@using GreenPro.AdminInterface.Models
+@{
+    //success messages
+    var successMessages = new List<string>();
+    if (TempData[string.Format("greenpro.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessages.AddRange(TempData[string.Format("greenpro.notifications.{0}", NotifyType.Success)] as IList<string>);
+    }
+    if (ViewData[string.Format("greenpro.notifications.{0}", NotifyType.Success)] != null)
+    {
+        successMessages.AddRange(ViewData[string.Format("greenpro.notifications.{0}", NotifyType.Success)] as IList<string>);
+    }
+
+
+    //error messages
+    var errorMessages = new List<string>();
+    if (TempData[string.Format("greenpro.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessages.AddRange(TempData[string.Format("greenpro.notifications.{0}", NotifyType.Error)] as IList<string>);
+    }
+    if (ViewData[string.Format("greenpro.notifications.{0}", NotifyType.Error)] != null)
+    {
+        errorMessages.AddRange(ViewData[string.Format("greenpro.notifications.{0}", NotifyType.Error)] as IList<string>);
+    }
+}
+<style>
+    /* MASTER ERRORS */
+.messageBox{background-color:#F4F4F4;background-position:7px 5px;background-repeat:no-repeat;color:#333;font-family:Tahoma;font-size:11px;margin:5px 0;padding:8px 8px 8px 30px;}
+.messageBoxError{background-color:#FFECEC;background-image:url(images/error-message.gif);}
+.messageBoxSuccess{background-image:url(images/success-message.gif);}
+
+</style>
+@foreach (var message in successMessages)
+{
+    <div class="messageBox messageBoxSuccess">
+        @message
+    </div>
+}
+@foreach (var message in errorMessages)
+{
+    <div class="messageBox messageBoxError">
+        @message
+    </div>
+}
+

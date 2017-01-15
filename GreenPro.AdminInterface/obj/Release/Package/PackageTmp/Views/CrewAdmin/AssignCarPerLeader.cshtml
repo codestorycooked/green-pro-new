@@ -1,0 +1,59 @@
+﻿@model GreenPro.Data.GarageMaxCar
+
+@{
+    ViewBag.Title = "AssignCarPerLeader";
+}
+
+<h2>Max Cars Assignment</h2>
+<p>Enter max cars each leader will service with his CREW MEMBER on : <b>@DateTime.Now.Date.DayOfWeek</b></p>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <input type="hidden" name="garageid" value=@ViewBag.GarageID />
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.GarageID, "GarageID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("GarageID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GarageID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label for="cappercrewadmin" class="control-label col-md-2">Max Car:</label>
+                @*@Html.LabelFor(model => model.CarPerCrewAdmin, htmlAttributes: new { @ })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CarPerCrewAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CarPerCrewAdmin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.DayRef, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DayRef, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DayRef, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

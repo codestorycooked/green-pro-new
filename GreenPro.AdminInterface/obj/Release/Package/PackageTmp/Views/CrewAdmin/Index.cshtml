@@ -1,0 +1,30 @@
+﻿@model IEnumerable<GreenPro.AdminInterface.ViewModels.CrewAdminGarageCarModel>
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        <h2>Garages for @Convert.ToString( ViewData["WorkingDay"])</h2><hr />
+        @if (Model.Count() != 0 || Model.Count() != null)
+        {
+            foreach (var item in Model)
+            {
+                <h3 class="alert alert-info">
+                    @item.Garage_Name : <span style="font-weight:900;font-size:16px">Number of Cars @item.CarCount </span>
+                    <span class="pull-right" style="padding-left:10px; font-size:16px;">
+                        @Html.ActionLink("Assign Cars","Index", "GaragesCarDay", new { id = item.GarageId }, new { @class = "btn btn-primary" })
+                        @*@Html.ActionLink("Assign Leaders", "AssignLeaders", new { id = item.GarageId }, new { @class = "btn btn-primary" })*@
+                    </span>
+                    @*<span class="pull-right" style="font-size:16px;">@Html.ActionLink("Assign Car's", "AssignCarPerLeader", new { id = item.GarageId },
+                         new { @class = "btn btn-primary" })</span>*@
+                </h3>
+
+            }
+
+        }
+
+    </div>
+</div>

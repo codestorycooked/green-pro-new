@@ -29,6 +29,8 @@ namespace GreenPro.Api.ViewModels.Garage
         public string Pincode { get; set; }
         public double Latitute { get; set; }
         public double Longitude { get; set; }
+        public int CityID { get; set; }
+        public int StateID { get; set; }
     }
 
 }

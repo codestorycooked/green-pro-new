@@ -1,0 +1,23 @@
+﻿@model IEnumerable<GreenPro.Data.Package>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Packages List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(a => a.Package_Name).Titled("Package Name").Filterable(true);
+    columns.Add(a => a.Package_Description).Titled("Package Description");
+    columns.Add(a => a.Package_Price).Titled("Package_Price").Filterable(true);   
+        
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Edit", "Edit", new { id = d.PackageId }));
+    //columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Details", "Details", new { id = d.PackageId }));
+    columns.Add().Encoded(false).Sanitized(false).RenderValueAs(d => @Html.ActionLink("Delete", "Delete", new { id = d.PackageId }));
+
+}).WithPaging(20).Filterable()

@@ -3,3 +3,12 @@ D:\sampleApps\green-pro-new\GreenPro.Database\obj\Release\GreenPro.Database.pdb
 D:\sampleApps\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.dacpac
 D:\sampleApps\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.dll
 D:\sampleApps\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.dacpac
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Release\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\GreenPro.Database.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\Model.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\refactor.xml
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\postdeploy.sql
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Release\predeploy.sql

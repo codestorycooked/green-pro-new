@@ -1,0 +1,135 @@
+﻿@model GreenPro.AdminInterface.ViewModels.LeaderServiceDayViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CrewLayout.cshtml";
+}
+
+<h2>Assigned Jobs </h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.ServiceDay)
+    @Html.HiddenFor(m => m.TeamId)
+    @Html.HiddenFor(m => m.LeaderId)
+
+    @Html.AntiForgeryToken()
+    <p style="text-align:right">
+        <a href="@Url.Action("Index")" class="btn btn-default">Today</a> &nbsp;<input type="submit" name="btnTomorroww" value="Tomorrow" class="btn btn-default" />
+    </p>
+    if (Model.ServiceDayRecordExists)
+    {
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="TeamName" class="control-label col-md-2">Team Name</label>
+                <div class="col-md-10">
+                    @Model.TeamName
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="LeaderName" class="control-label col-md-2">Leader Name</label>
+                <div class="col-md-10">
+                    @Model.LeaderName
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="GarageName" class="control-label col-md-2">Garage</label>
+                <div class="col-md-10">
+                    @Model.GarageName
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8">
+                    <div style="border:1px solid; padding:5px;">
+                        @if (Model.CarServicesList.Count > 0)
+                        {
+                            <p> Cars </p>
+                            <div>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            ServiceDay #
+                                        </td>
+
+                                        <td>
+                                            Car#
+                                        </td>
+                                        <td>
+                                            Display Name
+                                        </td>
+                                        <td>
+                                            License Number
+                                        </td>
+                                        <td>
+                                           Make
+                                        </td>
+                                        <td>
+                                            Status
+                                        </td>
+                                        <td></td>
+                                    </tr>
+
+                                    @foreach (var car in Model.CarServicesList)
+                                {
+                            <tr>
+                                <td>
+                                    @car.ServiceDayId
+                                </td>
+                                <td>
+                                    @car.CarId
+                                </td>
+                                <td>
+                                    @car.CarDisplayName
+                                </td>
+                                <td>
+                                    @car.LicenseNumber
+                                </td>
+                                <td>
+                                    @car.Make
+                                </td>
+                                <td>
+                                    @car.serviceStatus.ToString()
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("CurrentCarServiceDetail", "CrewLeader", new { Id =car.ServiceDayId})" class="btn btn-primary">View</a>
+                                </td>
+                            </tr>
+                                }
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="border:1px solid; padding:5px;">
+                        @if (Model.Members.Count > 0)
+                        {
+                            <p> Members </p>
+                            <ul>
+                                @foreach (var member in Model.Members)
+                                {
+                                    <li> @member.MemberName</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    }
+    else
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                
+                <div class="col-md-12">
+                    Job Not Assigned.
+                </div>
+            </div>
+        </div>
+    }
+}

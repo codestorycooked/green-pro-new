@@ -1,0 +1,137 @@
+﻿@model GreenPro.AdminInterface.Models.MasterPackageViewModel
+@using System.Linq;
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Package</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm("Edit", "Packages", FormMethod.Post, null))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">       
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PackageId)
+        @Html.HiddenFor(model => model.CreatedBy)
+        <div class="col-md-6">            
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Package_Price, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Package_Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Package_Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubscriptionTypes, new { @class = "control-label col-md-3" })
+                <div class="col-md-8">                   
+                    @foreach (var serviceType in Model.AvailableSubscriptionTypes)
+                    {
+                        var selected = ((IList<string>)Model.SubscriptionTypes).Contains(serviceType.Value);
+                        <input type="checkbox" name="SubscriptionTypes" value="@serviceType.Value" @(selected ? " checked=checked" : null) /> @serviceType.Text
+                    }
+                </div>
+            </div>
+
+        </div>
+        @*<div class="col-md-6"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+    @*}
+        @using (Html.BeginForm("Edit", "Packages", FormMethod.Post, null))
+        {*@
+    @*<div class="form-horizontal">*@
+        <div class="col-md-6">
+            <h4>Services</h4>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @ViewBag.Message
+                    <table class="table table-condensed">
+
+
+                        @{
+
+    List<GreenPro.Data.Service> services = ViewBag.Services;
+    List<GreenPro.Data.Service> checkedServices = ViewBag.CheckedServices;
+    if (services.Count == 0)
+    {
+        <p>Please add Services</p>
+    }
+    else
+    {
+        foreach (var service in services)
+        {
+            bool selected = false;
+            foreach (var item in checkedServices)
+            {
+                if (item.ServiceID == service.ServiceID)
+                {
+                    selected = true;
+                }
+            }
+            <tr>
+                <td>
+                    @if (selected == true)
+                    {
+                        <input type="checkbox"
+                               name="selectedServices"
+                               value="@service.ServiceID "
+                               checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox"
+                               name="selectedServices"
+                               value="@service.ServiceID " />
+
+                    }
+                    @*// @(Html.Raw(service.Selected ? "checked=\"checked\"" : "")) />*@
+                    @service.Service_Name
+                </td>
+            </tr>
+        }
+    }
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    @*</div>*@
+        </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

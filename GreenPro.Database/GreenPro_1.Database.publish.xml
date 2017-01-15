@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>GreenProData</TargetDatabaseName>
     <DeployScriptFileName>GreenPro.Database.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=tcp:g851xbo2jb.database.windows.net,1433;Persist Security Info=True;User ID=kunaldeshmukh;Pooling=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=g851xbo2jb.database.windows.net;Persist Security Info=True;User ID=kunaldeshmukh;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
 </Project>

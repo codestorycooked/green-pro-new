@@ -1,0 +1,278 @@
+﻿@model GreenPro.AdminInterface.ViewModels.UserPackageDetailViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Package Subscription Detail</h2>
+<p><a href="@Url.Action("UserPackageList")">Back User Package List</a> </p>
+@using (Html.BeginForm())
+{
+<div class="form-horizontal">
+
+    <div class="col-md-12">
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Car Info</a></li>
+            <li><a data-toggle="tab" href="#package">Package</a></li>
+            <li><a data-toggle="tab" href="#payments">Payments</a></li>
+                
+        </ul>
+
+
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">               
+
+                <div style="padding:10px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Car # </label>
+                        <div class="col-md-10">
+                            @Model.CarId
+                            @Html.HiddenFor(m=>m.CarId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Display Name</label>
+                        <div class="col-md-10">
+                            @Model.CarModel.DisplayName
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Make</label>
+                        <div class="col-md-10">
+                            @Model.CarModel.Make
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> License Number </label>
+                        <div class="col-md-10">
+                            @Model.CarModel.LicenseNumber
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Color </label>
+                        <div class="col-md-10">
+                           @Model.CarModel.Color
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Purchase Year </label>
+                        <div class="col-md-10">
+                            @Model.CarModel.PurchaseYear
+                        </div>
+                    </div>                   
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> Garage </label>
+                        <div class="col-md-10">
+                            @Model.CarModel.Garage
+                        </div>
+                    </div>
+
+                </div>
+
+                
+            </div>
+            <div class="clearfix"> </div>
+            <div id="package" class="tab-pane fade">
+                <div style="padding:10px;">
+                   
+                           <div class="package-info">
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Package Name </label>
+                                   <div class="col-md-10">
+                                       @Model.Package.Package_Name
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Service Day </label>
+                                   <div class="col-md-10">
+                                       @Model.ServiceDay
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Time </label>
+                                   <div class="col-md-10">
+                                       @Model.TimeSlot
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Subscription Type </label>
+                                   <div class="col-md-10">
+                                       @if (!string.IsNullOrEmpty(Model.SubscriptionType))
+                                       { 
+                                        <text> Every </text> @Model.SubscriptionType
+                                       }
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Actual Price </label>
+                                   <div class="col-md-10">
+                                       @String.Format("{0:$00.00}", Model.ActualPrice) 
+                                   </div>
+                               </div>
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Total Price </label>
+                                   <div class="col-md-10">
+                                       @String.Format("{0:$00.00}", Model.TotalPrice)
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Tip Amount </label>
+                                   <div class="col-md-10">
+                                       @String.Format("{0:$00.00}", Model.TipAmount)
+                                   </div>
+                               </div>
+                               
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Tax Amount </label>
+                                   <div class="col-md-10">
+                                       @String.Format("{0:$00.00}", Model.TaxAmount)
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
+                                   <label class="control-label col-md-2"> Subsciption Total Amount </label>
+                                   <div class="col-md-10">
+                                       @String.Format("{0:$00.00}", Model.TotalPrice + Model.TaxAmount + Model.TipAmount)
+                                   </div>
+                               </div>
+
+                               <div class="form-group">
+                                   @if (Model.Services.Count > 0)
+                                   {
+                                       <div style="height:15px;"></div>
+                                    <p>Services</p>
+                                       <table style="width:40%">
+                                           <tr>
+                                               <td>
+                                                   <b>Service Name</b>
+                                               </td>
+                                               <td>
+                                                   <b>Is AddOn</b>
+                                               </td>
+                                               <td>
+                                                   <b> Service Date</b>
+                                               </td>
+                                           </tr>
+                                           @foreach (var service in Model.Services)
+                                           {
+                                            <tr>
+                                                <td>
+                                                    @service.Service_Name
+                                                </td>
+                                                <td>
+                                                    @(service.IsAddOn?"Yes":"No")
+                                                </td>
+                                                <td>
+                                                    @if (service.ServiceDate.HasValue)
+                                                    {
+                                                    @Convert.ToDateTime(service.ServiceDate).ToShortDateString()
+                                                    }
+                                                </td>
+                                            </tr>
+                                           }
+                                       </table>
+                                   }
+
+                               </div>
+
+
+                               </div>
+                        
+                </div>
+            </div>
+
+            <div id="payments" class="tab-pane fade">
+                <div style="padding:10px;">
+                    <div class="package-info">
+                        @if (Model.PaymentHistorys.Count > 0)
+                        {
+                            <table style="width:100%">
+                                <tr>
+                                    <td>
+                                        Payment #
+                                    </td>
+                                    <td>
+                                        ReferenceID #
+                                    </td>
+                                    <td>
+                                        TrasactionID #
+                                    </td>
+
+                                    <td>
+                                        Amount
+                                    </td>
+                                    <td>
+                                        Service Day
+                                    </td>
+                                    <td>
+                                        Created Date
+                                    </td>
+
+                                    <td>
+                                        Status
+                                    </td>
+
+                                </tr>
+                                @foreach (var item in Model.PaymentHistorys)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.Id
+                                        </td>
+                                        <td>
+                                            @item.ReferenceID
+                                        </td>
+                                        <td>
+                                            @item.TrasactionID
+                                        </td>
+
+                                        <td>
+                                            @String.Format("{0:$00.00}", Convert.ToDecimal(item.GrossAmount))
+                                        </td>
+                                        <td>
+                                            @item.ServiceDate
+                                        </td>
+                                        <td>
+                                            @item.CreatedOn
+                                        </td>
+
+                                        <td>
+                                            @item.PaymentStatus
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            @*<div id="menu2" class="tab-pane fade">
+        <h3>Menu 2</h3>
+        <p>Some content in menu 2.</p>
+    </div>*@
+        </div>
+        <div class="clearfix"> </div>
+
+        </div>
+    <div class="clearfix"> </div>
+
+    </div>
+
+}

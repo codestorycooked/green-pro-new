@@ -10,3 +10,8 @@ D:\sampleApps\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.dll
 D:\sampleApps\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.pdb
 D:\sampleApps\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.dll
 D:\sampleApps\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.dacpac
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\bin\Debug\GreenPro.Database.pdb
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.dll
+C:\Users\kunal-pc\Source\Repos\green-pro-new\GreenPro.Database\obj\Debug\GreenPro.Database.pdb

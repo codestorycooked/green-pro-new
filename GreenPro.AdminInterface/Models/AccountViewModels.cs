@@ -56,10 +56,7 @@ namespace GreenPro.AdminInterface.Models
     {
         
 
-        [Required]
-        [Display(Name = "User name (Email)")]
-        [EmailAddress(ErrorMessage = "Please Enter your email ID")]
-        public string UserName { get; set; }
+        
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -69,7 +66,7 @@ namespace GreenPro.AdminInterface.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [System.Web.Mvc.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "State")]

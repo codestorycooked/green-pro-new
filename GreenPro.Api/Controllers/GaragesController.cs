@@ -20,7 +20,7 @@ namespace GreenPro.Api.Controllers
 
         [Route("allcitys")]
         [HttpGet]
-        public dynamic Citys()
+        public IHttpActionResult Citys()
         {
             // Store Customer Seleted Garage in session
             //Session["NewServiceGarageId"] = id;
@@ -45,15 +45,19 @@ namespace GreenPro.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                return InternalServerError(ex);
             }
 
-            //return Ok(model);
-            return model.Citys;
+            if (model != null)
+            {
+                return Ok(model.Citys);
+            }
+            else
+                return NotFound();
         }
 
         [Route("get-garagesby-city")]
-        public dynamic GetGaragesByCity(int Id)
+        public IHttpActionResult GetGaragesByCity(int Id)
         {
             GaragesListRsponseModel model = new GaragesListRsponseModel();
 
@@ -94,15 +98,20 @@ namespace GreenPro.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                return InternalServerError(ex);
             }
 
-            return model.Garages;
+            if (model != null)
+            {
+                return Ok(model.Garages);
+            }
+            else
+                return NotFound();
         }
 
         [Route("getallgarages")]
         [HttpGet]
-        public dynamic GetAllGarages()
+        public IHttpActionResult GetAllGarages()
         {
 
             GaragesListRsponseModel model = new GaragesListRsponseModel();
@@ -138,21 +147,29 @@ namespace GreenPro.Api.Controllers
                     if (item.State1 != null)
                         gModel.State = item.State1.StateName;
                     gModel.Pincode = item.Pincode;
+                    gModel.CityID = item.City1.Id;
+                    gModel.StateID = item.State1.Id;
                     model.Garages.Add(gModel);
                 }
                 model.Result = true;
             }
             catch (Exception ex)
             {
-
+                return InternalServerError(ex);
             }
 
-            return model.Garages;
+            if (model != null)
+            {
+                return Ok(model);
+            }
+            else
+                return NotFound();
+
         }
 
         [Route("garageDetails")]
         [HttpGet]
-        public dynamic GarageDetails(string id)
+        public IHttpActionResult GarageDetails(string id)
         {
             int garagdid = Convert.ToInt32(id);
             var model = from a in _db.Garages
@@ -168,9 +185,17 @@ namespace GreenPro.Api.Controllers
                             a.Latitute,
                             a.Longitude,
                             a.Pincode,
-                            a.City
+                            a.City,
+                            a.City1.Id
+
                         };
-            return model;
+            if (model != null)
+            {
+                return Ok(model);
+            }
+            else
+                return NotFound();
+
         }
     }
 }

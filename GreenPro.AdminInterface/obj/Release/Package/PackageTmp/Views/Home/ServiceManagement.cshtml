@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "ServiceManagement";
+}
+<style>
+    .btn {
+        margin: 5px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Service Management</h2>
+        <p>This page lets you manage Packages, Taxes & Payments</p>
+        <ul>
+            @Html.ActionLink("Manage Car Types", "Index", "Cartypes", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Packages", "Index", "Packages", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Package Services", "Index", "Services", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Garages", "Index", "Garages", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Taxes", "Index", "Taxes", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage States", "Index", "States", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Cities", "Index", "StateCity", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Tax", "Index", "Taxes", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Paypal Payments", "Index", "Taxes", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Upcoming Renewals", "Index", "Taxes", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Manage Renewals", "Index", "Taxes", null, new { @class = "btn btn-primary" })
+
+        </ul>
+    </div>
+</div>

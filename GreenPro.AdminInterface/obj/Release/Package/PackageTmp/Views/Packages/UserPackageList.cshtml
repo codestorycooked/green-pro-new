@@ -1,0 +1,47 @@
+﻿@model GreenPro.AdminInterface.ViewModels.UserPackageListViewModel
+@{
+    ViewBag.Title = "UserPackageList";
+}
+
+<h2>User Package List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Id #
+        </th>
+        <th>
+            User
+        </th>
+        <th>
+            Package Name
+        </th>
+        <th>
+            Car #
+        </th>
+
+        <th>
+            Subscribed On
+        </th>
+
+        <th>
+            Created On
+        </th>
+
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model.UserPackages)
+    {
+        <tr>
+            <td> @item.Id</td>
+            <td> @item.CustomerName</td>
+            <td> @item.Package.Package_Name</td>
+            <td> @Html.ActionLink("View Car", "Edit", "Car", new { id = item.CarId }, new { target="_blank"}) </td>
+            <td> @item.SubscribedDate</td>
+            <td> @item.CreatedDt</td>
+            <td> @Html.ActionLink("View Detail", "Details", "Packages", new { id = item.Id }, null)</td>
+        </tr>
+    }
+    </table>

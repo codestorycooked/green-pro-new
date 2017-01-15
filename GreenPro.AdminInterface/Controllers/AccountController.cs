@@ -1,10 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using GreenPro.AdminInterface.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GreenPro.AdminInterface.Controllers
 {
@@ -12,15 +14,28 @@ namespace GreenPro.AdminInterface.Controllers
     public class AccountController : BaseController
     {
         private ApplicationUserManager _userManager;
-
+        private ApplicationRoleManager roleManager;
         public AccountController()
         {
         }
 
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                roleManager = value;
+            }
+        }
 
-        public AccountController(ApplicationUserManager userManager)
+
+        public AccountController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
+            RoleManager = roleManager;
         }
 
         public ApplicationUserManager UserManager
@@ -56,6 +71,7 @@ namespace GreenPro.AdminInterface.Controllers
 
             if (ModelState.IsValid)
             {
+
                 var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
@@ -99,10 +115,14 @@ namespace GreenPro.AdminInterface.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            CreateRoles();
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                if (!model.Email.Contains("admin")) { return View(); }
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.Email, City = 1, State = 1 };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                UserManager.AddToRole(user.Id, "Admin");
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
@@ -123,6 +143,21 @@ namespace GreenPro.AdminInterface.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void CreateRoles()
+        {
+            try
+            {
+                //Create Admin role
+                var role = new IdentityRole("Admin");
+                var roleresult = RoleManager.Create(role);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         //
